@@ -373,7 +373,7 @@ body{
     transition:transform .4s ease-in-out, -webkit-transform .4s ease-in-out
 }
 .header{
-    padding-top: 5px;
+    padding-top: 10px;
     position:absolute;
     top:0;
     left:0;
@@ -669,15 +669,15 @@ body{
 
 /* Add some space between the contents */
 .intro--options > * {
-    margin-right: 200px; /* Adjust the space between the contents */
+    margin-right: 100px; 
 }
 
-/* Remove margin-right from the last child to avoid extra spacing */
-.intro--options > *:last-child {
+
+/* .intro--options > *:last-child {
     margin-right: 0;
-}
+} */
 .intro--options>a{
-    max-width:250px;
+    max-width:30%;
     text-decoration:none;
     color:#282828;
     -webkit-transition:color .2s ease-in-out;

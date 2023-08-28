@@ -86,6 +86,10 @@
                   <p>The task of Face Sentiment Analysis involves detecting the sentiment portrayed by a person's face.</p>
                 </a>
                 <a href="#0">
+                  <h3>Validation Test</h3>
+                  <p>The task of Face Sentiment Analysis involves detecting the sentiment portrayed by a person's face.</p>
+                </a>
+                <a href="#0">
                   <h3>Cognitive Style Test</h3>
                   <p>The task of Voice Sentiment Analysis involves assigning a positive or negative score for how the tone is perceived</p>
                 </a>
