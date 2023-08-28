@@ -68,16 +68,12 @@
               </div>
               <div class="intro--options">
                 <a href="#0">
-                  <h3>Face Sentiment Analysis</h3>
+                  <h3>Interview Test</h3>
                   <p>The task of Face Sentiment Analysis involves detecting the sentiment portrayed by a person's face.</p>
                 </a>
                 <a href="#0">
-                  <h3>Voice Sentiment Analysis</h3>
+                  <h3>Cognitive Style Test</h3>
                   <p>The task of Voice Sentiment Analysis involves assigning a positive or negative score for how the tone is perceived</p>
-                </a>
-                <a href="#0">
-                  <h3>Speech To Text</h3>
-                  <p>Turns the Speech into a Text to be analyzed</p>
                 </a>
               </div>
             </div>
@@ -92,27 +88,36 @@
                   <li class="slider--item slider--item-left">
                     <a href="#0">
                       <div class="slider--item-image">
-                        <img src="assets/img/work-victory.jpg" alt="Victory">
+                        <img src="assets/img/kedaireka-logo.png" alt="kedaireka">
                       </div>
-                      <p class="slider--item-title">Victory</p>
+                      <p class="slider--item-title">Kedaireka</p>
                       <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
                     </a>
                   </li>
                   <li class="slider--item slider--item-center">
                     <a href="#0">
                       <div class="slider--item-image">
-                        <img src="assets/img/work-metiew-smith.jpg" alt="Metiew and Smith">
+                        <img src="assets/img/logo-kemendikbud.png" alt="kemendikbud">
                       </div>
-                      <p class="slider--item-title">Metiew &amp; Smith</p>
+                      <p class="slider--item-title">Kemendikbud</p>
                       <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
                     </a>
                   </li>
                   <li class="slider--item slider--item-right">
                     <a href="#0">
                       <div class="slider--item-image">
-                        <img src="assets/img/work-alex-nowak.jpg" alt="Alex Nowak">
+                        <img src="assets/img/logo-ubaya.png" alt="ubaya">
                       </div>
-                      <p class="slider--item-title">Alex Nowak</p>
+                      <p class="slider--item-title">Ubaya</p>
+                      <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
+                    </a>
+                  </li>
+                  <li class="slider--item slider--item">
+                    <a href="#0">
+                      <div class="slider--item-image">
+                        <img src="assets/img/logo-maxy.png" alt="maxy">
+                      </div>
+                      <p class="slider--item-title">Maxy Academy</p>
                       <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
                     </a>
                   </li>

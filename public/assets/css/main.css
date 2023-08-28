@@ -190,11 +190,11 @@ body{
     -webkit-tap-highlight-color:#FFF498
 }
 body{
-    background-color:#0c0c0c;
+    background-color:#ffff;
     font-size:14px;
     line-height:1.6;
     font-family:"Montserrat",sans-serif;
-    color:#fff;
+    color:#0c0c0c;
     -webkit-font-smoothing:antialiased;
     -webkit-text-size-adjust:100%
 }
@@ -433,7 +433,7 @@ body{
     position:relative;
     width:16px;
     height:2px;
-    background-color:#fff
+    background-color:#0c0c0c
 }
 .header--nav-toggle::before{
     bottom:5px;
@@ -501,7 +501,7 @@ body{
 .side-nav>li{
     position:relative;
     top:-5px;
-    color:#fff;
+    color:#0c0c0c;
     font-size:6px;
     cursor:pointer
 }
@@ -509,7 +509,7 @@ body{
     position:relative;
     top:3px;
     left:10px;
-    color:#fff;
+    color:#0c0c0c;
     font-size:14px;
     font-weight:300;
     opacity:0;
@@ -519,7 +519,7 @@ body{
     position:absolute;
     top:3px;
     left:10px;
-    color:#555;
+    color:#0c0c0c;
     font-size:14px;
     font-weight:300
 }
@@ -554,7 +554,7 @@ body{
 }
 .side-nav li.is-active::before{
     left:-33px;
-    color:#fff
+    color:#0c0c0c
 }
 .intro{
     position:relative;
@@ -610,13 +610,15 @@ body{
     line-height:1;
     z-index:1
 }
-.intro--banner button{
-    position:relative;
-    padding:5px 17px 5px 12px;
-    font-weight:700;
-    text-transform:uppercase;
-    background-color:transparent;
-    border:none
+.intro--banner button {
+    position: relative;
+    padding: 5px 17px 5px 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background-color: transparent;
+    border: none;
+    color: white;
+    text-shadow: 0 0 3px blue; /* Add this line to create a blue border effect on the text */
 }
 .intro--banner button .btn-background{
     position:absolute;
@@ -639,25 +641,29 @@ body{
     position:relative;
     left:5px;
     width:15px;
-    fill:#fff
+    fill:#0c0c0c
 }
 .intro--banner img{
     position:absolute;
     bottom:21px;
     right:-12px
 }
-.intro--options{
-    display:-webkit-box;
-    display:-webkit-flex;
-    display:-ms-flexbox;
-    display:flex;
-    -webkit-box-pack:justify;
-    -webkit-justify-content:space-between;
-    -ms-flex-pack:justify;
-    justify-content:space-between;
-    margin:0;
-    padding:0;
-    list-style:none
+.intro--options {
+    display: flex;
+    justify-content: center; /* Center the contents horizontally */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Add some space between the contents */
+.intro--options > * {
+    margin-right: 200px; /* Adjust the space between the contents */
+}
+
+/* Remove margin-right from the last child to avoid extra spacing */
+.intro--options > *:last-child {
+    margin-right: 0;
 }
 .intro--options>a{
     max-width:250px;
@@ -666,8 +672,9 @@ body{
     -webkit-transition:color .2s ease-in-out;
     transition:color .2s ease-in-out
 }
-.intro--options>a:hover{
-    color:#fff
+.intro--options>a:hover {
+    color: #0c0c0c;
+    font-weight: bold; 
 }
 .intro--options h3{
     font-size:16px;
@@ -837,7 +844,7 @@ body{
     display:block
 }
 .work--lockup .slider--item-center a{
-    color:#fff
+    color:#0c0c0c
 }
 .work--lockup .slider--item-center .slider--item-title{
     margin-top:25px;
@@ -999,7 +1006,7 @@ body{
 .about--banner a{
     padding:5px 17px 5px 0;
     text-decoration:none;
-    color:#fff;
+    color:#0c0c0c;
     font-weight:700;
     text-transform:uppercase;
     background-color:transparent
@@ -1011,7 +1018,7 @@ body{
     position:relative;
     left:5px;
     width:15px;
-    fill:#fff;
+    fill:#0c0c0c;
     -webkit-transition:left .2s ease-in-out;
     transition:left .2s ease-in-out
 }
@@ -1039,7 +1046,8 @@ body{
     width:150px;
     height:75px;
     text-decoration:none;
-    color:#fff;
+    color:#0c0c0c;
+    text-shadow: 0 0 0.1px #ffff;
     border:10px solid #0f33ff;
     background-position:center;
     background-size:cover;
@@ -1325,6 +1333,7 @@ body{
     font-size:16px;
     font-weight:700;
     text-align:center;
+    color: #0c0c0c;
     border:2px solid #fff;
     cursor:pointer;
     padding-bottom: 20px;
@@ -1335,16 +1344,18 @@ body{
     position:relative;
     left:-5px;
     width:0;
-    fill:#fff;
+    fill:#ffff;
     -webkit-transition:width .2s ease-in-out;
     transition:width .2s ease-in-out
 }
 .work-request--options input[type="checkbox"]{
     display:none
 }
-.work-request--options input[type="checkbox"]:checked+label{
-    background-color:#0f33ff;
-    border-color:#0f33ff
+.work-request--options input[type="checkbox"]:checked + label {
+    background-color: #0f33ff;
+    border-color: #0f33ff;
+    color: #ffff;
+    border-radius: 10px; 
 }
 .work-request--options input[type="checkbox"]:checked+label svg{
     width:15px
@@ -1599,4 +1610,6 @@ body{
     font-size:20px;
     width: 60%; 
     height: 60px; 
+    color: #ffff;
+    border-color: #ffff;
 }
