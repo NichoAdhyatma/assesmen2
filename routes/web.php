@@ -16,3 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/consent', function () {
+    return view('consent'); // Replace 'next-page' with the actual name of the Blade view you want to show
+})->name('consent');
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+

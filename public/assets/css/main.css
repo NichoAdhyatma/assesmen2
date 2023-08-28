@@ -50,7 +50,11 @@ audio:not([controls]){
     display:none
 }
 a{
-    background-color:transparent
+    background-color:transparent;
+}
+.special-link {
+    display: inline-block;
+    padding-left: 28.75%;
 }
 a:active,a:hover{
     outline:0
@@ -369,6 +373,7 @@ body{
     transition:transform .4s ease-in-out, -webkit-transform .4s ease-in-out
 }
 .header{
+    padding-top: 5px;
     position:absolute;
     top:0;
     left:0;
@@ -400,6 +405,12 @@ body{
     text-decoration:none;
     color:#fff
 }
+
+.logo-container {
+    display: flex;
+    gap: 50px;
+}
+
 .header--logo p{
     margin:0 0 0 10px;
     font-size:16px;

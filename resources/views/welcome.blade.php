@@ -27,16 +27,30 @@
   <div class="container"><div class="outer-nav--return"></div>
     <div id="viewport" class="l-viewport">
       <div class="l-wrapper">
-        <header class="header">
+      <header class="header">
+        <div class="logo-container">
           <a class="header--logo" href="#0">
-            <img src="assets/img/logo.png" alt="Global">
-            <p>Global</p>
+            <img src="assets/img/logo-maxy-header.png" alt="Global">
+   
           </a>
-          <button class="header--cta cta">Bergabung</button>
-          <div class="header--nav-toggle">
-            <span></span>
-          </div>
-        </header>
+          <a class="header--logo" href="#0">
+            <img src="assets/img/logo-ubaya-header.png" alt="Global">
+       
+          </a>
+          <a class="header--logo" href="#0">
+            <img src="assets/img/kedaireka-logo-header.png" alt="Global">
+       
+          </a>
+          <a class="header--logo" href="#0">
+            <img src="assets/img/logo-kemendikbud-header.png" alt="Global">
+   
+          </a>
+        </div>
+        <button class="header--cta cta">Bergabung</button>
+        <div class="header--nav-toggle">
+          <span></span>
+        </div>
+      </header>
 
         <!-- Side navbar -->
         <nav class="l-side-nav">
@@ -82,7 +96,7 @@
           <!-- Section 2 Tim Riset -->
           <li class="l-section section">
             <div class="work">
-              <h2>Perkenalkan Tim Kami</h2>
+              <h2>Perkenalkan Sponsor Kami</h2>
               <div class="work--lockup">
                 <ul class="slider">
                   <li class="slider--item slider--item-left">
@@ -178,7 +192,7 @@
             <!-- <div class="contact"> -->
             <div>
               <div class="contact--lockup">
-                <div id="video-container" style="height:100%; width:100%; padding-top:13%">
+                <div id="video-container" style="height:100%; width:100%; padding-top:150px">
                     <!-- <iframe width="640" height="360" src="https://www.youtube.com/embed/FC7JQItVqzM" frameborder="0" allowfullscreen></iframe>  -->
                     <iframe src="https://www.youtube.com/embed/FC7JQItVqzM" style="width:100%;height:65vh;" frameborder="0" allowfullscreen></iframe>
                     <!-- <p>something</p> -->
@@ -239,7 +253,9 @@
                   <!-- <input type="submit" value="Send Request"> -->
                   <!-- <button class="testButton">Bergabung</button> -->
                 </form>
-                <button class="testButton" style="align-self: center;">Bergabung</button>
+                <a href="{{ route('login') }}" class="special-link">
+                    <button class="testButton">Bergabung</button>
+                </a>
             </div>
           </li>
 
