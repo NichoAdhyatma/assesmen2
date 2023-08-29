@@ -67,27 +67,31 @@
                 </ul>
                 <div class="tab-content mt-3">
                     <div class="tab-pane fade show active" id="signup">
-                        <form action="{{ route('consent') }}" method="GET">
-                            <div class="form-group">
-                                <label for="signupUsername">Username</label>
-                                <input type="text" class="form-control" id="signupUsername" placeholder="Enter username">
-                            </div>
-                            <div class="form-group">
-                                <label for="signupPassword">Password</label>
-                                <input type="password" class="form-control" id="signupPassword" placeholder="Password">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Sign Up</button>
-                        </form>
+                    <form action="{{ route('postSignUp') }}" method="POST">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="Username">Username</label>
+                            <input type="text" class="form-control" id="Username" name="username" placeholder="Enter username">
+                        </div>
+                        <div class="form-group">
+                            <label for="Password">Password</label>
+                            <input type="password" class="form-control" id="Password" name="password" placeholder="Password">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </form>
                     </div>
                     <div class="tab-pane fade" id="login">
-                        <form>
+                        <form action="{{ route('postSignIn') }}" method="POST">
+                            @csrf
                             <div class="form-group">
                                 <label for="loginUsername">Username</label>
-                                <input type="text" class="form-control" id="loginUsername" placeholder="Enter username">
+                                <input type="text" class="form-control" id="loginUsername" name="username" placeholder="Enter username">
                             </div>
                             <div class="form-group">
                                 <label for="loginPassword">Password</label>
-                                <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                                <input type="password" class="form-control" id="loginPassword" name="password" placeholder="Password">
                             </div>
                             <button type="submit" class="btn btn-primary">Login</button>
                         </form>

@@ -69,7 +69,7 @@
           <li class="l-section section section--is-active">
             <div class="intro">
               <div class="intro--banner">
-                <h1>Interview<br>Psikogram<br>Interaktif</h1>
+                <h1>Tele Assesment<br>Interaktif<br>Psikologi</h1>
                 <button class="cta">Bergabung
                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
                   <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
@@ -175,7 +175,7 @@
                     </svg>
                   </span>
                 </a>
-                <img src="assets/img/about-visual.png" alt="About Us">
+                <img src="assets/img/about-visual1.png" alt="About Us" style="padding-bottom:120px">
               </div>
               <div class="about--options">
                 <a href="#0">
@@ -212,7 +212,7 @@
             
             
             <div class="hire">
-                <h2>Jadilah Kontributor</h2>
+                <h2>Ingin Tahu Profil Psikologi Diri atau Karyawan?</h2>
                 <!-- checkout formspree.io for easy form setup -->
                 <form class="work-request">
                   <div class="work-request--options">
@@ -227,7 +227,8 @@
                         </g>
                         </svg>
                         <!-- <img src="assets/img/testbg.png"> -->
-                        Volunteer IT
+                        Individu
+                        <p style="font-size: 12px;">Cari tahu tentang dirimu</p>
                       </label>
                       <input id="opt-2" type="checkbox" value="graphic design">
                       <label for="opt-2">
@@ -238,7 +239,8 @@
                           <path d="M950,705L555,310L360,505C253,612,160,700,155,700c-6,0-44-34-85-75l-75-75l278-278L550-5l475,475c261,261,475,480,475,485c0,13-132,145-145,145C1349,1100,1167,922,950,705z"/>
                         </g>
                         </svg>
-                        Perusahaan
+                        Karyawan
+                        <p style="font-size: 12px;">Cari tahu tentang karyawan di perusahaanmu</p>
                       </label>
                       <input id="opt-3" type="checkbox" value="motion design">
                       <label for="opt-3">
@@ -249,8 +251,8 @@
                           <path d="M950,705L555,310L360,505C253,612,160,700,155,700c-6,0-44-34-85-75l-75-75l278-278L550-5l475,475c261,261,475,480,475,485c0,13-132,145-145,145C1349,1100,1167,922,950,705z"/>
                         </g>
                         </svg>
-                        Field Helper
-                        
+                        Tim
+                        <p style="font-size: 12px;">Cari tahu tentang kelompok di perusahaan</p>
                       </label>
                     </span>
                   </div>

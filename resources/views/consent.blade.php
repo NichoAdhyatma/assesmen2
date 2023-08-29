@@ -8,22 +8,94 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Styles -->
     <style>
-        /* Define your styles here */
+        /* Customize the carousel control icons color */
+        .carousel-control-prev-icon{
+            background-image: url('assets/img/prev-icon.png'); /* Replace with your black icon image */
+            background-color: transparent;
+            background-size: cover;
+            width: 24px; /* Adjust width and height based on your icon size */
+            height: 24px;
+        }
+        .carousel-control-next-icon {
+            background-image: url('assets/img/next-icon.png'); /* Replace with your black icon image */
+            background-color: transparent;
+            background-size: cover;
+            width: 24px; /* Adjust width and height based on your icon size */
+            height: 24px;
+        }
+        .image-container img {
+            height: 60%; /* Set the maximum height to 60% of the container height */
+            display: flex; /* Ensure the image is displayed as a block element */
+            margin-bottom: 25px; /* Center the image horizontally */
+        }
+
     </style>
 </head>
 <body>
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-8 offset-md-2">
-                <h2>Welcome to Our Platform</h2>
-                <p>Pada tes interaktif ini, akan dilakukan perekaman sekaligus penyimpanan video & analisis dari subjek</p>
+                <h1>Informed Consent</h1>
+                <br>
+                <p>Akan dilakukan 3 jenis tes, beserta tes validasi secara tertulis</p>
+                <p>1. Test Interview</p>
+                <p>2. Test Validasi Kepribadian</p>
+                <p>3. Test Cognitive</p>
+                <p>4. Test Validasi Untuk Memastikan Hasil Tele Assesment</p>
+                <!-- <div id="carouselExample" class="carousel slide" data-ride="carousel" style="width:50%;height:400px">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="image-container">
+                                <img src="assets/img/logo-ubaya-header.png" class="d-block w-100" alt="Test Interview" >
+                            </div>
+                            <div class="carousel-caption">
+                                <h5 style="color: black;">Test Interview</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="image-container">
+                                <img src="assets/img/logo-maxy-header.png" class="d-block w-100" alt="Test Validasi Kepribadian">
+                            </div>
+                            <div class="carousel-caption">
+                                <h5 style="color: black;">Test Validasi Kepribadian</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="image-container">
+                                <img src="assets/img/logo-kemendikbud-header.png" class="d-block w-100" alt="Test Cognitive">
+                            </div>
+                            <div class="carousel-caption">
+                                <h5 style="color: black;">Test Cognitive</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="image-container">
+                                <img src="assets/img/kedaireka-logo-header.png" class="d-block w-100" alt="Test Validasi Untuk Memastikan Hasil Tele Assesment">
+                            </div>
+                            <div class="carousel-caption">
+                                <h5 style="color: black;">Test Validasi Tele Assesment</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div> -->
+                
+                <br>
+                <p>Pada tes interaktif ini, akan dilakukan perekaman sekaligus penyimpanan video dan suara dari subjek</p>
                 <p>Dengan mengikuti tes ini, subjek menyetujui untuk:</p>
                 
                 <!-- First Form -->
                 <form>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="consentCheckbox1">
-                        <label class="form-check-label" for="consentCheckbox1">Saya setuju untuk video saya digunakan untuk kebutuhan analisa form 1.</label>
+                        <label class="form-check-label" for="consentCheckbox1">Video & raut muka saya digunakan untuk kebutuhan analisa.</label>
                     </div>
                 </form>
 
@@ -31,14 +103,23 @@
                 <form>
                     <div class="form-check">
                         <input type="checkbox" class="form-check-input" id="consentCheckbox2">
-                        <label class="form-check-label" for="consentCheckbox2">Saya setuju untuk video saya digunakan untuk kebutuhan analisa form 2.</label>
+                        <label class="form-check-label" for="consentCheckbox2">Suara saya direkam dan digunakan untuk kebutuhan analisa.</label>
+                    </div>
+                </form>
+
+                <!-- Third Form -->
+                <form>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="consentCheckbox2">
+                        <label class="form-check-label" for="consentCheckbox2">Mengikuti ketiga tes dan tes validasi.</label>
                     </div>
                 </form>
                 
-                <a href="{{ route('login') }}" class="btn btn-primary mt-3 disabled" id="continueButton">Continue</a>       
+                <a href="{{ route('login') }}" class="btn btn-primary mt-3 disabled" id="continueButton">Lanjut</a>       
             </div>
         </div>
     </div>
+
     <!-- Link to Bootstrap JS and jQuery (required for Bootstrap features) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>

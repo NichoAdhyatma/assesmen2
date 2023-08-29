@@ -652,7 +652,7 @@ body{
     position:relative;
     left:5px;
     width:15px;
-    fill:#0c0c0c
+    fill:#ffff
 }
 .intro--banner img{
     position:absolute;
@@ -1080,7 +1080,7 @@ body{
 }
 .about--options h3{
     position:absolute;
-    bottom:-40px;
+    bottom:-60px;
     left:10px;
     font-size:16px;
     text-transform:uppercase;

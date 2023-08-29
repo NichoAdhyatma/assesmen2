@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +20,21 @@ Route::get('/', function () {
 });
 
 Route::get('/consent', function () {
-    return view('consent'); // Replace 'next-page' with the actual name of the Blade view you want to show
+    return view('consent');
 })->name('consent');
+
+
+// Route::get('/signin', 'AuthController@show')->name('signUp');
+
+Route::post('/signup', [AuthController::class, 'postSignUp'])->name('postSignUp');
+Route::post('/signin', [AuthController::class, 'postSignIn'])->name('postSignIn');
+
+Route::get('/signup', function () {
+    return view('consent');
+});
+Route::get('/signin', function () {
+    return view('consent');
+});
 
 Route::get('/login', function () {
     return view('login');
