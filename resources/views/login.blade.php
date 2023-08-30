@@ -81,7 +81,7 @@
 
                         <button type="submit" class="btn btn-primary">Sign Up</button>
                     </form>
-                    </div>
+                </div>
                     <div class="tab-pane fade" id="login">
                         <form action="{{ route('postSignIn') }}" method="POST">
                             @csrf
