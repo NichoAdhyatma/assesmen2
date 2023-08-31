@@ -36,6 +36,10 @@ Route::get('/signin', function () {
     return view('consent');
 });
 
+Route::get('/test', function () {
+    return view('beforetest');
+})->name('test');
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');
