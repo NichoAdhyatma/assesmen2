@@ -10,20 +10,20 @@
     <!-- Font Styles -->
     <style>
         /* Customize the carousel control icons color */
-        .carousel-control-prev-icon{
-            background-image: url('assets/img/prev-icon.png'); /* Replace with your black icon image */
+        /* .carousel-control-prev-icon{
+            background-image: url('assets/img/prev-icon.png');
             background-color: transparent;
             background-size: cover;
-            width: 24px; /* Adjust width and height based on your icon size */
+            width: 24px; =
             height: 24px;
         }
         .carousel-control-next-icon {
-            background-image: url('assets/img/next-icon.png'); /* Replace with your black icon image */
+            background-image: url('assets/img/next-icon.png'); 
             background-color: transparent;
             background-size: cover;
-            width: 24px; /* Adjust width and height based on your icon size */
+            width: 24px; 
             height: 24px;
-        }
+        } */
         .image-container img {
             height: 60%; /* Set the maximum height to 60% of the container height */
             display: flex; /* Ensure the image is displayed as a block element */
@@ -37,9 +37,10 @@
         <div class="row">
             <div class="col-md-8 offset-md-2 text-center">
 
-                <img src="assets/img/introduction-visual.png" alt="Image" class="img-fluid mb-4"> <!-- Replace with your image URL and adjust classes as needed -->
+                <img src="assets/img/about-visual1.png" alt="Image" class="img-fluid mb-4"> <!-- Replace with your image URL and adjust classes as needed -->
 
                 <h1>Informed Consent</h1>
+                <h1>Tele Assesment</h1>
                 <br>
                 <p>Akan dilakukan 3 jenis tes, beserta tes validasi secara tertulis</p>
                 <p>1. Test Interview</p>
@@ -95,36 +96,38 @@
                 <p>Pada tes interaktif ini, akan dilakukan perekaman sekaligus penyimpanan video dan suara dari subjek</p>
                 <p>Dengan mengikuti tes ini, subjek menyetujui untuk:</p>
                 
+                <div>
                 <!-- First Form -->
-                <form>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="consentCheckbox1">
-                        <label class="form-check-label" for="consentCheckbox1">Video & raut muka saya digunakan untuk kebutuhan analisa.</label>
-                        
-                    </div>
-                </form>
-                
-                <!-- Second Form -->
-                <form>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="consentCheckbox2">
-                        <label class="form-check-label" for="consentCheckbox2">Suara saya direkam dan digunakan untuk kebutuhan analisa.</label>
-                        
-                    </div>
-                </form>
+                    <form>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="consentCheckbox1">
+                            <label class="form-check-label" for="consentCheckbox1">Video & raut muka saya digunakan untuk kebutuhan analisa.</label>
+                            
+                        </div>
+                    </form>
+                    
+                    <!-- Second Form -->
+                    <form>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="consentCheckbox2">
+                            <label class="form-check-label" for="consentCheckbox2">Suara saya direkam dan digunakan untuk kebutuhan analisa.</label>
+                            
+                        </div>
+                    </form>
 
-                <!-- Third Form -->
-                <form>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="consentCheckbox2">
-                        <label class="form-check-label" for="consentCheckbox2">Mengikuti ketiga tes dan tes validasi secara keseluruhan.</label>
-                        
-                    </div>
-                </form>
-                <div class="alert-text" id="alertText" style="display: none; background-color: red; color: white; padding: 5px; text-align: center;">
-                    <i class="fas fa-exclamation-circle"></i> Please check all the boxes before continuing.
+                    <!-- Third Form -->
+                    <form>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="consentCheckbox2">
+                            <label class="form-check-label" for="consentCheckbox2">Mengikuti ketiga tes dan tes validasi secara keseluruhan.</label>
+                            
+                        </div>
+                    </form>
                 </div>
-                <a href="{{ route('login') }}" class="btn btn-primary mt-3 disabled" id="continueButton">Lanjut</a>       
+                <div class="alert-text" id="alertText" style="display: none; background-color: red; color: white; padding: 5px; text-align: center;">
+                    <i class="fas fa-exclamation-circle"></i> Mohon untuk mencentang semua kotak sebelum melanjutkan.
+                </div>
+                <a href="{{ route('test') }}" class="btn btn-primary mt-3 disabled" id="continueButton">Lanjut</a>       
                 <br>
                 <br>
                 <br>

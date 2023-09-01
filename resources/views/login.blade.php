@@ -44,7 +44,8 @@
             font-size: 16px;
             line-height: 18px;
             /* background */
-            background-image: url('assets/img/background.jpg'); /* Replace with the path to your background image */
+            /* background-image: url('assets/img/background.jpg'); Replace with the path to your background image */
+            background:#ffff;
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -58,6 +59,7 @@
 
         .login-wrap{
             width:100%;
+            height: 100%;
             align-self:center;
             max-width:525px;
             min-height:670px;
@@ -66,6 +68,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background:url('assets/img/loginformbg.jpg'); no-repeat center;
+            /* background:#ffff; */
             background-size: cover;
             box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
             border-radius:15px;
@@ -208,6 +211,15 @@
         .input::placeholder {
             color: #A7b7bd; /* Change to the color you want */
         }
+        option {
+            font-weight: normal;
+            display: block;
+            white-space-collapse: collapse;
+            text-wrap: nowrap;
+            min-height: 1.2em;
+            padding: 0px 2px 1px;
+            color: #0c0c0c;
+        }
     </style>
 </head>
 <body>
@@ -217,7 +229,7 @@
             <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
             <div class="login-form">
                 <div class="sign-in-htm">
-                    <form action="{{ route('postSignIn') }}" method="POST">
+                    <form id="SignInID" action="{{ route('postSignIn') }}" method="POST">
                         @csrf
                         <br>
                         <div class="group">
@@ -257,6 +269,33 @@
                             <label for="pass" class="label">Password</label>
                             <input id="Password" type="password" class="input" data-type="password" name="password" placeholder="Password">
                         </div>
+                        <div class="group">
+                            <label for="namaLengkap" class="label">Nama Lengkap</label>
+                            <input id="namaLengkap" type="text" class="input" name="namaLengkap" placeholder="Masukkan Nama Lengkap">
+                        </div>
+                        <div class="group">
+                            <label for="jenisKelamin" class="label">Jenis Kelamin</label>
+                            <select id="jenisKelamin" class="input" name="jenisKelamin">
+                                <option value="lakiLaki">Laki-Laki</option>
+                                <option value="perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="group">
+                            <label for="usia" class="label">Usia</label>
+                            <input id="usia" type="number" class="input" name="usia" placeholder="Masukkan Usia">
+                        </div>
+                        <div class="group">
+                            <label for="pendidikanTerakhir" class="label">Pendidikan Terakhir</label>
+                            <!-- <input id="pendidikanTerakhir" type="text" class="input" name="pendidikanTerakhir" placeholder="Masukkan Pendidikan Terakhir"> -->
+                            <select id="pendidikanTerakhir" class="input" name="pendidikanTerakhir">
+                                <option value="SD">SD</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA/SMK">SMA/SMK</option>
+                                <option value="S1">S1</option>
+                                <option value="S1">S2</option>
+                                <option value="S1">S3</option>
+                            </select>
+                        </div>
                         <br>
                         <div class="group">
                             <input type="submit" class="button" value="Sign Up">
@@ -272,4 +311,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 
     <!-- Your additional JavaScript for form functionality -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#SignInID').submit(function (event) {
+                event.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('postSignIn') }}',
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = response.redirect;
+                        } else {
+                            alert('User tidak ditemukan, mohon sign in lagi');
+                        }
+                    },
+                    error: function () {
+                        alert('An error occurred during sign-in.');
+                    }
+                });
+            });
+        });
+    </script>
 </body>

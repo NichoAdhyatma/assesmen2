@@ -9,7 +9,15 @@
   <meta name="keywords" content="global, template, html, sass, jquery">
   <meta name="author" content="Bucky Maler">
   <link rel="stylesheet" href="assets/css/main.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">     
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">   
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    @media (max-width: 768px) {
+        .page3title {
+            display: none;
+        }
+    }
+  </style>
 </head>
 <body>
 
@@ -29,19 +37,19 @@
       <div class="l-wrapper">
       <header class="header">
         <div class="logo-container">
-          <a class="header--logo" href="#0">
+          <a class="header--logo" href="https://maxy.academy/">
             <img src="assets/img/logo-maxy-header.png" alt="Global">
    
           </a>
-          <a class="header--logo" href="#0">
+          <a class="header--logo" href="https://www.ubaya.ac.id/">
             <img src="assets/img/logo-ubaya-header.png" alt="Global">
        
           </a>
-          <a class="header--logo" href="#0">
+          <a class="header--logo" href="https://kedaireka.id/">
             <img src="assets/img/kedaireka-logo-header.png" alt="Global">
        
           </a>
-          <a class="header--logo" href="#0">
+          <a class="header--logo" href="https://www.kemdikbud.go.id/">
             <img src="assets/img/logo-kemendikbud-header.png" alt="Global">
    
           </a>
@@ -56,7 +64,7 @@
         <nav class="l-side-nav">
           <ul class="side-nav">
             <li class="is-active"><span>Tentang Projek</span></li>
-            <li><span>Tim Riset</span></li>
+            <li><span>Funders</span></li>
             <li><span>Undangan</span></li>
             <li><span>Video</span></li>
             <li><span>Contact Us</span></li>
@@ -70,6 +78,8 @@
             <div class="intro">
               <div class="intro--banner">
                 <h1>Tele Assesment<br>Interaktif<br>Psikologi</h1>
+                <p style="width: 50%;font-size: 13px;" >Tele assesmen interaktif psikologi adalah tes yang menggunakan basis Artificial Intelligence yang menggunakan sentiment analisis dari modalitas suara,
+                   video serta respons dari testee. Tujuan Utama dari asesmen ini bukan sebagai tes psikologi namun merupakan screening profiling ang dapat ditindak lanjuti dengan asesmen yang lebih mendalam.<p>
                 <button class="cta">Bergabung
                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
                   <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
@@ -83,15 +93,15 @@
               <div class="intro--options">
                 <a href="#0">
                   <h3>Interview Test</h3>
-                  <p>The task of Face Sentiment Analysis involves detecting the sentiment portrayed by a person's face.</p>
+                  <p>Interview interaktif dengan AI menggunakna Face Sentiment Analysis & Voice Sentiment Analysis</p>
                 </a>
                 <a href="#0">
                   <h3>Validation Test</h3>
-                  <p>The task of Face Sentiment Analysis involves detecting the sentiment portrayed by a person's face.</p>
+                  <p>Test tertulis untuk memvalidasi hasil Interview Interaktif</p>
                 </a>
                 <a href="#0">
                   <h3>Cognitive Style Test</h3>
-                  <p>The task of Voice Sentiment Analysis involves assigning a positive or negative score for how the tone is perceived</p>
+                  <p>Mengetes kemampuan kognitif testee untuk dinilai beserta dengan tes lain</p>
                 </a>
               </div>
             </div>
@@ -100,43 +110,42 @@
           <!-- Section 2 Tim Riset -->
           <li class="l-section section">
             <div class="work">
-              <h2>Perkenalkan Sponsor Kami</h2>
+              <h2>Program ini merupakan bagian dari Matching Fund dari</h2>
               <div class="work--lockup">
                 <ul class="slider">
                   <li class="slider--item slider--item-left">
-                    <a href="#0">
+                    <a href="https://kedaireka.id/">
                       <div class="slider--item-image">
                         <img src="assets/img/kedaireka-logo.png" alt="kedaireka">
                       </div>
                       <p class="slider--item-title">Kedaireka</p>
-                      <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
                     </a>
                   </li>
                   <li class="slider--item slider--item-center">
-                    <a href="#0">
+                    <a href="https://www.kemdikbud.go.id/">
                       <div class="slider--item-image">
                         <img src="assets/img/logo-kemendikbud.png" alt="kemendikbud">
                       </div>
                       <p class="slider--item-title">Kemendikbud</p>
-                      <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
+                      <!-- <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p> -->
                     </a>
                   </li>
                   <li class="slider--item slider--item-right">
-                    <a href="#0">
+                    <a href="https://www.ubaya.ac.id/">
                       <div class="slider--item-image">
                         <img src="assets/img/logo-ubaya.png" alt="ubaya">
                       </div>
                       <p class="slider--item-title">Ubaya</p>
-                      <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
+                      <!-- <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p> -->
                     </a>
                   </li>
                   <li class="slider--item slider--item">
-                    <a href="#0">
+                    <a href="https://maxy.academy/">
                       <div class="slider--item-image">
                         <img src="assets/img/logo-maxy.png" alt="maxy">
                       </div>
                       <p class="slider--item-title">Maxy Academy</p>
-                      <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p>
+                      <!-- <p class="slider--item-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do.</p> -->
                     </a>
                   </li>
                 </ul>
@@ -165,8 +174,8 @@
           <li class="l-section section">
             <div class="about">
               <div class="about--banner">
-                <h2>Daftar Sekarang <br>& Jadi Trailblazer <br> Projek ini</h2>
-                <a href="#0">Jadi Tester Sekarang
+                <h2>Pendafaran Assesmen<br>Psikologi <br>Interaktif</h2>
+                <a href="{{ route('login') }}">Jadi Testee Sekarang
                   <span>
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
                     <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
@@ -175,17 +184,25 @@
                     </svg>
                   </span>
                 </a>
+                
                 <img src="assets/img/about-visual1.png" alt="About Us" style="padding-bottom:120px">
+                
               </div>
+              <!-- <h2>Pendafaran dapat berupa:<h2> -->
+                
+              <h3 class="page3title">Pendaftaran dapat berupa:</h3>
+
+              
               <div class="about--options">
-                <a href="#0">
-                  <h3>Volunteer IT</h3>
+                
+                <a href="#" class="popup-link" data-popup-text="Umum atau individual yang membutuhkan prfile kepribadian bakat dan minta serta intelegensi ">
+                    <h3>Individu</h3>
                 </a>
-                <a href="#0">
-                  <h3>Perusahaan</h3>
+                <a href="#" class="popup-link" data-popup-text="Perusahaan atau Lembaga yang ingin membuat profile tes kepribadian, bakat, minat serta intelegensi karyawan">
+                    <h3>Perusahaan</h3>
                 </a>
-                <a href="#0">
-                  <h3>Field Helper</h3>
+                <a href="#" class="popup-link" data-popup-text="Tim atau kelompok kecil untuk analisis kepribadian, bakat, minat dan intelegensi pada kelompok">
+                    <h3>Tim</h3>
                 </a>
               </div>
             </div>
@@ -199,7 +216,7 @@
                 <div id="video-container" style="height:100%; width:100%; padding-top:150px">
                     <!-- <iframe width="640" height="360" src="https://www.youtube.com/embed/FC7JQItVqzM" frameborder="0" allowfullscreen></iframe>  -->
                     <iframe src="https://www.youtube.com/embed/FC7JQItVqzM" style="width:100%;height:65vh;" frameborder="0" allowfullscreen></iframe>
-                    <!-- <p>something</p> -->
+  
                 </div> 
               </div>
               
@@ -213,7 +230,7 @@
             
             <div class="hire">
                 <h2>Ingin Tahu Profil Psikologi Diri atau Karyawan?</h2>
-                <!-- checkout formspree.io for easy form setup -->
+
                 <form class="work-request">
                   <div class="work-request--options">
                     <span class="options-a">
@@ -256,8 +273,7 @@
                       </label>
                     </span>
                   </div>
-                  <!-- <input type="submit" value="Send Request"> -->
-                  <!-- <button class="testButton">Bergabung</button> -->
+
                 </form>
                 <a href="{{ route('login') }}" class="special-link">
                     <button class="testButton">Bergabung</button>
@@ -272,7 +288,7 @@
   </div>
   <ul class="outer-nav">
     <li class="is-active">Tentang Proyek</li>
-    <li>Tim Riset</li>
+    <li>Funders</li>
     <li>Undangan</li>
     <li>Video</li>
     <li>Contact Us</li>
@@ -284,5 +300,24 @@
 <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
 <script src="assets/js/functions-min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const popupLinks = document.querySelectorAll(".popup-link");
+
+    popupLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+            event.preventDefault();
+            const text = link.getAttribute("data-popup-text");
+
+            Swal.fire({
+                // title: "Popup Title",
+                text: text,
+                icon: "info",
+                confirmButtonText: "OK"
+            });
+        });
+    });
+  });
+</script>
 </body>
 </html>

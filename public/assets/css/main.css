@@ -594,7 +594,9 @@ body{
 }
 .intro--banner{
     position:relative;
-    height:475px
+    height:550x;
+    padding-bottom: 50px;
+    margin-top: 50px;
 }
 .intro--banner::before{
     content:"";
@@ -989,7 +991,7 @@ body{
 }
 .about--banner h2{
     position:relative;
-    margin-top:35px;
+    margin-top:50px;
     font-size:68px;
     font-weight:900;
     line-height:1;
@@ -1035,8 +1037,8 @@ body{
 }
 .about--banner img{
     position:absolute;
-    bottom:-90px;
-    right:-12px
+    bottom:-145px;
+    right:-30px
 }
 .about--options{
     display:-webkit-box;
@@ -1059,14 +1061,15 @@ body{
     text-decoration:none;
     color:#0c0c0c;
     text-shadow: 0 0 0.1px #ffff;
-    border:10px solid #0f33ff;
+    border:2px solid #0f33ff;
+    border-radius: 5px;
     background-position:center;
     background-size:cover;
     background-repeat:no-repeat
 }
 .about--options>a:nth-child(1){
     width: 25%;
-    height: 79%;
+    
     background-image:url("../img/Kontributor1.jpg")
 }
 .about--options>a:nth-child(2){

@@ -18,6 +18,10 @@ class Users extends Model
     protected $fillable = [
         'username',
         'password',
+        'nama_lengkap',
+        'jenis_kelamin',
+        'usia',
+        'pendidikan_terakhir'
 
     ];
 

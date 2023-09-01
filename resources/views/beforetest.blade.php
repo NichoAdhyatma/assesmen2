@@ -37,7 +37,13 @@
     }
     .intro--banner{
         position:relative;
-        height:475px
+        height:240px
+    }
+    @media (max-width: 768px) {
+        /* Apply these styles when the screen width is 768px or smaller */
+        .intro--banner {
+            height: 120px; /* Adjust the height for smaller screens */
+        }
     }
     .intro--banner::before{
         content:"";
@@ -59,7 +65,7 @@
     }
     .intro--banner h1{
         position:relative;
-        font-size:68px;
+        font-size:58px;
         font-weight:900;
         line-height:1;
         z-index:1;
@@ -80,45 +86,97 @@
         font-weight:700;
         text-transform:uppercase;
         font-size:20px;
-        width: 60%; 
+        width: 50%; 
         height: 60px; 
         color: #ffff;
         border-color: #ffff;
+        margin-top:20px
     }
-    .special-link {
+    .special-link-button {
         display: inline-block;
-        padding-left: 28.75%;
+        /* padding-left: 28.75%; */
+        width:100%;
+    }
+    .contact--lockup{
+        text-align: center;
+        position:relative;
+        display:-webkit-box;
+        display:-webkit-flex;
+        display:-ms-flexbox;
+        display:flex;
+        width:75%;
+        /* max-width:75%;*/
+        height:100%; 
+        -webkit-box-align:center;
+        -webkit-align-items:center;
+        -ms-flex-align:center;
+        align-items:center;
+        -webkit-box-pack:end;
+        -webkit-justify-content:flex-end;
+        -ms-flex-pack:end;
+        justify-content:flex-end;
+        margin:0 auto
+    }
+    #webcam {
+        display: block;
+        /* width:30%: */
+        margin: 0 auto;
+        max-width: 75%; 
+        /* height: auto;  */
+        
+        transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        -moz-transform: scaleX(-1);
+        -ms-transform: scaleX(-1);
+        transform-origin: center;
+        -webkit-transform-origin: center;
+        -moz-transform-origin: center;
+        -ms-transform-origin: center;
+        
     }
   </style>
 </head>
 
-<style>
-</style>
 <body>
-    <div class="intro">
+    <!-- <div class="intro"> -->
         <div class="intro--banner" >
-            <h1>Tele Assesment<br>Interaktif<br>Psikologi</h1>
-            <a href="{{ route('login') }}" class="special-link">
-                <button class="testButton">Bergabung</button>
-            </a>
+            <!-- <h1>Tele Assesment<br>Interaktif<br>Psikologi</h1> -->
+            
+            <h1>Video Penjelasan</h1>
+            <h1>Tele Assesment</h1>
+            <!-- <a href="{{ route('login') }}" class="special-link">
+                <button class="testButton">Mulai Test</button>
+            </a> -->
         </div>
+    <!-- </div> -->
+    <div class="contact--lockup">
+        <div id="video-container-" style="height:100%; width:100%; padding-top:150px">
+            <!-- <iframe width="640" height="360" src="https://www.youtube.com/embed/FC7JQItVqzM" frameborder="0" allowfullscreen></iframe>  -->
+            <!-- <iframe src="https://www.youtube.com/embed/FC7JQItVqzM" style="width:100%;height:65vh;" frameborder="0" allowfullscreen></iframe> -->
+            <video controls autoplay style="width: 100%; height: 65vh;">
+                <source src="assets/video/InstructionVideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <h1> Webcam Anda <h1>
+            <video id="webcam" autoplay style=""></video>
+            <a href="{{ route('testinterview') }}" class="special-link-button">
+                <button class="testButton">Mulai Test</button>
+            </a>
+            <!-- <div>
+            </div> -->
+            <!-- <p>something</p> -->
+        </div> 
+        
     </div>
-    <div class="intro--options">
-    <a href="#0">
-        <h3>Interview Test</h3>
-        <p>The task of Face Sentiment Analysis involves detecting the sentiment portrayed by a person's face.</p>
-    </a>
-    <a href="#0">
-        <h3>Validation Test</h3>
-        <p>The task of Face Sentiment Analysis involves detecting the sentiment portrayed by a person's face.</p>
-    </a>
-    <a href="#0">
-        <h3>Cognitive Style Test</h3>
-        <p>The task of Voice Sentiment Analysis involves assigning a positive or negative score for how the tone is perceived</p>
-    </a>
-    </div>
-    </div>
-    <div class="intro">
+    <!-- <div class="intro"> -->
+        <!-- <div class="intro--banner" >
+            <a href="{{ route('login') }}" class="special-link">
+                <button class="testButton">Mulai Test</button>
+            </a>
+        </div> -->
+    <!-- </div> -->
+    <!-- <div class="intro">
         <div class="intro--banner">
         <h1>Tele Assesment<br>Interaktif<br>Psikologi</h1>
         <button class="cta">Bergabung
@@ -145,5 +203,17 @@
             <p>The task of Voice Sentiment Analysis involves assigning a positive or negative score for how the tone is perceived</p>
         </a>
         </div>
-    </div>
+    </div> -->
 </body>
+<script>
+    // Access the user's webcam
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+            // Assign the webcam stream to the video element
+            var webcam = document.getElementById('webcam');
+            webcam.srcObject = stream;
+        })
+        .catch(function (error) {
+            console.error('Error accessing webcam:', error);
+        });
+</script>

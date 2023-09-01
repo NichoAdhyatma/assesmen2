@@ -48,3 +48,14 @@ Route::get('/testlogin', function () {
     return view('testlogin');
 })->name('testlogin');
 
+Route::get('/testinterview', function () {
+    return view('testinterview');
+})->name('testinterview');
+
+Route::get('/testcognitive', function () {
+    return view('testcognitive');
+})->name('testcognitive');
+
+Route::get('/testvalidation', function () {
+    return view('testvalidation');
+})->name('testvalidation');
