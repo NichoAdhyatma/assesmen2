@@ -131,26 +131,26 @@
         -webkit-transform-origin: center;
         -moz-transform-origin: center;
         -ms-transform-origin: center;
-        
+    }
+
+    button.testButton[disabled] {
+        color: #999; /* Grey text color */
+        background-color: #eee; /* Grey background color */
+        opacity: 0.7; /* Reduced opacity to indicate it's disabled */
+        cursor: not-allowed; /* Change cursor to indicate it's not clickable */
     }
   </style>
 </head>
 
 <body>
-    <!-- <div class="intro"> -->
+
         <div class="intro--banner" >
-            <!-- <h1>Tele Assesment<br>Interaktif<br>Psikologi</h1> -->
-                        
-            <h1>Tele Interview</h1>
-            <!-- <a href="{{ route('login') }}" class="special-link">
-                <button class="testButton">Mulai Test</button>
-            </a> -->
+            <h1>Tes Interview</h1>
         </div>
-    <!-- </div> -->
+
     <div class="contact--lockup">
         <div id="video-container-" style="height:100%; width:100%; padding-top:150px">
-            <!-- <iframe width="640" height="360" src="https://www.youtube.com/embed/FC7JQItVqzM" frameborder="0" allowfullscreen></iframe>  -->
-            <!-- <iframe src="https://www.youtube.com/embed/FC7JQItVqzM" style="width:100%;height:65vh;" frameborder="0" allowfullscreen></iframe> -->
+
             <video controls autoplay style="width: 100%; height: 65vh;">
                 <source src="assets/video/InstructionVideo.mp4" type="video/mp4">
                 Your browser does not support the video tag.
@@ -159,49 +159,17 @@
             <h1> Webcam Anda <h1>
             <video id="webcam" autoplay style=""></video>
             <a href="{{ route('testcognitive') }}" class="special-link-button">
-                <button class="testButton">Mulai Test</button>
+                <button id="startButton" class="testButton" disabled>Lanjut ke tes berikutnya</button>
             </a>
-            <!-- <div>
-            </div> -->
-            <!-- <p>something</p> -->
+
+            <a href="{{ route('testcognitive') }}" class="special-link-button">
+                <button id="startButton" class="testButton">Skip</button>
+            </a>
+
         </div> 
         
     </div>
-    <!-- <div class="intro"> -->
-        <!-- <div class="intro--banner" >
-            <a href="{{ route('login') }}" class="special-link">
-                <button class="testButton">Mulai Test</button>
-            </a>
-        </div> -->
-    <!-- </div> -->
-    <!-- <div class="intro">
-        <div class="intro--banner">
-        <h1>Tele Assesment<br>Interaktif<br>Psikologi</h1>
-        <button class="cta">Bergabung
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
-            <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
-            <path d="M870,1167c-34-17-55-57-46-90c3-15,81-100,194-211l187-185l-565-1c-431,0-571-3-590-13c-55-28-64-94-18-137c21-20,33-20,597-20h575l-192-193C800,103,794,94,849,39c20-20,39-29,61-29c28,0,63,30,298,262c147,144,272,271,279,282c30,51,23,60-219,304C947,1180,926,1196,870,1167z"/>
-            </g>
-            </svg>
-            <span class="btn-background"></span>
-        </button>
-        <img src="assets/img/introduction-visual1.png" alt="Welcome">
-        </div>
-        <div class="intro--options">
-        <a href="#0">
-            <h3>Interview Test</h3>
-            <p>The task of Face Sentiment Analysis involves detecting the sentiment portrayed by a person's face.</p>
-        </a>
-        <a href="#0">
-            <h3>Validation Test</h3>
-            <p>The task of Face Sentiment Analysis involves detecting the sentiment portrayed by a person's face.</p>
-        </a>
-        <a href="#0">
-            <h3>Cognitive Style Test</h3>
-            <p>The task of Voice Sentiment Analysis involves assigning a positive or negative score for how the tone is perceived</p>
-        </a>
-        </div>
-    </div> -->
+ 
 </body>
 <script>
     // Access the user's webcam
@@ -214,4 +182,14 @@
         .catch(function (error) {
             console.error('Error accessing webcam:', error);
         });
+</script>
+<script>
+    // Get references to the video and button elements
+    var video = document.querySelector('video');
+    var startButton = document.getElementById('startButton');
+
+    // Add an event listener to the video to enable the button when it ends
+    video.addEventListener('ended', function() {
+        startButton.disabled = false;
+    });
 </script>
