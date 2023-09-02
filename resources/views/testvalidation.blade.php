@@ -6,8 +6,17 @@
     <title>Question and Answer Page</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat';
             text-align: center;
+        }
+
+        .answer-button,
+        .prev-button,
+        .next-button,
+        .go-to-question {
+            background-color: #0f33ff; /* Change button color to blue */
+            color: #fff; /* Change text color to white */
+            font-family: 'Montserrat'; /* Apply Montserrat font */
         }
 
         .container {
@@ -53,6 +62,7 @@
         .answer-button:hover {
             background-color: #2980b9;
         }
+        
 
         .prev-button {
             max width: 600px;
@@ -61,7 +71,7 @@
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 18px;
-            background-color: #2ecc71;
+            background-color: #0f33ff;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -75,7 +85,7 @@
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 18px;
-            background-color: #2ecc71;
+            background-color: #0f33ff;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -97,8 +107,16 @@
         }
 
         .next-button:hover {
-            background-color: #27ae60;
+            background-color: #2980b9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
         }
+
+        /* Hover effect for previous button */
+        .prev-button:hover {
+            background-color: #2980b9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+        }
+
 
         /* Style for radio buttons */
         .radio-label {
@@ -187,6 +205,52 @@
             border-left: 5px solid transparent;
         }
 
+        .submit-button {
+            max width: 600px;
+            width: 50%;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #0f33ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #2980b9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+        }
+        .submit-button[disabled] {
+            background-color: #ccc; /* Change the background color to a muted gray */
+            cursor: not-allowed; /* Change the cursor to indicate it's not clickable */
+            color: #999; /* Change the text color to a muted gray */
+            box-shadow: none; /* Remove the shadow when disabled */
+        }
+
+        .submit-button[disabled]:hover {
+            background-color: #ccc; /* Change the background color to a muted gray */
+            cursor: not-allowed; /* Change the cursor to indicate it's not clickable */
+            color: #999; /* Change the text color to a muted gray */
+            box-shadow: none; /* Remove the shadow when disabled */
+        }
+
+        .submit-button[disabled]:hover::after {
+            content: "Please finish all questions"; /* Tooltip text */
+            display: block;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
     </style>
 </head>
 <body>
@@ -224,56 +288,68 @@
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label" data-correct="true">
-                            <input type="radio" class="radio-input" name="answer2" value="Option A">
-                            Option A
+                            <input type="radio" class="radio-input" name="answer2" value="Option Correct">
+                            Option Correct
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer2" value="Option B">
-                            Option B
+                            <input type="radio" class="radio-input" name="answer2" value="Option Wrong 1">
+                            Option Wrong A
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer2" value="Option C">
-                            Option C
+                            <input type="radio" class="radio-input" name="answer2" value="Option Wrong 2">
+                            Option Wrong B
                         </label>
                     </form>
                 </div>
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Select the correct answer:</p>
+                <div class="question-image-container">
+                    <img src="assets/questionimg/question2.png" alt="Question 2" class="image">
+                </div>
                 <div class="answer-form">
                     <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer1" value="Option A">
+                            <img src="assets/answerimg/q2a.png" alt="Option A" class="answerimage">
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer1" value="Option B">
+                            <img src="assets/answerimg/q2b.png" alt="Option B" class="answerimage">
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer1" value="Option C">
+                            <img src="assets/answerimg/q2c.png" alt="Option C" class="answerimage">
+                        </label>
                         <label class="radio-label" data-correct="true">
-                            <input type="radio" class="radio-input" name="answer3" value="Option A">
-                            Option A
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer3" value="Option B">
-                            Option B
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer3" value="Option C">
-                            Option C
+                            <input type="radio" class="radio-input" name="answer1" value="Option D">
+                            <img src="assets/answerimg/q2d.png" alt="Option D" class="answerimage">
                         </label>
                     </form>
                 </div>
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Select the correct answer:</p>
+                <div class="question-image-container">
+                    <img src="assets/questionimg/question3.png" alt="Question 3" class="image">
+                </div>
                 <div class="answer-form">
                     <form class="answer-form">
-                        <label class="radio-label" data-correct="true">
-                            <input type="radio" class="radio-input" name="answer4" value="Option A">
-                            Option A
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer1" value="Option A">
+                            <img src="assets/answerimg/q3a.png" alt="Option A" class="answerimage">
+                        </label>
+                        <label class="radio-label"  data-correct="true">
+                            <input type="radio" class="radio-input" name="answer1" value="Option B">
+                            <img src="assets/answerimg/q3b.png" alt="Option B" class="answerimage">
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer4" value="Option B">
-                            Option B
+                            <input type="radio" class="radio-input" name="answer1" value="Option C">
+                            <img src="assets/answerimg/q3c.png" alt="Option C" class="answerimage">
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer4" value="Option C">
-                            Option C
+                            <input type="radio" class="radio-input" name="answer1" value="Option D">
+                            <img src="assets/answerimg/q3d.png" alt="Option D" class="answerimage">
                         </label>
                     </form>
                 </div>
@@ -285,6 +361,9 @@
     </div>
     <button class="prev-button">Previous Question</button>
     <button class="next-button">Next Question</button>
+    <a href="{{ route('result') }}">
+        <button id="submit-button" class="submit-button" disabled title="Please finish all questions">Submit</button>
+    <a>
     <br>
     <div class="question-navigation">
         <div class="select-dropdown">
@@ -294,6 +373,8 @@
         </div>
     </div>
     <button class="calculate-score-button">Calculate Score</button>
+    
+
     <!-- <div class="dropdown">
         <div class="select">
           <span>Select Gender</span>
@@ -477,26 +558,64 @@
         }
         
         function calculateScore() {
-        let correctAnswers = 0;
-        const totalQuestions = questionsArray.length;
+            let correctAnswers = 0;
+            const totalQuestions = questionsArray.length;
 
-        questionsArray.forEach((question, index) => {
-            const form = question.querySelector('form.answer-form');
-            const selectedOption = form.querySelector('input[type="radio"]:checked');
-            const correctOption = question.querySelector('label[data-correct="true"] input[type="radio"]');
+            questionsArray.forEach((question, index) => {
+                const form = question.querySelector('form.answer-form');
+                const selectedOption = form.querySelector('input[type="radio"]:checked');
+                const correctOption = question.querySelector('label[data-correct="true"] input[type="radio"]');
 
-            if (selectedOption && selectedOption === correctOption) {
-            correctAnswers++;
-            }
-        });
+                if (selectedOption && selectedOption === correctOption) {
+                correctAnswers++;
+                }
+            });
 
-        const scorePercentage = (correctAnswers / totalQuestions) * 100;
-        alert(`Your Score: ${correctAnswers} out of ${totalQuestions} (${scorePercentage.toFixed(2)}%)`);
+            const scorePercentage = (correctAnswers / totalQuestions) * 100;
+            alert(`Your Score: ${correctAnswers} out of ${totalQuestions} (${scorePercentage.toFixed(2)}%)`);
         }
 
         const calculateScoreButton = document.querySelector('.calculate-score-button');
 
         calculateScoreButton.addEventListener('click', calculateScore);
+
+        // Script to make a button that is disabled until every questions are answered
+        // Get the submit button element
+        const submitButton = document.getElementById('submit-button');
+
+        // Function to check if all radio buttons are selected
+        function checkAllRadioButtonsSelected() {
+            let allSelected = true;
+
+            questionsArray.forEach((question) => {
+                const form = question.querySelector('form.answer-form');
+                const selectedOption = form.querySelector('input[type="radio"]:checked');
+
+                if (!selectedOption) {
+                    allSelected = false;
+                }
+            });
+
+            return allSelected;
+        }
+
+        // Add an event listener to each radio button
+        questionsArray.forEach((question) => {
+            const form = question.querySelector('form.answer-form');
+            const radioInputs = form.querySelectorAll('input[type="radio"]');
+
+            radioInputs.forEach((radioInput) => {
+                radioInput.addEventListener('change', () => {
+                    // Check if all radio buttons are selected
+                    if (checkAllRadioButtonsSelected()) {
+                        submitButton.removeAttribute('disabled');
+                    } else {
+                        submitButton.setAttribute('disabled', 'disabled');
+                    }
+                });
+            });
+        });
+
 
 
     </script>

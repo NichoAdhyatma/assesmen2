@@ -40,7 +40,7 @@
                 <img src="assets/img/about-visual1.png" alt="Image" class="img-fluid mb-4"> <!-- Replace with your image URL and adjust classes as needed -->
 
                 <h1>Informed Consent</h1>
-                <h1>Tele Assesment</h1>
+                <h1>Teleassesment</h1>
                 <br>
                 <p>Akan dilakukan 3 jenis tes, beserta tes validasi secara tertulis</p>
                 <p>1. Test Interview</p>

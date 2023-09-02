@@ -17,6 +17,14 @@
             display: none;
         }
     }
+    .custom-text {
+        font-size: 12px; /* Default font size */
+    }
+    @media screen and (max-width: 768px) {
+        .custom-text {
+            font-size: 10px; /* Adjust the font size for smaller screens */
+        }
+    }
   </style>
 </head>
 <body>
@@ -77,7 +85,7 @@
           <li class="l-section section section--is-active">
             <div class="intro">
               <div class="intro--banner">
-                <h1>Tele Assesment<br>Interaktif<br>Psikologi</h1>
+                <h1>Telesssesment<br>Interaktif<br>Psikologi</h1>
                 <p style="width: 50%;font-size: 13px;" >Tele assesmen interaktif psikologi adalah tes yang menggunakan basis Artificial Intelligence yang menggunakan sentiment analisis dari modalitas suara,
                    video serta respons dari testee. Tujuan Utama dari asesmen ini bukan sebagai tes psikologi namun merupakan screening profiling ang dapat ditindak lanjuti dengan asesmen yang lebih mendalam.<p>
                 <button class="cta">Bergabung
@@ -195,7 +203,7 @@
               
               <div class="about--options">
                 
-                <a href="#" class="popup-link" data-popup-text="Umum atau individual yang membutuhkan prfile kepribadian bakat dan minta serta intelegensi ">
+                <a href="#" class="popup-link" data-popup-text="Umum atau individual yang membutuhkan profile kepribadian bakat dan minta serta intelegensi ">
                     <h3>Individu</h3>
                 </a>
                 <a href="#" class="popup-link" data-popup-text="Perusahaan atau Lembaga yang ingin membuat profile tes kepribadian, bakat, minat serta intelegensi karyawan">
@@ -215,7 +223,8 @@
               <div class="contact--lockup">
                 <div id="video-container" style="height:100%; width:100%; padding-top:150px">
                     <!-- <iframe width="640" height="360" src="https://www.youtube.com/embed/FC7JQItVqzM" frameborder="0" allowfullscreen></iframe>  -->
-                    <iframe src="https://www.youtube.com/embed/FC7JQItVqzM" style="width:100%;height:65vh;" frameborder="0" allowfullscreen></iframe>
+                    <!-- <iframe src="https://www.youtube.com/embed/FC7JQItVqzM" style="width:100%;height:65vh;" frameborder="0" allowfullscreen></iframe> -->
+                    <iframe src="assets/video/InstructionVideo.mp4" style="width:100%;height:65vh;" frameborder="0" allowfullscreen></iframe>
   
                 </div> 
               </div>
@@ -236,7 +245,7 @@
                     <span class="options-a">
                       <input id="opt-1" type="checkbox" value="app design">
                       <label for="opt-1">
-                        <img src="assets/img/Kontributor1.jpg" class="image-with-top-margin">
+                        <img src="assets/img/Kontributor11.png" class="image-with-top-margin">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 150 111" style="enable-background:new 0 0 150 111;" xml:space="preserve">
                         <g transform="translate(0.000000,111.000000) scale(0.100000,-0.100000)">
@@ -245,11 +254,11 @@
                         </svg>
                         <!-- <img src="assets/img/testbg.png"> -->
                         Individu
-                        <p style="font-size: 12px;">Cari tahu tentang dirimu</p>
+                        <p class="custom-text">Cari tahu tentang dirimu</p>
                       </label>
                       <input id="opt-2" type="checkbox" value="graphic design">
                       <label for="opt-2">
-                        <img src="assets/img/Kontributor2.jpg" class="image-with-top-margin">
+                        <img src="assets/img/Kontributor21.png" class="image-with-top-margin">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 150 111" style="enable-background:new 0 0 150 111;" xml:space="preserve">
                         <g transform="translate(0.000000,111.000000) scale(0.100000,-0.100000)">
@@ -257,11 +266,11 @@
                         </g>
                         </svg>
                         Karyawan
-                        <p style="font-size: 12px;">Cari tahu tentang karyawan di perusahaanmu</p>
+                        <p class="custom-text">Cari tahu tentang karyawan di perusahaanmu</p>
                       </label>
                       <input id="opt-3" type="checkbox" value="motion design">
                       <label for="opt-3">
-                        <img src="assets/img/Kontributor3.jpg" class="image-with-top-margin">
+                        <img src="assets/img/Kontributor31Icon.png" class="image-with-top-margin">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 150 111" style="enable-background:new 0 0 150 111;" xml:space="preserve">
                         <g transform="translate(0.000000,111.000000) scale(0.100000,-0.100000)">
@@ -269,7 +278,8 @@
                         </g>
                         </svg>
                         Tim
-                        <p style="font-size: 12px;">Cari tahu tentang kelompok di perusahaan</p>
+                        <p class="custom-text">Cari tahu tentang kelompok di perusahaan</p>
+
                       </label>
                     </span>
                   </div>

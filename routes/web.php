@@ -44,10 +44,11 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::get('/testlogin', function () {
-    return view('testlogin');
-})->name('testlogin');
+// Route::get('/testlogin', function () {
+//     return view('testlogin');
+// })->name('testlogin');
 
+// Rute Untuk Test Video/Teleassesment Urutuan Interview -> BakatMinat -> Cognitive
 Route::get('/testinterview', function () {
     return view('testinterview');
 })->name('testinterview');
@@ -56,6 +57,26 @@ Route::get('/testcognitive', function () {
     return view('testcognitive');
 })->name('testcognitive');
 
+Route::get('/testbakatminat', function () {
+    return view('testbakatminat');
+})->name('testbakatminat');
+
+
+// Rute untuk Test Validation Tertulis Pilgan Urutan Kepribadian(1) -> BakatMinat -> Validation/Intelegensi
 Route::get('/testvalidation', function () {
     return view('testvalidation');
 })->name('testvalidation');
+
+Route::get('/testvalidationkepribadian', function () {
+    return view('testvalidationkepribadian');
+})->name('testvalidationkepribadian');
+
+Route::get('/testvalidationbakatminat', function () {
+    return view('testvalidationbakatminat');
+})->name('testvalidationbakatminat');
+// Hasil
+Route::get('/result', function () {
+    return view('result');
+})->name('result');
+
+

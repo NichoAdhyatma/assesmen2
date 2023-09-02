@@ -158,11 +158,11 @@
 
             <h1> Webcam Anda <h1>
             <video id="webcam" autoplay style=""></video>
-            <a href="{{ route('testinterview') }}" class="special-link-button">
+            <a href="{{ route('testvalidationkepribadian') }}" class="special-link-button">
                 <button id="startButton" class="testButton" disabled>Lanjut ke tes berikutnya</button>
             </a>
 
-            <a href="{{ route('testinterview') }}" class="special-link-button">
+            <a href="{{ route('testvalidationkepribadian') }}" class="special-link-button">
                 <button id="startButton" class="testButton">Skip</button>
             </a>
 

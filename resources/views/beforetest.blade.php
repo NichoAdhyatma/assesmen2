@@ -143,7 +143,7 @@
             <!-- <h1>Tele Assesment<br>Interaktif<br>Psikologi</h1> -->
             
             <h1>Video Penjelasan</h1>
-            <h1>Tele Assesment</h1>
+            <h1>Teleassesment</h1>
             <!-- <a href="{{ route('login') }}" class="special-link">
                 <button class="testButton">Mulai Test</button>
             </a> -->

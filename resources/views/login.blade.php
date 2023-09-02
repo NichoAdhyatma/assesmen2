@@ -37,7 +37,7 @@
 
         body {
             margin: 0;
-            color: #6a6f8c;
+            color: #bac4d4;
             background: #ffff;
             font-family: 'Montserrat', sans-serif; /* Use the custom font */
             font-weight: 400; /* Default font weight */
@@ -77,7 +77,7 @@
             width:100%;
             height:100%;
             position:absolute;
-            padding:90px 70px 50px 70px;
+            padding:45px 70px 50px 70px;
             background: rgba(15, 51, 255, 0.4); /* Background color with opacity */
             border-radius:15px;
         }
@@ -151,6 +151,9 @@
             border: 0.5px solid #ffff; /* Border color */
             box-shadow: 0 3px 6px rgba(15, 51, 255, 0.2); /* Box shadow */
             transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Add transitions for smooth effects */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .login-form .group label .icon{
             width:15px;
@@ -220,6 +223,7 @@
             padding: 0px 2px 1px;
             color: #0c0c0c;
         }
+
     </style>
 </head>
 <body>
@@ -254,6 +258,10 @@
                         <div class="group">
                             <input type="submit" class="button" value="Sign In">
                         </div>
+                        <div class="group">
+                            <a href="{{ route('consent') }}" class="button align-middle">Guest</a>
+                        </div>
+
                     </form>
                 </div>
                 <div class="sign-up-htm">
@@ -300,7 +308,10 @@
                         <div class="group">
                             <input type="submit" class="button" value="Sign Up">
                         </div>
-                    </form>
+                        <div class="group">
+                            <a href="{{ route('consent') }}" class="button align-middle">Guest</a>
+                        </div>
+                    </form>            
                 </div>
             </div>
         </div>
