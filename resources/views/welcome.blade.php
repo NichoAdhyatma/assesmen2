@@ -222,11 +222,11 @@
             <div>
               <div class="contact--lockup">
                 <div id="video-container" style="height:100%; width:100%; padding-top:150px">
-                    <!-- <iframe width="640" height="360" src="https://www.youtube.com/embed/FC7JQItVqzM" frameborder="0" allowfullscreen></iframe>  -->
-                    <!-- <iframe src="https://www.youtube.com/embed/FC7JQItVqzM" style="width:100%;height:65vh;" frameborder="0" allowfullscreen></iframe> -->
-                    <iframe src="assets/video/InstructionVideo.mp4" style="width:100%;height:65vh;" frameborder="0" allowfullscreen></iframe>
-  
-                </div> 
+                  <video controls style="width:100%;height:65vh;">
+                      <source src="assets/video/InstructionVideo.mp4" type="video/mp4">
+                      Your browser does not support the video tag.
+                  </video>
+                </div>
               </div>
               
             </div>
