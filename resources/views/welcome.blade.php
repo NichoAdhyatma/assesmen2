@@ -85,9 +85,9 @@
           <li class="l-section section section--is-active">
             <div class="intro">
               <div class="intro--banner">
-                <h1>Telesssesment<br>Interaktif<br>Psikologi</h1>
-                <p style="width: 50%;font-size: 13px;" >Tele assesmen interaktif psikologi adalah tes yang menggunakan basis Artificial Intelligence yang menggunakan sentiment analisis dari modalitas suara,
-                   video serta respons dari testee. Tujuan Utama dari asesmen ini bukan sebagai tes psikologi namun merupakan screening profiling ang dapat ditindak lanjuti dengan asesmen yang lebih mendalam.<p>
+                <h1>Teleassesmen<br>Interaktif<br>Psikologi</h1>
+                <p style="width: 50%;font-size: 13px;" >Teleassesmen interaktif psikologi adalah berbasis Artificial Intelligence yang menggunakan analisis sentime dari modalitas suara,
+                   video serta respons dari testee. Tujuan Utama dari assesmen ini bukan sebagai tes psikologi namun merupakan screening profiling yang dapat ditindak lanjuti dengan assesmen yang lebih mendalam.<p>
                 <button class="cta">Bergabung
                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
                   <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
@@ -105,7 +105,7 @@
                 </a>
                 <a href="#0">
                   <h3>Validation Test</h3>
-                  <p>Test tertulis untuk memvalidasi hasil Interview Interaktif</p>
+                  <p>Test tertulis untuk memvalidasi hasil assesmen Interaktif</p>
                 </a>
                 <a href="#0">
                   <h3>Cognitive Style Test</h3>
@@ -203,7 +203,7 @@
               
               <div class="about--options">
                 
-                <a href="#" class="popup-link" data-popup-text="Umum atau individual yang membutuhkan profile kepribadian bakat dan minta serta intelegensi ">
+                <a href="#" class="popup-link" data-popup-text="Umum atau individual yang membutuhkan profile kepribadian bakat dan minta serta intelegensi">
                     <h3>Individu</h3>
                 </a>
                 <a href="#" class="popup-link" data-popup-text="Perusahaan atau Lembaga yang ingin membuat profile tes kepribadian, bakat, minat serta intelegensi karyawan">
@@ -254,7 +254,7 @@
                         </svg>
                         <!-- <img src="assets/img/testbg.png"> -->
                         Individu
-                        <p class="custom-text">Cari tahu tentang dirimu</p>
+                        <p class="custom-text">Cari tahu tentang diri anda</p>
                       </label>
                       <input id="opt-2" type="checkbox" value="graphic design">
                       <label for="opt-2">
@@ -266,7 +266,7 @@
                         </g>
                         </svg>
                         Karyawan
-                        <p class="custom-text">Cari tahu tentang karyawan di perusahaanmu</p>
+                        <p class="custom-text">Cari tahu tentang karyawan di perusahaan anda</p>
                       </label>
                       <input id="opt-3" type="checkbox" value="motion design">
                       <label for="opt-3">
@@ -278,7 +278,7 @@
                         </g>
                         </svg>
                         Tim
-                        <p class="custom-text">Cari tahu tentang kelompok di perusahaan</p>
+                        <p class="custom-text">Cari tahu tentang kelompok atau tim anda</p>
 
                       </label>
                     </span>

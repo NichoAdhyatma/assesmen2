@@ -2,29 +2,35 @@
 <html>
 <head>
 <style>
-        /* Add your CSS styles here to format the table */
-        table {
-            border-collapse: collapse;
-            width: 90%;
-            margin: 0 auto;
+       table {
+        border-collapse: collapse;
+        width: 90%;
+        margin: 0 auto;
         }
 
         th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
+        border: 1px solid #c2c2c2;
+        padding: 8px;
+        text-align: left;
         }
 
         th {
-            background-color: #f2f2f2;
+        /* background-color: #c7c1c1; */
+        background-color: #f2f2f2;
         }
 
         /* Style for the first column (headers on the side) */
         th.vertical-header {
-            white-space: nowrap;
-            width: 20px; /* Adjust the width as needed */
-            transform-origin: 100% 100%;
-            /* transform: rotate(-90deg); */
+        white-space: nowrap;
+        width: 20px; /* Adjust the width as needed */
+        transform-origin: 100% 100%;
+        /* transform: rotate(-90deg); */
+        }
+
+        /* Style for every other row in the table */
+        tr:nth-child(even) {
+        /* background-color:#f2f2f2; */
+        background-color:#e6e6e6 ;
         }
     </style>
 </head>
