@@ -91,6 +91,12 @@
         border-color: #ffff;
         margin-top:20px
     }
+
+    @media screen and (max-width: 768px) {
+        .testButton {
+            font-size: 16px; /* Adjust the font size for smaller screens */
+        }
+    }
     .special-link-button {
         display: inline-block;
         /* padding-left: 28.75%; */
