@@ -1044,7 +1044,7 @@ body{
 .about--banner img{
     position:absolute;
     bottom:-145px;
-    right:-30px
+    right:-10px
 }
 .about--options{
     display:-webkit-box;
@@ -1061,28 +1061,27 @@ body{
     list-style:none
 }
 .about--options>a{
-    position:relative;
-    width:150px;
-    height:75px;
-    text-decoration:none;
-    color:#0c0c0c;
+    position: relative;
+    width: 150px;
+    height: 75px;
+    text-decoration: none;
+    color: #0c0c0c;
     text-shadow: 0 0 0.1px #ffff;
-    border:2px solid #0f33ff;
+    border: 2px solid #0f33ff;
     border-radius: 5px;
-    background-position:center;
-    background-size:contain;
-    background-repeat:no-repeat
+    background-position: center;
+    background-size: cover; /* Change this property to cover */
+    background-repeat: no-repeat;
 }
 .about--options>a:nth-child(1){
     width: 25%;
-    
-    background-image:url("../img/Kontributor11.png")
+    background-image:url("../img/Kontributor1.png")
 }
 .about--options>a:nth-child(2){
-    background-image:url("../img/Kontributor21.png")
+    background-image:url("../img/Kontributor2.png")
 }
 .about--options>a:nth-child(3){
-    background-image:url("../img/Kontributor31.png")
+    background-image:url("../img/Kontributor2.jpg")
 }
 .about--options>a:hover h3{
     bottom:-50px

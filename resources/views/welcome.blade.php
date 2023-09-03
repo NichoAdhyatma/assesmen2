@@ -85,9 +85,9 @@
           <li class="l-section section section--is-active">
             <div class="intro">
               <div class="intro--banner">
-                <h1>Teleassesmen<br>Interaktif<br>Psikologi</h1>
-                <p style="width: 50%;font-size: 13px;" >Teleassesmen interaktif psikologi adalah berbasis Artificial Intelligence yang menggunakan analisis sentime dari modalitas suara,
-                   video serta respons dari testee. Tujuan Utama dari assesmen ini bukan sebagai tes psikologi namun merupakan screening profiling yang dapat ditindak lanjuti dengan assesmen yang lebih mendalam.<p>
+                <h1>Tele-asesmen<br>Interaktif<br>Psikologi</h1>
+                <p style="width: 50%;font-size: 13px;" >Tele-asesmen interaktif psikologi adalah berbasis Artificial Intelligence yang menggunakan analisis sentimen dari modalitas suara,
+                   video serta respons dari testee. Tujuan Utama dari asesmen ini bukan sebagai tes psikologi namun merupakan screening profiling yang dapat ditindak lanjuti dengan asesmen yang lebih mendalam.<p>
                 <button class="cta">Bergabung
                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
                   <g transform="translate(0.000000,118.000000) scale(0.100000,-0.100000)">
@@ -105,7 +105,7 @@
                 </a>
                 <a href="#0">
                   <h3>Validation Test</h3>
-                  <p>Test tertulis untuk memvalidasi hasil assesmen Interaktif</p>
+                  <p>Test tertulis untuk memvalidasi hasil asesmen Interaktif</p>
                 </a>
                 <a href="#0">
                   <h3>Cognitive Style Test</h3>
@@ -182,7 +182,7 @@
           <li class="l-section section">
             <div class="about">
               <div class="about--banner">
-                <h2>Pendaftaran Assesmen<br>Psikologi <br>Interaktif</h2>
+                <h2>Pendaftaran Asesmen<br>Psikologi <br>Interaktif</h2>
                 <a href="{{ route('login') }}">Jadi Testee Sekarang
                   <span>
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
@@ -245,7 +245,7 @@
                     <span class="options-a">
                       <input id="opt-1" type="checkbox" value="app design">
                       <label for="opt-1">
-                        <img src="assets/img/Kontributor11.png" class="image-with-top-margin">
+                        <img src="assets/img/Kontributor1.jpg" class="image-with-top-margin">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 150 111" style="enable-background:new 0 0 150 111;" xml:space="preserve">
                         <g transform="translate(0.000000,111.000000) scale(0.100000,-0.100000)">
@@ -258,19 +258,19 @@
                       </label>
                       <input id="opt-2" type="checkbox" value="graphic design">
                       <label for="opt-2">
-                        <img src="assets/img/Kontributor21.png" class="image-with-top-margin">
+                        <img src="assets/img/Kontributor3.jpg" class="image-with-top-margin">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 150 111" style="enable-background:new 0 0 150 111;" xml:space="preserve">
                         <g transform="translate(0.000000,111.000000) scale(0.100000,-0.100000)">
                           <path d="M950,705L555,310L360,505C253,612,160,700,155,700c-6,0-44-34-85-75l-75-75l278-278L550-5l475,475c261,261,475,480,475,485c0,13-132,145-145,145C1349,1100,1167,922,950,705z"/>
                         </g>
                         </svg>
-                        Karyawan
+                        Perusahaan
                         <p class="custom-text">Cari tahu tentang karyawan di perusahaan anda</p>
                       </label>
                       <input id="opt-3" type="checkbox" value="motion design">
                       <label for="opt-3">
-                        <img src="assets/img/Kontributor31Icon.png" class="image-with-top-margin">
+                        <img src="assets/img/Kontributor2.jpg" class="image-with-top-margin">
                         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         viewBox="0 0 150 111" style="enable-background:new 0 0 150 111;" xml:space="preserve">
                         <g transform="translate(0.000000,111.000000) scale(0.100000,-0.100000)">

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question and Answer Page</title>
+    <title>Tes Validasi Bakat Minat</title>
     <style>
         body {
             font-family: 'Montserrat';

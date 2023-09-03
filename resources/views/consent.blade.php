@@ -40,13 +40,13 @@
                 <img src="assets/img/about-visual1.png" alt="Image" class="img-fluid mb-4"> <!-- Replace with your image URL and adjust classes as needed -->
 
                 <h1>Informed Consent</h1>
-                <h1>Teleassesmen</h1>
+                <h1>Tele-asesmen</h1>
                 <br>
                 <p>Akan dilakukan 3 jenis tes, beserta tes validasi secara tertulis</p>
                 <p>1. Tes Interview</p>
                 <p>2. Tes Bakat & Minat</p>
                 <p>3. Tes Cognitive</p>
-                <p>4. Tes Validasi Untuk Memastikan Hasil Teleassesment</p>
+                <p>4. Tes Validasi Untuk Memastikan Hasil Tele-asesment</p>
                 <!-- <div id="carouselExample" class="carousel slide" data-ride="carousel" style="width:50%;height:400px">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
