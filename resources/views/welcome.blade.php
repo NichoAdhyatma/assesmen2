@@ -182,7 +182,7 @@
           <li class="l-section section">
             <div class="about">
               <div class="about--banner">
-                <h2>Pendafaran Assesmen<br>Psikologi <br>Interaktif</h2>
+                <h2>Pendaftaran Assesmen<br>Psikologi <br>Interaktif</h2>
                 <a href="{{ route('login') }}">Jadi Testee Sekarang
                   <span>
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
