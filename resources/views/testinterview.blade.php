@@ -178,6 +178,7 @@
     </style>
 </head>
 
+
 <body>
 
     <div class="intro--banner">
@@ -187,41 +188,158 @@
     <div class="contact--lockup">
         <div id="video-container-" style="height:100%; width:100%; padding-top:150px">
 
-            <video controls autoplay style="width: 100%; height: 65vh;">
+            <video id="main-video" controls autoplay style="width: 100%; height: 65vh;">
                 <source src="assets/video/KepribadianVideo.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
 
-            <h1> Webcam Anda <h1>
-                    <video id="webcam" autoplay style=""></video>
-                    <!-- <div id="face-position-square"></div> -->
+            <h1> Webcam Anda </h1>
+            <div class="col-12 col-md-6">
+                <video autoplay="true" id="your-video-id" controls="" autoplay width="100%" height="300px">
+                    Izinkan Penggunaan Kamera.
+                </video>
+            </div>
+            
+            <div class="col-12 col-md-6 ">
+                <button onclick="startRecording()" id="startRecordButton">Start Record</button>
+                <button id="stopRecordButton" disabled>Stop</button>
+            </div>
 
-                    <a href="{{ route('testbakatminat') }}" class="special-link-button">
-                        <button id="startButton" class="testButton" disabled>Lanjut ke tes berikutnya</button>
-                    </a>
+            <a href="{{ route('testbakatminat') }}" class="special-link-button">
+                <button id="nextButton" class="testButton" disabled>Lanjut ke tes berikutnya</button>
+            </a>
 
-
-
-                    <a href="{{ route('testbakatminat') }}" class="special-link-button">
-                        <button id="startButton" class="testButton">Skip</button>
-                    </a>
+            <a href="{{ route('testbakatminat') }}" class="special-link-button">
+                <button id="skipButton" class="testButton">Skip</button>
+            </a>
 
         </div>
     </div>
 
-</body>
-<script>
-    // Access the user's webcam
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-            // Assign the webcam stream to the video element
-            var webcam = document.getElementById('webcam');
-            webcam.srcObject = stream;
-        })
-        .catch(function (error) {
-            console.error('Error accessing webcam:', error);
+    <script type="text/javascript">
+        var recorder;
+        var webcamVideoElement = document.getElementById('your-video-id'); // Video element for the webcam feed
+        var mainVideoElement = document.getElementById('main-video'); // Main video element to play the video
+        var startRecordButton = document.getElementById('startRecordButton');
+        var stopRecordButton = document.getElementById('stopRecordButton');
+        var nextButton = document.getElementById('nextButton');
+        var skipButton = document.getElementById('skipButton');
+
+        function startRecording() {
+            // Play the main video
+            mainVideoElement.play();
+
+            navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: true
+            }).then(function (camera) {
+                webcamVideoElement.srcObject = camera;
+
+                // Recording configuration/hints/parameters
+                var recordingHints = {
+                    type: 'video',
+                    mimeType: 'video/webm',
+                };
+
+                // Initiating the recorder
+                recorder = RecordRTC(camera, recordingHints);
+
+                // Starting recording
+                recorder.startRecording();
+
+                // Enable the Stop Record button and disable Start Record button
+                startRecordButton.disabled = true;
+                stopRecordButton.disabled = false;
+            });
+        }
+
+        stopRecordButton.addEventListener('click', function () {
+            // Stopping the recorder
+            recorder.stopRecording(function () {
+                // Get recorded blob
+                var blob = recorder.getBlob();
+
+                // Open recorded blob in a new window
+                window.open(URL.createObjectURL(blob));
+
+                // Release camera
+                webcamVideoElement.srcObject = null;
+                navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    audio: true
+                }).then(function (camera) {
+                    camera.getTracks().forEach(function (track) {
+                        track.stop();
+                    });
+                });
+
+                // Preview recorded data on this page as well
+                webcamVideoElement.src = URL.createObjectURL(blob);
+
+                // Enable the Start Record button and disable Stop Record button
+                startRecordButton.disabled = false;
+                stopRecordButton.disabled = true;
+
+                // Enable the Next button
+                nextButton.disabled = false;
+            });
         });
-</script>
+
+        // Enable the Start Record button when the video ends
+        webcamVideoElement.addEventListener('ended', function () {
+            startRecordButton.disabled = false;
+        });
+    </script>
+</body>
+<!-- <script type="text/javascript">
+    function startrecord(){
+      var tombol_stop      = $(".tombol_stop");
+        navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true
+        }).then(function(camera) {
+
+            // preview camera during recording
+            // document.getElementById('your-video-id').muted = true;
+            document.getElementById('your-video-id').srcObject = camera;
+
+            // recording configuration/hints/parameters
+            var recordingHints = {
+                type: 'video',
+                mimeType: 'video/webm',
+            };
+
+            // initiating the recorder
+            var recorder = RecordRTC(camera, recordingHints);
+            
+            // starting recording here
+            recorder.startRecording();
+            //document.getElementById("text_record").innerHTML = " Sedang Merekam . . ."; 
+            $('#RootNode').click(function(){
+                //document.getElementById("text_record").innerHTML += "<br> Stop<br><b>Untuk upload video, tekan tombol 'Kirim Video' dibawah ini. Format yang digunakan adalah mp4, selain itu harap convert video terlebih dahulu <a style='background-color=#a0937d' href='https://cloudconvert.com/mkv-to-mp4' target='_blank'>disini</a></b>"; 
+                recorder.stopRecording(function() {
+
+                    // get recorded blob
+                    var blob = recorder.getBlob();
+
+                    // open recorded blob in a new window
+                    window.open(URL.createObjectURL(blob));
+
+                    // release camera
+                    document.getElementById('your-video-id').srcObject = null;
+                    camera.getTracks().forEach(function(track) {
+                        track.stop();
+                    });
+                    
+                    // you can preview recorded data on this page as well
+                    document.getElementById('your-video-id').src = URL.createObjectURL(blob);
+                });
+                $('#modalvideo').modal('show')
+            });
+        });
+    };
+</script> -->
+
 <script>
     // Get references to the video and button elements
     var video = document.querySelector('video');
@@ -233,4 +351,14 @@
     });
 </script>
 
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script src="https://cdn.WebRTC-Experiment.com/RecordRTC.js"></script>
+<!-- <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script> -->
+<!-- Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 </html>
+

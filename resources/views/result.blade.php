@@ -39,26 +39,33 @@
 </head>
 <body>
     <h1>Hasil Tes Psikogram</h1>
+    
     <table>
         <tr>
             <th>Nama</th>
-            <td>John Doe</td>
+            <td>{{ $dataUser->nama_lengkap }}</td>        
         </tr>
         <tr>
             <th>Usia</th>
-            <td>30</td>
+            <td>{{ $dataUser->usia }}</td>
         </tr>
         <tr>
             <th>Jenis Kelamin</th>
-            <td>Laki-laki</td>
+            <td>
+                @php
+                    $jenisKelamin = $dataUser->jenis_kelamin;
+                    $jenisKelaminText = $jenisKelamin == 1 ? 'Laki-Laki' : ($jenisKelamin == 0 ? 'Perempuan' : 'Tidak Diketahui');
+                @endphp
+                {{ $jenisKelaminText }}
+            </td>
         </tr>
         <tr>
             <th>Pendidikan</th>
-            <td>Sarjana</td>
+            <td>{{ $dataUser->pendidikan_terakhir }}</td>
         </tr>
         <tr>
             <th>Tanggal Pemeriksaan</th>
-            <td>2023-09-02</td>
+            <td>{{ $data->tanggal_penilaian }}</td>        
         </tr>
     
     </table>
@@ -158,6 +165,7 @@
             <tr>
                 <th colspan="10">Minat</th>
             </tr>
+                
             <tr>
                 <th>Realistic</th>
                 <td>Terampil secara mekanik dan/atau pekerjaan yang mengutamakan keterampilan fisik, dan kekuatan otot</td>
@@ -448,7 +456,7 @@
             <tr>
                 <th>Realistic</th>
                 <td>Terampil secara mekanik dan/atau pekerjaan yang mengutamakan keterampilan fisik, dan kekuatan otot</td>
-                <td></td>
+                <td>{{ session('resultR') }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -458,7 +466,7 @@
             <tr>
                 <th>Investigative</th>
                 <td>Cenderung memiliki ketertarikan/minat untuk mengobservasi, belajar, menganalisis dan memecahkan masalah</td>
-                <td></td>
+                <td>{{ session('resultI') }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -468,7 +476,7 @@
             <tr>
                 <th>Artistic</th>
                 <td>Berhati lembut, baik, suka menolong, dapat dipercaya, mudah memaafkan, mudah untuk dimaafkan, terus terang</td>
-                <td></td>
+                <td>{{ session('resultA') }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -478,7 +486,7 @@
             <tr>
                 <th>Social</th>
                 <td>Memiliki minat bekerja dengan individu lain dibandingkan dengan peralatan</td>
-                <td></td>
+                <td>{{ session('resultS') }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -488,7 +496,7 @@
             <tr>
                 <th>Enterprising</th>
                 <td>Memiliki minat bekerja dengan individu lain, serta mempersuasi orang lain dan tampil di muka umum</td>
-                <td></td>
+                <td>{{ session('resultE') }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -498,7 +506,7 @@
             <tr>
                 <th>Conventional</th>
                 <td>Memiliki minat terhadap hal-hal yang mendetail, terorganisir, dan berkaitan dengan data</td>
-                <td></td>
+                <td>{{ session('resultC') }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -676,18 +684,18 @@
             }
         };
     </script>
-
+    
     <script>
         // Function to generate a random score between 1 and 100
         function generateRandomScore() {
-            return Math.floor(Math.random() * 100) + 1;
+            return Math.floor(Math.random() * 10) + 1;
         }
 
         // Function to determine the values for "Rendah," "Tinggi," and "Rata-Rata" based on the raw score
         function determineValues(rawScore) {
-            if (rawScore <= 33) {
+            if (rawScore <= 3) {
                 return ["🔘", "", ""];
-            } else if (rawScore <= 66) {
+            } else if (rawScore <= 6) {
                 return ["", "🔘", ""];
             } else {
                 return ["", "", "🔘"];
@@ -746,21 +754,21 @@
         }
     </script>
 
-<script>
+    <script>
         // Function to generate a random score between 1 and 100
         function generateRandomScore() {
-            return Math.floor(Math.random() * 100) + 1;
+            return Math.floor(Math.random() * 10) + 1;
         }
 
         // Function to determine the values for "Rendah," "Tinggi," and "Rata-Rata" based on the raw score
         function determineValues(rawScore) {
-            if (rawScore <= 20) {
+            if (rawScore <= 2) {
                 return ["🔘", "", "", "", ""];
-            } else if (rawScore <= 40) {
+            } else if (rawScore <= 4) {
                 return ["", "🔘", "", "", ""];
-            } else if (rawScore <= 60) {
+            } else if (rawScore <= 6) {
                 return ["", "", "🔘", "", ""];
-            } else if (rawScore <= 80) {
+            } else if (rawScore <= 8) {
                 return ["", "", "", "🔘", ""];
             } else {
                 return ["", "", "", "", "🔘"];
@@ -775,32 +783,57 @@
             if(i==6 || i==13){
                 continue;
             }
+            else if(i > 6 && i < 13){
+                var row = table.rows[i];
+                var rawScoreCell = row.cells[2]; // Index 2 is the "Raw Score" column
+                console.log(rawScoreCell);
+                // Determine the values for "Sangat Rendah" to "Sangat Tinggi" based on the raw score
+                var values = determineValues(rawScoreCell.textContent);
+
+                
+
+                // Fill in the corresponding cells
+                var sangatRendahCell = row.cells[3]; // Index 3 is the "Sangat Rendah" column
+                sangatRendahCell.textContent = values[0];
+
+                var rendahCell = row.cells[4]; // Index 4 is the "Rendah" column
+                rendahCell.textContent = values[1];
+
+                var rataRataCell = row.cells[5]; // Index 5 is the "Rata-Rata" column
+                rataRataCell.textContent = values[2];
+
+                var tinggiCell = row.cells[6]; // Index 6 is the "Tinggi" column
+                tinggiCell.textContent = values[3];
+
+                var sangatTinggiCell = row.cells[7]; // Index 7 is the "Sangat Tinggi" column
+                sangatTinggiCell.textContent = values[4];
+            }
             else{
-            var row = table.rows[i];
-            var rawScoreCell = row.cells[2]; // Index 2 is the "Raw Score" column
+                var row = table.rows[i];
+                var rawScoreCell = row.cells[2]; // Index 2 is the "Raw Score" column
 
-            // Generate a random score and set it in the cell
-            var randomScore = generateRandomScore();
-            rawScoreCell.textContent = randomScore;
+                // Generate a random score and set it in the cell
+                var randomScore = generateRandomScore();
+                rawScoreCell.textContent = randomScore;
 
-            // Determine the values for "Sangat Rendah" to "Sangat Tinggi" based on the raw score
-            var values = determineValues(randomScore);
+                // Determine the values for "Sangat Rendah" to "Sangat Tinggi" based on the raw score
+                var values = determineValues(randomScore);
 
-            // Fill in the corresponding cells
-            var sangatRendahCell = row.cells[3]; // Index 3 is the "Sangat Rendah" column
-            sangatRendahCell.textContent = values[0];
+                // Fill in the corresponding cells
+                var sangatRendahCell = row.cells[3]; // Index 3 is the "Sangat Rendah" column
+                sangatRendahCell.textContent = values[0];
 
-            var rendahCell = row.cells[4]; // Index 4 is the "Rendah" column
-            rendahCell.textContent = values[1];
+                var rendahCell = row.cells[4]; // Index 4 is the "Rendah" column
+                rendahCell.textContent = values[1];
 
-            var rataRataCell = row.cells[5]; // Index 5 is the "Rata-Rata" column
-            rataRataCell.textContent = values[2];
+                var rataRataCell = row.cells[5]; // Index 5 is the "Rata-Rata" column
+                rataRataCell.textContent = values[2];
 
-            var tinggiCell = row.cells[6]; // Index 6 is the "Tinggi" column
-            tinggiCell.textContent = values[3];
+                var tinggiCell = row.cells[6]; // Index 6 is the "Tinggi" column
+                tinggiCell.textContent = values[3];
 
-            var sangatTinggiCell = row.cells[7]; // Index 7 is the "Sangat Tinggi" column
-            sangatTinggiCell.textContent = values[4];
+                var sangatTinggiCell = row.cells[7]; // Index 7 is the "Sangat Tinggi" column
+                sangatTinggiCell.textContent = values[4];
             }
         }
     </script>

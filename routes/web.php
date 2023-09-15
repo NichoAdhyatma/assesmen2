@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\pyController;
+use App\Http\Controllers\ValidationMinatController;
 
 
 /*
@@ -28,6 +30,22 @@ Route::get('/consent', function () {
 
 Route::post('/signup', [AuthController::class, 'postSignUp'])->name('postSignUp');
 Route::post('/signin', [AuthController::class, 'postSignIn'])->name('postSignIn');
+Route::post('/gotoValidation', [ValidationMinatController::class, 'gotoValidation']);
+
+Route::get('/gotoValidation', function () {
+    return view('testvalidation');
+});
+
+Route::post('/gotoValidationbakatminat', [ValidationMinatController::class, 'gotoValidationbakatminat']);
+
+Route::get('/gotoValidationbakatminat', function () {
+    return view('testvalidationbakatminat');
+});
+
+Route::post('/postPenilaian', [ValidationMinatController::class, 'postPenilaian'])->name('postPenilaian');
+Route::get('/postPenilaian', function () {
+    return view('beforeresult');
+});
 
 Route::get('/signup', function () {
     return view('consent');
@@ -78,5 +96,12 @@ Route::get('/testvalidationbakatminat', function () {
 Route::get('/result', function () {
     return view('result');
 })->name('result');
+
+Route::get('/my-route', [pyController::class, 'index'])->name('my-route');
+
+Route::get('/outputdb', [ValidationMinatController::class, 'getPenilaian']);
+Route::get('/beforeresult', [ValidationMinatController::class, 'getPenilaianBefore'])->name('beforeresult');
+Route::get('/resultID/{itemId}', [ValidationMinatController::class, 'getPenilaianAfter'])->name('resultID');
+
 
 

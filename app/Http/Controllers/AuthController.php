@@ -15,7 +15,7 @@ class AuthController extends Controller
      */
 
      function postSignUp(Request $request){
-        $data = 'WOIIIIIIIIIIIIIIIIIIIIIIII';
+        $data = 'test';
     
         
         $validate = $request->validate([
@@ -108,19 +108,30 @@ class AuthController extends Controller
     //     use Illuminate\Http\Request;
     // use Illuminate\Support\Facades\Auth;
 
-        public function postSignIn(Request $request)
-        {
-            $validated = $request->validate([
-                'username' => 'required',
-                'password' => 'required',
-            ]);
+    public function postSignIn(Request $request)
+    {
+        $validated = $request->validate([
+            'username' => 'required',
+            'password' => 'required',
+        ]);
 
-            if (Auth::guard('web')->attempt(['username' => $validated['username'], 'password' => $validated['password']])) {
-                return response()->json(['success' => true, 'redirect' => route('consent')]);
-            } else {
-                return response()->json(['success' => false, 'message' => 'Sign In Failed.']);
-            }
+        if (Auth::guard('web')->attempt(['username' => $validated['username'], 'password' => $validated['password']])) {
+            $user = Auth::user();
+            $userId = $user->id;
+            $userName = $user->username;
+            $namaLengkap = $user->nama_lengkap;
+            $usia = $user->usia;
+            $jenisKelamin = $user->jenis_kelamin;
+            $pendidikanTerakhir = $user->pendidikan_terakhir;
+    
+            // Store user information in the session
+            session(['user_id' => $userId, 'username' => $userName, 'nama_lengkap' => $namaLengkap, 'usia' => $usia, 'jenis_kelamin' => $jenisKelamin, 'pendidikan_terakhir' => $pendidikanTerakhir]);
+    
+            return response()->json(['success' => true, 'user_id' => $userId, 'username' => $userName, 'nama_lengkap' => $namaLengkap, 'usia' => $usia, 'jenis_kelamin' => $jenisKelamin, 'pendidikan_terakhir' => $pendidikanTerakhir, 'redirect' => route('consent')]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Sign In Failed.']);
         }
+    }
 
     // function handlePost($email){
     //     if (Auth::guard('web')->attempt(['email' => $email, 'password' => 'default'])){

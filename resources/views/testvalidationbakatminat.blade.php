@@ -289,23 +289,23 @@
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="1">
+                            <input type="radio" class="radio-input" name="answer2" value="1">
                             Sangat tidak suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="2">
+                            <input type="radio" class="radio-input" name="answer2" value="2">
                             Tidak Suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="3">
+                            <input type="radio" class="radio-input" name="answer2" value="3">
                             Netral
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="4">
+                            <input type="radio" class="radio-input" name="answer2" value="4">
                             Suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="5">
+                            <input type="radio" class="radio-input" name="answer2" value="5">
                             Sangat Suka
                         </label>
                     </form>
@@ -317,23 +317,23 @@
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="1">
+                            <input type="radio" class="radio-input" name="answer3" value="1">
                             Sangat tidak suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="2">
+                            <input type="radio" class="radio-input" name="answer3" value="2">
                             Tidak Suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="3">
+                            <input type="radio" class="radio-input" name="answer3" value="3">
                             Netral
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="4">
+                            <input type="radio" class="radio-input" name="answer3" value="4">
                             Suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="5">
+                            <input type="radio" class="radio-input" name="answer3" value="5">
                             Sangat Suka
                         </label>
                     </form>
@@ -345,23 +345,23 @@
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="1">
+                            <input type="radio" class="radio-input" name="answer4" value="1">
                             Sangat tidak suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="2">
+                            <input type="radio" class="radio-input" name="answer4" value="2">
                             Tidak Suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="3">
+                            <input type="radio" class="radio-input" name="answer4" value="3">
                             Netral
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="4">
+                            <input type="radio" class="radio-input" name="answer4" value="4">
                             Suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="5">
+                            <input type="radio" class="radio-input" name="answer4" value="5">
                             Sangat Suka
                         </label>    
                     </form>
@@ -373,23 +373,219 @@
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="1">
+                            <input type="radio" class="radio-input" name="answer5" value="1">
                             Sangat tidak suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="2">
+                            <input type="radio" class="radio-input" name="answer5" value="2">
                             Tidak Suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="3">
+                            <input type="radio" class="radio-input" name="answer5" value="3">
                             Netral
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="4">
+                            <input type="radio" class="radio-input" name="answer5" value="4">
                             Suka
                         </label>
                         <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="5">
+                            <input type="radio" class="radio-input" name="answer5" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 6:</h1>
+                <p>Saya menyukai tugas-tugas yang memiliki struktur yang jelas dan rutin.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer6" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer6" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer6" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer6" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer6" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 7:</h1>
+                <p>Saya menikmati olahraga atau aktivitas fisik.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer7" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer7" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer7" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer7" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer7" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 8:</h1>
+                <p>Saya tertarik pada penulisan, membaca, atau menggali informasi.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer8" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer8" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer8" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer8" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer8" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 9:</h1>
+                <p>Saya senang berpartisipasi dalam pertunjukan atau acara seni.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer9" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer9" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer9" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer9" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer9" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 10:</h1>
+                <p>Saya suka berinteraksi dengan orang banyak dan membantu mereka.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer10" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer10" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer10" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer10" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer10" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 11:</h1>
+                <p>Saya tertarik pada peluang bisnis dan mengambil risiko.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer11" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer11" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer11" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer11" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer11" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 12:</h1>
+                <p>Saya suka bekerja dengan data dan detail yang akurat.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer12" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer12" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer12" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer12" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer12" value="5">
                             Sangat Suka
                         </label>
                     </form>
@@ -403,9 +599,10 @@
     </div>
     <button class="prev-button">Previous Question</button>
     <button class="next-button">Next Question</button>
-    <a href="{{ route('testvalidation') }}">
+    <button id="calculate-button">Calculate</button>
+    <!-- <a href="{{ route('testvalidation') }}"> -->
         <button id="submit-button" class="submit-button" disabled title="Please finish all questions">Submit</button>
-    <a>
+    <!-- <a> -->
     <br>
     <div class="question-navigation">
         <div class="select-dropdown">
@@ -414,8 +611,100 @@
             </select>
         </div>
     </div>
-    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <script>
+        const scoreR1 = document.querySelector('input[name="answer1"]:checked')?.value || 0;
+        const scoreR2 = document.querySelector('input[name="answer7"]:checked')?.value || 0;
+        $resultR = parseInt(scoreR1) + parseInt(scoreR2);
+
+        const scoreI1 = document.querySelector('input[name="answer2"]:checked')?.value || 0;
+        const scoreI2 = document.querySelector('input[name="answer8"]:checked')?.value || 0;
+        $resultI = parseInt(scoreI1) + parseInt(scoreI2);
+
+        const scoreA1 = document.querySelector('input[name="answer3"]:checked')?.value || 0;
+        const scoreA2 = document.querySelector('input[name="answer9"]:checked')?.value || 0;
+        const resultA = parseInt(scoreA1) + parseInt(scoreA2);
+
+        const scoreS1 = document.querySelector('input[name="answer4"]:checked')?.value || 0;
+        const scoreS2 = document.querySelector('input[name="answer10"]:checked')?.value || 0;
+        const resultS = parseInt(scoreS1) + parseInt(scoreS2);
+
+        const scoreE1 = document.querySelector('input[name="answer5"]:checked')?.value || 0;
+        const scoreE2 = document.querySelector('input[name="answer11"]:checked')?.value || 0;
+        const resultE = parseInt(scoreE1) + parseInt(scoreE2);
+
+        const scoreC1 = document.querySelector('input[name="answer6"]:checked')?.value || 0;
+        const scoreC2 = document.querySelector('input[name="answer12"]:checked')?.value || 0;
+        $resultC = parseInt(scoreC1) + parseInt(scoreC2);
+        // Function to calculate and assign scores
+
+        function calculateScores() {
+            const scoreR1 = document.querySelector('input[name="answer1"]:checked')?.value || 0;
+            const scoreR2 = document.querySelector('input[name="answer7"]:checked')?.value || 0;
+            $resultR = parseInt(scoreR1) + parseInt(scoreR2);
+
+            const scoreI1 = document.querySelector('input[name="answer2"]:checked')?.value || 0;
+            const scoreI2 = document.querySelector('input[name="answer8"]:checked')?.value || 0;
+            $resultI = parseInt(scoreI1) + parseInt(scoreI2);
+
+            const scoreA1 = document.querySelector('input[name="answer3"]:checked')?.value || 0;
+            const scoreA2 = document.querySelector('input[name="answer9"]:checked')?.value || 0;
+            $resultA = parseInt(scoreA1) + parseInt(scoreA2);
+
+            const scoreS1 = document.querySelector('input[name="answer4"]:checked')?.value || 0;
+            const scoreS2 = document.querySelector('input[name="answer10"]:checked')?.value || 0;
+            $resultS = parseInt(scoreS1) + parseInt(scoreS2);
+
+            const scoreE1 = document.querySelector('input[name="answer5"]:checked')?.value || 0;
+            const scoreE2 = document.querySelector('input[name="answer11"]:checked')?.value || 0;
+            $resultE = parseInt(scoreE1) + parseInt(scoreE2);
+
+            const scoreC1 = document.querySelector('input[name="answer6"]:checked')?.value || 0;
+            const scoreC2 = document.querySelector('input[name="answer12"]:checked')?.value || 0;
+            $resultC = parseInt(scoreC1) + parseInt(scoreC2);
+
+            axios.post('/gotoValidation', {
+                resultR: $resultR,
+                resultI: $resultI,
+                resultA: $resultA,
+                resultS: $resultS,
+                resultE: $resultE,
+                resultC: $resultC
+            })
+            .then(function (response) {
+                console.log("Yeeee"); // Log a success message
+            })
+            .catch(function (error) {
+                console.error("Fail"); // Log any errors
+            });
+            // Example: Display the scores in the console
+            console.log("ScoreR: " + $resultR);
+            console.log("ScoreI: " + $resultI);
+            console.log("ScoreA: " + $resultA);
+            console.log("ScoreS: " + $resultS);
+            console.log("ScoreE: " + $resultE);
+            console.log("ScoreC: " + $resultC);
+        }
+
+        // Add an event listener to the Calculate button to trigger the calculation
+        document.querySelector('#calculate-button').addEventListener('click', calculateScores);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitButton = document.getElementById('submit-button');
+            
+            submitButton.addEventListener('click', function (event) {
+                // Prevent the default form submission behavior
+                event.preventDefault();
+                
+                // Call the calculateScores() function here
+                calculateScores();
+                
+                // After calling calculateScores(), you can redirect to the 'testvalidation' route
+                window.location.href = "{{ route('testvalidation') }}";
+            });
+        });
+    </script>
     <script>
         // Get the list of questions and navigation buttons
         const questionList = document.getElementById('question-list');

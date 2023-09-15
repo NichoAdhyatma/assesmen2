@@ -183,5 +183,20 @@
             });
         });
     </script>
+    <!-- <script>
+        const user_id = @json(session('user_id'));
+        const username = @json(session('username'));
+        const nama = @json(session('nama_lengkap'));
+        const usia = @json(session('usia'));
+        const jenis = @json(session('jenis_kelamin'));
+        const pendidikan = @json(session('pendidikan_terakhir'));
+
+        console.log("User ID:", user_id);
+        console.log("Username:", username);
+        console.log("User ID:", nama);
+        console.log("Username:", usia);
+        console.log("User ID:", jenis);
+        console.log("Username:", pendidikan);
+    </script> -->
 </body>
 </html>
