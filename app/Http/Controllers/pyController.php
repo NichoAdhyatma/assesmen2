@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\View;
-
 class pyController extends Controller
 {
     public function index()

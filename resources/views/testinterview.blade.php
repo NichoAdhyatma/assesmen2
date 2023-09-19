@@ -11,6 +11,7 @@
     <meta name="author" content="Bucky Maler">
     <link rel="stylesheet" href="assets/css/main.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
         .intro {
             position: relative;
@@ -215,7 +216,15 @@
 
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+    <script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    </script>
     <script type="text/javascript">
         var recorder;
         var webcamVideoElement = document.getElementById('your-video-id'); // Video element for the webcam feed
@@ -259,8 +268,33 @@
                 // Get recorded blob
                 var blob = recorder.getBlob();
 
+                // Create a FormData object to send the video file to the server
+                var formData = new FormData();
+                formData.append('recorded_video', blob, 'recorded-video.webm');
+                
+                // Send the recorded video to the Laravel backend
+                console.log("Mulai");
+                fetch('/save-recorded-video', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                            // Set the CSRF token in the request header
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                })
+                
+                //.then(response => response.json())
+                .then(data => {
+                    console.log("BErhasil?"); // You can handle the response as needed
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+
                 // Open recorded blob in a new window
-                window.open(URL.createObjectURL(blob));
+                //window.open(URL.createObjectURL(blob));
+                console.log("YEEEE");
 
                 // Release camera
                 webcamVideoElement.srcObject = null;

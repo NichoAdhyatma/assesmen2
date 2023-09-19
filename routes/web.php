@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\pyController;
 use App\Http\Controllers\ValidationMinatController;
+use App\Http\Controllers\VideoController;
+
 
 
 /*
@@ -103,5 +105,13 @@ Route::get('/outputdb', [ValidationMinatController::class, 'getPenilaian']);
 Route::get('/beforeresult', [ValidationMinatController::class, 'getPenilaianBefore'])->name('beforeresult');
 Route::get('/resultID/{itemId}', [ValidationMinatController::class, 'getPenilaianAfter'])->name('resultID');
 
+Route::post('/save-recorded-video', [VideoController::class, 'saveRecordedVideo']);
+Route::get('/save-recorded-video', function () {
+    return view('testinterview');
+});
 
+Route::post('/process-video', [VideoController::class, 'processSelectedVideo']);
+Route::get('/process-video', function () {
+    return view('beforetest');
+});
 

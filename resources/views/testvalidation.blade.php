@@ -375,6 +375,7 @@
         </div>
     </div>
     <button class="calculate-score-button">Calculate Score</button>
+    <button id="processVideoButton">Process Video</button>
     
 
     <!-- <div class="dropdown">
@@ -391,6 +392,59 @@
     });
     </script>
     <script>
+        // Declare a variable outside of the event listener to store the Python data
+        var pythonData;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const processVideoButton = document.getElementById('processVideoButton');
+
+            processVideoButton.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                // Make an AJAX request to trigger video processing
+                $.ajax({
+                    type: "POST",
+                    url: '/process-video',
+                    data: {
+                        // Include any data you need to send to the server
+                    },
+                    success: function (response) {
+                        // Handle the response from the server
+                        if (response && response.data) {
+                            // Store the Python data in the variable declared outside of the event listener
+                            pythonData = response.data;
+
+                            // Display the data on the web page
+                            console.log('Python Data:', pythonData);
+
+                            // You can update your HTML elements with the data
+                            // Example: document.getElementById('result').textContent = pythonData.someValue;
+
+                            // Now 'pythonData' is accessible outside the AJAX request
+                            // You can use it in other parts of your JavaScript code
+                        } else {
+                            console.error('Invalid response from server');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors (if needed)
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            // Declare and use additional JavaScript variables here
+            var additionalVariable = 'This is an additional variable';
+            console.log('Additional Variable:', additionalVariable);
+            console.log('pythonData outside of the event listener:', pythonData);
+        });
+
+        // You can use 'pythonData' outside of the event listener as well
+        console.log('pythonData outside of the event listener:', pythonData);
+
+    </script>
+    
+    <script>
         var sessionData = @json(session()->all());
         document.addEventListener('DOMContentLoaded', function () {
             const submitButton = document.getElementById('submit-button');
@@ -404,83 +458,85 @@
                 
 
                 //Tabel Penilaian
-                    // ID Penilaian = autoIncrement
-                    // ID User
-                    $userid = sessionData.user_id;
-                    // Tanggal Penilaian = CurrentDate
+                // ID Penilaian = autoIncrement
+                // ID User
+                $userid = sessionData.user_id;
+                // Tanggal Penilaian = CurrentDate
 
-                    // Struktur Tele-assesmen interview (Kepribadian,Bakat,Minat) (14data dipisah koma) per  atribut
+                // Struktur Tele-assesmen interview (Kepribadian,Bakat,Minat) (14data dipisah koma) per  atribut
 
-                    // Sentimen Positif Facial
-                    $f_sentimen_positif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
-                    // Sentimen Netral Facial
-                    $f_sentimen_netral = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                // Sentimen Positif Facial
+                $f_sentimen_positif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                // Sentimen Netral Facial
+                $f_sentimen_netral = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
 
-                    // Sentimen Negatif Facial
-                    $f_sentimen_negatif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                // Sentimen Negatif Facial
+                $f_sentimen_negatif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
 
-                    // Sentimen Positif Voice
-                    $v_sentimen_positif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                // Sentimen Positif Voice
+                $v_sentimen_positif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
 
-                    // Sentimen Netral Voice
-                    $v_sentimen_netral = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                // Sentimen Netral Voice
+                $v_sentimen_netral = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
 
-                    // Sentimen Negatif voice
-                    $v_sentimen_negatif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                // Sentimen Negatif voice
+                $v_sentimen_negatif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
 
-                    // Validation Score
-                    $validation_score = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                // Validation Score
+                $validation_score = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
 
-                    // %Kepercayaan
-                    $kepercayaan = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
-
-
-                    // [Untuk tes cognitive video]
-                    // RawScore(9Data Dipisah Koma)
-                    $skor_validasi = 0; 
-                    // Validasi bakat minat kepribadian
-                    // RawScore(14 Data dipisah koma)
-                    $skor_validasi_kepribadianbakatminat = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + "0,0,0" ;
-                    // Validasi Cognitive
-                    // Raw Score(9Data dipisah koma) -> 9 Penilaian jadikan 1 data hingga berikut
-                    //$skor_validasi_cognitif = calculateScore();
-                    //const csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-                    $.ajax({
-                        type: "POST",
-                        url: '{{route('postPenilaian') }}',
-                        data: {
-                            // Your request data goes here
-                            id_user: sessionData.user_id,
-                            f_sentimen_positif: $f_sentimen_positif,
-                            f_sentimen_netral: $f_sentimen_netral,
-                            f_sentimen_negatif: $f_sentimen_negatif,
-                            v_sentimen_positif: $v_sentimen_positif,
-                            v_sentimen_netral: $v_sentimen_netral,
-                            v_sentimen_negatif: $v_sentimen_negatif,
-                            skor_validasi: $validation_score,
-                            kepercayaan: $kepercayaan,
-                            cognitive_video_score: $skor_validasi,
-                            skor_validasi_kepribadianbakatminat: $skor_validasi_kepribadianbakatminat,
-                            skor_validasi_cognitif: $skor_validasi_cognitif,
+                // %Kepercayaan
+                $kepercayaan = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
 
 
-                            // ...
-                        },
-                        headers: {
-                            // Set the CSRF token in the request header
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
+                // [Untuk tes cognitive video]
+                // RawScore(9Data Dipisah Koma)
+                $skor_validasi = 0; 
+                // Validasi bakat minat kepribadian
+                // RawScore(14 Data dipisah koma)
+                $skor_validasi_kepribadianbakatminat = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + "0,0,0" ;
+                // Validasi Cognitive
+                // Raw Score(9Data dipisah koma) -> 9 Penilaian jadikan 1 data hingga berikut
+                //$skor_validasi_cognitif = calculateScore();
+                //const csrfToken = $('meta[name="csrf-token"]').attr('content');
 
-                            console.log("YEEE")
-                        },
-                        error: function(xhr, status, error) {
-                            console.log("Fail")
-                        }
-                    });
-    
-                    // Set up your AJAX request
+                $.ajax({
+                    type: "POST",
+                    url: '{{route('postPenilaian') }}',
+                    data: {
+                        // Your request data goes here
+                        id_user: sessionData.user_id,
+                        f_sentimen_positif: $f_sentimen_positif,
+                        f_sentimen_netral: $f_sentimen_netral,
+                        f_sentimen_negatif: $f_sentimen_negatif,
+                        v_sentimen_positif: $v_sentimen_positif,
+                        v_sentimen_netral: $v_sentimen_netral,
+                        v_sentimen_negatif: $v_sentimen_negatif,
+                        skor_validasi: $validation_score,
+                        kepercayaan: $kepercayaan,
+                        cognitive_video_score: $skor_validasi,
+                        skor_validasi_kepribadianbakatminat: $skor_validasi_kepribadianbakatminat,
+                        skor_validasi_cognitif: $skor_validasi_cognitif,
+
+
+                        // ...
+                    },
+                    headers: {
+                        // Set the CSRF token in the request header
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+
+                        console.log("YEEE")
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Fail")
+                    }
+                });
+
+               
+
+                // Set up your AJAX request
                 // console.log($skor_validasi_kepribadianbakatminat);
                 // $dataArray = $skor_validasi_kepribadianbakatminat.split(',');
                 // console.log($dataArray);
