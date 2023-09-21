@@ -9,6 +9,7 @@ from googletrans import Translator, constants
 from IPython.core.display import Video
 from feat.utils.io import get_test_data_path
 from feat import Detector
+from feat.detector import Detector
 from pydub import AudioSegment
 
 
@@ -16,12 +17,17 @@ from pydub import AudioSegment
 
 #video_name = "video_test.mp4"
 # audio_name = "audio_test.wav"
-
-# Extract Audio dari Video
+video_name = sys.argv[1]
 def main():
-    video_file_path = sys.argv[1]
-    print(video_file_path)
-    video = moviepy.VideoFileClip(video_file_path)
+    video = moviepy.editor.VideoFileClip(video_name)
+    # Extract the Audio
+    # audio = video.audio
+    # Export the Audio
+    # audio.write_audiofile(audio_name)
+
+# if __name__ == "__main__":
+#     main()
+    #video = moviepy.VideoFileClip(video_file_path)
     # video = moviepy.editor.VideoFileClip(video_name)
     # Extract the Audio
     # audio = video.audio
@@ -54,12 +60,12 @@ def main():
 #         print(v)
 
 
-def face_sentiment():
+def face_sentiment(video_path):
     # Make Object detector
     detector = Detector()
-
+    video_name = sys.argv[1]
     # Import video 
-    test_video_path = "video_test.mp4"
+    test_video_path = video_path
     Video(test_video_path, embed=False)
     video_prediction = detector.detect_video(test_video_path, skip_frames=30)
 
@@ -69,25 +75,25 @@ def face_sentiment():
 
     # print(video_prediction_df)
     # Nama CSV
-    #csv_file_path = "result.csv"
+    # csv_file_path = "result.csv"
 
     # Save Dataframe ke CSV
-    #video_prediction_df.to_csv(csv_file_path, index=False)
+    # video_prediction_df.to_csv(csv_file_path, index=False)
 
     # Modifikasi CSV
-    #df = pd.read_csv("result.csv")
+    # df = pd.read_csv("result.csv")
     # Menambah "contempt" pada CSV dengan rata - rata "AU12 dan AU14"
     # Bisa diubah sesuai kebutuhan
-    #df["contempt"] = df.loc[:, ["AU12","AU14"]].mean(axis = 1)
+    # df["contempt"] = df.loc[:, ["AU12","AU14"]].mean(axis = 1)
     # Filter kolom pada csv dan simpan pada variabel baru
-    #happiness = df["happiness"]
+    # happiness = df["happiness"]
     # Hasil penjumlahan
-    #sadness = df["sadness"].sum()
+    # sadness = df["sadness"].sum()
     # Hasil rata - rata
-    #contempt = df["contempt"].mean()
+    # contempt = df["contempt"].mean()
 
 def resultcalc(video_prediction_df):
-    df = pd.read_csv("result.csv")
+    df = pd.read_csv(video_prediction_df)
     # anger,disgust,fear,happiness,sadness,surprise,neutral
     negative_score = df[["anger", "disgust","fear","sadness"]].mean().mean()
     positive_score = df[["happiness", "surprise"]].mean().mean()
@@ -101,7 +107,7 @@ def resultcalc(video_prediction_df):
 
 main()
 # voice_sentiment()
-# video_prediction_df = face_sentiment()
+video_prediction_df = face_sentiment(video_name)
 # negative_score, positive_score, neutral_score, trust_score = resultcalc(video_prediction_df)
 # import json
 # output_data = {

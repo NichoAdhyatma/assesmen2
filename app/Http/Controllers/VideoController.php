@@ -70,7 +70,7 @@ class VideoController extends Controller
         //$pythonScript = public_path('asesmen.py'); //public/python ya bisa
         $pythonScript = base_path('public\asesmen.py');
         //dd($videoFilePath);
-        $command = "python3 {$pythonScript} '{$videoFilePath}'";
+        $command = "python {$pythonScript} '{$videoFilePath}'";
         //dd($command);
         $output = exec($command);
         dd($output);
