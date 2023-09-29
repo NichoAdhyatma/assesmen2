@@ -417,6 +417,15 @@
                             // Display the data on the web page
                             console.log('Python Data:', pythonData);
 
+                            var jsonData = JSON.parse(response.data);
+
+                            // Iterate through the properties and display them
+                            for (var key in jsonData) {
+                                if (jsonData.hasOwnProperty(key)) {
+                                    console.log(key + ':', jsonData[key]);
+                                }
+                            }
+
                             // You can update your HTML elements with the data
                             // Example: document.getElementById('result').textContent = pythonData.someValue;
 
@@ -464,29 +473,29 @@
                 // Tanggal Penilaian = CurrentDate
 
                 // Struktur Tele-assesmen interview (Kepribadian,Bakat,Minat) (14data dipisah koma) per  atribut
-
+                
                 // Sentimen Positif Facial
-                $f_sentimen_positif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                $f_sentimen_positif = sessionData.positive_scoreExtraversion + "," + sessionData.positive_scoreConscientiousness + "," + sessionData.positive_scoreAgreeableness + "," + sessionData.positive_scoreOpenness + "," + sessionData.positive_scoreNeuroticism + "," + sessionData.positive_scoreRealistic + "," + sessionData.positive_scoreInvestigative + "," + sessionData.positive_scoreArtistic + "," + sessionData.positive_scoreSocial + "," + sessionData.positive_scoreEnterprising + "," + sessionData.positive_scoreConventional + "," + sessionData.positive_scorePerseptual + "," + sessionData.positive_scorePsikomotor + "," + sessionData.positive_scoreIntelektual;
                 // Sentimen Netral Facial
-                $f_sentimen_netral = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                $f_sentimen_netral = sessionData.neutral_scoreExtraversion + "," + sessionData.neutral_scoreConscientiousness + "," + sessionData.neutral_scoreAgreeableness + "," + sessionData.neutral_scoreOpenness + "," + sessionData.neutral_scoreNeuroticism + "," + sessionData.neutral_scoreRealistic + "," + sessionData.neutral_scoreInvestigative + "," + sessionData.neutral_scoreArtistic + "," + sessionData.neutral_scoreSocial + "," + sessionData.neutral_scoreEnterprising + "," + sessionData.neutral_scoreConventional + "," + sessionData.neutral_scorePerseptual + "," + sessionData.neutral_scorePsikomotor + "," + sessionData.neutral_scoreIntelektual;
 
                 // Sentimen Negatif Facial
-                $f_sentimen_negatif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                $f_sentimen_negatif = sessionData.negative_scoreExtraversion + "," + sessionData.negative_scoreConscientiousness + "," + sessionData.negative_scoreAgreeableness + "," + sessionData.negative_scoreOpenness + "," + sessionData.negative_scoreNeuroticism + "," + sessionData.negative_scoreRealistic + "," + sessionData.negative_scoreInvestigative + "," + sessionData.negative_scoreArtistic + "," + sessionData.negative_scoreSocial + "," + sessionData.negative_scoreEnterprising + "," + sessionData.negative_scoreConventional + "," + sessionData.negative_scorePerseptual + "," + sessionData.negative_scorePsikomotor + "," + sessionData.negative_scoreIntelektual;
 
                 // Sentimen Positif Voice
-                $v_sentimen_positif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                $v_sentimen_positif = sessionData.posExtraversion + "," + sessionData.posConscientiousness + "," + sessionData.posAgreeableness + "," + sessionData.posOpenness + "," + sessionData.posNeuroticism + "," + sessionData.posRealistic + "," + sessionData.posInvestigative + "," + sessionData.posArtistic + "," + sessionData.posSocial + "," + sessionData.posEnterprising + "," + sessionData.posConventional + "," + sessionData.posPerseptual + "," + sessionData.posPsikomotor + "," + sessionData.posIntelektual;
 
                 // Sentimen Netral Voice
-                $v_sentimen_netral = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                $v_sentimen_netral = sessionData.neuExtraversion + "," + sessionData.neuConscientiousness + "," + sessionData.neuAgreeableness + "," + sessionData.neuOpenness + "," + sessionData.neuNeuroticism + "," + sessionData.neuRealistic + "," + sessionData.neuInvestigative + "," + sessionData.neuArtistic + "," + sessionData.neuSocial + "," + sessionData.neuEnterprising + "," + sessionData.neuConventional + "," + sessionData.neuPerseptual + "," + sessionData.neuPsikomotor + "," + sessionData.neuIntelektual;
 
                 // Sentimen Negatif voice
-                $v_sentimen_negatif = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                $v_sentimen_negatif = sessionData.negExtraversion + "," + sessionData.negConscientiousness + "," + sessionData.negAgreeableness + "," + sessionData.negOpenness + "," + sessionData.negNeuroticism + "," + sessionData.negRealistic + "," + sessionData.negInvestigative + "," + sessionData.negArtistic + "," + sessionData.negSocial + "," + sessionData.negEnterprising + "," + sessionData.negConventional + "," + sessionData.negPerseptual + "," + sessionData.negPsikomotor + "," + sessionData.negIntelektual;
 
                 // Validation Score
                 $validation_score = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
 
                 // %Kepercayaan
-                $kepercayaan = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                $kepercayaan = trustExtraversion + "," + trustConscientiousness + "," + trustAgreeableness + "," + trustOpenness + "," + trustNeuroticism + "," + trustRealistic + "," + trustInvestigative + "," + trustArtistic + "," + trustSocial + "," + trustEnterprising + "," + trustConventional + "," + trustPerseptual + "," + trustPsikomotor + "," + trustIntelektual;
 
 
                 // [Untuk tes cognitive video]
@@ -724,7 +733,7 @@
                 });
             });
         }
-        
+        var sessionData = @json(session()->all());
         function calculateScore() {
             let correctAnswers = 0;
             const totalQuestions = questionsArray.length;
@@ -741,6 +750,9 @@
 
             const scorePercentage = (correctAnswers / totalQuestions) * 100;
             alert(`Your Score: ${correctAnswers} out of ${totalQuestions} (${scorePercentage.toFixed(2)}%)`);
+            // console.log('Python Data:', pythonData['neg']);
+            var sessionData = @json(session()->all());
+            console.log(sessionData);
             return scorePercentage;
         }
 

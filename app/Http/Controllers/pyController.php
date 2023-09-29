@@ -17,7 +17,7 @@ class pyController extends Controller
 
         // Execute the Python script and capture its output
         $output = exec('python "'.$scriptPath.'" 2>&1', $outputArray, $returnValue);
-
+        dd($output);
         // Check if the script executed successfully
         if ($returnValue === 0) {
             // Parse the JSON output into a PHP array

@@ -14,56 +14,78 @@ from pydub import AudioSegment
 
 
 
-
-#video_name = "video_test.mp4"
-# audio_name = "audio_test.wav"
-video_name = sys.argv[1]
+testvar = sys.argv[1]
+testvar = testvar.replace("'", '')
+# print(testvar)
+# video_name = "C:\\xamppMaxy\\htdocs\\assessment-test-lp\\public\\videos\\11\\video1.mp4"
+video_name = ""
+video_name += testvar
+# print(video_name)
+audio_name = "C:\\xamppMaxy\\htdocs\\assessment-test-lp\\public\\audiofile\\audio_test.wav"
+# video_name = sys.argv[1]
+# print(video_name)
 def main():
+    # actual_duration = calculate_actual_duration(video_name)
+    # print(actual_duration)
+    # Round the duration to the nearest second
+    # rounded_duration = round(actual_duration)
+    # print(rounded_duration)
     video = moviepy.editor.VideoFileClip(video_name)
-    # Extract the Audio
-    # audio = video.audio
-    # Export the Audio
-    # audio.write_audiofile(audio_name)
+    # video = video.subclip(0, rounded_duration)
+    # return actual_duration
+    
 
-# if __name__ == "__main__":
-#     main()
-    #video = moviepy.VideoFileClip(video_file_path)
-    # video = moviepy.editor.VideoFileClip(video_name)
+    # Perform face sentiment analysis on the video
+    # video_prediction_df = face_sentiment(video_name)
     # Extract the Audio
-    # audio = video.audio
+    audio = video.audio
+    # return audio
     # Export the Audio
-    # audio.write_audiofile(audio_name)
+    audio.write_audiofile(audio_name)
+
+# def calculate_actual_duration(video_name):
+    
+#     # Load the video using VideoFileClip
+#     video = moviepy.editor.VideoFileClip(video_name)
+
+#     # Get the duration of the video in seconds
+#     duration_in_seconds = video.duration
+
+#     # Close the video file
+#     video.close()
+
+#     return duration_in_seconds
 
 
 # Analyst Voice to Text
-# def voice_sentiment():
-#     # Initialize recognizer class
-#     r = sr.Recognizer()
-#     # make audio object
-#     audio = sr.AudioFile(audio_name)
-#     # read audio object and transcribe
-#     with audio as source:
-#         audio = r.record(source)
-#         result = r.recognize_google(audio, language="id-ID")
+def voice_sentiment():
+    # Initialize recognizer class
+    r = sr.Recognizer()
+    # make audio object
+    audio = sr.AudioFile(audio_name)
+    # read audio object and transcribe
+    with audio as source:
+        audio = r.record(source)
+        result = r.recognize_google(audio, language="id-ID")
 
-#     print(result)
-#     # Translate to ENG
-#     translator = Translator()
-#     trans_res = translator.translate(result)
-#     print(trans_res)
+    # print(result)
+    # Translate to ENG
+    translator = Translator()
+    trans_res = translator.translate(result)
+    # print(trans_res)
 
-#     # Analyst
-#     Sentence = [str(trans_res)]
-#     analyser = SentimentIntensityAnalyzer()
-#     for i in Sentence:
-#         v = analyser.polarity_scores(i)
-#         print(v)
+    # Analyst
+    
+    Sentence = [str(trans_res)]
+    analyser = SentimentIntensityAnalyzer()
+    for i in Sentence:
+        v = analyser.polarity_scores(i)
+    return v
 
 
 def face_sentiment(video_path):
     # Make Object detector
     detector = Detector()
-    video_name = sys.argv[1]
     # Import video 
     test_video_path = video_path
     Video(test_video_path, embed=False)
@@ -93,27 +115,38 @@ def face_sentiment(video_path):
     # contempt = df["contempt"].mean()
 
 def resultcalc(video_prediction_df):
-    df = pd.read_csv(video_prediction_df)
-    # anger,disgust,fear,happiness,sadness,surprise,neutral
-    negative_score = df[["anger", "disgust","fear","sadness"]].mean().mean()
-    positive_score = df[["happiness", "surprise"]].mean().mean()
-    neutral_score = df["neutral"].mean()
-    trust_score = df[["AU12", "AU14"]].mean().mean()
-    # print("negatif: ",negative_score)
-    # print("positif: ",positive_score)
-    # print("netral: ",neutral_score)
-    # print("trust: ",trust_score)
+    video_prediction_df = video_prediction_df.astype({'anger': 'float64', 'disgust': 'float64', 'fear': 'float64', 'sadness': 'float64', 'happiness': 'float64', 'surprise': 'float64', 'neutral': 'float64', 'AU12': 'float64', 'AU14': 'float64'})
+
+    # Continue to work with the provided DataFrame...
+    # Example calculations using the DataFrame:
+    negative_score = video_prediction_df[["anger", "disgust", "fear", "sadness"]].mean().mean()
+    positive_score = video_prediction_df[["happiness", "surprise"]].mean().mean()
+    neutral_score = video_prediction_df["neutral"].mean()
+    trust_score = video_prediction_df[["AU12", "AU14"]].mean().mean()
+
     return negative_score, positive_score, neutral_score, trust_score
 
+
 main()
-# voice_sentiment()
+# print(video)
+audio_res = voice_sentiment()
+# print(audio_res)
 video_prediction_df = face_sentiment(video_name)
-# negative_score, positive_score, neutral_score, trust_score = resultcalc(video_prediction_df)
-# import json
-# output_data = {
-#     "negative_score": negative_score,
-#     "positive_score": positive_score,
-#     "neutral_score": neutral_score,
-#     "trust":trust_score,
-# }
-# print(json.dumps(output_data))
+negative_score, positive_score, neutral_score, trust_score = resultcalc(video_prediction_df)
+# # print(negative_score)
+import json
+output_data = {
+    "neg": audio_res.get('neg', 0.0),
+    "neu": audio_res.get('neu', 0.0),
+    "pos": audio_res.get('pos', 0.0),
+    "compound": audio_res.get('compound', 0.0),
+    "negative_score": negative_score,
+    "positive_score": positive_score,
+    "neutral_score": neutral_score,
+    "trust":trust_score,
+
+}
+output_json = json.dumps(output_data)
+
+# Return the JSON string as the final output
+sys.stdout.write(output_json)

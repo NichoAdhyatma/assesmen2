@@ -135,6 +135,17 @@
         
     }
   </style>
+  <style>
+    body {
+        text-align: center; /* Center-align the content */
+    }
+
+    p {
+        font-size: 22px; /* Set the font size to your desired size */
+        margin: 0 auto; /* Center-align the paragraphs within the page */
+        max-width: 80%; /* Limit the width of the paragraphs for better readability */
+    }
+</style>
 </head>
 
 <body>
@@ -149,6 +160,9 @@
             </a> -->
         </div>
     <!-- </div> -->
+    <p>Pastikan wajah ada pada layar video yang akan merekam jawaban saudara dengan ukuran wajah yang tampak di layar sebesar mungkin</p>
+    <br>
+    <p> Jawablah pertanyaan dari video dari sistem artificial Intelligence kami dengan jujur dan gunakan kata sifat ( suka, senang, takut, marah, dll). Maksimum dalam menjawab pertnyaan adalah 5 menit.</p>
     <div class="contact--lockup">
         <div id="video-container-" style="height:100%; width:100%; padding-top:150px">
             <!-- <iframe width="640" height="360" src="https://www.youtube.com/embed/FC7JQItVqzM" frameborder="0" allowfullscreen></iframe>  -->

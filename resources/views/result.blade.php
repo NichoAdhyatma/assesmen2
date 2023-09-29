@@ -36,10 +36,11 @@
             text-align: center;
         }
     </style>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body>
     <h1>Hasil Tes Psikogram</h1>
-    
+    <button id="generatePdfButton">Generate PDF</button>
     <table>
         <tr>
             <th>Nama</th>
@@ -645,7 +646,42 @@
             </tr>
         </tbody>
     </table>
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <!-- JavaScript for PDF generation -->
+    <script>
+    $(document).ready(function() {
+        // Add an event listener to the button
+        $('#generatePdfButton').click(function() {
+            // Capture the HTML content of the current page
+            var currentPageHTML = $('html').html();
+
+            // Send the HTML content to the server for PDF generation
+            $.ajax({
+                type: 'POST', // Make sure this is set to POST
+                url: '/generate-pdf', // Ensure this matches your updated route
+                data: {
+                    htmlContent: currentPageHTML
+                },
+                success: function(response) {
+                    console.log(response);
+                    alert('PDF generated and ready for download.');
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    // Handle errors here
+                    alert('Error generating PDF.');
+                }
+            });
+        });
+    });
+    </script>
+
 
     <script>
         function randomSentiment() {
