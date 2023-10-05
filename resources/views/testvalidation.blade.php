@@ -391,67 +391,7 @@
         }
     });
     </script>
-    <script>
-        // Declare a variable outside of the event listener to store the Python data
-        var pythonData;
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const processVideoButton = document.getElementById('processVideoButton');
-
-            processVideoButton.addEventListener('click', function (event) {
-                event.preventDefault();
-
-                // Make an AJAX request to trigger video processing
-                $.ajax({
-                    type: "POST",
-                    url: '/process-video',
-                    data: {
-                        // Include any data you need to send to the server
-                    },
-                    success: function (response) {
-                        // Handle the response from the server
-                        if (response && response.data) {
-                            // Store the Python data in the variable declared outside of the event listener
-                            pythonData = response.data;
-
-                            // Display the data on the web page
-                            console.log('Python Data:', pythonData);
-
-                            var jsonData = JSON.parse(response.data);
-
-                            // Iterate through the properties and display them
-                            for (var key in jsonData) {
-                                if (jsonData.hasOwnProperty(key)) {
-                                    console.log(key + ':', jsonData[key]);
-                                }
-                            }
-
-                            // You can update your HTML elements with the data
-                            // Example: document.getElementById('result').textContent = pythonData.someValue;
-
-                            // Now 'pythonData' is accessible outside the AJAX request
-                            // You can use it in other parts of your JavaScript code
-                        } else {
-                            console.error('Invalid response from server');
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle errors (if needed)
-                        console.error('Error:', error);
-                    }
-                });
-            });
-
-            // Declare and use additional JavaScript variables here
-            var additionalVariable = 'This is an additional variable';
-            console.log('Additional Variable:', additionalVariable);
-            console.log('pythonData outside of the event listener:', pythonData);
-        });
-
-        // You can use 'pythonData' outside of the event listener as well
-        console.log('pythonData outside of the event listener:', pythonData);
-
-    </script>
+   
     
     <script>
         var sessionData = @json(session()->all());
@@ -492,7 +432,7 @@
                 $v_sentimen_negatif = sessionData.negExtraversion + "," + sessionData.negConscientiousness + "," + sessionData.negAgreeableness + "," + sessionData.negOpenness + "," + sessionData.negNeuroticism + "," + sessionData.negRealistic + "," + sessionData.negInvestigative + "," + sessionData.negArtistic + "," + sessionData.negSocial + "," + sessionData.negEnterprising + "," + sessionData.negConventional + "," + sessionData.negPerseptual + "," + sessionData.negPsikomotor + "," + sessionData.negIntelektual;
 
                 // Validation Score
-                $validation_score = 0 + "," + 1 + "," + 2 + "," + 3 + "," + 4 + "," + 5 + "," + 6 + "," + 7 + "," + 8 + "," + 9 + "," + 10 + "," + 11 + "," + 12 + "," + 13;
+                $validation_score = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + sessionData.resultPer + ","+ sessionData.resultPsi + ","+ sessionData.resultInt ;
 
                 // %Kepercayaan
                 $kepercayaan = trustExtraversion + "," + trustConscientiousness + "," + trustAgreeableness + "," + trustOpenness + "," + trustNeuroticism + "," + trustRealistic + "," + trustInvestigative + "," + trustArtistic + "," + trustSocial + "," + trustEnterprising + "," + trustConventional + "," + trustPerseptual + "," + trustPsikomotor + "," + trustIntelektual;
@@ -503,7 +443,7 @@
                 $skor_validasi = 0; 
                 // Validasi bakat minat kepribadian
                 // RawScore(14 Data dipisah koma)
-                $skor_validasi_kepribadianbakatminat = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + "0,0,0" ;
+                $skor_validasi_kepribadianbakatminat = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + sessionData.resultPer + ","+ sessionData.resultPsi + ","+ sessionData.resultInt ;
                 // Validasi Cognitive
                 // Raw Score(9Data dipisah koma) -> 9 Penilaian jadikan 1 data hingga berikut
                 //$skor_validasi_cognitif = calculateScore();

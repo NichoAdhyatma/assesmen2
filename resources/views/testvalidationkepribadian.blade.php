@@ -250,9 +250,73 @@
             transform: translateX(-50%);
             white-space: nowrap;
         }
+
+        #calculate-button {
+            max width: 600px;
+            width: 50%;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #0f33ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #calculate-button-bakmi {
+            max width: 600px;
+            width: 50%;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #0f33ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+
+        /* sidebar */
+        .sidebar {
+            z-index: 1;
+            height: 100%;
+            width: 260px;
+            position: fixed;
+            left: 0;
+            border: solid 1px rgba(0, 0, 0, 0.05);
+            box-shadow: 1px 0px 2px 0px rgba(0, 0, 0, 0.25);
+            background-color: #fff;
+            padding: 20px;
+            overflow: auto;
+        }
+
+        /* Gaya untuk bilah pengguliran WebKit (Chrome, Safari) */
+        .sidebar::-webkit-scrollbar {
+            width: 8px; /* Lebar bilah pengguliran */
+        }
+        
+        /* Gaya untuk thumb atau pegangan pada bilah pengguliran WebKit */
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.3); /* Warna pegangan */
+            border-radius: 4px; /* Sudut melengkung pegangan */
+        }
+        
+        /* Gaya untuk track atau lintasan pada bilah pengguliran WebKit */
+        .sidebar::-webkit-scrollbar-track {
+            background-color: rgba(0, 0, 0, 0.1); /* Warna lintasan */
+        }
     </style>
 </head>
 <body>
+    <div class="sidebar"> 
+        <select id="question-number" style="font-size:1.1rem;width:70%">
+            
+        </select>
+    </div>
     <div class="container">
         <ol id="question-list">
             <!-- Pertanyaan 1-10 Emotional Stability  -->
@@ -538,7 +602,6 @@
             </li>
 
 
-            <!-- Pertanyaan 11-20 Emotional Stability  -->
             <li class="question">
                 <h1>Question 11:</h1>
                 <p>Saya lebih suka bekerja di belakang layar</p>
@@ -819,7 +882,6 @@
                     </form>
                 </div>
             </li>
-            <!-- Pertanyaan 21-30 Conscientiousness -->
             <li class="question">
                 <h1>Question 21:</h1>
                 <p>Saya segera mengerjakan tugas yang diberikan</p>
@@ -1100,7 +1162,6 @@
                     </form>
                 </div>
             </li>
-            <!-- Pertanyaan 31-40 Agreeableness -->
             <li class="question">
                 <h1>Question 31:</h1>
                 <p>Saya adalah orang yang lemah lembut</p>
@@ -1381,8 +1442,7 @@
                     </form>
                 </div>
             </li>
-            <!-- Pertanyaan 41-50 Intelect -->
-            <!-- Question 41 -->
+
             <li class="question">
                 <h1>Question 41:</h1>
                 <p>Saya sering menggunakan istilah-istilah yang sulit </p>
@@ -1412,7 +1472,6 @@
                 </div>
             </li>
 
-            <!-- Question 42 -->
             <li class="question">
                 <h1>Question 42:</h1>
                 <p>Saya kesulitan memahami ide yang bersifat abstrak </p>
@@ -1442,7 +1501,6 @@
                 </div>
             </li>
 
-            <!-- Question 43 -->
             <li class="question">
                 <h1>Question 43:</h1>
                 <p>Saya menguasai banyak kosakata </p>
@@ -1472,7 +1530,6 @@
                 </div>
             </li>
 
-            <!-- Question 44 -->
             <li class="question">
                 <h1>Question 44:</h1>
                 <p>Saya memiliki ide-ide yang cemerlang </p>
@@ -1502,7 +1559,7 @@
                 </div>
             </li>
 
-            <!-- Question 45 -->
+
             <li class="question">
                 <h1>Question 45:</h1>
                 <p>Saya memiliki banyak ide</p>
@@ -1532,7 +1589,7 @@
                 </div>
             </li>
 
-            <!-- Question 46 -->
+
             <li class="question">
                 <h1>Question 46:</h1>
                 <p>Saya cepat dalam memahami sesuatu</p>
@@ -1562,7 +1619,6 @@
                 </div>
             </li>
 
-            <!-- Question 47 -->
             <li class="question">
                 <h1>Question 47:</h1>
                 <p>Saya tidak tertarik dengan ide-ide abstrak </p>
@@ -1592,7 +1648,6 @@
                 </div>
             </li>
 
-            <!-- Question 48 -->
             <li class="question">
                 <h1>Question 48:</h1>
                 <p>Saya memiliki imajinasi yang sangat kuat</p>
@@ -1622,7 +1677,6 @@
                 </div>
             </li>
 
-            <!-- Question 49 -->
             <li class="question">
                 <h1>Question 49:</h1>
                 <p>Saya tidak memiliki imajinasi yang baik </p>
@@ -1650,9 +1704,8 @@
                         </label>
                     </form>
                 </div>
-            </li>
+            </li> 
 
-            <!-- Question 50 -->
             <li class="question">
                 <h1>Question 50:</h1>
                 <p>Saya meluangkan waktu untuk merefleksikan berbagai hal</p>
@@ -1681,31 +1734,587 @@
                     </form>
                 </div>
             </li>
-
-
-
-            
-            <!-- Repeat the above <li> block for each question -->
-        </ol>
+            <li class="question">
+                <h1>Question 51:</h1>
+                <p>Saya menikmati bekerja dengan tangan dan menggunakan alat-alat.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer51" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer51" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer51" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer51" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer51" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 52:</h1>
+                <p>Saya tertarik pada penelitian dan eksplorasi ilmiah.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer52" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer52" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer52" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer52" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer52" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 53:</h1>
+                <p>Saya menikmati mengungkapkan diri melalui seni dan kreativitas.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer53" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer53" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer53" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer53" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer53" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 54:</h1>
+                <p>Saya suka membantu orang lain dan bekerja dalam kelompok.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer54" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer54" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer54" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer54" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer54" value="5">
+                            Sangat Suka
+                        </label>    
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 55:</h1>
+                <p>Saya memiliki minat dalam memimpin dan mempengaruhi orang lain.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer55" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer55" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer55" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer55" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer55" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 56:</h1>
+                <p>Saya menyukai tugas-tugas yang memiliki struktur yang jelas dan rutin.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer56" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer56" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer56" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer56" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer56" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 57:</h1>
+                <p>Saya menikmati olahraga atau aktivitas fisik.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer57" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer57" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer57" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer57" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer57" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 58:</h1>
+                <p>Saya tertarik pada penulisan, membaca, atau menggali informasi.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer58" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer58" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer58" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer58" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer58" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 59:</h1>
+                <p>Saya senang berpartisipasi dalam pertunjukan atau acara seni.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer59" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer59" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer59" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer59" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer59" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 60:</h1>
+                <p>Saya suka berinteraksi dengan orang banyak dan membantu mereka.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer60" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer60" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer60" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer60" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer60" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 61:</h1>
+                <p>Saya tertarik pada peluang bisnis dan mengambil risiko.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer61" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer61" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer61" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer61" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer61" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 62:</h1>
+                <p>Saya suka bekerja dengan data dan detail yang akurat.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer62" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer62" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer62" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer62" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer62" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>    
+            <li class="question">
+                <h1>Question 63:</h1>
+                <p>Saya paling cocok ditempatkan di pekerjaan yang membutuhkan kepekaan mata dan indera manusia lainnya.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer63" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer63" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer63" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer63" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer63" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>   
+            <li class="question">
+                <h1>Question 64:</h1>
+                <p>Saya suka bekerja dengan data dan detail yang akurat.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer64" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer64" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer64" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer64" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer64" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>   
+            <li class="question">
+                <h1>Question 65:</h1>
+                <p>Saya suka bekerja dengan data dan detail yang akurat.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer65" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer65" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer65" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer65" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer65" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>    
+        
+        </ol> 
         
     </div>
-    <button class="prev-button">Previous Question</button>
-    <button class="next-button">Next Question</button>
-    <button id="calculate-button">Calculate</button>
-    <!-- <a href="{{ route('testvalidationbakatminat') }}"> -->
-        <button id="submit-button" class="submit-button" disabled title="Please finish all questions">Submit</button>
+
+    <button id="calculate-button">Calculate (Kepribadian)</button>
+    <button id="calculate-button-bakmi">Calculate (Minat)</button> 
+    <button id="calculate-button-bakat">Calculate (Bakat)</button> 
+    
+    <button id="submit-button" class="submit-button" disabled title="Please finish all questions">Submit</button>
     <!-- <a> -->
     <br>
-    <div class="question-navigation">
+    <!-- <div class="question-navigation">
         <div class="select-dropdown">
             <select id="question-number">
-            <!-- Options will be added dynamically using JavaScript -->
+            
             </select>
         </div>
-    </div>
+    </div> -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
+
+        // Ini Script Untuk Hitung calculate Bakat Minat
+        const scoreRMI1 = document.querySelector('input[name="answer51"]:checked')?.value || 0;
+        const scoreRMI2 = document.querySelector('input[name="answer57"]:checked')?.value || 0;
+        $resultR = parseInt(scoreRMI1) + parseInt(scoreRMI2);
+
+        const scoreIMI1 = document.querySelector('input[name="answer52"]:checked')?.value || 0;
+        const scoreIMI2 = document.querySelector('input[name="answer58"]:checked')?.value || 0;
+        $resultI = parseInt(scoreIMI1) + parseInt(scoreIMI2);
+
+        const scoreAMI1 = document.querySelector('input[name="answer53"]:checked')?.value || 0;
+        const scoreAMI2 = document.querySelector('input[name="answer59"]:checked')?.value || 0;
+        $resultA = parseInt(scoreAMI1) + parseInt(scoreAMI2);
+
+        const scoreSMI1 = document.querySelector('input[name="answer54"]:checked')?.value || 0;
+        const scoreSMI2 = document.querySelector('input[name="answer60"]:checked')?.value || 0;
+        $resultS = parseInt(scoreSMI1) + parseInt(scoreSMI2);
+
+        const scoreEMI1 = document.querySelector('input[name="answer55"]:checked')?.value || 0;
+        const scoreEMI2 = document.querySelector('input[name="answer61"]:checked')?.value || 0;
+        $resultE = parseInt(scoreEMI1) + parseInt(scoreEMI2);
+
+        const scoreCMI1 = document.querySelector('input[name="answer56"]:checked')?.value || 0;
+        const scoreCMI2 = document.querySelector('input[name="answer62"]:checked')?.value || 0;
+        $resultC = parseInt(scoreCMI1) + parseInt(scoreCMI2);
+
+        
+        // Function to calculate and assign scoresMI
+
+        function calculateScoresMinat() {
+            const scoreRMI1 = document.querySelector('input[name="answer51"]:checked')?.value || 0;
+            const scoreRMI2 = document.querySelector('input[name="answer57"]:checked')?.value || 0;
+            $resultRMI = parseInt(scoreRMI1) + parseInt(scoreRMI2);
+
+            const scoreIMI1 = document.querySelector('input[name="answer52"]:checked')?.value || 0;
+            const scoreIMI2 = document.querySelector('input[name="answer58"]:checked')?.value || 0;
+            $resultIMI = parseInt(scoreIMI1) + parseInt(scoreIMI2);
+
+            const scoreAMI1 = document.querySelector('input[name="answer53"]:checked')?.value || 0;
+            const scoreAMI2 = document.querySelector('input[name="answer59"]:checked')?.value || 0;
+            $resultAMI = parseInt(scoreAMI1) + parseInt(scoreAMI2);
+
+            const scoreSMI1 = document.querySelector('input[name="answer54"]:checked')?.value || 0;
+            const scoreSMI2 = document.querySelector('input[name="answer60"]:checked')?.value || 0;
+            $resultSMI = parseInt(scoreSMI1) + parseInt(scoreSMI2);
+
+            const scoreEMI1 = document.querySelector('input[name="answer55"]:checked')?.value || 0;
+            const scoreEMI2 = document.querySelector('input[name="answer61"]:checked')?.value || 0;
+            $resultEMI = parseInt(scoreEMI1) + parseInt(scoreEMI2);
+
+            const scoreCMI1 = document.querySelector('input[name="answer56"]:checked')?.value || 0;
+            const scoreCMI2 = document.querySelector('input[name="answer62"]:checked')?.value || 0;
+            $resultCMI = parseInt(scoreCMI1) + parseInt(scoreCMI2);
+
+            axios.post('/gotoValidation', {
+                resultR: $resultRMI,
+                resultI: $resultIMI,
+                resultA: $resultAMI,
+                resultS: $resultSMI,
+                resultE: $resultEMI,
+                resultC: $resultCMI
+            })
+            .then(function (response) {
+                console.log("Yeeee"); // Log a success message
+            })
+            .catch(function (error) {
+                console.error("Fail"); // Log any errors
+            });
+            // Example: Display the scores in the console
+            console.log("ScoreR: " + $resultRMI);
+            console.log("ScoreI: " + $resultIMI);
+            console.log("ScoreA: " + $resultAMI);
+            console.log("ScoreS: " + $resultSMI);
+            console.log("ScoreE: " + $resultEMI);
+            console.log("ScoreC: " + $resultCMI);
+        }
+
+        // Untuk Bakat 
+        const scorePer = document.querySelector('input[name="answer63"]:checked')?.value || 0;
+        $resultPer = parseInt(scorePer) 
+
+        const scorePsi = document.querySelector('input[name="answer64"]:checked')?.value || 0;
+        $resultPsi = parseInt(scorePsi) 
+
+        const scoreInt = document.querySelector('input[name="answer65"]:checked')?.value || 0;
+        $resultInt = parseInt(scoreInt) 
+
+        function calculateScoresBakat() {
+            const scorePer = document.querySelector('input[name="answer63"]:checked')?.value || 0;
+            $resultPer = parseInt(scorePer) 
+
+            const scorePsi = document.querySelector('input[name="answer64"]:checked')?.value || 0;
+            $resultPsi = parseInt(scorePsi) 
+
+            const scoreInt = document.querySelector('input[name="answer65"]:checked')?.value || 0;
+            $resultInt = parseInt(scoreInt) 
+
+            axios.post('/gotoValidationBakat', {
+                resultPer: $resultPer,
+                resultPsi: $resultPsi,
+                resultInt: $resultInt
+            })
+            .then(function (response) {
+                console.log("Yeeee"); // Log a success message
+            })
+            .catch(function (error) {
+                console.error("Fail"); // Log any errors
+            });
+            // Example: Display the scores in the console
+            console.log("ScorePer: " + $resultPer);
+            console.log("ScorePsi: " + $resultPsi);
+            console.log("ScoreInt: " + $resultInt);
+        
+        }
+
+        // Add an event listener to the Calculate button to trigger the calculation
+        document.querySelector('#calculate-button-bakmi').addEventListener('click', calculateScoresMinat);
+        document.querySelector('#calculate-button-bakat').addEventListener('click', calculateScoresBakat);
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const submitButton = document.getElementById('submit-button');
+            
+            submitButton.addEventListener('click', function (event) {
+                // Prevent the default form submission behavior
+                event.preventDefault();
+                
+                // Call the calculateScores() function here
+                calculateScores();
+                calculateScoresMinat();    
+                calculateScoresBakat();            
+                // After calling calculateScores(), you can redirect to the 'testvalidation' route
+                window.location.href = "{{ route('testvalidation1') }}";
+            });
+        });
+    </script>
+
+    <script>
+        // Ini Script Untuk Hitung calculate kepribadian
         const scoreEM1 = document.querySelector('input[name="answer1"]:checked')?.value || 0;
         const scoreEM2 = document.querySelector('input[name="answer2"]:checked')?.value || 0;
         const scoreEM3 = document.querySelector('input[name="answer3"]:checked')?.value || 0;
@@ -1853,30 +2462,17 @@
                 console.error(error); // Log any errors
             });
             // Example: Display the scores in the console
-            console.log("ScoreEM: " + $resultEmotionalStability);
-            console.log("ScoreE: " + $resultExtraversion);
-            console.log("ScoreC: " + $resultConscien);
-            console.log("ScoreA: " + $resultAgree);
-            console.log("ScoreI: " + $resultIntellect);
+            console.log("ScoreNeurotic: " + $resultEmotionalStability);
+            console.log("ScoreExtraversion: " + $resultExtraversion);
+            console.log("ScoreConscientiousness: " + $resultConscien);
+            console.log("ScoreAgreeableness: " + $resultAgree);
+            console.log("ScoreOpeness: " + $resultIntellect);
         }
 
         // Add an event listener to the Calculate button to trigger the calculation
         document.querySelector('#calculate-button').addEventListener('click', calculateScores);
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const submitButton = document.getElementById('submit-button');
-            
-            submitButton.addEventListener('click', function (event) {
-                // Prevent the default form submission behavior
-                event.preventDefault();
-                
-                // Call the calculateScores() function here
-                calculateScores();
-                
-                // After calling calculateScores(), you can redirect to the 'testvalidation' route
-                window.location.href = "{{ route('testvalidationbakatminat') }}";
-            });
-        });
+        
     </script>
     <script>
         // Get the list of questions and navigation buttons
@@ -1887,123 +2483,132 @@
         const prevButton = document.querySelector('.prev-button');
         const nextButton = document.querySelector('.next-button');
 
-        // Get the list of questions and convert it to an array
-        const questionsArray = Array.from(questionList.children);
+        // if (prevButton) {
+        //     prevButton.remove();
+        // }
+        // if (nextButton) {
+        //     nextButton.remove();
+        // }
 
-        // Initialize the current question index
-        let currentQuestionIndex = 0;
+        // // Get the list of questions and convert it to an array
+        // const questionsArray = Array.from(questionList.children);
+
+        // // Initialize the current question index
+        // let currentQuestionIndex = 0;
 
         // Hide all questions except the first one
-        const questions = document.querySelectorAll('.question');
-        questions.forEach((question, index) => {
-            if (index !== currentQuestionIndex) {
-                question.style.display = 'none';
-            }
-        });
+        // const questions = document.querySelectorAll('.question');
+        // questions.forEach((question, index) => {
+        //     if (index !== currentQuestionIndex) {
+        //         question.style.display = 'none';
+        //     }
+        // });
 
         // Function to show the current question
-        function showCurrentQuestion() {
-            questionsArray.forEach((question, index) => {
-                if (index === currentQuestionIndex) {
-                    question.style.display = 'block';
-                } else {
-                    question.style.display = 'none';
-                }
-            });
-        }
+        // function showCurrentQuestion() {
+        //     questionsArray.forEach((question, index) => {
+        //         if (index === currentQuestionIndex) {
+        //             question.style.display = 'block';
+        //         } else {
+        //             question.style.display = 'none';
+        //         }
+        //     });
+        // }
 
         // Scripts for making the next and prev button questions
         // Add an event listener to the Next Question button
-        nextButton.addEventListener('click', () => {
-            // Hide the current question
-            questionsArray[currentQuestionIndex].style.display = 'none';
+        // nextButton.addEventListener('click', () => {
+        //     // Hide the current question
+        //     questionsArray[currentQuestionIndex].style.display = 'none';
 
-            // Move to the next question
-            currentQuestionIndex++;
+        //     // Move to the next question
+        //     currentQuestionIndex++;
 
-            // If at the end of questions, loop back to the first question
-            if (currentQuestionIndex >= questionsArray.length) {
-                currentQuestionIndex--;
-            }
+        //     // If at the end of questions, loop back to the first question
+        //     if (currentQuestionIndex >= questionsArray.length) {
+        //         currentQuestionIndex--;
+        //     }
 
-            // Show the next question
-            showCurrentQuestion();
-            questionNumberSelect.value = currentQuestionIndex + 1;
-        });
+        //     // Show the next question
+        //     showCurrentQuestion();
+        //     questionNumberSelect.value = currentQuestionIndex + 1;
+        // });
 
         // Add an event listener to the Previous Question button
-        prevButton.addEventListener('click', () => {
-            // Hide the current question
-            questionsArray[currentQuestionIndex].style.display = 'none';
+        // prevButton.addEventListener('click', () => {
+        //     // Hide the current question
+        //     questionsArray[currentQuestionIndex].style.display = 'none';
 
-            // Move to the previous question
-            currentQuestionIndex--;
+        //     // Move to the previous question
+        //     currentQuestionIndex--;
 
-            // If at the beginning of questions, move to the last question
-            if (currentQuestionIndex < 0) {
-                currentQuestionIndex++;
-            }
+        //     // If at the beginning of questions, move to the last question
+        //     if (currentQuestionIndex < 0) {
+        //         currentQuestionIndex++;
+        //     }
 
-            // Show the previous question
-            showCurrentQuestion();
-            questionNumberSelect.value = currentQuestionIndex + 1;
-        });
+        //     // Show the previous question
+        //     showCurrentQuestion();
+        //     questionNumberSelect.value = currentQuestionIndex + 1;
+        // });
 
         // Initially show the first question (not randomized)
-        showCurrentQuestion();
+        // showCurrentQuestion();
 
         //Ajax untuk mengganti ke pertanyaan yang dituju
-        questionNumberInput.addEventListener('input', () => {
-            const desiredQuestionNumber = parseInt(questionNumberInput.value);
-            navigateToQuestion(desiredQuestionNumber);
-        });
+        // questionNumberInput.addEventListener('input', () => {
+        //     const desiredQuestionNumber = parseInt(questionNumberInput.value);
+        //     navigateToQuestion(desiredQuestionNumber);
+        // });
 
-        // Add an event listener to the select element for question navigation
-        questionNumberSelect.addEventListener('change', () => {
-            const desiredQuestionNumber = parseInt(questionNumberSelect.value);
-            navigateToQuestion(desiredQuestionNumber);
-        });
+        // // Add an event listener to the select element for question navigation
+        // questionNumberSelect.addEventListener('change', () => {
+        //     const desiredQuestionNumber = parseInt(questionNumberSelect.value);
+        //     navigateToQuestion(desiredQuestionNumber);
+        // });
 
         // Function to navigate to a specific question
-        function navigateToQuestion(desiredQuestionNumber) {
-            if (!isNaN(desiredQuestionNumber) && desiredQuestionNumber >= 1 && desiredQuestionNumber <= questionsArray.length) {
-                // Hide the current question
-                questionsArray[currentQuestionIndex].style.display = 'none';
+        // function navigateToQuestion(desiredQuestionNumber) {
+        //     if (!isNaN(desiredQuestionNumber) && desiredQuestionNumber >= 1 && desiredQuestionNumber <= questionsArray.length) {
+        //         // Hide the current question
+        //         questionsArray[currentQuestionIndex].style.display = 'none';
 
-                // Set the current question index to the desired question number minus one
-                currentQuestionIndex = desiredQuestionNumber - 1;
+        //         // Set the current question index to the desired question number minus one
+        //         currentQuestionIndex = desiredQuestionNumber - 1;
 
-                // Show the desired question
-                showCurrentQuestion();
-            }
-        }
+        //         // Show the desired question
+        //         showCurrentQuestion();
+        //     }
+        // }
 
-        function populateQuestionSelect() {
-            const questionNumberSelect = document.getElementById('question-number');
+        // function populateQuestionSelect() {
+        //     const questionNumberSelect = document.getElementById('question-number');
 
-            // Remove any existing options
-            questionNumberSelect.innerHTML = '';
+        //     // Remove any existing options
+        //     questionNumberSelect.innerHTML = '';
 
-            // Add options for each question
-            questionsArray.forEach((_, index) => {
-                const option = document.createElement('option');
-                option.value = index + 1;
-                option.textContent = `Question ${index + 1}`;
-                questionNumberSelect.appendChild(option);
-            });
-        }
+        //     // Add options for each question
+        //     questionsArray.forEach((_, index) => {
+        //         const option = document.createElement('option');
+        //         option.value = index + 1;
+        //         option.textContent = `Question ${index + 1}`;
+        //         questionNumberSelect.appendChild(option);
+        //     });
+        // }
 
-        function updateQuestionSelect() {
-            populateQuestionSelect();
-            // Set the selected option to the current question index + 1
-            questionNumberSelect.value = currentQuestionIndex + 1;
-        }
+        // function updateQuestionSelect() {
+        //     populateQuestionSelect();
+        //     // Set the selected option to the current question index + 1
+        //     questionNumberSelect.value = currentQuestionIndex + 1;
+        // }
 
         // Call the function to update the select element initially
-        updateQuestionSelect();
+        // updateQuestionSelect();
 
         const submitButton = document.getElementById('submit-button');
 
+        // Function to check if all radio buttons are selected
+        // Select all <li> elements with the class "question" and convert them to an array
         // Function to check if all radio buttons are selected
         function checkAllRadioButtonsSelected() {
             let allSelected = true;
@@ -2019,6 +2624,9 @@
 
             return allSelected;
         }
+
+        // Select all <li> elements with the class "question" and convert them to an array
+        const questionsArray = Array.from(document.querySelectorAll('li.question'));
 
         // Add an event listener to each radio button
         questionsArray.forEach((question) => {
@@ -2036,6 +2644,8 @@
                 });
             });
         });
+
+
 
 
 

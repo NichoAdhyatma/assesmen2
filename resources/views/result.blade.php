@@ -41,6 +41,7 @@
 <body>
     <h1>Hasil Tes Psikogram</h1>
     <button id="generatePdfButton">Generate PDF</button>
+    <a href="{{ route('download-pdf') }}" class="btn btn-primary">Download PDF</a>
     <table>
         <tr>
             <th>Nama</th>
@@ -73,6 +74,32 @@
     <br>
     <h1>Hasil Tele-asesmen Interview</h1>
     <br>
+    <?php
+        // Assuming $data->scoreString contains the comma-separated string
+        $scoreArrayfpos = explode(',', $data->f_sentimen_positif);
+        $scoreArrayfpos = array_map('intval', $scoreArrayfpos);
+
+        $scoreArrayfneu = explode(',', $data->f_sentimen_netral);
+        $scoreArrayfneu = array_map('intval', $scoreArrayfneu);
+
+        $scoreArrayfneg = explode(',', $data->f_sentimen_negatif);
+        $scoreArrayfneg = array_map('intval', $scoreArrayfneg);
+
+        $scoreArrayvpos = explode(',', $data->v_sentimen_positif);
+        $scoreArrayvpos = array_map('intval', $scoreArrayvpos);
+
+        $scoreArrayvneu = explode(',', $data->v_sentimen_netral);
+        $scoreArrayvneu = array_map('intval', $scoreArrayvneu);
+
+        $scoreArrayvneg = explode(',', $data->v_sentimen_negatif);
+        $scoreArrayvneg = array_map('intval', $scoreArrayvneg);
+
+        $scoreArrayvalidasi = explode(',', $data->skor_validasi);
+        $scoreArrayvalidasi = array_map('intval', $scoreArrayvalidasi);
+
+        $scoreArraykepercayaan = explode(',', $data->kepercayaan);
+        $scoreArraykepercayaan = array_map('intval', $scoreArrayfpos);
+    ?>
     <table id="tabelKepribadian"> <!-- Added an ID to the table -->
         <thead>
             <tr>
@@ -107,8 +134,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[0]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[0]; ?></td>
             </tr>
             <tr>
                 <th>Conscientiousness</th>
@@ -120,8 +147,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[1]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[1]; ?></td>
             </tr>
             <tr>
                 <th>Agreeableness</th>
@@ -133,8 +160,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[2]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[2]; ?></td>
             </tr>
             <tr>
                 <th>Openness</th>
@@ -146,8 +173,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[3]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[3]; ?></td>
             </tr>
             <tr>
                 <th>Neuroticism</th>
@@ -159,8 +186,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[4]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[4]; ?></td>
             </tr>
             <!-- Row 7 Minat -->
             <tr>
@@ -177,8 +204,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[5]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[5]; ?></td>
             </tr>
             <tr>
                 <th>Investigative</th>
@@ -190,8 +217,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[6]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[6]; ?></td>
             </tr>
             <tr>
                 <th>Artistic</th>
@@ -203,8 +230,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[7]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[7]; ?></td>
             </tr>
             <tr>
                 <th>Social</th>
@@ -216,8 +243,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[8]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[8]; ?></td>
             </tr>
             <tr>
                 <th>Enterprising</th>
@@ -229,8 +256,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[9]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[9]; ?></td>
             </tr>
             <tr>
                 <th>Conventional</th>
@@ -242,8 +269,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[10]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[10]; ?></td>
             </tr>
             <!-- Row 14 Bakat -->
             <tr>
@@ -259,8 +286,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[11]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[11]; ?></td>
             </tr>
             <tr>
                 <th>Dimensi psikomotor</th>
@@ -272,8 +299,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[12]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[12]; ?></td>
             </tr>
             <tr>
                 <th>Dimensi intelektual</th>
@@ -285,8 +312,8 @@
                 <td class="center-align"></td>
                 <td class="center-align"></td>
 
-                <td></td>
-                <td></td>
+                <td><?php echo $scoreArrayvalidasi[13]; ?></td>
+                <td><?php echo $scoreArraykepercayaan[13]; ?></td>
             </tr>
         </tbody>
     </table>
@@ -308,7 +335,7 @@
             <tr>
                 <th>Satzerganzung (SE) → Melengkapi Kalimat</th>
                 <td>Kemampuan pengambilan keputusan, keinginan berprestasi, penilaian atau pembentukan opini, common sense, penekanan pada berpikir praktis dan konkrit pemaknaan realitas, dan berpikir secara mandiri</td>
-                <td></td>
+                <td>{{ $data->skor_validasi_cognitif }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -316,7 +343,7 @@
             <tr>
                 <th>Wortauswahl (WA) → Melengkapi Kata-kata</th>
                 <td>Kemampuan menangkap inti atau makna dari sesuatu yang disampaikan melalui bahasa, perasaan empati atau kemampuan menyelami perasaan, berpikir induktif menggunakan bahasa. WA juga mengukur common sense (logika berpikir), cara berpikir kongkrit praktis, sense of reality, judgement,mandiri dalam berfikir, pembentukan keputusan. Yang dimaksud dengan “judgement,”  adalah artinya apakah testee mampu menilai arti apakah ia mandiri, atau apakah ia salah kaprah</td>
-                <td></td>
+                <td>{{ $data->skor_validasi_cognitif }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -324,7 +351,7 @@
             <tr>
                 <th>Analogien (AN) → Persamaan Kata</th>
                 <td>Kemampuan fleksibilitas dalam berpikir, kemampuan mengkombinasikan atau menghubungkan, kelincahan dalam berubah dan berganti dalam berpikir, resistensi atau kemampuan untuk melawan solusi masalah yang tidak pasti sehingga meliputi kejelasan dan kekonsenkuenan dalam berpikir</td>
-                <td></td>
+                <td>{{ $data->skor_validasi_cognitif }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -332,7 +359,7 @@
             <tr>
                 <th>Gemeinsamkeiten (GE) → Sifat yang Dimiliki Bersama</th>
                 <td>Kemampuan abstraksi verbal, menemukan ciri yang sama atau khas dari dua objek dan menyusun suatu pengertian tentangnya. Kemampuan untuk menyatakan pengertian akan sesuatu dalam bentuk Bahasa, membentuk suatu pengertian atau mencari inti persoalan, serta memahami esensi pengertian suatu kata untuk dapat menemukan kesamaan esensial dari beberapa kata</td>                
-                <td></td>
+                <td>{{ $data->skor_validasi_cognitif }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -340,7 +367,7 @@
             <tr>
                 <th>Rechhenaufgaben (RA) → Kemampuan Berhitung</th>
                 <td>Kemampuan berpikir atau memecahkan masalah praktis dalam berhitung, matematis, berpikir logis, dan lugas penalaran, dan kemampuan berpikir runtut mengambil kesimpulan</td>                
-                <td></td>
+                <td>{{ $data->skor_validasi_cognitif }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -348,7 +375,7 @@
             <tr>
                 <th>Zahlenreihen (ZR) → Deret Angka</th>
                 <td>Cara berpikir teoritis dengan hitungan. Maksudnya mengukur kemampuan berhitung testee yang didasarkan pada pendekatan analisis atas informasi factual berbentuk angka sehingga didapatkan suatu kesimpulan (berpikir induktif dengan angkaangka), serta kelincahan dan irama dalam berpikir</td>                
-                <td></td>
+                <td>{{ $data->skor_validasi_cognitif }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -356,7 +383,7 @@
             <tr>
                 <th>Figurenauswahl (FA) → Memilih Bentuk</th>
                 <td>Kemampuan membayangkan, kemampuan mengkonstruksi (sintesa dan Analisa) sehingga dapat menggabungkan potongan suatu objek visual dan menghasilkan suatu bentuk tertentu, serta memasukkan bagian pada suatu keseluruhan (membayangkan menyeluruh)</td>                
-                <td></td>
+                <td>{{ $data->skor_validasi_cognitif }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -364,7 +391,7 @@
             <tr>
                 <th>Wurfelaufgaben (WU) → Latihan Balok</th>
                 <td>Kemampuan analisis yakni daya bayang ruang, didalamnya terkandung kreativitas, kemampuan tiga dimensi, imajinasi dan fleksibilitas berpikir, serta kemampuan konstruktif teknis dalam menyusun </td>                
-                <td></td>
+                <td>{{ $data->skor_validasi_cognitif }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -372,7 +399,7 @@
             <tr>
                 <th>Merkaufgaben (ME) → Latihan Simbol</th>
                 <td>Kemampuan daya ingat seseorang, fokus, perhatian, konsentrasi yang menetap, dan daya tahan</td>                
-                <td></td>
+                <td>{{ $data->skor_validasi_cognitif }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -699,31 +726,57 @@
         }
 
         window.onload = function () {
-            var table = document.getElementById("tabelKepribadian");
-            var rows = table.getElementsByTagName("tr");
-
-            for (var i = 2; i < rows.length; i++) {
-                console.log(rows.length)
-                if(i == 7 || i == 14){
-                    continue;
-                }
-                else{
-                    var randomIndexFacial = randomSentiment();
-                    rows[i].cells[randomIndexFacial + 2].textContent = "🔘"; // Fill with "X" in one Facial Assessment subcolumn
+        var table = document.getElementById("tabelKepribadian");
+        var rows = table.getElementsByTagName("tr");
+        var scoreArrayfpos = <?php echo json_encode($scoreArrayfpos); ?>;
+        var scoreArrayfneu = <?php echo json_encode($scoreArrayfneu); ?>;
+        var scoreArrayfneg = <?php echo json_encode($scoreArrayfneg); ?>;
+        var scoreArrayvpos = <?php echo json_encode($scoreArrayvpos); ?>;
+        var scoreArrayvneu = <?php echo json_encode($scoreArrayvneu); ?>;
+        var scoreArrayvneg = <?php echo json_encode($scoreArrayvneg); ?>;
+        var scoreArrayvalidasi = <?php echo json_encode($scoreArrayvalidasi); ?>;
+        var scoreArraykepercayaan = <?php echo json_encode($scoreArraykepercayaan); ?>;
+        for (var i = 2; i < rows.length; i++) {
+            console.log(rows.length)
+            if (i == 7 || i == 14) {
+                continue;
+            } else {
+                // Extract the values from the respective arrays
                 
 
-                
-                    var randomIndexVoice = randomSentiment();
-                    rows[i].cells[randomIndexVoice + 5].textContent = "🔘"; // Fill with "X" in one Voice to Text Assessment subcolumn
-                    
-                    var randomSkorValidasi = getRandomNumber(1, 100);
-                    var randomKepercayaan = getRandomPercentage(1, 100);
+                // Convert PHP variables to JavaScript variables
+                var fpos = parseFloat(scoreArrayfpos[i]);
+                var fneg = parseFloat(scoreArrayfneg[i]);
+                var fneu = parseFloat(scoreArrayfneu[i]);
+                var vpos = parseFloat(scoreArrayvpos[i]);
+                var vneg = parseFloat(scoreArrayvneg[i]);
+                var vneu = parseFloat(scoreArrayvneu[i]);
 
-                    rows[i].cells[8].textContent = randomSkorValidasi; // "Skor Validasi" column
-                    rows[i].cells[9].textContent = randomKepercayaan;  // "%Kepercayaan" column
+                // Find the maximum value and its corresponding index
+                var maxF = Math.max(fpos, fneg, fneu);
+                var maxV = Math.max(vpos, vneg, vneu);
+
+                if (maxF === fneu) {
+                    rows[i].cells[3].textContent = "◯"; // "Fpos" column
+                } else if (maxF === fneg) {
+                    rows[i].cells[2].textContent = "◯"; // "Fneg" column
+                } else if (maxF === fpos) {
+                    rows[i].cells[4].textContent = "◯"; // "Fneu" column
                 }
+
+                if (maxV === vneu) {
+                    rows[i].cells[6].textContent = "◯"; // "Vpos" column
+                } else if (maxV === vneg) {
+                    rows[i].cells[5].textContent = "◯"; // "Vneg" column
+                } else if (maxV === vpos) {
+                    rows[i].cells[7].textContent = "◯"; // "Vneu" column
+                }
+
+                rows[i].cells[8].textContent = parseFloat(scoreArrayvalidasi); // "Skor Validasi" column
+                rows[i].cells[9].textContent = parseFloat(scoreArraykepercayaan); // "%Kepercayaan" column
             }
-        };
+        }
+    };
     </script>
     
     <script>
@@ -734,24 +787,24 @@
 
         // Function to determine the values for "Rendah," "Tinggi," and "Rata-Rata" based on the raw score
         function determineValues(rawScore) {
-            if (rawScore <= 3) {
-                return ["🔘", "", ""];
-            } else if (rawScore <= 6) {
-                return ["", "🔘", ""];
+            if (rawScore <= 14) {
+                return ["◯", "", ""];
+            } else if (rawScore <= 24) {
+                return ["", "◯", ""];
             } else {
-                return ["", "", "🔘"];
+                return ["", "", "◯"];
             }
         }
         function determineValuesValidasi(rawScore) {
-            if (rawScore <= 33) {
-                return ["🔘", "", ""];
-            } else if (rawScore <= 66) {
-                return ["", "🔘", ""];
+            if (rawScore <= 14) {
+                return ["◯", "", ""];
+            } else if (rawScore <= 24) {
+                return ["", "◯", ""];
             } else {
-                return ["", "", "🔘"];
+                return ["", "", "◯"];
             }
         }
-
+        // ○ 🔘 ◯
         // Get the table element by its ID
         var table = document.getElementById("scoreTable");
 
@@ -761,11 +814,11 @@
             var rawScoreCell = row.cells[2]; // Index 2 is the "Raw Score" column
 
             // Generate a random score and set it in the cell
-            var randomScore = generateRandomScore();
-            rawScoreCell.textContent = randomScore;
+            
 
             // Determine the values for "Rendah," "Tinggi," and "Rata-Rata" based on the raw score
-            var values = determineValues(randomScore);
+            var values = determineValuesValidasi(rawScoreCell.textContent);
+
 
             // Fill in the corresponding cells
             var rendahCell = row.cells[3]; // Index 3 is the "Rendah" column
@@ -813,16 +866,16 @@
         // Function to determine the values for "Rendah," "Tinggi," and "Rata-Rata" based on the raw score
         //  REMINDER: buat Determinevalues buat semua isi biar soale peniliaiane unik
         function determineValues(rawScore) {
-            if (rawScore <= 2) {
-                return ["🔘", "", "", "", ""];
-            } else if (rawScore <= 4) {
-                return ["", "🔘", "", "", ""];
-            } else if (rawScore <= 6) {
-                return ["", "", "🔘", "", ""];
-            } else if (rawScore <= 8) {
-                return ["", "", "", "🔘", ""];
+            if (rawScore <= 20) {
+                return ["◯", "", "", "", ""];
+            } else if (rawScore <= 40) {
+                return ["", "◯", "", "", ""];
+            } else if (rawScore <= 60) {
+                return ["", "", "◯", "", ""];
+            } else if (rawScore <= 80) {
+                return ["", "", "", "◯", ""];
             } else {
-                return ["", "", "", "", "🔘"];
+                return ["", "", "", "", "◯"];
             }
         }
 
@@ -833,13 +886,40 @@
         for (var i = 1; i < table.rows.length; i++) { // Start from 1 to skip the header row
             if(i==6 || i==13){
                 continue;
+
+            }
+            else if(i < 6 ){
+                var row = table.rows[i];
+                var rawScoreCell = row.cells[2]; // Index 2 is the "Raw Score" column
+                console.log(rawScoreCell);
+                // Determine the values for "Sangat Rendah" to "Sangat Tinggi" based on the raw score
+                var rawScoreCellValue = parseInt(rawScoreCell.textContent, 10); // Parse as an integer
+                var values = determineValues((rawScoreCellValue / 50) * 100);
+                
+
+                // Fill in the corresponding cells
+                var sangatRendahCell = row.cells[3]; // Index 3 is the "Sangat Rendah" column
+                sangatRendahCell.textContent = values[0];
+
+                var rendahCell = row.cells[4]; // Index 4 is the "Rendah" column
+                rendahCell.textContent = values[1];
+
+                var rataRataCell = row.cells[5]; // Index 5 is the "Rata-Rata" column
+                rataRataCell.textContent = values[2];
+
+                var tinggiCell = row.cells[6]; // Index 6 is the "Tinggi" column
+                tinggiCell.textContent = values[3];
+
+                var sangatTinggiCell = row.cells[7]; // Index 7 is the "Sangat Tinggi" column
+                sangatTinggiCell.textContent = values[4];
             }
             else if(i > 6 && i < 13){
                 var row = table.rows[i];
                 var rawScoreCell = row.cells[2]; // Index 2 is the "Raw Score" column
                 console.log(rawScoreCell);
                 // Determine the values for "Sangat Rendah" to "Sangat Tinggi" based on the raw score
-                var values = determineValues(rawScoreCell.textContent);
+                var rawScoreCellValue = parseInt(rawScoreCell.textContent, 10); // Parse as an integer
+                var values = determineValues((rawScoreCellValue / 10) * 100);
 
                 
 
@@ -868,7 +948,8 @@
                 //rawScoreCell.textContent = randomScore;
 
                 // Determine the values for "Sangat Rendah" to "Sangat Tinggi" based on the raw score
-                var values = determineValues(rawScoreCell.textContent);
+                var rawScoreCellValue = parseInt(rawScoreCell.textContent, 10); // Parse as an integer
+                var values = determineValues((rawScoreCellValue / 5) * 100);
 
                 // Fill in the corresponding cells
                 var sangatRendahCell = row.cells[3]; 

@@ -18,21 +18,20 @@ class resultController extends Controller
 
         // Generate PDF from the HTML content
         $customPageSize = 'A3'; // You can also specify dimensions like '8.5in x 11in'
-        
+
         // Generate PDF from the HTML content with custom page size
         $pdf = PDF::loadHTML($htmlContent)->setPaper($customPageSize);
 
+        // Specify the subdirectory where you want to save the PDF
+        $subdirectory = 'pdf/';
+
         // Generate a unique filename for the PDF
-        // $filename = 'example.pdf';
+        $filename = $subdirectory . 'example.pdf';
 
-        // Save the PDF to the public folder
-        // $pdf->save(public_path($filename));
-        // $filedir = public_path($filename);
+        // Save the PDF to the public/pdf subdirectory
+        $pdf->save(public_path($filename));
+
         // Create a response to serve the saved PDF for download
-        // $response = Response::make(file_get_contents(public_path($filename)));
-        // $response->header('Content-Type', 'application/pdf');
-        // $response->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
-
         $filename = 'generated_pdf_' . time() . '.pdf';
 
         // Set the headers to force a download
@@ -44,4 +43,34 @@ class resultController extends Controller
         // Output the PDF content directly to the browser
         return response($pdf->output(), 200, $headers);
     }
+
+
+    public function downloadPDF()
+    {
+        // Define the directory where PDF files are stored
+        $pdfDirectory = public_path('pdf');
+
+        // Get all PDF files in the directory
+        $pdfFiles = glob($pdfDirectory . '/*.pdf');
+
+        // Sort the files by modification time to get the latest one
+        usort($pdfFiles, function ($a, $b) {
+            return filemtime($b) - filemtime($a);
+        });
+
+        if (count($pdfFiles) > 0) {
+            // Get the path of the latest PDF file
+            $latestPdfFile = $pdfFiles[0];
+
+            // Extract the filename from the path
+            $filename = pathinfo($latestPdfFile, PATHINFO_BASENAME);
+
+            // Download the latest PDF file and delete it after sending
+            return response()->download($latestPdfFile, $filename)->deleteFileAfterSend(true);
+        } else {
+            // Handle the case where no PDF files exist in the directory
+            abort(404);
+        }
+    }
+
 }

@@ -172,6 +172,9 @@
                 Your browser does not support the video tag.
             </video>
 
+            <p style="padding-top:30px">Panduan Untuk Merekam Video : <br> <span> Start Record -> Stop -> Process Video</span></p>
+            <br>
+            <h2>Perlu di Ingat Bahwa Terdapat 14 Video Dalam Proses Ini</h2>
             <h1> Webcam Anda <h1>
             <video id="webcam" autoplay style=""></video>
             <a href="{{ route('testinterview') }}" class="special-link-button">

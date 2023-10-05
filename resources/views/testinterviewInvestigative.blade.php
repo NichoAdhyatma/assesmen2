@@ -193,10 +193,21 @@
     <div class="contact--lockup">
         <div id="video-container-" style="height:100%; width:100%; padding-top:150px">
 
-            <video id="main-video" controls autoplay style="width: 100%; height: 65vh;">
-                <source src="assets/video/KepribadianVideo.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        @php
+            $videoDir = public_path('assets/video/Investigative'); // Specify the path to your video folder.
+            $videoFiles = glob($videoDir . '/*.mp4'); // Get all .mp4 files in the folder.
+
+            if (count($videoFiles) > 0) {
+                $randomVideo = basename($videoFiles[array_rand($videoFiles)]); // Select a random video file name.
+            } else {
+                $randomVideo = ''; // No videos found in the folder.
+            }
+        @endphp
+
+        <video id="main-video" controls autoplay style="width: 100%; height: 65vh;">
+            <source src="{{ asset('assets/video/' . $randomVideo) }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
 
             <h1> Webcam Anda </h1>
             <div class="col-12 col-md-6">

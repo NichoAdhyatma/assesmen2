@@ -33,17 +33,21 @@ Route::get('/consent', function () {
 
 Route::post('/signup', [AuthController::class, 'postSignUp'])->name('postSignUp');
 Route::post('/signin', [AuthController::class, 'postSignIn'])->name('postSignIn');
+
+
 Route::post('/gotoValidation', [ValidationMinatController::class, 'gotoValidation']);
-
-
 Route::get('/gotoValidation', function () {
     return view('testvalidation');
 });
 
 Route::post('/gotoValidationbakatminat', [ValidationMinatController::class, 'gotoValidationbakatminat']);
-
 Route::get('/gotoValidationbakatminat', function () {
     return view('testvalidationbakatminat');
+});
+
+Route::post('/gotoValidationBakat', [ValidationMinatController::class, 'gotoValidationBakat']);
+Route::get('/gotoValidationBakat', function () {
+    return view('testvalidationBakat');
 });
 
 Route::post('/postPenilaian', [ValidationMinatController::class, 'postPenilaian'])->name('postPenilaian');
@@ -61,6 +65,10 @@ Route::get('/signin', function () {
 Route::get('/test', function () {
     return view('beforetest');
 })->name('test');
+
+Route::get('/testInt', function () {
+    return view('beforetestIntelegensi');
+})->name('testInt');
 
 Route::get('/login', function () {
     return view('login');
@@ -148,6 +156,31 @@ Route::get('/testvalidation', function () {
     return view('testvalidation');
 })->name('testvalidation');
 
+
+Route::get('/testvalidation1', function () {
+    return view('testvalidation1');
+})->name('testvalidation1');
+
+Route::get('/testvalidation1Mudah', function () {
+    return view('testvalidation1Mudah');
+})->name('testvalidation1Mudah');
+
+Route::get('/testvalidation1Susah', function () {
+    return view('testvalidation1Susah');
+})->name('testvalidation1Susah');
+
+Route::get('/testvalidation2', function () {
+    return view('testvalidation2');
+})->name('testvalidation2');
+
+Route::get('/testvalidation2Mudah', function () {
+    return view('testvalidation2Mudah');
+})->name('testvalidation2Mudah');
+
+Route::get('/testvalidation2Susah', function () {
+    return view('testvalidation2Susah');
+})->name('testvalidation2Susah');
+
 Route::get('/testvalidationkepribadian', function () {
     return view('testvalidationkepribadian');
 })->name('testvalidationkepribadian');
@@ -189,6 +222,9 @@ Route::post('/generate-pdf',  [resultController::class, 'generatePDF']);
 
 Route::get('/generate-pdf', [resultController::class, 'generatePDF']);
 
+Route::get('/download-pdf', [resultController::class, 'downloadPDF'])->name('download-pdf');
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 Route::get('/upload', function () {
@@ -211,4 +247,48 @@ Route::post('/upload', function (Request $request) {
     return "The video has been successfully uploaded to {$selectedFolder}.";
 })->name('upload.video');
 
+
+
+// Buat Skor
+Route::post('/store-skor-in-session', function (Request $request) {
+    $skorData = $request->json()->all();
+    if (isset($skorData['skor'])) {
+        Session::put('skor', $skorData['skor']);
+        return response()->json(['message' => 'Skor stored in session.']);
+    } else {
+        return response()->json(['error' => 'Skor data not provided.'], 400);
+    }
+});
+
+Route::get('/store-skor-in-session', function () {
+    return view('testvalidation1');
+});
+
+Route::post('/store-skor-in-session2', function (Request $request) {
+    $skorData = $request->json()->all();
+    if (isset($skorData['skor'])) {
+        Session::put('skor2', $skorData['skor']);
+        return response()->json(['message' => 'Skor stored in session.']);
+    } else {
+        return response()->json(['error' => 'Skor data not provided.'], 400);
+    }
+});
+
+Route::get('/store-skor-in-session2', function () {
+    return view('testvalidation2');
+});
+
+Route::post('/store-skor-in-sessionVideo', function (Request $request) {
+    $skorData = $request->json()->all();
+    if (isset($skorData['skor'])) {
+        Session::put('skorVideo', $skorData['skor']);
+        return response()->json(['message' => 'Skor stored in session.']);
+    } else {
+        return response()->json(['error' => 'Skor data not provided.'], 400);
+    }
+});
+
+Route::get('/store-skor-in-sessionVideo', function () {
+    return view('testvalidation2');
+});
 

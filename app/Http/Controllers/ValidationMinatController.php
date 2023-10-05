@@ -61,6 +61,22 @@ class ValidationMinatController extends Controller
         //return response()->json(['redirect' => route('testvalidation')]);
     }
 
+    public function gotoValidationBakat(Request $request)
+    {
+        // Retrieve the data that you want to store in the session
+        $resultPer = $request->input('resultPer');
+        $resultPsi = $request->input('resultPsi');
+        $resultInt = $request->input('resultInt');
+
+        // Store the data in the session
+        Session::put('resultPer', $resultPer);
+        Session::put('resultPsi', $resultPsi);
+        Session::put('resultInt', $resultInt);
+
+        // Return a JSON response with the redirect route
+        //return response()->json(['redirect' => route('testvalidation')]);
+    }
+
     function postPenilaian(Request $request){
        
     
