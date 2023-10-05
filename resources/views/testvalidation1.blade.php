@@ -8,7 +8,7 @@
     <title>Tes Valiasi Cognitif</title>
     <style>
         body {
-            font-family: 'Montserrat';
+            font-family: 'Arial';
             text-align: center;
         }
 
@@ -22,7 +22,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
             background-color: #f7f7f7;
@@ -35,8 +35,9 @@
         }
 
         p {
-            font-size: 18px;
+            font-size: 24px;
             margin-top: 20px;
+
         }
 
         .question {
@@ -46,13 +47,13 @@
         .answer-form {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: left;
         }
 
         .answer-button {
             margin-top: 10px;
             padding: 10px;
-            font-size: 18px;
+            font-size: 24px;
             background-color: #3498db;
             color: #fff;
             border: none;
@@ -123,7 +124,9 @@
         /* Style for radio buttons */
         .radio-label {
             display: flex;
-            align-items: center;
+            align-items: left;
+            font-size: 24px;
+
         }
 
         .radio-input {
@@ -701,8 +704,7 @@
         </ol>
         
     </div>
-    <button class="prev-button">Previous Question</button>
-    <button class="next-button">Next Question</button>
+
     <!-- <a href="{{ route('result') }}"> -->
         <button id="submit-button" class="submit-button" disabled title="Please finish all questions">Submit</button>
     <!-- <a> -->
@@ -830,26 +832,26 @@
 
         // Script Untuk membuat tampil pertanyaan selain yang sekarang hilang ------------------------------------------------------------------------
         // Initialize the current question index
-        let currentQuestionIndex = 0;
+        // let currentQuestionIndex = 0;
 
-        // Hide all questions except the first one
-        const questions = document.querySelectorAll('.question');
-        questions.forEach((question, index) => {
-            if (index !== currentQuestionIndex) {
-                question.style.display = 'none';
-            }
-        });
+        // // Hide all questions except the first one
+        // const questions = document.querySelectorAll('.question');
+        // questions.forEach((question, index) => {
+        //     if (index !== currentQuestionIndex) {
+        //         question.style.display = 'none';
+        //     }
+        // });
 
-        // Function to show the current question
-        function showCurrentQuestion() {
-            questionsArray.forEach((question, index) => {
-                if (index === currentQuestionIndex) {
-                    question.style.display = 'block';
-                } else {
-                    question.style.display = 'none';
-                }
-            });
-        }
+        // // Function to show the current question
+        // function showCurrentQuestion() {
+        //     questionsArray.forEach((question, index) => {
+        //         if (index === currentQuestionIndex) {
+        //             question.style.display = 'block';
+        //         } else {
+        //             question.style.display = 'none';
+        //         }
+        //     });
+        // }
 
 
         // Scripts for making the next and prev button questions

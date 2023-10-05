@@ -210,6 +210,8 @@
         </video>
 
             <h1> Webcam Anda </h1>
+            <p style="padding-top:20px">Panduan Untuk Merekam Video : <br> <span> Start Record -> Stop -> Process Video</span></p>
+
             <div class="col-12 col-md-6">
                 <video autoplay="true" id="your-video-id"  autoplay width="100%" height="300px">
                     Izinkan Penggunaan Kamera.

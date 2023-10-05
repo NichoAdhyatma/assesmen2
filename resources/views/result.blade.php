@@ -2,6 +2,10 @@
 <html>
 <head>
 <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
        table {
         border-collapse: collapse;
         width: 90%;
@@ -35,11 +39,34 @@
         td.center-align {
             text-align: center;
         }
+        .logo-container {
+            display: flex;
+            gap: 50px;
+        }
     </style>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body>
+    <div class="logo-container">
+        <a class="header--logo" href="https://maxy.academy/">
+            <img src="{{ asset('assets/img/logo-maxy-header.png') }}" alt="Global">
+
+        </a>
+        <a class="header--logo" href="https://www.ubaya.ac.id/">
+            <img src="{{ asset('assets/img/logo-ubaya-header.png') }}" alt="Global">
+
+        </a>
+        <a class="header--logo" href="https://kedaireka.id/">
+            <img src="{{ asset('assets/img/kedaireka-logo-header.png') }}" alt="Global">
+
+        </a>
+        <a class="header--logo" href="https://www.kemdikbud.go.id/">
+            <img src="{{ asset('assets/img/logo-kemendikbud-header.png') }}" alt="Global">
+
+        </a>
+    </div>
     <h1>Hasil Tes Psikogram</h1>
+    
     <button id="generatePdfButton">Generate PDF</button>
     <a href="{{ route('download-pdf') }}" class="btn btn-primary">Download PDF</a>
     <table>
@@ -335,7 +362,7 @@
             <tr>
                 <th>Satzerganzung (SE) → Melengkapi Kalimat</th>
                 <td>Kemampuan pengambilan keputusan, keinginan berprestasi, penilaian atau pembentukan opini, common sense, penekanan pada berpikir praktis dan konkrit pemaknaan realitas, dan berpikir secara mandiri</td>
-                <td>{{ $data->skor_validasi_cognitif }}</td>
+                <td>{{ $data->cognitive_video_score }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -343,7 +370,7 @@
             <tr>
                 <th>Wortauswahl (WA) → Melengkapi Kata-kata</th>
                 <td>Kemampuan menangkap inti atau makna dari sesuatu yang disampaikan melalui bahasa, perasaan empati atau kemampuan menyelami perasaan, berpikir induktif menggunakan bahasa. WA juga mengukur common sense (logika berpikir), cara berpikir kongkrit praktis, sense of reality, judgement,mandiri dalam berfikir, pembentukan keputusan. Yang dimaksud dengan “judgement,”  adalah artinya apakah testee mampu menilai arti apakah ia mandiri, atau apakah ia salah kaprah</td>
-                <td>{{ $data->skor_validasi_cognitif }}</td>
+                <td>{{ $data->cognitive_video_score }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -351,7 +378,7 @@
             <tr>
                 <th>Analogien (AN) → Persamaan Kata</th>
                 <td>Kemampuan fleksibilitas dalam berpikir, kemampuan mengkombinasikan atau menghubungkan, kelincahan dalam berubah dan berganti dalam berpikir, resistensi atau kemampuan untuk melawan solusi masalah yang tidak pasti sehingga meliputi kejelasan dan kekonsenkuenan dalam berpikir</td>
-                <td>{{ $data->skor_validasi_cognitif }}</td>
+                <td>{{ $data->cognitive_video_score }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -359,7 +386,7 @@
             <tr>
                 <th>Gemeinsamkeiten (GE) → Sifat yang Dimiliki Bersama</th>
                 <td>Kemampuan abstraksi verbal, menemukan ciri yang sama atau khas dari dua objek dan menyusun suatu pengertian tentangnya. Kemampuan untuk menyatakan pengertian akan sesuatu dalam bentuk Bahasa, membentuk suatu pengertian atau mencari inti persoalan, serta memahami esensi pengertian suatu kata untuk dapat menemukan kesamaan esensial dari beberapa kata</td>                
-                <td>{{ $data->skor_validasi_cognitif }}</td>
+                <td>{{ $data->cognitive_video_score }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -367,7 +394,7 @@
             <tr>
                 <th>Rechhenaufgaben (RA) → Kemampuan Berhitung</th>
                 <td>Kemampuan berpikir atau memecahkan masalah praktis dalam berhitung, matematis, berpikir logis, dan lugas penalaran, dan kemampuan berpikir runtut mengambil kesimpulan</td>                
-                <td>{{ $data->skor_validasi_cognitif }}</td>
+                <td>{{ $data->cognitive_video_score }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -375,7 +402,7 @@
             <tr>
                 <th>Zahlenreihen (ZR) → Deret Angka</th>
                 <td>Cara berpikir teoritis dengan hitungan. Maksudnya mengukur kemampuan berhitung testee yang didasarkan pada pendekatan analisis atas informasi factual berbentuk angka sehingga didapatkan suatu kesimpulan (berpikir induktif dengan angkaangka), serta kelincahan dan irama dalam berpikir</td>                
-                <td>{{ $data->skor_validasi_cognitif }}</td>
+                <td>{{ $data->cognitive_video_score }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -383,7 +410,7 @@
             <tr>
                 <th>Figurenauswahl (FA) → Memilih Bentuk</th>
                 <td>Kemampuan membayangkan, kemampuan mengkonstruksi (sintesa dan Analisa) sehingga dapat menggabungkan potongan suatu objek visual dan menghasilkan suatu bentuk tertentu, serta memasukkan bagian pada suatu keseluruhan (membayangkan menyeluruh)</td>                
-                <td>{{ $data->skor_validasi_cognitif }}</td>
+                <td>{{ $data->cognitive_video_score }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -391,7 +418,7 @@
             <tr>
                 <th>Wurfelaufgaben (WU) → Latihan Balok</th>
                 <td>Kemampuan analisis yakni daya bayang ruang, didalamnya terkandung kreativitas, kemampuan tiga dimensi, imajinasi dan fleksibilitas berpikir, serta kemampuan konstruktif teknis dalam menyusun </td>                
-                <td>{{ $data->skor_validasi_cognitif }}</td>
+                <td>{{ $data->cognitive_video_score }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -399,7 +426,7 @@
             <tr>
                 <th>Merkaufgaben (ME) → Latihan Simbol</th>
                 <td>Kemampuan daya ingat seseorang, fokus, perhatian, konsentrasi yang menetap, dan daya tahan</td>                
-                <td>{{ $data->skor_validasi_cognitif }}</td>
+                <td>{{ $data->cognitive_video_score }}</td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
                 <td class="center-align"></td>
@@ -673,6 +700,14 @@
             </tr>
         </tbody>
     </table>
+    <div style="text-align: right; padding-top: 100px;padding-right: 100px;padding-bottom:50px;">
+        <!-- Right-aligned content with padding at the top -->
+        <p>Tanda Tangan Psikolog</p>
+        
+        <!-- Line for the signature aligned to the right -->
+        <hr style="border: 1px solid #000; width: 150px; margin-top: 150px; margin-right: 0;">
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $.ajaxSetup({
