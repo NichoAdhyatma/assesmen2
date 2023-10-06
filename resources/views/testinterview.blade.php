@@ -205,7 +205,7 @@
         @endphp
 
         <video id="main-video" controls autoplay style="width: 100%; height: 65vh;">
-            <source src="{{ asset('assets/video/Extraversion' . $randomVideo) }}" type="video/mp4">
+            <source src="{{ asset('assets/video/Extraversion/' . $randomVideo) }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
@@ -370,7 +370,7 @@
                 // Make an AJAX request to trigger video processing
                 $.ajax({
                     type: "POST",
-                    url: '/process-video',
+                    url: '/process-video',f
                     data: {
                         numberData: 0
                     },

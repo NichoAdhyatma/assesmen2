@@ -205,7 +205,7 @@
         @endphp
 
         <video id="main-video" controls autoplay style="width: 100%; height: 65vh;">
-            <source src="{{ asset('assets/video/Perseptual' . $randomVideo) }}" type="video/mp4">
+            <source src="{{ asset('assets/video/Perseptual/' . $randomVideo) }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
