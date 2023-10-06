@@ -279,6 +279,20 @@
             transition: background-color 0.3s ease;
         }
 
+        #calculate-button-bakat {
+            max width: 600px;
+            width: 50%;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #0f33ff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
 
         /* sidebar */
         .sidebar {
@@ -312,7 +326,7 @@
     </style>
 </head>
 <body>
-    <div class="sidebar"> 
+    <div class="sidebar" style="display: none;"> 
         <select id="question-number" style="font-size:1.1rem;width:70%">
             
         </select>

@@ -187,7 +187,7 @@
 
 <body>
     <div class="intro--banner">
-        <h1>Tes Interview</h1>
+        <h1>Tes Interview 13</h1>
     </div>
 
     <div class="contact--lockup">
@@ -205,12 +205,12 @@
         @endphp
 
         <video id="main-video" controls autoplay style="width: 100%; height: 65vh;">
-            <source src="{{ asset('assets/video/' . $randomVideo) }}" type="video/mp4">
+            <source src="{{ asset('assets/video/Psikomotor' . $randomVideo) }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
             <h1> Webcam Anda </h1>
-            <p style="padding-top:20px">Panduan Untuk Merekam Video : <br> <span> Start Record -> Stop -> Process Video</span></p>
+            <p style="padding-top:20px">Mulai tes dengan menekan tombol start record, dan sudahi dengan menekan tombol stop recording.<br> Setelah menyelesaikan sesi recording harap menekan tombol process video</span></p>
 
             <div class="col-12 col-md-6">
                 <video autoplay="true" id="your-video-id"  autoplay width="100%" height="300px">

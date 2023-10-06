@@ -13,6 +13,7 @@ class resultController extends Controller
     // use PDF;
     public function generatePDF(Request $request)
     {
+        set_time_limit(360);
         // Get the HTML content from the AJAX request
         $htmlContent = $request->input('htmlContent');
 

@@ -482,19 +482,20 @@
         </ol>
         
     </div>
-
+    <button class="prev-button" style="display: none;">Previous Question</button>
+    <button class="next-button" style="display: none;">Next Question</button>
     <!-- <a href="{{ route('result') }}"> -->
         <button id="submit-button" class="submit-button" disabled title="Please finish all questions">Submit</button>
     <!-- <a> -->
     <br>
-    <div class="question-navigation">
+    <div class="question-navigation" style="display: none;">
         <div class="select-dropdown">
             <select id="question-number">
             <!-- Options will be added dynamically using JavaScript -->
             </select>
         </div>
     </div>
-    <button class="calculate-score-button">Calculate Score</button>
+    <button class="calculate-score-button" style="margin-top:50px;">Calculate Score</button>
     <button id="processVideoButton" onclick="calculateAndLogSkor()">See Current Total Score</button>
     
 
@@ -690,7 +691,7 @@
 
         // Script Untuk membuat tampil pertanyaan selain yang sekarang hilang ------------------------------------------------------------------------
         // Initialize the current question index
-        // let currentQuestionIndex = 0;
+        let currentQuestionIndex = 0;
 
         // // Hide all questions except the first one
         // const questions = document.querySelectorAll('.question');
@@ -727,7 +728,7 @@
             }
 
             // Show the next question
-            showCurrentQuestion();
+            // showCurrentQuestion();
             questionNumberSelect.value = currentQuestionIndex + 1;
 
 
@@ -747,12 +748,12 @@
             }
 
             // Show the previous question
-            showCurrentQuestion();
+            // showCurrentQuestion();
             questionNumberSelect.value = currentQuestionIndex + 1;
         });
 
         // Initially show the first question (randomized)
-        showCurrentQuestion();
+        // showCurrentQuestion();
         shuffleOptions();
 
 
@@ -778,7 +779,7 @@
                 currentQuestionIndex = desiredQuestionNumber - 1;
 
                 // Show the desired question
-                showCurrentQuestion();
+                // showCurrentQuestion();
             }
         }
 
@@ -849,7 +850,6 @@
         }
 
         function calculateRawScore() {
-            
             let correctAnswers = 0;
             const totalQuestions = questionsArray.length;
 
@@ -865,7 +865,6 @@
 
             var sessionData = @json(session()->all());
             console.log(sessionData);
-            console.log(correctAnswers);
             return correctAnswers;
         }
 

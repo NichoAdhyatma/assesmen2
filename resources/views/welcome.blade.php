@@ -86,7 +86,7 @@
             <div class="intro">
               <div class="intro--banner">
                 <h1>Tele-asesmen<br>Interaktif<br>Psikologi</h1>
-                <p style="width: 50%;font-size: 13px;" >Tele-asesmen interaktif psikologi adalah berbasis Artificial Intelligence yang menggunakan analisis sentimen dari modalitas suara,
+                <p style="width: 50%;font-size: 13px;" >Tele-asesmen interaktif psikologi adalah aplikasi asesmen online berbasis Artificial Intelligence yang menggunakan analisis sentimen dari modalitas suara,
                    video serta respons dari testee. Tujuan Utama dari asesmen ini bukan sebagai tes psikologi namun merupakan screening profiling yang dapat ditindak lanjuti dengan asesmen yang lebih mendalam.<p>
                 <button class="cta">Bergabung
                   <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 118" style="enable-background:new 0 0 150 118;" xml:space="preserve">
