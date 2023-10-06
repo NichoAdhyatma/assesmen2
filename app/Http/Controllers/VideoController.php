@@ -11,7 +11,6 @@ class VideoController extends Controller
 {
     public function saveRecordedVideo(Request $request)
     {
-        
         set_time_limit(360);
         // Validate and store the uploaded video in the public/videos folder
         $video = $request->file('recorded_video');
@@ -25,7 +24,7 @@ class VideoController extends Controller
         // dd($video);
         $userId = session('user_id');
         // Define the path where you want to save the video
-        $userVideoDirectory = public_path('videos/' . $userId . '/' .$firstPersonality );
+        $userVideoDirectory = public_path('videos/' . $userId . '/' . $firstPersonality);
         if (!file_exists($userVideoDirectory)) {
             // Create the user's directory if it doesn't exist
             mkdir($userVideoDirectory, 0777, true);
@@ -33,17 +32,24 @@ class VideoController extends Controller
         $i = 1;
         do {
             $videoName = 'video' . $i . '.mp4';
-            $videoPath = $userVideoDirectory . '/' . $videoName;
+            $outputVideoPath = $userVideoDirectory . '/' . $videoName;
+
+            // Execute FFmpeg command to create output files with a specific duration
+            $ffmpegCommand = "ffmpeg -i $video -t 10 -c:v copy -c:a copy $outputVideoPath"; // Adjust the duration as needed
+            exec($ffmpegCommand);
+
             $i++;
-        } while (file_exists($videoPath));
-        file_put_contents($videoPath, file_get_contents($video));
 
+            if ($i > 1) {
+                break; // Terminate the loop when $i exceeds 5
+            }
+        } while (file_exists($outputVideoPath));
 
-        // // Write the video content to the specified path
-        // file_put_contents($videoPath, file_get_contents($video));
-
-        //return response()->json(['message' => 'Video saved successfully']);
+        // Return a response to indicate success
+        return response()->json(['message' => 'Video saved successfully']);
     }
+
+
 
     public function processSelectedVideo(Request $request)
     {

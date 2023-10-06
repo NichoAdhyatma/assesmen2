@@ -370,7 +370,7 @@
                 // Make an AJAX request to trigger video processing
                 $.ajax({
                     type: "POST",
-                    url: '/process-video',f
+                    url: '/process-video',
                     data: {
                         numberData: 0
                     },

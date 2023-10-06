@@ -309,7 +309,7 @@
                             <input type="submit" class="button" value="Sign Up">
                         </div>
                         <div class="group">
-                            <a href="{{ route('consent') }}" class="button align-middle">Guest</a>
+                            <a href="{{ route('login') }}" class="button align-middle">Guest</a>
                         </div>
                     </form>            
                 </div>
