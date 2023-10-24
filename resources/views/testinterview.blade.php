@@ -11,6 +11,7 @@
     <meta name="author" content="Bucky Maler">
     <link rel="stylesheet" href="assets/css/main.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
         .intro {
@@ -34,6 +35,7 @@
             margin: 0 auto;
             align-items: center;
         }
+        
 
         @media (max-width: 1180px) {
             .intro {
@@ -104,6 +106,11 @@
             border-color: #ffff;
             margin-top: 20px
         }
+
+        .testButton i {
+            margin-right: 10px; /* Add margin to the right of the icon for spacing */
+        }
+
         @media screen and (max-width: 768px) {
             .testButton {
                 font-size: 16px; /* Adjust the font size for smaller screens */
@@ -191,7 +198,7 @@
     </div>
 
     <div class="contact--lockup">
-        <div id="video-container-" style="height:100%; width:100%; padding-top:150px">
+        <div id="video-container-" style="height:100%; width:100%; padding-top:75px">
 
         @php
             $videoDir = public_path('assets/video/Extraversion'); // Specify the path to your video folder.
@@ -204,14 +211,20 @@
             }
         @endphp
 
-        <video id="main-video" controls autoplay style="width: 100%; height: 65vh;">
+        <video id="main-video" controls style="width: 100%; height: 65vh;">
             <source src="{{ asset('assets/video/Extraversion/' . $randomVideo) }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
-        
-            <h1> Webcam Anda </h1>
-            <p style="padding-top:20px">Mulai tes dengan menekan tombol start record, dan sudahi dengan menekan tombol stop recording.<br> Setelah menyelesaikan sesi recording harap menekan tombol process video</span></p>
+            <p style="padding-top:20px">Mulai tes dengan menekan tombol start record, <br>Akhiri dengan menekan tombol stop recording.<br> Setelah menyelesaikan sesi recording harap melanjutkan ke tes berikutnya</span></p>
+
+            <button onclick="startRecording()" id="startRecordButton" class="testButton">
+                <i class="fas fa-microphone"></i> Start Record
+            </button>
+            <button id="stopRecordButton" class="testButton" style="margin-bottom: 20px;" disabled>
+                <i class="fas fa-stop"></i> Stop
+            </button>
+            <h3> Webcam Anda </h3>
 
             <div class="col-12 col-md-6">
                 <video autoplay="true" id="your-video-id"  autoplay width="100%" height="300px">
@@ -219,20 +232,24 @@
                 </video>
             </div>
             
-            <div class="col-12 col-md-6 ">
+            <!-- <div class="col-12 col-md-6 ">
                 <button onclick="startRecording()" id="startRecordButton">Start Record</button>
                 <button id="stopRecordButton" disabled>Stop</button>
-            </div>
+            </div> -->
+
 
             <a href="{{ route('testinterviewConscientiousness') }}" class="special-link-button">
-                <button id="nextButton" class="testButton" disabled>Lanjut ke tes berikutnya</button>
+                <button id="nextButton" class="testButton" style="margin-bottom: 20px;" disabled >Lanjut ke tes berikutnya</button>
             </a>
 
-            <a href="{{ route('testinterviewConscientiousness') }}" class="special-link-button">
+            <!-- <a href="{{ route('testinterviewConscientiousness') }}" class="special-link-button">
                 <button id="skipButton" class="testButton">Skip</button>
-            </a>
+            </a> -->
             <br>
-            <button id="processVideoButton">Process Video</button>
+            <!-- <button id="processVideoButton"  style="display: none;">Process Video</button> -->
+            <button id="processVideoButton" >Process Video</button>
+
+
 
         </div>
     </div>
@@ -263,18 +280,19 @@
 
             navigator.mediaDevices.getUserMedia({
                 video: true,
-                audio: true
-            }).then(function (camera) {
-                webcamVideoElement.srcObject = camera;
+                audio: true // Add this line to enable audio recording
+            }).then(function (stream) {
+                webcamVideoElement.srcObject = stream;
 
                 // Recording configuration/hints/parameters
                 var recordingHints = {
                     type: 'video',
                     mimeType: 'video/mp4',
+                    // audioBitsPerSecond: 128000, // You can adjust audio quality as needed
                 };
 
                 // Initiating the recorder
-                recorder = RecordRTC(camera, recordingHints);
+                recorder = RecordRTC(stream, recordingHints);
 
                 // Starting recording
                 recorder.startRecording();
@@ -284,6 +302,7 @@
                 stopRecordButton.disabled = false;
             });
         }
+
 
         stopRecordButton.addEventListener('click', function () {
             // Stopping the recorder
@@ -364,85 +383,51 @@
             processVideoButton.addEventListener('click', function (event) {
                 event.preventDefault();
 
-                // Create an object to store session values
                 var sessionValues = {};
 
-                // Make an AJAX request to trigger video processing
                 $.ajax({
                     type: "POST",
-                    url: '/process-video',
-                    data: {
-                        numberData: 0
-                    },
+                    url: '/processAllvideo',
                     success: function (response) {
-                        // Handle the response from the server
                         if (response && response.data) {
-                            // Store the Python data in the variable declared outside of the event listener
                             pythonData = response.data;
+                            console.log(pythonData);
 
-                            // Display the data on the web page
-                            console.log('Python Data:', pythonData);
-
-                            var jsonData = JSON.parse(response.data);
-
-                            // Iterate through the properties and add them to the sessionValues object
-                            for (var key in jsonData) {
-                                if (jsonData.hasOwnProperty(key)) {
-                                    var sessionName = key + "Extraversion";
-                                    var sessionValue = jsonData[key];
-
-                                    // Store the value in the sessionValues object
+                            // Assuming you want to store session values here
+                            for (var key in pythonData) {
+                                if (pythonData.hasOwnProperty(key)) {
+                                    var sessionName = key + 'Agreeableness'; // Modify this as needed
+                                    var sessionValue = pythonData[key];
                                     sessionValues[sessionName] = sessionValue;
-
-                                    // Log the session data
-                                    console.log("Appear?")
-                                    console.log("Session? " + sessionName + ":", sessionValue);
                                 }
                             }
 
-                            // Make an AJAX request to set all session values at once
-                            $.ajax({
-                                type: "POST",
-                                url: '/set-session-values',
-                                data: sessionValues, // Send all session values in one go
-                                headers: {
-                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                },
-                                
-                                success: function (sessionResponse) {
-                                    // Handle success response if needed
-                                    console.log('Session values set successfully.');
-                                },
-                                error: function (xhr, status, error) {
-                                    // Handle error response if needed
-                                    console.error('Error setting session values:', error);
-                                }
-                            });
-
-                            // You can update your HTML elements with the data
+                            // You can also update HTML elements with the data here
                             // Example: document.getElementById('result').textContent = pythonData.someValue;
-
-                            // Now 'pythonData' is accessible outside the AJAX request
-                            // You can use it in other parts of your JavaScript code
                         } else {
-                            console.error('Invalid response from server');
+                            console.error('Invalid response from the server');
                         }
                     },
                     error: function (xhr, status, error) {
-                        // Handle errors (if needed)
                         console.error('Error:', error);
                     }
                 });
+
+                // The loop for printing session values is inside the event listener
+                console.log('Session Values:');
+                for (var key in sessionValues) {
+                    if (sessionValues.hasOwnProperty(key)) {
+                        console.log(key + ':', sessionValues[key]);
+                    }
+                }
             });
 
-            // Declare and use additional JavaScript variables here
             var additionalVariable = 'This is an additional variable';
             console.log('Additional Variable:', additionalVariable);
             console.log('pythonData outside of the event listener:', pythonData);
         });
 
-        // You can use 'pythonData' outside of the event listener as well
-        console.log('pythonData outside of the event listener:', pythonData);
+        // You can't access sessionValues here, as it's declared within the event listener scope.
 
 
     </script>

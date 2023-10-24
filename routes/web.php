@@ -6,8 +6,8 @@ use App\Http\Controllers\pyController;
 use App\Http\Controllers\ValidationMinatController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\resultController;
-
-
+use App\Http\Controllers\banksoalvalidasikepribadianController;
+use App\Http\Controllers\APIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -213,6 +213,11 @@ Route::get('/process-video', function () {
     return view('beforetest');
 });
 
+Route::post('/processAllvideo', [VideoController::class, 'processAllVideo']);
+Route::get('/processAllvideo', function () {
+    return view('testvalidation1');
+});
+
 // Define a POST route for setting session values
 Route::post('/set-session-values', [VideoController::class, 'setSessionValues']);
 Route::get('/set-session-values', function () {
@@ -291,4 +296,41 @@ Route::post('/store-skor-in-sessionVideo', function (Request $request) {
 Route::get('/store-skor-in-sessionVideo', function () {
     return view('testvalidation2');
 });
+
+
+Route::get('/execute-python', function () {
+    return view('dd');
+})->name('dd');
+
+Route::post('/execute-python', [VideoController::class, 'executePython'])->name('execute.python');
+
+
+Route::post('/save-screenshot', [resultController::class,'save']);
+Route::get('/imgToPdf', [resultController::class,'imgToPdf']);
+Route::get('/convert-image-to-pdf', [resultController::class,'convertImageToPdf'])->name('convert.image');;
+
+Route::get('/generate-pdf',[resultController::class,'generatePDFfromBlade'])->name('/generate-pdf');
+
+// Testing Bank Soal
+Route::resource('questions', 'banksoalvalidasikepribadianController');
+Route::get('/insert-question', [banksoalvalidasikepribadianController::class,'index'])->name('insert-question');
+
+Route::post('/store-question', [banksoalvalidasikepribadianController::class,'store'])->name('store-question');
+
+Route::delete('/lol', [banksoalvalidasikepribadianController::class, 'destroy'])->name('delete-question');
+
+Route::post('/upload-csv', [banksoalvalidasikepribadianController::class,'importCSV'])->name('/upload-csv');
+
+// // Testing bank Soal
+
+// API Routes
+
+Route::get('/api/signin', [APIController::class,'signInAPI'])->name('apiName/signin');
+Route::post('/filter-audio', [APIController::class, 'signInAndFilterAudio'])->name('filter-audio');
+Route::post('/upload-audio', [APIController::class, 'addAudio'])->name('upload-audio');
+
+
+// // API Routes
+
+
 

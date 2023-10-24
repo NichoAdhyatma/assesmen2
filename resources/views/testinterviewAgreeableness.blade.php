@@ -11,6 +11,7 @@
     <meta name="author" content="Bucky Maler">
     <link rel="stylesheet" href="assets/css/main.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
         .intro {
@@ -34,6 +35,7 @@
             margin: 0 auto;
             align-items: center;
         }
+        
 
         @media (max-width: 1180px) {
             .intro {
@@ -191,47 +193,46 @@
     </div>
 
     <div class="contact--lockup">
-        <div id="video-container-" style="height:100%; width:100%; padding-top:150px">
+        <div id="video-container-" style="height:100%; width:100%; padding-top:75px">
 
-        @php
-            $videoDir = public_path('assets/video/Agreeableness'); // Specify the path to your video folder.
-            $videoFiles = glob($videoDir . '/*.mp4'); // Get all .mp4 files in the folder.
+            @php
+                $videoDir = public_path('assets/video/Agreeableness'); // Specify the path to your video folder.
+                $videoFiles = glob($videoDir . '/*.mp4'); // Get all .mp4 files in the folder.
 
-            if (count($videoFiles) > 0) {
-                $randomVideo = basename($videoFiles[array_rand($videoFiles)]); // Select a random video file name.
-            } else {
-                $randomVideo = ''; // No videos found in the folder.
-            }
-        @endphp
+                if (count($videoFiles) > 0) {
+                    $randomVideo = basename($videoFiles[array_rand($videoFiles)]); // Select a random video file name.
+                } else {
+                    $randomVideo = ''; // No videos found in the folder.
+                }
+            @endphp
 
-        <video id="main-video" controls autoplay style="width: 100%; height: 65vh;">
-            <source src="{{ asset('assets/video/Agreeableness/' . $randomVideo) }}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+            <video id="main-video" controls style="width: 100%; height: 65vh;">
+                <source src="{{ asset('assets/video/Agreeableness/' . $randomVideo) }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
 
-            <h1> Webcam Anda </h1>
-            <p style="padding-top:20px">Mulai tes dengan menekan tombol start record, dan sudahi dengan menekan tombol stop recording.<br> Setelah menyelesaikan sesi recording harap menekan tombol process video</span></p>
+            <p style="padding-top:20px">Mulai tes dengan menekan tombol start record, <br>Akhiri dengan menekan tombol stop recording.<br> Setelah menyelesaikan sesi recording harap melanjutkan ke tes berikutnya</span></p>
+
+            <button onclick="startRecording()" id="startRecordButton" class="testButton">
+                <i class="fas fa-microphone"></i> Start Record
+            </button>
+            <button id="stopRecordButton" class="testButton" style="margin-bottom: 20px;" disabled>
+                <i class="fas fa-stop"></i> Stop
+            </button>
+            <h3> Webcam Anda </h3>
 
             <div class="col-12 col-md-6">
                 <video autoplay="true" id="your-video-id"  autoplay width="100%" height="300px">
                     Izinkan Penggunaan Kamera.
                 </video>
             </div>
-            
-            <div class="col-12 col-md-6 ">
-                <button onclick="startRecording()" id="startRecordButton">Start Record</button>
-                <button id="stopRecordButton" disabled>Stop</button>
-            </div>
 
             <a href="{{ route('testinterviewOpenness') }}" class="special-link-button">
                 <button id="nextButton" class="testButton" disabled>Lanjut ke tes berikutnya</button>
             </a>
 
-            <a href="{{ route('testinterviewOpenness') }}" class="special-link-button">
-                <button id="skipButton" class="testButton">Skip</button>
-            </a>
             <br>
-            <button id="processVideoButton">Process Video</button>
+            <button id="processVideoButton"  style="display: none;">Process Video</button>
 
         </div>
     </div>

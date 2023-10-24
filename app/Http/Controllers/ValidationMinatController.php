@@ -7,12 +7,16 @@ use Illuminate\Support\Facades\Session;
 use App\Models\penilaian;
 use App\Models\Users;
 
-
+use Illuminate\Support\Facades\View;
+use League\Csv\Reader;
 
 
 
 class ValidationMinatController extends Controller
 {
+
+    
+
     public function gotoValidation(Request $request)
     {
         // Retrieve the data that you want to store in the session

@@ -3,46 +3,38 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Users;
-use PDF; // Import the PDF facade
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+// use Dompdf\Dompdf;
+// use Dompdf\Options;
+use PDF;
+use Barryvdh\Snappy\Facades\SnappyPdf;
+
+
 
 class resultController extends Controller
 {
     // use PDF;
     public function generatePDF(Request $request)
     {
-        set_time_limit(360);
-        // Get the HTML content from the AJAX request
+        set_time_limit(300);
         $htmlContent = $request->input('htmlContent');
 
-        // Generate PDF from the HTML content
-        $customPageSize = 'A3'; // You can also specify dimensions like '8.5in x 11in'
+        $customPageSize = 'A3'; // You can specify other page sizes
 
-        // Generate PDF from the HTML content with custom page size
-        $pdf = PDF::loadHTML($htmlContent)->setPaper($customPageSize);
+        $pdf = SnappyPdf::loadHTML($htmlContent)
+            ->setOption('page-size', $customPageSize);
 
-        // Specify the subdirectory where you want to save the PDF
-        $subdirectory = 'pdf/';
+        // Specify the filename for the generated PDF
+        $filename = 'pdf/generated_pdf_' . date('Y-m-d-H-i-s') . '.pdf';
 
-        // Generate a unique filename for the PDF
-        $filename = $subdirectory . 'example.pdf';
-
-        // Save the PDF to the public/pdf subdirectory
+        // Save the PDF to a directory
         $pdf->save(public_path($filename));
-
-        // Create a response to serve the saved PDF for download
-        $filename = 'generated_pdf_' . time() . '.pdf';
-
-        // Set the headers to force a download
-        $headers = [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
-        ];
-
-        // Output the PDF content directly to the browser
-        return response($pdf->output(), 200, $headers);
+        return response()->json(['success' => 'PDF generated and ready for download', 'filename' => $filename]);
+        // Optionally, you can return the PDF as a response for download:
+        // return response()->download(public_path($filename));
     }
 
 
@@ -73,5 +65,79 @@ class resultController extends Controller
             abort(404);
         }
     }
+
+
+    public function save(Request $request) {
+        $imgData = $request->input('imageData');
+        
+        $img = str_replace('data:image/png;base64,', '', $imgData);
+        $img = base64_decode($img);
+        
+        $fileName = 'screenshot.png'; // You can define a custom name or use a timestamp.
+        $filePath = public_path($fileName);
+    
+        file_put_contents($filePath, $img);
+        
+        // Create a PDF from the image
+        $pdf = PDF::loadView('pdf.image_to_pdf', ['imagePath' => $filePath]);
+        
+        return $pdf->stream('screenshot.pdf');
+    }
+
+
+    public function convertImageToPdf()
+    {
+
+        $imgData = file_get_contents(public_path('screenshot.png'));
+        $img = str_replace('data:image/png;base64,', '', $imgData);
+        $img = base64_decode($img);
+
+        // dd($imgData);
+
+        PDF::loadHTML('<img src="data:image/png;base64,' . base64_encode($img) . '">')->setPaper('a4')->save(public_path('ss.pdf'));
+        return response()->json(['message' => 'berhasil']);
+
+        
+        ini_set('memory_limit', '256M');
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+
+        $dompdf = new Dompdf($options);
+
+        // Load HTML content with an embedded image
+        $imagePath = public_path('screenshot.png'); // Change to lowercase 'png'
+        $imageData = base64_encode(file_get_contents($imagePath));
+        $imageSrc = 'data:image/png;base64,' . $imageData;
+
+        $html = '<img src="' . $imageSrc . '">';
+
+        $dompdf->loadHtml($html);
+
+        // Set paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $dompdf->render();
+
+        // Save the PDF to the public directory
+        $pdfOutput = $dompdf->output();
+        $pdfPath = public_path('output.pdf');
+        file_put_contents($pdfPath, $pdfOutput);
+
+        // If you want to return the PDF as a download response
+        return response()->download($pdfPath, 'output.pdf');
+    }
+
+    public function generatePDFfromBlade()
+    {
+    	$pdf = PDF::loadView('pdf.image_to_pdf', [
+    		'title' => 'codesolutionstuff.com Laravel Pdf with Image Example',
+    		'description' => 'This is an example Laravel pdf with Image tutorial.',
+    		'footer' => 'by <a href="https://www.codesolutionstuff.com/">codesolutionstuff.com</a>'
+    	]);
+    
+        return $pdf->download('sample-with-image.pdf');
+    }
+
 
 }

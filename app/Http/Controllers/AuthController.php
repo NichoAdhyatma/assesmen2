@@ -60,7 +60,7 @@ class AuthController extends Controller
             
             if ($createMember) {
                 // echo '<script>alert("Sign Up berhasil! Silakan login.");</script>';
-                echo '<script>window.location.href = "'.route('consent').'";</script>';
+                echo '<script>window.location.href = "'.route('login').'";</script>';
             } else {
                 return dd($data);
                 // echo '<script>alert("Sign Up Failed.");</script>';

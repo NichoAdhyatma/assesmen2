@@ -524,105 +524,135 @@
             const submitButton = document.getElementById('submit-button');
             
             submitButton.addEventListener('click', function (event) {
+
+                
+
                 // Prevent the default form submission behavior
                 event.preventDefault();
-                console.log(sessionData);
-                const rawScore = parseInt(calculateRawScore(), 10);
 
-                // Assuming 'skor' is already defined, add the parsed rawScore to it
-                const skorValidasiCognitif = (parseInt(rawScore, 10) * 1) + skor;
-
-                // $skor_validasi_cognitif = skorValidasiCognitif;
-                // dd($skor_validasi_cognitif);
-                console.log($skor_validasi_cognitif);
+                var sessionValues = {};
                 
-
-                //Tabel Penilaian
-                // ID Penilaian = autoIncrement
-                // ID User
-                $userid = sessionData.user_id;
-                // Tanggal Penilaian = CurrentDate
-
-                // Struktur Tele-assesmen interview (Kepribadian,Bakat,Minat) (14data dipisah koma) per  atribut
-                
-                // Sentimen Positif Facial
-                $f_sentimen_positif = sessionData.positive_scoreExtraversion + "," + sessionData.positive_scoreConscientiousness + "," + sessionData.positive_scoreAgreeableness + "," + sessionData.positive_scoreOpenness + "," + sessionData.positive_scoreNeuroticism + "," + sessionData.positive_scoreRealistic + "," + sessionData.positive_scoreInvestigative + "," + sessionData.positive_scoreArtistic + "," + sessionData.positive_scoreSocial + "," + sessionData.positive_scoreEnterprising + "," + sessionData.positive_scoreConventional + "," + sessionData.positive_scorePerseptual + "," + sessionData.positive_scorePsikomotor + "," + sessionData.positive_scoreIntelektual;
-                // $f_sentimen_positif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // Sentimen Netral Facial
-                $f_sentimen_netral = sessionData.neutral_scoreExtraversion + "," + sessionData.neutral_scoreConscientiousness + "," + sessionData.neutral_scoreAgreeableness + "," + sessionData.neutral_scoreOpenness + "," + sessionData.neutral_scoreNeuroticism + "," + sessionData.neutral_scoreRealistic + "," + sessionData.neutral_scoreInvestigative + "," + sessionData.neutral_scoreArtistic + "," + sessionData.neutral_scoreSocial + "," + sessionData.neutral_scoreEnterprising + "," + sessionData.neutral_scoreConventional + "," + sessionData.neutral_scorePerseptual + "," + sessionData.neutral_scorePsikomotor + "," + sessionData.neutral_scoreIntelektual;
-                // $f_sentimen_netral = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // Sentimen Negatif Facial
-                $f_sentimen_negatif = sessionData.negative_scoreExtraversion + "," + sessionData.negative_scoreConscientiousness + "," + sessionData.negative_scoreAgreeableness + "," + sessionData.negative_scoreOpenness + "," + sessionData.negative_scoreNeuroticism + "," + sessionData.negative_scoreRealistic + "," + sessionData.negative_scoreInvestigative + "," + sessionData.negative_scoreArtistic + "," + sessionData.negative_scoreSocial + "," + sessionData.negative_scoreEnterprising + "," + sessionData.negative_scoreConventional + "," + sessionData.negative_scorePerseptual + "," + sessionData.negative_scorePsikomotor + "," + sessionData.negative_scoreIntelektual;
-                // $f_sentimen_negatif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // Sentimen Positif Voice
-                $v_sentimen_positif = sessionData.posExtraversion + "," + sessionData.posConscientiousness + "," + sessionData.posAgreeableness + "," + sessionData.posOpenness + "," + sessionData.posNeuroticism + "," + sessionData.posRealistic + "," + sessionData.posInvestigative + "," + sessionData.posArtistic + "," + sessionData.posSocial + "," + sessionData.posEnterprising + "," + sessionData.posConventional + "," + sessionData.posPerseptual + "," + sessionData.posPsikomotor + "," + sessionData.posIntelektual;
-                // $v_sentimen_positif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // Sentimen Netral Voice
-                $v_sentimen_netral = sessionData.neuExtraversion + "," + sessionData.neuConscientiousness + "," + sessionData.neuAgreeableness + "," + sessionData.neuOpenness + "," + sessionData.neuNeuroticism + "," + sessionData.neuRealistic + "," + sessionData.neuInvestigative + "," + sessionData.neuArtistic + "," + sessionData.neuSocial + "," + sessionData.neuEnterprising + "," + sessionData.neuConventional + "," + sessionData.neuPerseptual + "," + sessionData.neuPsikomotor + "," + sessionData.neuIntelektual;
-                // $v_sentimen_netral = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // Sentimen Negatif voice
-                $v_sentimen_negatif = sessionData.negExtraversion + "," + sessionData.negConscientiousness + "," + sessionData.negAgreeableness + "," + sessionData.negOpenness + "," + sessionData.negNeuroticism + "," + sessionData.negRealistic + "," + sessionData.negInvestigative + "," + sessionData.negArtistic + "," + sessionData.negSocial + "," + sessionData.negEnterprising + "," + sessionData.negConventional + "," + sessionData.negPerseptual + "," + sessionData.negPsikomotor + "," + sessionData.negIntelektual;
-                // $v_sentimen_negatif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // Validation Score
-                $validation_score = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + sessionData.resultPer + ","+ sessionData.resultPsi + ","+ sessionData.resultInt ;
-                // $validation_score = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // %Kepercayaan
-                $kepercayaan = trustExtraversion + "," + trustConscientiousness + "," + trustAgreeableness + "," + trustOpenness + "," + trustNeuroticism + "," + trustRealistic + "," + trustInvestigative + "," + trustArtistic + "," + trustSocial + "," + trustEnterprising + "," + trustConventional + "," + trustPerseptual + "," + trustPsikomotor + "," + trustIntelektual;
-                // $kepercayaan = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-
-                // [Untuk tes cognitive video]
-                // RawScore(9Data Dipisah Koma)
-                $skor_validasi = sessionData.skorVideo; 
-                // Validasi bakat minat kepribadian
-                // RawScore(14 Data dipisah koma)
-                $skor_validasi_kepribadianbakatminat = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + sessionData.resultPer + ","+ sessionData.resultPsi + ","+ sessionData.resultInt ;
-                // Validasi Cognitive
-                // Raw Score(9Data dipisah koma) -> 9 Penilaian jadikan 1 data hingga berikut
-                $skor_validasi_cognitif = skorValidasiCognitif;
-                // $skor_validasi_cognitif = calculateScore();
-                //const csrfToken = $('meta[name="csrf-token"]').attr('content');
-
                 $.ajax({
                     type: "POST",
-                    url: '{{route('postPenilaian') }}',
+                    url: '/processAllvideo',
                     data: {
-                        // Your request data goes here
-                        id_user: sessionData.user_id,
-                        f_sentimen_positif: $f_sentimen_positif,
-                        f_sentimen_netral: $f_sentimen_netral,
-                        f_sentimen_negatif: $f_sentimen_negatif,
-                        v_sentimen_positif: $v_sentimen_positif,
-                        v_sentimen_netral: $v_sentimen_netral,
-                        v_sentimen_negatif: $v_sentimen_negatif,
-                        skor_validasi: $validation_score,
-                        kepercayaan: $kepercayaan,
-                        cognitive_video_score: $skor_validasi,
-                        skor_validasi_kepribadianbakatminat: $skor_validasi_kepribadianbakatminat,
-                        skor_validasi_cognitif: $skor_validasi_cognitif,
-
-
-                        // ...
+                        skorValidasiCognitif: skorValidasiCognitif
                     },
-                    headers: {
-                        // Set the CSRF token in the request header
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    timeout: 1800000, // 30 minutes in milliseconds (30 * 60 * 1000)
+                    success: function (response) {
+                        // Handle the response from the server
                     },
-                    success: function(response) {
-
-                        console.log("YEEE")
-                    },
-                    error: function(xhr, status, error) {
-                        console.log("Fail")
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
                     }
                 });
+
+                //     // The loop for printing session values is inside the event listener
+                //     console.log('Session Values:');
+                //     for (var key in sessionValues) {
+                //         if (sessionValues.hasOwnProperty(key)) {
+                //             console.log(key + ':', sessionValues[key]);
+                //         }
+                //     }
+
+                // var sessionData = @json(session()->all());
+                // console.log(sessionData);
+                // const rawScore = parseInt(calculateRawScore(), 10);
+
+                // // Assuming 'skor' is already defined, add the parsed rawScore to it
+                // const skorValidasiCognitif = (parseInt(rawScore, 10) * 1) + skor;
+
+                // // $skor_validasi_cognitif = skorValidasiCognitif;
+                // // dd($skor_validasi_cognitif);
+                // console.log($skor_validasi_cognitif);
+                
+
+                // //Tabel Penilaian
+                // // ID Penilaian = autoIncrement
+                // // ID User
+                // $userid = sessionData.user_id;
+                // // Tanggal Penilaian = CurrentDate
+
+                // // Struktur Tele-assesmen interview (Kepribadian,Bakat,Minat) (14data dipisah koma) per  atribut
+                
+                // // Sentimen Positif Facial
+                // $f_sentimen_positif = sessionData.positive_scoreExtraversion + "," + sessionData.positive_scoreConscientiousness + "," + sessionData.positive_scoreAgreeableness + "," + sessionData.positive_scoreOpenness + "," + sessionData.positive_scoreNeuroticism + "," + sessionData.positive_scoreRealistic + "," + sessionData.positive_scoreInvestigative + "," + sessionData.positive_scoreArtistic + "," + sessionData.positive_scoreSocial + "," + sessionData.positive_scoreEnterprising + "," + sessionData.positive_scoreConventional + "," + sessionData.positive_scorePerseptual + "," + sessionData.positive_scorePsikomotor + "," + sessionData.positive_scoreIntelektual;
+                // // $f_sentimen_positif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
+
+                // // Sentimen Netral Facial
+                // $f_sentimen_netral = sessionData.neutral_scoreExtraversion + "," + sessionData.neutral_scoreConscientiousness + "," + sessionData.neutral_scoreAgreeableness + "," + sessionData.neutral_scoreOpenness + "," + sessionData.neutral_scoreNeuroticism + "," + sessionData.neutral_scoreRealistic + "," + sessionData.neutral_scoreInvestigative + "," + sessionData.neutral_scoreArtistic + "," + sessionData.neutral_scoreSocial + "," + sessionData.neutral_scoreEnterprising + "," + sessionData.neutral_scoreConventional + "," + sessionData.neutral_scorePerseptual + "," + sessionData.neutral_scorePsikomotor + "," + sessionData.neutral_scoreIntelektual;
+                // // $f_sentimen_netral = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
+
+                // // Sentimen Negatif Facial
+                // $f_sentimen_negatif = sessionData.negative_scoreExtraversion + "," + sessionData.negative_scoreConscientiousness + "," + sessionData.negative_scoreAgreeableness + "," + sessionData.negative_scoreOpenness + "," + sessionData.negative_scoreNeuroticism + "," + sessionData.negative_scoreRealistic + "," + sessionData.negative_scoreInvestigative + "," + sessionData.negative_scoreArtistic + "," + sessionData.negative_scoreSocial + "," + sessionData.negative_scoreEnterprising + "," + sessionData.negative_scoreConventional + "," + sessionData.negative_scorePerseptual + "," + sessionData.negative_scorePsikomotor + "," + sessionData.negative_scoreIntelektual;
+                // // $f_sentimen_negatif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
+
+                // // Sentimen Positif Voice
+                // $v_sentimen_positif = sessionData.posExtraversion + "," + sessionData.posConscientiousness + "," + sessionData.posAgreeableness + "," + sessionData.posOpenness + "," + sessionData.posNeuroticism + "," + sessionData.posRealistic + "," + sessionData.posInvestigative + "," + sessionData.posArtistic + "," + sessionData.posSocial + "," + sessionData.posEnterprising + "," + sessionData.posConventional + "," + sessionData.posPerseptual + "," + sessionData.posPsikomotor + "," + sessionData.posIntelektual;
+                // // $v_sentimen_positif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
+
+                // // Sentimen Netral Voice
+                // $v_sentimen_netral = sessionData.neuExtraversion + "," + sessionData.neuConscientiousness + "," + sessionData.neuAgreeableness + "," + sessionData.neuOpenness + "," + sessionData.neuNeuroticism + "," + sessionData.neuRealistic + "," + sessionData.neuInvestigative + "," + sessionData.neuArtistic + "," + sessionData.neuSocial + "," + sessionData.neuEnterprising + "," + sessionData.neuConventional + "," + sessionData.neuPerseptual + "," + sessionData.neuPsikomotor + "," + sessionData.neuIntelektual;
+                // // $v_sentimen_netral = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
+
+                // // Sentimen Negatif voice
+                // $v_sentimen_negatif = sessionData.negExtraversion + "," + sessionData.negConscientiousness + "," + sessionData.negAgreeableness + "," + sessionData.negOpenness + "," + sessionData.negNeuroticism + "," + sessionData.negRealistic + "," + sessionData.negInvestigative + "," + sessionData.negArtistic + "," + sessionData.negSocial + "," + sessionData.negEnterprising + "," + sessionData.negConventional + "," + sessionData.negPerseptual + "," + sessionData.negPsikomotor + "," + sessionData.negIntelektual;
+                // // $v_sentimen_negatif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
+
+                // // Validation Score
+                // $validation_score = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + sessionData.resultPer + ","+ sessionData.resultPsi + ","+ sessionData.resultInt ;
+                // // $validation_score = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
+
+                // // %Kepercayaan
+                // $kepercayaan = trustExtraversion + "," + trustConscientiousness + "," + trustAgreeableness + "," + trustOpenness + "," + trustNeuroticism + "," + trustRealistic + "," + trustInvestigative + "," + trustArtistic + "," + trustSocial + "," + trustEnterprising + "," + trustConventional + "," + trustPerseptual + "," + trustPsikomotor + "," + trustIntelektual;
+                // // $kepercayaan = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
+
+
+                // // [Untuk tes cognitive video]
+                // // RawScore(9Data Dipisah Koma)
+                // $skor_validasi = sessionData.skorVideo; 
+                // // Validasi bakat minat kepribadian
+                // // RawScore(14 Data dipisah koma)
+                // $skor_validasi_kepribadianbakatminat = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + sessionData.resultPer + ","+ sessionData.resultPsi + ","+ sessionData.resultInt ;
+                // // Validasi Cognitive
+                // // Raw Score(9Data dipisah koma) -> 9 Penilaian jadikan 1 data hingga berikut
+                // $skor_validasi_cognitif = skorValidasiCognitif;
+                // // $skor_validasi_cognitif = calculateScore();
+                // //const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                // $.ajax({
+                //     type: "POST",
+                //     url: '{{route('postPenilaian') }}',
+                //     data: {
+                //         // Your request data goes here
+                //         id_user: sessionData.user_id,
+                //         f_sentimen_positif: $f_sentimen_positif,
+                //         f_sentimen_netral: $f_sentimen_netral,
+                //         f_sentimen_negatif: $f_sentimen_negatif,
+                //         v_sentimen_positif: $v_sentimen_positif,
+                //         v_sentimen_netral: $v_sentimen_netral,
+                //         v_sentimen_negatif: $v_sentimen_negatif,
+                //         skor_validasi: $validation_score,
+                //         kepercayaan: $kepercayaan,
+                //         cognitive_video_score: $skor_validasi,
+                //         skor_validasi_kepribadianbakatminat: $skor_validasi_kepribadianbakatminat,
+                //         skor_validasi_cognitif: $skor_validasi_cognitif,
+
+
+                //         // ...
+                //     },
+                //     headers: {
+                //         // Set the CSRF token in the request header
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //     },
+                //     success: function(response) {
+
+                //         console.log("YEEE")
+                //     },
+                //     error: function(xhr, status, error) {
+                //         console.log("Fail")
+                //     }
+                // });
 
                
 

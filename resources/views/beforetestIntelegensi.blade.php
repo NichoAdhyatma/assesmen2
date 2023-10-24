@@ -173,7 +173,7 @@
 
             <h1> Webcam Anda <h1>
             <video id="webcam" autoplay style=""></video>
-            <a href="{{ route('testinterview') }}" class="special-link-button">
+            <a href="{{ route('dd') }}" class="special-link-button">
                 <button class="testButton">Mulai Test</button>
             </a>
             <!-- <div>

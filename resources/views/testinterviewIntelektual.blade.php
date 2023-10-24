@@ -11,6 +11,7 @@
     <meta name="author" content="Bucky Maler">
     <link rel="stylesheet" href="assets/css/main.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <style>
         .intro {
@@ -204,34 +205,33 @@
             }
         @endphp
 
-        <video id="main-video" controls autoplay style="width: 100%; height: 65vh;">
+        <video id="main-video" controls  style="width: 100%; height: 65vh;">
             <source src="{{ asset('assets/video/Intelektual/' . $randomVideo) }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
-            <h1> Webcam Anda </h1>
-            <p style="padding-top:20px">Mulai tes dengan menekan tombol start record, dan sudahi dengan menekan tombol stop recording.<br> Setelah menyelesaikan sesi recording harap menekan tombol process video</span></p>
+        <p style="padding-top:20px">Mulai tes dengan menekan tombol start record, <br>Akhiri dengan menekan tombol stop recording.<br> Setelah menyelesaikan sesi recording harap melanjutkan ke tes berikutnya</span></p>
 
-            <div class="col-12 col-md-6">
-                <video autoplay="true" id="your-video-id"  autoplay width="100%" height="300px">
-                    Izinkan Penggunaan Kamera.
-                </video>
-            </div>
-            
-            <div class="col-12 col-md-6 ">
-                <button onclick="startRecording()" id="startRecordButton">Start Record</button>
-                <button id="stopRecordButton" disabled>Stop</button>
-            </div>
+        <button onclick="startRecording()" id="startRecordButton" class="testButton">
+            <i class="fas fa-microphone"></i> Start Record
+        </button>
+        <button id="stopRecordButton" class="testButton" style="margin-bottom: 20px;" disabled>
+            <i class="fas fa-stop"></i> Stop
+        </button>
+        <h3> Webcam Anda </h3>
+
+        <div class="col-12 col-md-6">
+            <video autoplay="true" id="your-video-id"  autoplay width="100%" height="300px">
+                Izinkan Penggunaan Kamera.
+            </video>
+        </div>
 
             <a href="{{ route('testInt') }}" class="special-link-button">
                 <button id="nextButton" class="testButton" disabled>Lanjut ke tes berikutnya</button>
             </a>
 
-            <a href="{{ route('testInt') }}" class="special-link-button">
-                <button id="skipButton" class="testButton">Skip</button>
-            </a>
             <br>
-            <button id="processVideoButton">Process Video</button>
+            <button id="processVideoButton"  style="display: none;">Process Video</button>
 
         </div>
     </div>

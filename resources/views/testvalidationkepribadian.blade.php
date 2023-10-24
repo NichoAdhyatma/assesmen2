@@ -44,7 +44,7 @@
         .answer-form {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: left;
         }
 
         .answer-button {
