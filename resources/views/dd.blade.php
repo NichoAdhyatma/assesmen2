@@ -214,12 +214,12 @@
             Your browser does not support the video tag.
         </video>
 
-            <p style="padding-top:20px">Mulai tes dengan menekan tombol start record, <br>Akhiri dengan menekan tombol stop recording.<br> Setelah menyelesaikan sesi recording harap melanjutkan ke tes berikutnya</span></p>
+            <!-- <p style="padding-top:20px">Mulai tes dengan menekan tombol start record, <br>Akhiri dengan menekan tombol stop recording.<br> Setelah menyelesaikan sesi recording harap melanjutkan ke tes berikutnya</span></p> -->
 
             
             <form method="POST" action="{{ route('execute.python') }}">
                 @csrf
-                <button type="submit">Execute Python</button>
+                <button type="submit">Mulai Tes</button>
             </form>
 
 

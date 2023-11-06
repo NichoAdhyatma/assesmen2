@@ -211,13 +211,13 @@
                 Your browser does not support the video tag.
             </video>
 
-            <p style="padding-top:20px">Mulai tes dengan menekan tombol start record, <br>Akhiri dengan menekan tombol stop recording.<br> Setelah menyelesaikan sesi recording harap melanjutkan ke tes berikutnya</span></p>
+            <p style="padding-top:20px">Mulai tes dengan menekan tombol Mulai Rekam, <br>Akhiri dengan menekan tombol Berhenti.<br> Setelah menyelesaikan sesi recording harap melanjutkan ke tes berikutnya</span></p>
 
             <button onclick="startRecording()" id="startRecordButton" class="testButton">
-                <i class="fas fa-microphone"></i> Start Record
+                <i class="fas fa-microphone"></i> Mulai Rekam
             </button>
             <button id="stopRecordButton" class="testButton" style="margin-bottom: 20px;" disabled>
-                <i class="fas fa-stop"></i> Stop
+                <i class="fas fa-stop"></i> Berhenti
             </button>
             <h3> Webcam Anda </h3>
 

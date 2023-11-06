@@ -75,13 +75,14 @@ class resultController extends Controller
         
         $fileName = 'screenshot.png'; // You can define a custom name or use a timestamp.
         $filePath = public_path($fileName);
-    
+
+        if (file_exists($filePath)) {
+            unlink($filePath); // Delete the existing file if it exists.
+        }
+
         file_put_contents($filePath, $img);
         
-        // Create a PDF from the image
-        $pdf = PDF::loadView('pdf.image_to_pdf', ['imagePath' => $filePath]);
-        
-        return $pdf->stream('screenshot.pdf');
+        return response()->download($filePath, 'screenshot.png', ['Content-Type' => 'image/png']);
     }
 
 

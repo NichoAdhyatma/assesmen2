@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 use App\Models\penilaian;
+use GuzzleHttp\Client;
 
 class VideoController extends Controller
 {
+
     public function saveRecordedVideo(Request $request)
     {
-        set_time_limit(360);
+        set_time_limit(720);
         // Validate and store the uploaded video in the public/videos folder
         $video = $request->file('recorded_video');
         $directoryIndex = $request->input('recordCounter');
@@ -33,7 +35,7 @@ class VideoController extends Controller
 
         // Initialize video number to 1
         $videoNumber = 1;
-        // $currentDateTime = date('Y-m-d:H-i-s');
+        $currentDateTime = date('Y-m-d_H-i-s');
         $outputVideoPath = $userVideoDirectory . '/video' . $videoNumber . '.mp4';
 
         // Find the next available video number
@@ -41,7 +43,8 @@ class VideoController extends Controller
             $videoNumber++;
             $outputVideoPath = $userVideoDirectory . '/video' . $videoNumber . '.mp4';
         }
-
+        // $outputVideoPath = $userVideoDirectory . '/video' . $videoNumber . '.mp4';
+        
         // Execute FFmpeg command to create output files with a specific duration
         $ffmpegCommand = "ffmpeg -i $video -c:v copy -c:a aac -strict experimental -b:a 192k $outputVideoPath";
         exec($ffmpegCommand);
@@ -63,6 +66,48 @@ class VideoController extends Controller
         $ffmpegAudioCommand = "ffmpeg -i $outputVideoPath -vn -acodec pcm_s16le -ar 44100 -ac 2 $outputAudioPath";
         exec($ffmpegAudioCommand);
 
+        // Upload audio to beo API
+        $client = new Client();
+        $accessToken = $this->signInAPI();
+        $audioName = $firstPersonality . '_' . $userId . '_' . $videoNumber;
+
+        try {
+            $response = $client->request('POST', 'https://backend.beo.inergi.id/recordadd', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $accessToken,
+                ],
+                'multipart' => [
+                    [
+                        'name' => 'type',
+                        'contents' => 'upload', 
+                    ],
+                    [
+                        'name' => 'name',
+                        'contents' => $audioName,
+                    ],
+                    [
+                        'name' => 'description',
+                        'contents' => ' ', // Optional: Adjust based on your needs
+                    ],
+                    [
+                        'name' => 'audio',
+                        'contents' => fopen($outputAudioPath, 'r'),
+                    ],
+                    [
+                        'name' => 'num_speakers',
+                        'contents' => '0',
+                    ],
+                    [
+                        'name' => 'noise_cancel',
+                        'contents' => 'false',
+                    ],
+                ]
+            ]);
+
+        } catch (\Exception $e) {
+
+            return $e;
+        }
         // Return a response to indicate success
         return response()->json(['message' => 'Video and audio saved successfully']);
     }
@@ -122,28 +167,19 @@ class VideoController extends Controller
         $results = [];
         $varCheck = [];
         foreach ($personalityList as $personality) {
-            // Get a list of video files in the user's directory for the current personality
+
             $videoFiles = Storage::disk('public')->files('videos' . DIRECTORY_SEPARATOR . $userId . DIRECTORY_SEPARATOR . $personality);
-         
-            // Select a video file to process (you can implement your logic to choose one)
-            // For example, you can select the first video file in the list
             $videoFile = end($videoFiles); // Change this to your logic
-        
-            // Construct the full path to the selected video file
             $videoFilePath = $userVideoDirectory . DIRECTORY_SEPARATOR . $personality . DIRECTORY_SEPARATOR . basename($videoFile);
-        
-            // Call the function to process the selected video
             $pythonData = $this->processVideoWithPython($videoFilePath);
-            // dd($pythonData);
-            // Modify the keys and values as needed and set them as sessions
             $decodedData = json_decode($pythonData, true); // Decode the JSON string into an array
            
             if (is_array($decodedData)) {
                 foreach ($decodedData as $key => $value) {
-                    // Modify the key (e.g., append the personality name)
+
                     $sessionName = $key . $personality;
                     array_push($varCheck, $sessionName);
-                    // Set the session with the modified name and the value
+
                     session([$sessionName => $value]);
                 }
             } 
@@ -151,25 +187,11 @@ class VideoController extends Controller
             // Store the result in the results array
             $results[$personality] = $pythonData;
 
-            // gabung di sini
-            // $userid = session('user_id');
-            // Tanggal Penilaian = CurrentDate
-            // ...
 
-            // Additional code for Sentimen Positif Facial, Sentimen Netral Facial, etc.
-            // $allSessionData = session()->all();
-    
-            // $filteredSessionData = array_filter($allSessionData, function ($key) {
-            //     return strpos($key, 'neutral') !== false;
-            // }, ARRAY_FILTER_USE_KEY);
+            // Disini kita perlu add ngambil voice recording dengan filter string
+            $filterString = $personality . '_' . $userID;
+            $resultAudio = $this->getRecordingData($filterString);
 
-            // dd($filteredSessionData);
-            
-            
-            
-            // ... Repeat the same for other variables
-
-            // postPenilaian
         }
         $f_sentimen_positif = session('positive_scoreExtraversion') . "," . session('positive_scoreConscientiousness') . "," . session('positive_scoreAgreeableness') . "," . session('positive_scoreOpenness') . "," . session('positive_scoreNeuroticism') . "," . session('positive_scoreRealistic') . "," . session('positive_scoreInvestigative') . "," . session('positive_scoreArtistic') . "," . session('positive_scoreSocial') . "," . session('positive_scoreEnterprising') . "," . session('positive_scoreConventional') . "," . session('positive_scorePerseptual') . "," . session('positive_scorePsikomotor') . "," . session('positive_scoreIntelektual');
         $f_sentimen_negatif = session('positive_scoreExtraversion') . "," . session('positive_scoreConscientiousness') . "," . session('positive_scoreAgreeableness') . "," . session('positive_scoreOpenness') . "," . session('positive_scoreNeuroticism') . "," . session('positive_scoreRealistic') . "," . session('positive_scoreInvestigative') . "," . session('positive_scoreArtistic') . "," . session('positive_scoreSocial') . "," . session('positive_scoreEnterprising') . "," . session('positive_scoreConventional') . "," . session('positive_scorePerseptual') . "," . session('positive_scorePsikomotor') . "," . session('positive_scoreIntelektual');
@@ -299,4 +321,134 @@ class VideoController extends Controller
         return view('testvalidationkepribadian', ['output' => $output]);
     }
 
+
+
+
+    // Fungsi Dari API Controller
+    public function signInAPI()
+    {
+        $client = new Client();
+
+        try {
+            $response = $client->request('POST', 'https://backend.beo.inergi.id/signin', [
+                'multipart' => [
+                    [
+                        'name' => 'email',
+                        'contents' => 'maxy@email.com'
+                    ],
+                    [
+                        'name' => 'password',
+                        'contents' => '123456'
+                    ]
+                ]
+            ]);
+
+            $responseBody = $response->getBody();
+            $data = json_decode($responseBody);
+
+            if (isset($data->access_token)) {
+                $accessToken = $data->access_token;
+                // $audioList = $this->getListOfAudio($accessToken);
+                return $data->access_token;
+                // dd($audioList);
+                // You can use the $accessToken in your application or return it as a response.
+            } else {
+                // Handle the case where the access token is not present in the response.
+                dd('fail');
+            }
+
+        } catch (\Exception $e) {
+            // Handle exceptions (e.g., network errors or API failures).
+        }
+
+        // You can return a view or response here if needed.
+    }
+    public function getListOfAudio($accessToken)
+    {
+        $client = new Client();
+
+        try {
+            $response = $client->request('POST', 'https://backend.beo.inergi.id/recordlist', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $accessToken,
+                ],
+                'form_params' => [
+                    // 'limit' => 5,    // Optional: Adjust based on your needs
+                    // 'search' => 'Audio', // Optional: Adjust based on your needs
+                    // 'status' => '',  // Optional: Adjust based on your needs
+                ]
+            ]);
+
+            $responseBody = $response->getBody();
+            $data = json_decode($responseBody);
+            return json_decode($responseBody, true);
+            // dd($data);
+            // Handle the response data as needed.
+            
+            return $data;
+        } catch (\Exception $e) {
+            // Handle exceptions (e.g., network errors or API failures).
+        }
+    }
+    public function signInAndFilterAudioForRecording($filterString)
+    {
+        // Obtain the JWT access token
+        $accessToken = $this->signInAPI();
+
+        if (!$accessToken) {
+            // Handle the case where access token could not be obtained.
+        }
+
+        // Get the list of audio and filter by name
+        $audioList = $this->getListOfAudio($accessToken);
+
+        // Get the filter string from the request
+        $search = $filterString;
+        $filteredAudio = collect($audioList['arr_record'])->filter(function ($audio) use ($search) {
+            return str_contains($audio['name'], $search);
+        });
+
+        // You can now work with the filtered audio data.
+        return $filteredAudio;
+    }
+    public function getRecordingData($filterString)
+    {
+        $accessToken = $this->signInAPI();
+        // $filterString = $filterString;
+        $audioList = $this->signInAndFilterAudioForRecording($filterString);
+        if ($audioList->isEmpty()) {
+            // Handle the case where the filtered list is empty (no matching audio files).
+        } else {
+            // Get the last audio entry from the filtered list
+            $lastAudio = $audioList->last();
+    
+            // Retrieve the 'id' of the last audio entry
+            $lastAudioId = $lastAudio['id'];
+    
+            // dd($lastAudioId);
+            $client = new Client();
+
+            try {
+                $response = $client->request('POST', 'https://backend.beo.inergi.id/recordget', [
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . $accessToken,
+                    ],
+                    'form_params' => [
+                        'record_id' => $lastAudioId,    // Optional: Adjust based on your needs
+                    ]
+                ]);
+
+                $responseBody = $response->getBody();
+                $data = json_decode($responseBody);
+                $arrRecord = $data->record;
+                $speakerList = $arrRecord->speaker_list;
+                $sentimentScore = $speakerList[0]->sentiment_score;
+                // return json_decode($responseBody, true);
+                return $sentimentScore;
+            } catch (\Exception $e) {
+                // Handle exceptions (e.g., network errors or API failures).
+            }
+        }
+
+    }
 }

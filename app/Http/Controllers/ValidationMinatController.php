@@ -17,7 +17,7 @@ class ValidationMinatController extends Controller
 
     
 
-    public function gotoValidation(Request $request)
+    public function gotoValidationKepribadian(Request $request)
     {
         // Retrieve the data that you want to store in the session
         $resultR = $request->input('resultR');
@@ -41,7 +41,7 @@ class ValidationMinatController extends Controller
         //return response()->json(['redirect' => route('testvalidation')]);
     }
     
-    public function gotoValidationbakatminat(Request $request)
+    public function gotoValidationMinat(Request $request)
     {
         // Retrieve the data that you want to store in the session
         $resultEmotionalStability = $request->input('resultEmotionalStability');

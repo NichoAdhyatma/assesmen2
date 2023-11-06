@@ -134,7 +134,7 @@
     </style>
 </head>
 <body>
-    <h1> BANK SOAL </h1>
+    <h1> Bank Soal Kepribadian, Bakat, &  Minat</h1>
     <!-- <div class="dataTables_filter">
         <label for="search">Search: </label>
         <input type="search" class="form-control" id="search" placeholder="Search...">
@@ -182,7 +182,15 @@
            
         </tbody>
     </table>
-
+    <br>
+    <form action="/generate-csv" method="GET">
+        <button type="submit">Generate CSV</button>
+    </form>
+    <br>
+    <form method="GET" action="{{ route('get-data') }}">
+        @csrf
+        <button type="submit" class="btn btn-primary">Get Data</button>
+    </form>
     <br>
     <div class="tabs-container">
         <button class="tab-button" onclick="showTab(1)">Add Question</button>
@@ -246,7 +254,31 @@
 
         <div class="form-group">
             <label for="tipe">Tipe</label>
-            <input type="text" id="tipe" name="tipe" class="form-control" required>
+            <select id="tipe" name="tipe" class="form-control" required>
+                <optgroup label="Kepribadian">
+                    <option value="Extraversion">Extraversion</option>
+                    <option value="Conscientiousness">Conscientiousness</option>
+                    <option value="Agreeableness">Agreeableness</option>
+                    <option value="Openness">Openness</option>
+                    <option value="Neuroticism">Neuroticism</option>
+                </optgroup>
+
+                <optgroup label="Minat">
+                    <option value="Realistic">Realistic</option>
+                    <option value="Investigative">Investigative</option>
+                    <option value="Artistic">Artistic</option>
+                    <option value="Social">Social</option>
+                    <option value="Enterprising">Enterprising</option>
+                    <option value="Conventional">Conventional</option>
+                </optgroup>
+
+                <optgroup label="Bakat">
+                    <option value="Perseptual">Perseptual</option>
+                    <option value="Psikomotor">Psikomotor</option>
+                    <option value="Intelektual">Intelektual</option>
+                </optgroup>
+            </select>
+
         </div>
 
         <button type="submit" class="btn btn-primary">Create Question</button>
@@ -290,7 +322,13 @@
 
     <br>
     <button id="signInButton">Sign In</button>
-    <button id="filterButton">Filter Audio</button>
+    <form id="filterForm">
+        @csrf
+        <input type="text" id="filterString" name="filterString" placeholder="Enter filter string">
+        <button id="filterButton" type="button">Filter Audio</button>
+        <button id="getRecordingDataButton" type="button">Get Recording Data</button>
+    </form>
+
     <button id="uploadButton">Upload Audio</button>
 </body>
 <script>
@@ -352,12 +390,17 @@
 </script>
 <script>
     document.getElementById('filterButton').addEventListener('click', function () {
+        // Get the filter string from the input field
+        const filterString = document.getElementById('filterString').value;
+
         // Make an AJAX request to the route that triggers signInAndFilterAudio.
         fetch("{{ route('filter-audio') }}", {
             method: 'POST',
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Content-Type': 'application/json',
             },
+            body: JSON.stringify({ filterString: filterString }), // Send the filter string in the request body
         })
         .then(response => response.json())
         .then(data => {
@@ -378,6 +421,31 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response data here.
+            console.log(data);
+        })
+        .catch(error => {
+            // Handle errors here.
+            console.error(error);
+        });
+    });
+</script>
+<script>
+    document.getElementById('getRecordingDataButton').addEventListener('click', function () {
+        // Get the filter string from the input field
+        const filterString = document.getElementById('filterString').value;
+
+        // Make an AJAX request to the route that triggers getRecordingData.
+        fetch("{{ route('get-audio') }}", {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ filterString: filterString }), // Send the filter string in the request body
         })
         .then(response => response.json())
         .then(data => {

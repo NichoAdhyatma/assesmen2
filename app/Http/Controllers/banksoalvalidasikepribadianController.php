@@ -123,5 +123,50 @@ class banksoalvalidasikepribadianController extends Controller
         // }
     }
 
+    public function getAllData(Request $request){
+        $data = banksoalvalidasikepribadian::all();
+        return view('testvalidationkepribadian', compact('data'));
+    }
 
+    public function writeCSV() {
+        // Data to be written to the CSV file
+        $data = banksoalvalidasikepribadian::all();
+    
+        // File path where you want to save the CSV file
+        $filePath = public_path('testcsv.csv');
+    
+        // Open the CSV file for writing
+        $file = fopen($filePath, 'w');
+    
+        // Write the CSV header
+        fputcsv($file, ['id', 'Question', 'Answer1', 'Answer2', 'Answer3', 'Answer4', 'Answer5', 'Value1', 'Value2', 'Value3', 'Value4', 'Value5', 'Type', 'updated_at', 'created_at']);
+    
+        // Write the data to the CSV file
+        foreach ($data as $item) {
+            $row = [
+                $item->id_Soal,
+                $item->pertanyaan,
+                $item->jawaban1,
+                $item->jawaban2,
+                $item->jawaban3,
+                $item->jawaban4,
+                $item->jawaban5,
+                $item->value1,
+                $item->value2,
+                $item->value3,
+                $item->value4,
+                $item->value5,
+                $item->tipe,
+                $item->updated_at,
+                $item->created_at
+            ];
+            fputcsv($file, $row);
+        }
+    
+        // Close the file
+        fclose($file);
+    
+        return "CSV file created successfully!";
+    }
+    
 }

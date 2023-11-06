@@ -1,0 +1,12 @@
+id,Question,Answer1,Answer2,Answer3,Answer4,Answer5,Value1,Value2,Value3,Value4,Value5,Type,updated_at,created_at
+1,Pertanyaan?,"Sangat Tidak Setuju","Tidak Setuju",Netral,Setuju,"Sangat Setuju",1,2,3,4,5,tipe1,"2023-10-20 14:28:58","2023-10-20 14:28:58"
+2,fw,"Sangat Tidak Setuju","Tidak Setuju",Netral,Setuju,"Sangat Setuju",1,2,3,4,5,tipe2,"2023-10-20 07:57:10","2023-10-20 07:57:10"
+3,fw,"Sangat Tidak Setuju","Tidak Setuju",Netral,Setuju,"Sangat Setuju",1,2,3,4,5,tipe2,"2023-10-20 08:28:02","2023-10-20 08:28:02"
+4,fw,"Sangat Tidak Setuju","Tidak Setuju",Netral,Setuju,"Sangat Setuju",1,2,3,4,5,tipe2,"2023-10-20 08:29:50","2023-10-20 08:29:50"
+6,wwwwwwww,"Sangat Tidak Setuju","Tidak Setuju",Netral,Setuju,"Sangat Setuju",2,4,6,8,10,tipe3,"2023-10-20 08:35:04","2023-10-20 08:35:04"
+10,WAW,"Sangat Tidak Setuju","Tidak Setuju",Netral,Setuju,"Sangat Setuju",1,2,3,4,5,TipeX,"2023-10-24 09:47:19","2023-10-24 09:47:19"
+11,Aaw,NO,no,maybe,yes,YES,1,2,3,4,5,tipe1,"2023-10-24 10:58:24","2023-10-24 10:58:24"
+12,AWW,NO,no,maybe,yes,YES,1,2,3,4,5,tipe2,"2023-10-24 10:58:24","2023-10-24 10:58:24"
+13,Aaw,NO,no,maybe,yes,YES,1,2,3,4,5,tipe1,"2023-10-24 11:29:25","2023-10-24 11:29:25"
+14,AWW,NO,no,maybe,yes,YES,1,2,3,4,5,tipe2,"2023-10-24 11:29:25","2023-10-24 11:29:25"
+15,"Bisa Jadi","Sangat Tidak Setuju","Tidak Setuju",Netral,Setuju,"Sangat Setuju",1,2,3,4,5,tipe2,"2023-10-30 11:23:56","2023-10-30 11:23:56"

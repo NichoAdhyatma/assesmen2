@@ -133,18 +133,22 @@ audio_res = voice_sentiment()
 # print(audio_res)
 video_prediction_df = face_sentiment(video_name)
 negative_score, positive_score, neutral_score, trust_score = resultcalc(video_prediction_df)
+negative_score = round(negative_score, 3)
+positive_score = round(positive_score, 3)
+neutral_score = round(neutral_score, 3)
+trust_score = round(trust_score, 3)
+
 # # print(negative_score)
 import json
 output_data = {
-    "neg": audio_res.get('neg', 0.0),
-    "neu": audio_res.get('neu', 0.0),
-    "pos": audio_res.get('pos', 0.0),
-    "compound": audio_res.get('compound', 0.0),
+    "neg": round(audio_res.get('neg', 0.0), 3),
+    "neu": round(audio_res.get('neu', 0.0), 3),
+    "pos": round(audio_res.get('pos', 0.0), 3),
+    "compound": round(audio_res.get('compound', 0.0), 3),
     "negative_score": negative_score,
     "positive_score": positive_score,
     "neutral_score": neutral_score,
-    "trust":trust_score,
-
+    "trust": trust_score
 }
 output_json = json.dumps(output_data)
 

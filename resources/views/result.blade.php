@@ -5,7 +5,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
 <style>
-        body {
+        html,body {
             font-family: 'Montserrat', sans-serif;
             background-color: #12486B;
         }
@@ -137,9 +137,11 @@
                 <a href="{{ route('download-pdf') }}" class="btn btn-primary">Download PDF</a>
             </div>
             <div>
-                <button id="captureAndConvert">CAP</button>
+                <button id="captureAndConvert">Capture as Image</button>
                 <a href="{{ route('convert.image') }}" class="btn btn-primary">Convert Image to PDF</a>
+                
             </div>
+
         </div>
 
         <table class="table-info">
@@ -1105,10 +1107,19 @@
                     body: formData
                 }).then(response => {
                     if (response.ok) {
-                        // Handle success, e.g., show a success message
+                        return response.blob();
                     } else {
                         // Handle errors, e.g., show an error message
                     }
+                }).then(blob => {
+                    // Create a download link for the saved file
+                    var url = window.URL.createObjectURL(blob);
+                    var a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'screenshot.png'; // Specify the file name
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
                 });
             });
         });

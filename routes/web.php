@@ -7,6 +7,8 @@ use App\Http\Controllers\ValidationMinatController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\resultController;
 use App\Http\Controllers\banksoalvalidasikepribadianController;
+use App\Http\Controllers\bankSoalValidasiCognitiveController;
+use App\Http\Controllers\bankSoalDDController;
 use App\Http\Controllers\APIController;
 
 /*
@@ -24,36 +26,37 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Login dan Signup
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+Route::post('/signup', [AuthController::class, 'postSignUp'])->name('postSignUp');
+Route::post('/signin', [AuthController::class, 'postSignIn'])->name('postSignIn');
+
+
 Route::get('/consent', function () {
     return view('consent');
 })->name('consent');
 
 
-// Route::get('/signin', 'AuthController@show')->name('signUp');
-
-Route::post('/signup', [AuthController::class, 'postSignUp'])->name('postSignUp');
-Route::post('/signin', [AuthController::class, 'postSignIn'])->name('postSignIn');
-
-
-Route::post('/gotoValidation', [ValidationMinatController::class, 'gotoValidation']);
+Route::post('/gotoValidation', [ValidationMinatController::class, 'gotoValidationKepribadian']);
 Route::get('/gotoValidation', function () {
     return view('testvalidation');
 });
-
-Route::post('/gotoValidationbakatminat', [ValidationMinatController::class, 'gotoValidationbakatminat']);
+Route::post('/gotoValidationbakatminat', [ValidationMinatController::class, 'gotoValidationMinat']);
 Route::get('/gotoValidationbakatminat', function () {
     return view('testvalidationbakatminat');
 });
-
 Route::post('/gotoValidationBakat', [ValidationMinatController::class, 'gotoValidationBakat']);
 Route::get('/gotoValidationBakat', function () {
     return view('testvalidationBakat');
 });
-
 Route::post('/postPenilaian', [ValidationMinatController::class, 'postPenilaian'])->name('postPenilaian');
 Route::get('/postPenilaian', function () {
     return view('beforeresult');
 });
+
+
 
 Route::get('/signup', function () {
     return view('consent');
@@ -70,15 +73,10 @@ Route::get('/testInt', function () {
     return view('beforetestIntelegensi');
 })->name('testInt');
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
 
-// Route::get('/testlogin', function () {
-//     return view('testlogin');
-// })->name('testlogin');
 
-// Rute Untuk Test Video/Teleassesment Urutuan Interview -> BakatMinat -> Cognitive
+
+// Rute Untuk Test Video Teleassesment 
 Route::get('/testinterview', function () {
     return view('testinterview');
 })->name('testinterview');
@@ -140,22 +138,10 @@ Route::get('/testinterviewIntelektual', function () {
 })->name('testinterviewIntelektual');
 
 
-
-
-Route::get('/testcognitive', function () {
-    return view('testcognitive');
-})->name('testcognitive');
-
-Route::get('/testbakatminat', function () {
-    return view('testbakatminat');
-})->name('testbakatminat');
-
-
 // Rute untuk Test Validation Tertulis Pilgan Urutan Kepribadian(1) -> BakatMinat -> Validation/Intelegensi
 Route::get('/testvalidation', function () {
     return view('testvalidation');
 })->name('testvalidation');
-
 
 Route::get('/testvalidation1', function () {
     return view('testvalidation1');
@@ -181,6 +167,8 @@ Route::get('/testvalidation2Susah', function () {
     return view('testvalidation2Susah');
 })->name('testvalidation2Susah');
 
+
+// 
 Route::get('/testvalidationkepribadian', function () {
     return view('testvalidationkepribadian');
 })->name('testvalidationkepribadian');
@@ -314,23 +302,35 @@ Route::get('/generate-pdf',[resultController::class,'generatePDFfromBlade'])->na
 // Testing Bank Soal
 Route::resource('questions', 'banksoalvalidasikepribadianController');
 Route::get('/insert-question', [banksoalvalidasikepribadianController::class,'index'])->name('insert-question');
-
 Route::post('/store-question', [banksoalvalidasikepribadianController::class,'store'])->name('store-question');
-
 Route::delete('/lol', [banksoalvalidasikepribadianController::class, 'destroy'])->name('delete-question');
-
 Route::post('/upload-csv', [banksoalvalidasikepribadianController::class,'importCSV'])->name('/upload-csv');
+// (Sementara Didalam Bank Soal) buat test upload ke csv
+Route::get('/generate-csv', [banksoalvalidasikepribadianController::class,'writeCSV'])->name('/generate-csv');
 
-// // Testing bank Soal
+
+// Testing Bank Soal Cognitive
+Route::get('/insert-question-cognitive', [bankSoalValidasiCognitiveController::class,'index'])->name('insert-question-cognitive');
+Route::post('/store-question-cognitive', [bankSoalValidasiCognitiveController::class,'store'])->name('store-question-cognitive');
+Route::delete('/lol-cognitive', [bankSoalValidasiCognitiveController::class, 'destroy'])->name('delete-question-cognitive');
+Route::post('/upload-csv-cognitive', [bankSoalValidasiCognitiveController::class,'importCSV'])->name('/upload-csv-cognitive');
+
+
+// Testing Bank Soal DD
+Route::get('/insert-question-DD', [bankSoalDDController::class,'index'])->name('insert-question-DD');
+// Route::post('/store-question-DD', [bankSoalDDController::class,'store'])->name('store-question-DD');
+// Route::delete('/lol-DD', [bankSoalDDController::class, 'destroy'])->name('delete-question-DD');
+// Route::post('/upload-csv-DD', [bankSoalDDController::class,'importCSV'])->name('/upload-csv-DD');
+
+
 
 // API Routes
-
 Route::get('/api/signin', [APIController::class,'signInAPI'])->name('apiName/signin');
 Route::post('/filter-audio', [APIController::class, 'signInAndFilterAudio'])->name('filter-audio');
 Route::post('/upload-audio', [APIController::class, 'addAudio'])->name('upload-audio');
+Route::post('/get-audio', [APIController::class, 'getRecordingData'])->name('get-audio');
 
 
-// // API Routes
-
-
+// Untuk data dari Bank Soal untuk Validasi Kepribadian Bakat Minat
+Route::get('/test-get-data', [banksoalvalidasikepribadianController::class, 'getAllData'])->name('get-data'); // Name it 'get-data'
 

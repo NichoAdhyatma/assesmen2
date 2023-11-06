@@ -256,108 +256,33 @@
 <body>
     <div class="container">
         <ol id="question-list">
-            <li class="question">
-                <h1>Question:</h1>
-                <div class="question-image-container">
-                    <img src="assets/questionimg/question1.png" alt="Question 1" class="image">
-                </div>
+        @php
+            $questionCounter = 0;
+        @endphp
+
+        @foreach ($data as $modelInstance)
+            @php
+            $questionCounter++;
+            @endphp
+            <li class="question" data-tipe="{{ $modelInstance->tipe }}">
+                <h1>{{ $modelInstance->pertanyaan }}</h1>
                 <div class="answer-form">
                     <form class="answer-form">
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="Option A">
-                            <img src="assets/answerimg/q1a.png" alt="Option A" class="answerimage">
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="Option B">
-                            <img src="assets/answerimg/q1b.png" alt="Option B" class="answerimage">
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="Option C">
-                            <img src="assets/answerimg/q1c.png" alt="Option C" class="answerimage">
-                        </label>
-                        <label class="radio-label" data-correct="true">
-                            <input type="radio" class="radio-input" name="answer1" value="Option D">
-                            <img src="assets/answerimg/q1d.png" alt="Option D" class="answerimage">
-                        </label>
+                        @for ($i = 1; $i <= 5; $i++)
+                            @php
+                            $answerAttribute = "jawaban" . $i;
+                            $valueAttribute = "value" . $i;
+                            @endphp
+                            <label class="radio-label">
+                                <input type="radio" class="radio-input" name="question_{{ $questionCounter }}" value="{{ $modelInstance->$valueAttribute }}" data-question="{{ $modelInstance->pertanyaan }}">
+                                {{ $modelInstance->$answerAttribute }}
+                            </label>
+                        @endfor
                     </form>
                 </div>
             </li>
-            <li class="question">
-                <h1>Question:</h1>
-                <p>Select the correct answer:</p>
-                <div class="answer-form">
-                    <form class="answer-form">
-                        <label class="radio-label" data-correct="true">
-                            <input type="radio" class="radio-input" name="answer2" value="Option Correct">
-                            Option Correct
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer2" value="Option Wrong 1">
-                            Option Wrong A
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer2" value="Option Wrong 2">
-                            Option Wrong B
-                        </label>
-                    </form>
-                </div>
-            </li>
-            <li class="question">
-                <h1>Question:</h1>
-                <div class="question-image-container">
-                    <img src="assets/questionimg/question2.png" alt="Question 2" class="image">
-                </div>
-                <div class="answer-form">
-                    <form class="answer-form">
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="Option A">
-                            <img src="assets/answerimg/q2a.png" alt="Option A" class="answerimage">
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="Option B">
-                            <img src="assets/answerimg/q2b.png" alt="Option B" class="answerimage">
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="Option C">
-                            <img src="assets/answerimg/q2c.png" alt="Option C" class="answerimage">
-                        </label>
-                        <label class="radio-label" data-correct="true">
-                            <input type="radio" class="radio-input" name="answer1" value="Option D">
-                            <img src="assets/answerimg/q2d.png" alt="Option D" class="answerimage">
-                        </label>
-                    </form>
-                </div>
-            </li>
-            <li class="question">
-                <h1>Question:</h1>
-                <div class="question-image-container">
-                    <img src="assets/questionimg/question3.png" alt="Question 3" class="image">
-                </div>
-                <div class="answer-form">
-                    <form class="answer-form">
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="Option A">
-                            <img src="assets/answerimg/q3a.png" alt="Option A" class="answerimage">
-                        </label>
-                        <label class="radio-label"  data-correct="true">
-                            <input type="radio" class="radio-input" name="answer1" value="Option B">
-                            <img src="assets/answerimg/q3b.png" alt="Option B" class="answerimage">
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="Option C">
-                            <img src="assets/answerimg/q3c.png" alt="Option C" class="answerimage">
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" class="radio-input" name="answer1" value="Option D">
-                            <img src="assets/answerimg/q3d.png" alt="Option D" class="answerimage">
-                        </label>
-                    </form>
-                </div>
-            </li>
-            
-            <!-- Repeat the above <li> block for each question -->
-        </ol>
-        
+        @endforeach
+        </ol>      
     </div>
     <button class="prev-button">Previous Question</button>
     <button class="next-button">Next Question</button>
@@ -372,7 +297,9 @@
             </select>
         </div>
     </div>
-    <button class="calculate-score-button">Calculate Score</button>
+    
+    <button class="calculate-score-button" id="calculate-score">Calculate Score</button>
+
     
 
     <!-- <div class="dropdown">
@@ -577,7 +504,24 @@
 
         const calculateScoreButton = document.querySelector('.calculate-score-button');
 
-        calculateScoreButton.addEventListener('click', calculateScore);
+        document.getElementById('calculate-score').addEventListener('click', function () {
+            const scores = {};
+
+            document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
+                const questionName = input.getAttribute('name');
+                const tipe = input.closest('.question').getAttribute('data-tipe');
+                const score = parseInt(input.value) || 0;
+
+                if (!scores[tipe]) {
+                    scores[tipe] = 0;
+                }
+
+                scores[tipe] += score;
+            });
+
+            console.log(scores);
+        });
+
 
         // Script to make a button that is disabled until every questions are answered
         // Get the submit button element
@@ -619,4 +563,28 @@
 
 
     </script>
+<script>
+    const questionData = [];
+
+    // Add event listeners to radio inputs
+    document.querySelectorAll('.radio-input').forEach((input, index) => {
+        input.addEventListener('change', (event) => {
+            const question = event.target.getAttribute('data-question'); // Get the question from data attribute
+            const score = event.target.value;
+
+            // Update or add the selected answer in the questionData array
+            const existingQuestionIndex = questionData.findIndex(item => item.Question === question);
+            if (existingQuestionIndex !== -1) {
+                questionData[existingQuestionIndex].Score = score;
+            } else {
+                questionData.push({ Question: question, Score: score });
+            }
+
+            // Log the updated data (you can send it to the server as needed)
+            console.log(questionData);
+        });
+    });
+</script>
+
+
 

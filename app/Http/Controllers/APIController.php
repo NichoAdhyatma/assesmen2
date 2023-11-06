@@ -59,7 +59,8 @@ class APIController extends Controller
             'Extraversion', 'Conscientiousness', 'Agreeableness', 'Openness', 'Neuroticism', 'Realistic', 'Investigative', 'Artistic', 'Social', 'Enterprising', 'Conventional', 'Perseptual', 'Psikomotor', 'Intelektual',
         ];
         $firstPersonality = $personalityList[0]; // Assuming you want the first personality.
-        $userId = 11;
+        // $userId = 11;
+        $userId = session('user_id');
         // Build the file path based on the user's ID and the first personality.
         $audioFilePath = public_path('audios/' . $userId . '/' . $firstPersonality);
         $audioFiles = glob($audioFilePath . '/*.wav'); // Adjust the file extension as needed.
@@ -190,12 +191,80 @@ class APIController extends Controller
 
         // Get the list of audio and filter by name
         $audioList = $this->getListOfAudio($accessToken);
-        dd($audioList);
-        $filteredAudio = collect($audioList['arr_record'])->filter(function ($audio) {
-            return $audio['name'] === 'sample_audio'; // Replace 'test' with the name you're looking for.
+
+        // Get the filter string from the request
+        $filterString = $request->input('filterString');
+
+        $filteredAudio = collect($audioList['arr_record'])->filter(function ($audio) use ($filterString) {
+            return str_contains($audio['name'], $filterString);
         });
-        dd($filteredAudio);
+
         // You can now work with the filtered audio data.
         return response()->json(['filtered_audio' => $filteredAudio]);
+    }
+
+    public function signInAndFilterAudioForRecording($filterString)
+    {
+        // Obtain the JWT access token
+        $accessToken = $this->signInAPI();
+
+        if (!$accessToken) {
+            // Handle the case where access token could not be obtained.
+        }
+
+        // Get the list of audio and filter by name
+        $audioList = $this->getListOfAudio($accessToken);
+
+        // Get the filter string from the request
+        $search = $filterString;
+        $filteredAudio = collect($audioList['arr_record'])->filter(function ($audio) use ($search) {
+            return str_contains($audio['name'], $search);
+        });
+
+        // You can now work with the filtered audio data.
+        return $filteredAudio;
+    }
+
+
+    public function getRecordingData(Request $request)
+    {
+        $accessToken = $this->signInAPI();
+        $filterString = $request->input('filterString');
+        $audioList = $this->signInAndFilterAudioForRecording($filterString);
+        if ($audioList->isEmpty()) {
+            // Handle the case where the filtered list is empty (no matching audio files).
+        } else {
+            // Get the last audio entry from the filtered list
+            $lastAudio = $audioList->last();
+    
+            // Retrieve the 'id' of the last audio entry
+            $lastAudioId = $lastAudio['id'];
+    
+            // dd($lastAudioId);
+            $client = new Client();
+
+            try {
+                $response = $client->request('POST', 'https://backend.beo.inergi.id/recordget', [
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . $accessToken,
+                    ],
+                    'form_params' => [
+                        'record_id' => $lastAudioId,    // Optional: Adjust based on your needs
+                    ]
+                ]);
+
+                $responseBody = $response->getBody();
+                $data = json_decode($responseBody);
+                $arrRecord = $data->record;
+                $speakerList = $arrRecord->speaker_list;
+                $sentimentScore = $speakerList[0]->sentiment_score;
+                // dd($sentimentScore);
+                // return json_decode($responseBody, true);
+                return $sentimentScore;
+            } catch (\Exception $e) {
+                // Handle exceptions (e.g., network errors or API failures).
+            }
+        }
+
     }
 }
