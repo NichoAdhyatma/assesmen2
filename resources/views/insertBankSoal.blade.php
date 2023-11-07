@@ -183,6 +183,8 @@
         </tbody>
     </table>
     <br>
+    <a href="{{ route('export-csv') }}" class="btn btn-primary">Export CSV</a>
+    <br>
     <form action="/generate-csv" method="GET">
         <button type="submit">Generate CSV</button>
     </form>

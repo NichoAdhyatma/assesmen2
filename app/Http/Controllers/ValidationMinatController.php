@@ -173,4 +173,51 @@ class ValidationMinatController extends Controller
         //dd($data[0]->id_penilaian);
         return view('result', ['data' => $data[0], 'dataUser' => $dataUser[0]]);
     }
+    
+    public function appendToCSV(Request $request)
+    {
+        // Get the question data from the request
+        $questionData = $request->input('questionData');
+
+        // Define the "id_user" and "Time" values
+        $id_user = session('user_id');; // Set the user ID
+        $time = session('waktuTes'); // Set the current date in the desired format, e.g., "23 Nov"
+
+        // Initialize an associative array to store scores for each question
+        $scoreData = [
+            'id_user' => $id_user,
+            'Time' => $time,
+        ];
+
+        // Extract and add the scores for each question, with the question text as headers
+        foreach ($questionData as $index => $question) {
+            $scoreData[$question['Question']] = $question['Score'];
+        }
+
+        // Define the path to the CSV file
+        $csvFilePath = public_path('csv/csvKep/csvKep.csv');
+
+        // Check if the CSV file already exists and if not, create it with headers
+        if (!file_exists($csvFilePath)) {
+            $headers = array_keys($scoreData);
+
+            // Open the CSV file for writing and add headers
+            $csvFile = fopen($csvFilePath, 'w');
+            fputcsv($csvFile, $headers);
+        } else {
+            // Open the CSV file for appending
+            $csvFile = fopen($csvFilePath, 'a');
+        }
+
+        // Write the row with scores to the CSV file
+        fputcsv($csvFile, $scoreData);
+
+        // Close the CSV file
+        fclose($csvFile);
+
+        return response()->json(['message' => 'Data appended to CSV successfully']);
+    }
+
+
+
 }

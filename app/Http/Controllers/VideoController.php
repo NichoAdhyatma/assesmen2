@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Session;
 use App\Models\penilaian;
 use GuzzleHttp\Client;
 
+use App\Models\banksoalvalidasikepribadian;
+
+
 class VideoController extends Controller
 {
 
@@ -189,8 +192,10 @@ class VideoController extends Controller
 
 
             // Disini kita perlu add ngambil voice recording dengan filter string
-            $filterString = $personality . '_' . $userID;
-            $resultAudio = $this->getRecordingData($filterString);
+            // $filterString = $personality . '_' . $userId;
+            // $resultAudio = $this->getRecordingData($filterString);
+            // $sessionNameAudio = 'voice' . $personality;
+            // session([$sessionNameAudio => $resultAudio]);
 
         }
         $f_sentimen_positif = session('positive_scoreExtraversion') . "," . session('positive_scoreConscientiousness') . "," . session('positive_scoreAgreeableness') . "," . session('positive_scoreOpenness') . "," . session('positive_scoreNeuroticism') . "," . session('positive_scoreRealistic') . "," . session('positive_scoreInvestigative') . "," . session('positive_scoreArtistic') . "," . session('positive_scoreSocial') . "," . session('positive_scoreEnterprising') . "," . session('positive_scoreConventional') . "," . session('positive_scorePerseptual') . "," . session('positive_scorePsikomotor') . "," . session('positive_scoreIntelektual');
@@ -318,7 +323,8 @@ class VideoController extends Controller
         // Save the score in a session variable
         Session::put('skorVideo', $score);
 
-        return view('testvalidationkepribadian', ['output' => $output]);
+        $data = banksoalvalidasikepribadian::all();
+        return view('testvalidationkepribadian', compact('data'));
     }
 
 
@@ -449,6 +455,6 @@ class VideoController extends Controller
                 // Handle exceptions (e.g., network errors or API failures).
             }
         }
-
+        
     }
 }

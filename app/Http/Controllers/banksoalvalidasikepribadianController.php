@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\banksoalvalidasikepribadian;
+use Illuminate\Support\Facades\Response;
 
 
 class banksoalvalidasikepribadianController extends Controller
@@ -168,5 +169,60 @@ class banksoalvalidasikepribadianController extends Controller
     
         return "CSV file created successfully!";
     }
+
+    public function exportToCSV()
+{
+    // Sample data
+    $data = [
+        ['question3' => 'Answer5', 'question1' => 'Answer6'],
+        ['question2' => 'Answer2', 'question3' => 'Answer3'],
+        ['question1' => 'Answer1', 'question2' => 'Answer4'],
+        ['question1' => 'SWASW', 'question2' => 'WESWS'],
+    ];
+
+    // Define all possible questions
+    $allQuestions = ['question1', 'question2', 'question3'];
+
+    // Create an array to store the CSV data
+    $csvData = [];
+
+    // Add the header row
+    $headerRow = [];
+    foreach ($allQuestions as $question) {
+        $headerRow[] = $question;
+    }
+    $csvData[] = $headerRow;
+
+    // Process the data and add to CSV
+    foreach ($data as $row) {
+        $rowData = [];
+        foreach ($allQuestions as $question) {
+            if (isset($row[$question])) {
+                $rowData[] = $row[$question];
+            } else {
+                $rowData[] = -1;
+            }
+        }
+        $csvData[] = $rowData;
+    }
+
+    // Create a temporary file to store the CSV
+    $tempFile = tempnam(sys_get_temp_dir(), 'csv');
+    $csvFile = fopen($tempFile, 'w');
+
+    foreach ($csvData as $row) {
+        fputcsv($csvFile, $row, ',');
+    }
+
+    fclose($csvFile);
+
+    // Prepare the CSV response
+    $csvFileName = "yourfile.csv";
+    $response = Response::download($tempFile, $csvFileName, [
+        'Content-Type' => 'text/csv',
+    ]);
+
+    return $response;
+}
     
 }

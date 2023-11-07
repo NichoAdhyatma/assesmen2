@@ -38,7 +38,7 @@ Route::get('/consent', function () {
     return view('consent');
 })->name('consent');
 
-
+// Rute untuk upload nilai dari validation kepribadian bakat minat menjadi session
 Route::post('/gotoValidation', [ValidationMinatController::class, 'gotoValidationKepribadian']);
 Route::get('/gotoValidation', function () {
     return view('testvalidation');
@@ -51,6 +51,8 @@ Route::post('/gotoValidationBakat', [ValidationMinatController::class, 'gotoVali
 Route::get('/gotoValidationBakat', function () {
     return view('testvalidationBakat');
 });
+
+// Rute untuk menggabung nilai dan 
 Route::post('/postPenilaian', [ValidationMinatController::class, 'postPenilaian'])->name('postPenilaian');
 Route::get('/postPenilaian', function () {
     return view('beforeresult');
@@ -307,6 +309,8 @@ Route::delete('/lol', [banksoalvalidasikepribadianController::class, 'destroy'])
 Route::post('/upload-csv', [banksoalvalidasikepribadianController::class,'importCSV'])->name('/upload-csv');
 // (Sementara Didalam Bank Soal) buat test upload ke csv
 Route::get('/generate-csv', [banksoalvalidasikepribadianController::class,'writeCSV'])->name('/generate-csv');
+// Buat test export list ke csv 
+Route::get('/export-csv', [banksoalvalidasikepribadianController::class, 'exportToCSV'])->name('export-csv');
 
 
 // Testing Bank Soal Cognitive
@@ -333,4 +337,9 @@ Route::post('/get-audio', [APIController::class, 'getRecordingData'])->name('get
 
 // Untuk data dari Bank Soal untuk Validasi Kepribadian Bakat Minat
 Route::get('/test-get-data', [banksoalvalidasikepribadianController::class, 'getAllData'])->name('get-data'); // Name it 'get-data'
+
+
+// Untuk Append CSV ValidationMinatController
+Route::post('/append-to-csv', [ValidationMinatController::class,'appendToCSV'])->name('/append-to-csv');
+
 

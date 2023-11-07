@@ -524,8 +524,8 @@
             const submitButton = document.getElementById('submit-button');
             
             submitButton.addEventListener('click', function (event) {
-
-                
+                const rawScore = parseInt(calculateRawScore(), 10);
+                const skorValidasiCognitif = (parseInt(rawScore, 10) * 1) + skor;
 
                 // Prevent the default form submission behavior
                 event.preventDefault();

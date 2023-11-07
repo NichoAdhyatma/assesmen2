@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
     <title>Tes Validasi Bakat Minat</title>
     <style>
         body {
@@ -327,7 +329,7 @@
 </head>
 <body>
     
-    <div class="container">
+    <!-- <div class="container">
         <ol id="question-list">
         @php
             $questionCounter = 0;
@@ -356,19 +358,1869 @@
             </li>
         @endforeach
         </ol>      
+    </div> -->
+
+    <div class="container">
+        <ol id="question-list">
+            <!-- Pertanyaan 1-10 Emotional Stability  -->
+            <li class="question">
+                <h1>Question 1:</h1>
+                <p>Saya mudah khawatir</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer1" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer1" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer1" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer1" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer1" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 2:</h1>
+                <p>Suasana hati saya sering cepat berubah</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer2" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer2" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer2" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer2" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer2" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 3:</h1>
+                <p>Perasaan saya berubah-ubah</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer3" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer3" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer3" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer3" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer3" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 4:</h1>
+                <p>Saya mudah merasa kesal</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer4" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer4" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer4" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer4" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer4" value="1">
+                            Sangat Setuju
+                        </label>    
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 5:</h1>
+                <p>Saya mudah merasa tertekan</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer5" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer5" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer5" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer5" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer5" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 6:</h1>
+                <p>Saya mudah merasa terganggu</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer6" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer6" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer6" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer6" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer6" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 7:</h1>
+                <p>Saya mudah merasa jengkel </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer7" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer7" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer7" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer7" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer7" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 8:</h1>
+                <p>Saya tertarik pada penulisan, membaca, atau menggali informasi.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer8" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer8" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer8" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer8" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer8" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 9:</h1>
+                <p>Saya jarang merasa sedih</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer9" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer9" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer9" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer9" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer9" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 10:</h1>
+                <p>Saya sering merasa sedih</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer10" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer10" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer10" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer10" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer10" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+
+
+            <li class="question">
+                <h1>Question 11:</h1>
+                <p>Saya lebih suka bekerja di belakang layar</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer11" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer11" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer11" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer11" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer11" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 12:</h1>
+                <p>Saya tidak suka menjadi pusat perhatian </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer12" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer12" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer12" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer12" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer12" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 13:</h1>
+                <p>Saya sedikit berkata</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer13" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer13" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer13" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer13" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer13" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 14:</h1>
+                <p>Saya tidak keberatan menjadi pusat perhatian </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer14" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer14" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer14" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer14" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer14" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 15:</h1>
+                <p>Saya tidak banyak berbicara </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer15" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer15" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer15" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer15" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer15" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 16:</h1>
+                <p>Saya tidak banyak berbicara pada orang yang tidak dikenal</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer16" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer16" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer16" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer16" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer16" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 17:</h1>
+                <p>Saya menghidupkan suasana dalam suatu acara </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer17" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer17" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer17" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer17" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer17" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 18:</h1>
+                <p>Saya berinteraksi dengan banyak orang dalam suatu acara</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer18" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer18" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer18" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer18" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer18" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 19:</h1>
+                <p>Saya merasa nyaman berada di sekitar orang lain</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer19" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer19" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer19" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer19" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer19" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 20:</h1>
+                <p>Saya mudah memulai suatu percakapan </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer20" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer20" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer20" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer20" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer20" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 21:</h1>
+                <p>Saya segera mengerjakan tugas yang diberikan</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer21" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer21" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer21" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer21" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer21" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 22:</h1>
+                <p>Saya telaten dalam mengerjakan tugas</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer22" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer22" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer22" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer22" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer22" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 23:</h1>
+                <p>Saya sering lupa meletakkan barang kembali pada tempatnya</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer23" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer23" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer23" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer23" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer23" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 24:</h1>
+                <p>Saya memperhatikan hal-hal secara rinci</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer24" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer24" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer24" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer24" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer24" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 25:</h1>
+                <p>Saya melakukan aktivitas sesuai jadwal atau agenda</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer25" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer25" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer25" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer25" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer25" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 26:</h1>
+                <p>Saya sering meninggalkan barang pribadi di sembarang tempat </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer26" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer26" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer26" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer26" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer26" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 27:</h1>
+                <p>Saya selalu mempersiapkan segala hal</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer27" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer27" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer27" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer27" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer27" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 28:</h1>
+                <p>Saya menyukai keteraturan </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer28" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer28" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer28" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer28" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer28" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 29:</h1>
+                <p>Saya sering mengacaukan banyak hal </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer29" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer29" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer29" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer29" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer29" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 30:</h1>
+                <p>Saya sering mengabaikan tugas-tugas saya </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer30" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer30" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer30" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer30" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer30" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 31:</h1>
+                <p>Saya adalah orang yang lemah lembut</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer31" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer31" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer31" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer31" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer31" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 32:</h1>
+                <p>Saya tidak tertarik dengan masalah orang lain </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer32" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer32" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer32" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer32" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer32" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 33:</h1>
+                <p>Saya tidak terlalu tertarik dengan kondisi orang lain </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer33" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer33" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer33" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer33" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer33" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 34:</h1>
+                <p>Saya tidak terlalu memedulikan orang lain </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer34" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer34" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer34" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer34" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer34" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 35:</h1>
+                <p>Saya mampu membuat orang lain merasa nyaman </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer35" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer35" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer35" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer35" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer35" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 36:</h1>
+                <p>Saya sering meluangkan waktu untuk orang lain </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer36" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer36" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer36" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer36" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer36" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 37:</h1>
+                <p>Saya memahami perasaan orang lain </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer37" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer37" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer37" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer37" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer37" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 38:</h1>
+                <p>Saya peduli dengan orang lain </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer38" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer38" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer38" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer38" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer38" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 39:</h1>
+                <p>Saya sering bersikap kasar pada orang lain </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer39" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer39" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer39" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer39" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer39" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 40:</h1>
+                <p>Saya bersimpati dengan perasaan orang lain </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer40" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer40" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer40" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer40" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer40" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+
+            <li class="question">
+                <h1>Question 41:</h1>
+                <p>Saya sering menggunakan istilah-istilah yang sulit </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer41" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer41" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer41" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer41" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer41" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+
+            <li class="question">
+                <h1>Question 42:</h1>
+                <p>Saya kesulitan memahami ide yang bersifat abstrak </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer42" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer42" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer42" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer42" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer42" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+
+            <li class="question">
+                <h1>Question 43:</h1>
+                <p>Saya menguasai banyak kosakata </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer43" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer43" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer43" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer43" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer43" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+
+            <li class="question">
+                <h1>Question 44:</h1>
+                <p>Saya memiliki ide-ide yang cemerlang </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer44" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer44" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer44" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer44" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer44" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+
+
+            <li class="question">
+                <h1>Question 45:</h1>
+                <p>Saya memiliki banyak ide</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer45" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer45" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer45" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer45" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer45" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+
+
+            <li class="question">
+                <h1>Question 46:</h1>
+                <p>Saya cepat dalam memahami sesuatu</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer46" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer46" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer46" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer46" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer46" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+
+            <li class="question">
+                <h1>Question 47:</h1>
+                <p>Saya tidak tertarik dengan ide-ide abstrak </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer47" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer47" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer47" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer47" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer47" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+
+            <li class="question">
+                <h1>Question 48:</h1>
+                <p>Saya memiliki imajinasi yang sangat kuat</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer48" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer48" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer48" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer48" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer48" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+
+            <li class="question">
+                <h1>Question 49:</h1>
+                <p>Saya tidak memiliki imajinasi yang baik </p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer49" value="5">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer49" value="4">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer49" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer49" value="2">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer49" value="1">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li> 
+
+            <li class="question">
+                <h1>Question 50:</h1>
+                <p>Saya meluangkan waktu untuk merefleksikan berbagai hal</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer50" value="1">
+                            Sangat tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer50" value="2">
+                            Tidak Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer50" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer50" value="4">
+                            Setuju
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer50" value="5">
+                            Sangat Setuju
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 51:</h1>
+                <p>Saya menikmati bekerja dengan tangan dan menggunakan alat-alat.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer51" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer51" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer51" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer51" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer51" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 52:</h1>
+                <p>Saya tertarik pada penelitian dan eksplorasi ilmiah.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer52" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer52" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer52" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer52" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer52" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 53:</h1>
+                <p>Saya menikmati mengungkapkan diri melalui seni dan kreativitas.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer53" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer53" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer53" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer53" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer53" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 54:</h1>
+                <p>Saya suka membantu orang lain dan bekerja dalam kelompok.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer54" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer54" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer54" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer54" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer54" value="5">
+                            Sangat Suka
+                        </label>    
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 55:</h1>
+                <p>Saya memiliki minat dalam memimpin dan mempengaruhi orang lain.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer55" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer55" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer55" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer55" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer55" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 56:</h1>
+                <p>Saya menyukai tugas-tugas yang memiliki struktur yang jelas dan rutin.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer56" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer56" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer56" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer56" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer56" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 57:</h1>
+                <p>Saya menikmati olahraga atau aktivitas fisik.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer57" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer57" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer57" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer57" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer57" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 58:</h1>
+                <p>Saya tertarik pada penulisan, membaca, atau menggali informasi.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer58" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer58" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer58" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer58" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer58" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 59:</h1>
+                <p>Saya senang berpartisipasi dalam pertunjukan atau acara seni.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer59" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer59" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer59" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer59" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer59" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 60:</h1>
+                <p>Saya suka berinteraksi dengan orang banyak dan membantu mereka.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer60" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer60" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer60" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer60" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer60" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 61:</h1>
+                <p>Saya tertarik pada peluang bisnis dan mengambil risiko.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer61" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer61" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer61" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer61" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer61" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>
+            <li class="question">
+                <h1>Question 62:</h1>
+                <p>Saya suka bekerja dengan data dan detail yang akurat.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer62" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer62" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer62" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer62" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer62" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>    
+            <li class="question">
+                <h1>Question 63:</h1>
+                <p>Saya paling cocok ditempatkan di pekerjaan yang membutuhkan kepekaan mata dan indera manusia lainnya.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer63" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer63" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer63" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer63" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer63" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>   
+            <li class="question">
+                <h1>Question 64:</h1>
+                <p>Saya paling cocok pada pekerjaan yang  membutuhkan gerakan tubuh atau mengandalkan fisik.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer64" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer64" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer64" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer64" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer64" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>   
+            <li class="question">
+                <h1>Question 65:</h1>
+                <p>Saya paling cocok ditempatkan di pekerjaan yang membutuhkan banyak pemikiran atau konsep.</p>
+                <div class="answer-form">
+                    <form class="answer-form">
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer65" value="1">
+                            Sangat tidak suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer65" value="2">
+                            Tidak Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer65" value="3">
+                            Netral
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer65" value="4">
+                            Suka
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" class="radio-input" name="answer65" value="5">
+                            Sangat Suka
+                        </label>
+                    </form>
+                </div>
+            </li>    
+        
+        </ol> 
+        
     </div>
 
-    <button id="calculate-button">Calculate (Kepribadian)</button>
-    <button id="calculate-button-bakmi">Calculate (Minat)</button> 
-    <button id="calculate-button-bakat">Calculate (Bakat)</button> 
+    <button id="calculate-button" style="display:none">Calculate (Kepribadian)</button>
+    <button id="calculate-button-bakmi" style="display: none;">Calculate (Minat)</button> 
+    <button id="calculate-button-bakat" style="display: none;">Calculate (Bakat)</button> 
     <button class="calculate-score-button" id="calculate-score">Calculate Score</button>
     
     <button id="submit-button" class="submit-button" disabled title="Please finish all questions">Submit</button>
     <br>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    <!-- <script>
+            
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    </script>
+    <script>
 
         // Ini Script Untuk Hitung calculate Bakat Minat
         const scoreRMI1 = document.querySelector('input[name="answer51"]:checked')?.value || 0;
@@ -499,7 +2351,23 @@
                 // Call the calculateScores() function here
                 calculateScores();
                 calculateScoresMinat();    
-                calculateScoresBakat();            
+                calculateScoresBakat();    
+
+                fetch('/append-to-csv', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    body: JSON.stringify({ questionData })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(error => {
+                    console.error('Error appending data to CSV:', error);
+                });
                 // After calling calculateScores(), you can redirect to the 'testvalidation' route
                 window.location.href = "{{ route('testvalidation1') }}";
             });
@@ -666,7 +2534,7 @@
         document.querySelector('#calculate-button').addEventListener('click', calculateScores);
 
         
-    </script> -->
+    </script>
     <script>
         // Get the list of questions and navigation buttons
         const questionList = document.getElementById('question-list');
@@ -716,14 +2584,24 @@
             });
         });
     </script>
-    
+
+
     <script>
         const questionData = [];
+
+        document.querySelectorAll('.question').forEach(questionElement => {
+            const question = questionElement.querySelector('p').textContent;
+            const radioInput = questionElement.querySelector('input[type="radio"]:checked');
+            const score = radioInput ? parseInt(radioInput.value) : 0;
+
+            questionData.push({ Question: question, Score: score });
+        });
 
         // Add event listeners to radio inputs
         document.querySelectorAll('.radio-input').forEach((input, index) => {
             input.addEventListener('change', (event) => {
-                const question = event.target.getAttribute('data-question'); // Get the question from data attribute
+                // const question = event.target.getAttribute('data-question'); // Get the question from data attribute
+                const question = event.target.closest('li').querySelector('p').textContent;
                 const score = event.target.value;
 
                 // Update or add the selected answer in the questionData array
@@ -742,21 +2620,38 @@
         const calculateScoreButton = document.querySelector('.calculate-score-button');
 
         document.getElementById('calculate-score').addEventListener('click', function () {
-            const scores = {};
+            // const scores = {};
 
-            document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
-                const questionName = input.getAttribute('name');
-                const tipe = input.closest('.question').getAttribute('data-tipe');
-                const score = parseInt(input.value) || 0;
+            // document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
+            //     const questionName = input.getAttribute('name');
+            //     const tipe = input.closest('.question').getAttribute('data-tipe');
+            //     const score = parseInt(input.value) || 0;
 
-                if (!scores[tipe]) {
-                    scores[tipe] = 0;
-                }
+            //     if (!scores[tipe]) {
+            //         scores[tipe] = 0;
+            //     }
 
-                scores[tipe] += score;
+            //     scores[tipe] += score;
+            // });
+
+            // Send the questionData to the server
+            fetch('/append-to-csv', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                body: JSON.stringify({ questionData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+            })
+            .catch(error => {
+                console.error('Error appending data to CSV:', error);
             });
 
-            console.log(scores);
+            // console.log(scores);
         });
     </script>
 </body>

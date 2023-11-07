@@ -223,7 +223,7 @@
             </form>
 
 
-            <a href="{{ route('testvalidationkepribadian') }}" class="special-link-button">
+            <a href="{{ route('get-data') }}" class="special-link-button">
                 <button id="nextButton" class="testButton" style="margin-bottom: 20px;" disabled >Lanjut ke tes berikutnya</button>
             </a>
 

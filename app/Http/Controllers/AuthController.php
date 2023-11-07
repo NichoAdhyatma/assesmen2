@@ -125,9 +125,9 @@ class AuthController extends Controller
             $pendidikanTerakhir = $user->pendidikan_terakhir;
     
             // Store user information in the session
-            session(['user_id' => $userId, 'username' => $userName, 'nama_lengkap' => $namaLengkap, 'usia' => $usia, 'jenis_kelamin' => $jenisKelamin, 'pendidikan_terakhir' => $pendidikanTerakhir]);
+            session(['user_id' => $userId, 'username' => $userName, 'nama_lengkap' => $namaLengkap, 'usia' => $usia, 'jenis_kelamin' => $jenisKelamin, 'pendidikan_terakhir' => $pendidikanTerakhir, 'waktuTes' => now()]);
     
-            return response()->json(['success' => true, 'user_id' => $userId, 'username' => $userName, 'nama_lengkap' => $namaLengkap, 'usia' => $usia, 'jenis_kelamin' => $jenisKelamin, 'pendidikan_terakhir' => $pendidikanTerakhir, 'redirect' => route('consent')]);
+            return response()->json(['success' => true, 'user_id' => $userId, 'username' => $userName, 'nama_lengkap' => $namaLengkap, 'usia' => $usia, 'jenis_kelamin' => $jenisKelamin, 'pendidikan_terakhir' => $pendidikanTerakhir,'waktuTes' => session('waktuTes'), 'redirect' => route('consent')]);
         } else {
             return response()->json(['success' => false, 'message' => 'Sign In Failed.']);
         }

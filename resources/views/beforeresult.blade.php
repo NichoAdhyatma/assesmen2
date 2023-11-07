@@ -32,7 +32,7 @@
     <a href="{{ route('resultID', ['itemId' => $item->id_penilaian]) }}" style="text-decoration: none;color: black;"">
         <div class="card">
             <div class="card-header">
-                Psikogram {{ Carbon\Carbon::parse($item->header)->isoFormat('MMMM D, YYYY') }}
+                Psikogram {{ Carbon\Carbon::parse($item->tanggal_penilaian)->isoFormat('D MMMM , YYYY') }}
             </div>
             <div class="card-description">Psikogram tanggal: {{ $item->tanggal_penilaian }}, Dengan ID:  {{$item->id_penilaian}}</div>
         </div>
