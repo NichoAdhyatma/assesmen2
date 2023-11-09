@@ -180,7 +180,7 @@ class ValidationMinatController extends Controller
         $questionData = $request->input('questionData');
 
         // Define the "id_user" and "Time" values
-        $id_user = session('user_id');; // Set the user ID
+        $id_user = session('user_id'); // Set the user ID
         $time = session('waktuTes'); // Set the current date in the desired format, e.g., "23 Nov"
 
         // Initialize an associative array to store scores for each question
@@ -218,6 +218,27 @@ class ValidationMinatController extends Controller
         return response()->json(['message' => 'Data appended to CSV successfully']);
     }
 
+    public function storeDataInSession(Request $request)
+    {
+        $questionData = $request->input('questionData');
+        // Store the questionData in the session
+        session(['CSVSession' => $questionData]);
+        
+        return response()->json(['message' => 'Data stored in session successfully']);
+    }
 
+    public function addDataToSession(Request $request)
+    {
+        $newQuestionData = $request->input('questionData');
+        $existingQuestionData = session('CSVSession', []);
+
+        // Merge the new data with the existing data
+        $combinedData = array_merge($existingQuestionData, $newQuestionData);
+
+        // Store the combined data in the session
+        session(['CSVSession' => $combinedData]);
+
+        return response()->json(['message' => 'Data added to session successfully']);
+    }
 
 }

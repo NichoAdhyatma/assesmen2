@@ -505,6 +505,8 @@ X, XII, X, XV, X, XIX, X, ...
         </div>
     </div>
     <button class="calculate-score-button" style="margin-top:50px;">Calculate Score</button>
+    <button class="calculate-score-button1" id="calculate-score1">CSVSession</button>
+
     <button id="processVideoButton" onclick="calculateAndLogSkor()">See Current Total Score</button>
     
 
@@ -551,6 +553,21 @@ X, XII, X, XV, X, XIX, X, ...
                 const skorValidasiCognitif = (parseInt(rawScore, 10) * 2) + skor;
                 // Prevent the default form submission behavior
                 event.preventDefault();
+                // fetch('/add-data-to-session', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                //     },
+                //     body: JSON.stringify({ questionData })
+                // })
+                // .then(response => response.json())
+                // .then(data => {
+                //     console.log(data.message);
+                // })
+                // .catch(error => {
+                //     console.error('Error storing data in session:', error);
+                // });
                 var sessionValues = {};
                 
                 $.ajax({
@@ -674,8 +691,8 @@ X, XII, X, XV, X, XIX, X, ...
 
                 // After calling calculateScores(), you can redirect to the 'testvalidation' route
                 
-                // window.location.href = "{{ route('beforeresult') }}";
-                // location.reload();
+                window.location.href = "{{ route('beforeresult') }}";
+                location.reload();
             });
         });
     </script>
@@ -940,5 +957,65 @@ X, XII, X, XV, X, XIX, X, ...
 
 
 
+    </script>
+    <script>
+        const questionData = [
+            { Question: 'Dalam perkembangan teknologi informasi, konektivit…data dan informasi dengan cepat di seluruh dunia.', Score: -1 },
+            { Question: 'Pemahaman ........ teori psikologi membantu dalam …asi pola perilaku manusia dalam berbagai konteks.', Score: -1 },
+            { Question: 'Dalam bidang ekonomi, konsep inflasi mengacu pada.…-harga barang dan jasa dalam suatu periode waktu.', Score: -1 },
+            { Question: 'Mana dibawah ini yang paling berbeda', Score: -1 },
+            { Question: 'Mana dibawah ini yang paling berbeda', Score: -1 },
+            { Question: 'Mana dibawah ini yang paling berbeda', Score: -1 },
+            { Question: 'Sejalan : .... =', Score: -1 },
+            { Question: 'Statis : ..... =', Score: -1 },
+            { Question: 'Keras Kepala : .... =', Score: -1 }
+        ];
+
+
+        document.querySelectorAll('.question').forEach(questionElement => {
+            const question = questionElement.querySelector('p').textContent;
+            const radioInput = questionElement.querySelector('input[type="radio"]:checked');
+            const score = radioInput ? (radioInput.parentElement.getAttribute('data-correct') === 'true' ? 1 : 0) : 0;
+
+            questionData.push({ Question: question, Score: score });
+        });
+
+        // Add event listeners to radio inputs
+        document.querySelectorAll('.radio-input').forEach((input, index) => {
+            input.addEventListener('change', (event) => {
+                const question = event.target.closest('li').querySelector('p').textContent;
+                const isCorrect = event.target.parentElement.getAttribute('data-correct') === 'true';
+                const score = isCorrect ? 1 : 0;
+
+                // Update or add the selected answer in the questionData array
+                const existingQuestionIndex = questionData.findIndex(item => item.Question === question);
+                if (existingQuestionIndex !== -1) {
+                    questionData[existingQuestionIndex].Score = score;
+                } else {
+                    questionData.push({ Question: question, Score: score });
+                }
+
+                // Log the updated data (you can send it to the server as needed)
+                console.log(questionData);
+            });
+        });
+
+        // document.getElementById('calculate-score1').addEventListener('click', function () {
+        //     fetch('/add-data-to-session', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //         },
+        //         body: JSON.stringify({ questionData })
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data.message);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error storing data in session:', error);
+        //     });
+        // });
     </script>
 

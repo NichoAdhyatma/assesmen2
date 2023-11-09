@@ -342,4 +342,9 @@ Route::get('/test-get-data', [banksoalvalidasikepribadianController::class, 'get
 // Untuk Append CSV ValidationMinatController
 Route::post('/append-to-csv', [ValidationMinatController::class,'appendToCSV'])->name('/append-to-csv');
 
+// Coba gabungin data pertanyaan ke session
+Route::post('/store-data-in-session', [ValidationMinatController::class, 'storeDataInSession']);
+Route::post('/add-data-to-session', [ValidationMinatController::class, 'addDataToSession']);
+
+
 

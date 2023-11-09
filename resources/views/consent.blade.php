@@ -118,8 +118,8 @@
                     <!-- Third Form -->
                     <form>
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="consentCheckbox2">
-                            <label class="form-check-label" for="consentCheckbox2">Mengikuti ketiga tes dan tes validasi secara keseluruhan.</label>
+                            <input type="checkbox" class="form-check-input" id="consentCheckbox3">
+                            <label class="form-check-label" for="consentCheckbox3">Mengikuti ketiga tes dan tes validasi secara keseluruhan.</label>
                             
                         </div>
                     </form>

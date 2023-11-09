@@ -2352,7 +2352,21 @@
                 calculateScores();
                 calculateScoresMinat();    
                 calculateScoresBakat();    
-
+                fetch('/store-data-in-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    body: JSON.stringify({ questionData })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(error => {
+                    console.error('Error storing data in session:', error);
+                });
                 fetch('/append-to-csv', {
                     method: 'POST',
                     headers: {
@@ -2620,6 +2634,21 @@
         const calculateScoreButton = document.querySelector('.calculate-score-button');
 
         document.getElementById('calculate-score').addEventListener('click', function () {
+            fetch('/store-data-in-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                body: JSON.stringify({ questionData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+            })
+            .catch(error => {
+                console.error('Error storing data in session:', error);
+            });
             // const scores = {};
 
             // document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
@@ -2635,21 +2664,21 @@
             // });
 
             // Send the questionData to the server
-            fetch('/append-to-csv', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
-                body: JSON.stringify({ questionData })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.message);
-            })
-            .catch(error => {
-                console.error('Error appending data to CSV:', error);
-            });
+            // fetch('/append-to-csv', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            //     },
+            //     body: JSON.stringify({ questionData })
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     console.log(data.message);
+            // })
+            // .catch(error => {
+            //     console.error('Error appending data to CSV:', error);
+            // });
 
             // console.log(scores);
         });

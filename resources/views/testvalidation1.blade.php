@@ -361,7 +361,7 @@
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Mana dibawah ini yang paling berbeda</p>
+                <p>Mana dibawah ini yang paling berbeda </p>
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label" data-correct="true">
@@ -385,7 +385,7 @@
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Mana dibawah ini yang paling berbeda</p>
+                <p>Mana dibawah ini yang paling berbeda  </p>
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label" data-correct="true">
@@ -718,6 +718,8 @@
         </div>
     </div>
     <button class="calculate-score-button" style="margin-top:50px;">Calculate Score</button>
+    <button class="calculate-score-button1" id="calculate-score1">CSVSession</button>
+
     
 
     <!-- <div class="dropdown">
@@ -754,7 +756,21 @@
             // Attach a click event listener to the submit button
             submitButton.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent the default form submission
-                
+                fetch('/add-data-to-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    body: JSON.stringify({ questionData })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(error => {
+                    console.error('Error storing data in session:', error);
+                });
                 const skor = calculateRawScore(); // Replace this with the actual calculation
 
                 // Set the skor value in a session variable
@@ -765,6 +781,23 @@
                 // Define a threshold value
                 const threshold = 15; // Ganti mbe jumlag h benarnya
 
+                // Taruh detail soal individu dan jawabannya di session
+                fetch('/add-data-to-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    body: JSON.stringify({ questionData })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(error => {
+                    console.error('Error storing data in session:', error);
+                });
+                // Taruh Nilai keseluruhan di Session
                 fetch('/store-skor-in-session', {
                     method: 'POST',
                     headers: {
@@ -1052,5 +1085,90 @@
 
 
 
+    </script>
+    <script>
+        const questionData = [];
+
+        document.querySelectorAll('.question').forEach(questionElement => {
+            const question = questionElement.querySelector('p').textContent;
+            const radioInput = questionElement.querySelector('input[type="radio"]:checked');
+            const score = radioInput ? (radioInput.parentElement.getAttribute('data-correct') === 'true' ? 1 : 0) : 0;
+
+            questionData.push({ Question: question, Score: score });
+        });
+
+        // Add event listeners to radio inputs
+        document.querySelectorAll('.radio-input').forEach((input, index) => {
+            input.addEventListener('change', (event) => {
+                const question = event.target.closest('li').querySelector('p').textContent;
+                const isCorrect = event.target.parentElement.getAttribute('data-correct') === 'true';
+                const score = isCorrect ? 1 : 0;
+
+                // Update or add the selected answer in the questionData array
+                const existingQuestionIndex = questionData.findIndex(item => item.Question === question);
+                if (existingQuestionIndex !== -1) {
+                    questionData[existingQuestionIndex].Score = score;
+                } else {
+                    questionData.push({ Question: question, Score: score });
+                }
+
+                // Log the updated data (you can send it to the server as needed)
+                console.log(questionData);
+            });
+        });
+
+        document.getElementById('calculate-score1').addEventListener('click', function () {
+            fetch('/add-data-to-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                body: JSON.stringify({ questionData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+            })
+            .catch(error => {
+                console.error('Error storing data in session:', error);
+            });
+        });
+        // const calculateScoreButton = document.querySelector('.calculate-score-button');
+
+        // document.getElementById('calculate-score').addEventListener('click', function () {
+        //     // const scores = {};
+
+        //     // document.querySelectorAll('input[type="radio"]:checked').forEach(input => {
+        //     //     const questionName = input.getAttribute('name');
+        //     //     const tipe = input.closest('.question').getAttribute('data-tipe');
+        //     //     const score = parseInt(input.value) || 0;
+
+        //     //     if (!scores[tipe]) {
+        //     //         scores[tipe] = 0;
+        //     //     }
+
+        //     //     scores[tipe] += score;
+        //     // });
+
+        //     // Send the questionData to the server
+        //     fetch('/append-to-csv', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //         },
+        //         body: JSON.stringify({ questionData })
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data.message);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error appending data to CSV:', error);
+        //     });
+
+        //     // console.log(scores);
+        // });
     </script>
 

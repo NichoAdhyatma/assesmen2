@@ -359,7 +359,7 @@
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Mana dibawah ini yang paling berbeda</p>
+                <p>Mana dibawah ini yang paling berbeda </p>
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label" data-correct="true">
@@ -383,7 +383,7 @@
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Mana dibawah ini yang paling berbeda</p>                
+                <p>Mana dibawah ini yang paling berbeda  </p>                
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label" data-correct="true">
@@ -496,6 +496,8 @@
         </div>
     </div>
     <button class="calculate-score-button" style="margin-top:50px;">Calculate Score</button>
+    <button class="calculate-score-button1" id="calculate-score1">CSVSession</button>
+
     <button id="processVideoButton" onclick="calculateAndLogSkor()">See Current Total Score</button>
     
 
@@ -529,6 +531,21 @@
 
                 // Prevent the default form submission behavior
                 event.preventDefault();
+                fetch('/add-data-to-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    body: JSON.stringify({ questionData })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(error => {
+                    console.error('Error storing data in session:', error);
+                });
 
                 var sessionValues = {};
                 
@@ -546,122 +563,6 @@
                         console.error('Error:', error);
                     }
                 });
-
-                //     // The loop for printing session values is inside the event listener
-                //     console.log('Session Values:');
-                //     for (var key in sessionValues) {
-                //         if (sessionValues.hasOwnProperty(key)) {
-                //             console.log(key + ':', sessionValues[key]);
-                //         }
-                //     }
-
-                // var sessionData = @json(session()->all());
-                // console.log(sessionData);
-                // const rawScore = parseInt(calculateRawScore(), 10);
-
-                // // Assuming 'skor' is already defined, add the parsed rawScore to it
-                // const skorValidasiCognitif = (parseInt(rawScore, 10) * 1) + skor;
-
-                // // $skor_validasi_cognitif = skorValidasiCognitif;
-                // // dd($skor_validasi_cognitif);
-                // console.log($skor_validasi_cognitif);
-                
-
-                // //Tabel Penilaian
-                // // ID Penilaian = autoIncrement
-                // // ID User
-                // $userid = sessionData.user_id;
-                // // Tanggal Penilaian = CurrentDate
-
-                // // Struktur Tele-assesmen interview (Kepribadian,Bakat,Minat) (14data dipisah koma) per  atribut
-                
-                // // Sentimen Positif Facial
-                // $f_sentimen_positif = sessionData.positive_scoreExtraversion + "," + sessionData.positive_scoreConscientiousness + "," + sessionData.positive_scoreAgreeableness + "," + sessionData.positive_scoreOpenness + "," + sessionData.positive_scoreNeuroticism + "," + sessionData.positive_scoreRealistic + "," + sessionData.positive_scoreInvestigative + "," + sessionData.positive_scoreArtistic + "," + sessionData.positive_scoreSocial + "," + sessionData.positive_scoreEnterprising + "," + sessionData.positive_scoreConventional + "," + sessionData.positive_scorePerseptual + "," + sessionData.positive_scorePsikomotor + "," + sessionData.positive_scoreIntelektual;
-                // // $f_sentimen_positif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Sentimen Netral Facial
-                // $f_sentimen_netral = sessionData.neutral_scoreExtraversion + "," + sessionData.neutral_scoreConscientiousness + "," + sessionData.neutral_scoreAgreeableness + "," + sessionData.neutral_scoreOpenness + "," + sessionData.neutral_scoreNeuroticism + "," + sessionData.neutral_scoreRealistic + "," + sessionData.neutral_scoreInvestigative + "," + sessionData.neutral_scoreArtistic + "," + sessionData.neutral_scoreSocial + "," + sessionData.neutral_scoreEnterprising + "," + sessionData.neutral_scoreConventional + "," + sessionData.neutral_scorePerseptual + "," + sessionData.neutral_scorePsikomotor + "," + sessionData.neutral_scoreIntelektual;
-                // // $f_sentimen_netral = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Sentimen Negatif Facial
-                // $f_sentimen_negatif = sessionData.negative_scoreExtraversion + "," + sessionData.negative_scoreConscientiousness + "," + sessionData.negative_scoreAgreeableness + "," + sessionData.negative_scoreOpenness + "," + sessionData.negative_scoreNeuroticism + "," + sessionData.negative_scoreRealistic + "," + sessionData.negative_scoreInvestigative + "," + sessionData.negative_scoreArtistic + "," + sessionData.negative_scoreSocial + "," + sessionData.negative_scoreEnterprising + "," + sessionData.negative_scoreConventional + "," + sessionData.negative_scorePerseptual + "," + sessionData.negative_scorePsikomotor + "," + sessionData.negative_scoreIntelektual;
-                // // $f_sentimen_negatif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Sentimen Positif Voice
-                // $v_sentimen_positif = sessionData.posExtraversion + "," + sessionData.posConscientiousness + "," + sessionData.posAgreeableness + "," + sessionData.posOpenness + "," + sessionData.posNeuroticism + "," + sessionData.posRealistic + "," + sessionData.posInvestigative + "," + sessionData.posArtistic + "," + sessionData.posSocial + "," + sessionData.posEnterprising + "," + sessionData.posConventional + "," + sessionData.posPerseptual + "," + sessionData.posPsikomotor + "," + sessionData.posIntelektual;
-                // // $v_sentimen_positif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Sentimen Netral Voice
-                // $v_sentimen_netral = sessionData.neuExtraversion + "," + sessionData.neuConscientiousness + "," + sessionData.neuAgreeableness + "," + sessionData.neuOpenness + "," + sessionData.neuNeuroticism + "," + sessionData.neuRealistic + "," + sessionData.neuInvestigative + "," + sessionData.neuArtistic + "," + sessionData.neuSocial + "," + sessionData.neuEnterprising + "," + sessionData.neuConventional + "," + sessionData.neuPerseptual + "," + sessionData.neuPsikomotor + "," + sessionData.neuIntelektual;
-                // // $v_sentimen_netral = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Sentimen Negatif voice
-                // $v_sentimen_negatif = sessionData.negExtraversion + "," + sessionData.negConscientiousness + "," + sessionData.negAgreeableness + "," + sessionData.negOpenness + "," + sessionData.negNeuroticism + "," + sessionData.negRealistic + "," + sessionData.negInvestigative + "," + sessionData.negArtistic + "," + sessionData.negSocial + "," + sessionData.negEnterprising + "," + sessionData.negConventional + "," + sessionData.negPerseptual + "," + sessionData.negPsikomotor + "," + sessionData.negIntelektual;
-                // // $v_sentimen_negatif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Validation Score
-                // $validation_score = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + sessionData.resultPer + ","+ sessionData.resultPsi + ","+ sessionData.resultInt ;
-                // // $validation_score = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // %Kepercayaan
-                // $kepercayaan = trustExtraversion + "," + trustConscientiousness + "," + trustAgreeableness + "," + trustOpenness + "," + trustNeuroticism + "," + trustRealistic + "," + trustInvestigative + "," + trustArtistic + "," + trustSocial + "," + trustEnterprising + "," + trustConventional + "," + trustPerseptual + "," + trustPsikomotor + "," + trustIntelektual;
-                // // $kepercayaan = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-
-                // // [Untuk tes cognitive video]
-                // // RawScore(9Data Dipisah Koma)
-                // $skor_validasi = sessionData.skorVideo; 
-                // // Validasi bakat minat kepribadian
-                // // RawScore(14 Data dipisah koma)
-                // $skor_validasi_kepribadianbakatminat = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + sessionData.resultPer + ","+ sessionData.resultPsi + ","+ sessionData.resultInt ;
-                // // Validasi Cognitive
-                // // Raw Score(9Data dipisah koma) -> 9 Penilaian jadikan 1 data hingga berikut
-                // $skor_validasi_cognitif = skorValidasiCognitif;
-                // // $skor_validasi_cognitif = calculateScore();
-                // //const csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-                // $.ajax({
-                //     type: "POST",
-                //     url: '{{route('postPenilaian') }}',
-                //     data: {
-                //         // Your request data goes here
-                //         id_user: sessionData.user_id,
-                //         f_sentimen_positif: $f_sentimen_positif,
-                //         f_sentimen_netral: $f_sentimen_netral,
-                //         f_sentimen_negatif: $f_sentimen_negatif,
-                //         v_sentimen_positif: $v_sentimen_positif,
-                //         v_sentimen_netral: $v_sentimen_netral,
-                //         v_sentimen_negatif: $v_sentimen_negatif,
-                //         skor_validasi: $validation_score,
-                //         kepercayaan: $kepercayaan,
-                //         cognitive_video_score: $skor_validasi,
-                //         skor_validasi_kepribadianbakatminat: $skor_validasi_kepribadianbakatminat,
-                //         skor_validasi_cognitif: $skor_validasi_cognitif,
-
-
-                //         // ...
-                //     },
-                //     headers: {
-                //         // Set the CSRF token in the request header
-                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                //     },
-                //     success: function(response) {
-
-                //         console.log("YEEE")
-                //     },
-                //     error: function(xhr, status, error) {
-                //         console.log("Fail")
-                //     }
-                // });
-
-               
-
-                // Set up your AJAX request
-                // console.log($skor_validasi_kepribadianbakatminat);
-                // $dataArray = $skor_validasi_kepribadianbakatminat.split(',');
-                // console.log($dataArray);
-
-                // After calling calculateScores(), you can redirect to the 'testvalidation' route
                 
                 window.location.href = "{{ route('beforeresult') }}";
                 location.reload();
@@ -941,5 +842,68 @@
 
 
 
+    </script>
+    <script>
+        const questionData = [];
+
+        document.querySelectorAll('.question').forEach(questionElement => {
+            const question = questionElement.querySelector('p').textContent;
+            const radioInput = questionElement.querySelector('input[type="radio"]:checked');
+            const score = radioInput ? (radioInput.parentElement.getAttribute('data-correct') === 'true' ? 1 : 0) : 0;
+
+            questionData.push({ Question: question, Score: score });
+        });
+
+        // Add event listeners to radio inputs
+        document.querySelectorAll('.radio-input').forEach((input, index) => {
+            input.addEventListener('change', (event) => {
+                const question = event.target.closest('li').querySelector('p').textContent;
+                const isCorrect = event.target.parentElement.getAttribute('data-correct') === 'true';
+                const score = isCorrect ? 1 : 0;
+
+                // Update or add the selected answer in the questionData array
+                const existingQuestionIndex = questionData.findIndex(item => item.Question === question);
+                if (existingQuestionIndex !== -1) {
+                    questionData[existingQuestionIndex].Score = score;
+                } else {
+                    questionData.push({ Question: question, Score: score });
+                }
+
+                // Log the updated data (you can send it to the server as needed)
+                console.log(questionData);
+            });
+        });
+
+        document.getElementById('calculate-score1').addEventListener('click', function () {
+            const sourceBQuestions = [
+                { Question: 'Narsisisme juga dapat diartikan sebagai bentuk\ndar… memperoleh perhatian dan pemujaan atas dirinya.\n', Score: -1 },
+                { Question: 'Body Image merupakan imajinasi subyektif yang dimi…hnya harus disesuaikan dengan persepsi - persepsi', Score: -1 },
+                { Question: 'Sistem patriarki yang ... perempuan dan lelaki tid…nkan terjadi oleh sebagian besar warga masyarakat', Score: -1 },
+                { Question: 'Husein Mutahar: WR Soepratman: Ismail Marzuki= .......', Score: -1 },
+                { Question: 'Bumi: Jupiter: Saturnus = ........', Score: -1 },
+                { Question: 'Kertas : Karet : Resin = .......', Score: -1 },
+                { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nA, C, E, G, ...\n', Score: -1 },
+                { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nE,H, M, P, ...\n', Score: -1 },
+                { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nX, XII, X, XV, X, XIX, X, ...\n', Score: -1 }
+            ];
+
+            // Add the questions from source B to the end of the questionData array
+            questionData.push(...sourceBQuestions);
+            fetch('/add-data-to-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                body: JSON.stringify({ questionData })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.message);
+            })
+            .catch(error => {
+                console.error('Error storing data in session:', error);
+            });
+        });
     </script>
 
