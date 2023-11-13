@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 use App\Models\penilaian;
+use App\Models\penilaianBeo;
 use GuzzleHttp\Client;
 
 use App\Models\banksoalvalidasikepribadian;
@@ -169,7 +170,7 @@ class VideoController extends Controller
         // Initialize an array to store the results for each personality
         $results = [];
         $varCheck = [];
-        $existingQuestionData = session('CSVSession', []);
+        // $existingQuestionData = session('CSVSession', []);
         foreach ($personalityList as $personality) {
 
             $videoFiles = Storage::disk('public')->files('videos' . DIRECTORY_SEPARATOR . $userId . DIRECTORY_SEPARATOR . $personality);
@@ -182,7 +183,7 @@ class VideoController extends Controller
                 foreach ($decodedData as $key => $value) {
 
                     $sessionName = $key . $personality;
-                    array_push($varCheck, [$sessionName, $value]);
+                    array_push($varCheck, ["Question" => $sessionName, "Score" => $value]);
 
                     session([$sessionName => $value]);
                 }
@@ -193,18 +194,24 @@ class VideoController extends Controller
 
 
             // Disini kita perlu add ngambil voice recording dengan filter string
-            // $filterString = $personality . '_' . $userId;
-            // $resultAudio = $this->getRecordingData($filterString);
-            // $sessionNameAudio = 'voice' . $personality;
-            // session([$sessionNameAudio => $resultAudio]);
+            // REMINDER UNTUK ENABLE SAAT BEO GA DOWN
+            $filterString = $personality . '_' . $userId;
+            $filterString = "Extraversion_11"; 
+            $resultAudio = $this->getRecordingData($filterString);
+            $sessionNameAudio = 'voice' . $personality;
+            session([$sessionNameAudio => $resultAudio]);
 
         }
+        array_push($varCheck, ["Question" => 'SkorLiveCognitive', "Score" => session('skorVideo', -1)]);
         $existingCSVSession = session('CSVSession', []);
         $combinedData = array_merge($varCheck, $existingCSVSession);
+        // Tambah hasil disini 
+        // dd($combinedData);
         session(['CSVSession' => $combinedData]);
-
+        
 
         $questionData = session('CSVSession');
+        // dd($questionData);
         $id_user = session('user_id'); // Set the user ID
         $time = session('waktuTes'); // Set the current date in the desired format, e.g., "23 Nov"
 
@@ -216,7 +223,9 @@ class VideoController extends Controller
 
         // Extract and add the scores for each question, with the question text as headers
         foreach ($questionData as $index => $question) {
-            $scoreData[$question['Question']] = $question['Score'];
+            // $scoreData[$question['Question']] = $question['Score'];
+            $questionText = str_replace("\n", '', $question['Question']);
+            $scoreData[$questionText] = $question['Score'];
         }
 
         // Define the path to the CSV file
@@ -232,31 +241,23 @@ class VideoController extends Controller
         fclose($csvFile);
 
         // Gabungkan data dan taruh ke database
+        // Sentimen Face
         $f_sentimen_positif = session('positive_scoreExtraversion', -1) . "," . session('positive_scoreConscientiousness',-1) . "," . session('positive_scoreAgreeableness', -1) . "," . session('positive_scoreOpenness', -1) . "," . session('positive_scoreNeuroticism', -1) . "," . session('positive_scoreRealistic', -1) . "," . session('positive_scoreInvestigative', -1) . "," . session('positive_scoreArtistic', -1) . "," . session('positive_scoreSocial', -1) . "," . session('positive_scoreEnterprising', -1) . "," . session('positive_scoreConventional', -1) . "," . session('positive_scorePerseptual', -1) . "," . session('positive_scorePsikomotor', -1) . "," . session('positive_scoreIntelektual', -1);
         $f_sentimen_negatif = session('positive_scoreExtraversion', -1) . "," . session('positive_scoreConscientiousness',-1) . "," . session('positive_scoreAgreeableness', -1) . "," . session('positive_scoreOpenness', -1) . "," . session('positive_scoreNeuroticism', -1) . "," . session('positive_scoreRealistic', -1) . "," . session('positive_scoreInvestigative', -1) . "," . session('positive_scoreArtistic', -1) . "," . session('positive_scoreSocial', -1) . "," . session('positive_scoreEnterprising', -1) . "," . session('positive_scoreConventional', -1) . "," . session('positive_scorePerseptual', -1) . "," . session('positive_scorePsikomotor', -1) . "," . session('positive_scoreIntelektual', -1);
-        
         $f_sentimen_netral = session('neutral_scoreExtraversion', -1) . "," . session('neutral_scoreConscientiousness',-1) . "," . session('neutral_scoreAgreeableness', -1) . "," . session('neutral_scoreOpenness', -1) . "," . session('neutral_scoreNeuroticism', -1) . "," . session('neutral_scoreRealistic', -1) . "," . session('neutral_scoreInvestigative', -1) . "," . session('neutral_scoreArtistic', -1) . "," . session('neutral_scoreSocial', -1) . "," . session('neutral_scoreEnterprising', -1) . "," . session('neutral_scoreConventional', -1) . "," . session('neutral_scorePerseptual', -1) . "," . session('neutral_scorePsikomotor', -1) . "," . session('neutral_scoreIntelektual', -1);
         
-
-        // Sentimen Positif Voice
-        $v_sentimen_positif = session('posExtraversion', -1) . "," . session('posConscientiousness',-1) . "," . session('posAgreeableness', -1) . "," . session('posOpenness', -1) . "," . session('posNeuroticism', -1) . "," . session('posRealistic', -1) . "," . session('posInvestigative', -1) . "," . session('posArtistic', -1) . "," . session('posSocial', -1) . "," . session('posEnterprising', -1) . "," . session('posConventional', -1) . "," . session('posPerseptual', -1) . "," . session('posPsikomotor', -1) . "," . session('posIntelektual', -1);
-        // $v_sentimen_positif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-        // Sentimen Netral Voice
-        $v_sentimen_netral = session('neuExtraversion', -1) . "," . session('neuConscientiousness',-1) . "," . session('neuAgreeableness', -1) . "," . session('neuOpenness', -1) . "," . session('neuNeuroticism', -1) . "," . session('neuRealistic', -1) . "," . session('neuInvestigative', -1) . "," . session('neuArtistic', -1) . "," . session('neuSocial', -1) . "," . session('neuEnterprising', -1) . "," . session('neuConventional', -1) . "," . session('neuPerseptual', -1) . "," . session('neuPsikomotor', -1) . "," . session('neuIntelektual', -1);
-        // $v_sentimen_netral = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-        // Sentimen Negatif voice
-        $v_sentimen_negatif = session('negExtraversion', -1) . "," . session('negConscientiousness',-1) . "," . session('negAgreeableness', -1) . "," . session('negOpenness', -1) . "," . session('negNeuroticism', -1) . "," . session('negRealistic', -1) . "," . session('negInvestigative', -1) . "," . session('negArtistic', -1) . "," . session('negSocial', -1) . "," . session('negEnterprising', -1) . "," . session('negConventional', -1) . "," . session('negPerseptual', -1) . "," . session('negPsikomotor', -1) . "," . session('negIntelektual', -1);
-        // $v_sentimen_negatif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
+        // Sentimen Voice
+        // $v_sentimen_positif = session('posExtraversion', -1) . "," . session('posConscientiousness',-1) . "," . session('posAgreeableness', -1) . "," . session('posOpenness', -1) . "," . session('posNeuroticism', -1) . "," . session('posRealistic', -1) . "," . session('posInvestigative', -1) . "," . session('posArtistic', -1) . "," . session('posSocial', -1) . "," . session('posEnterprising', -1) . "," . session('posConventional', -1) . "," . session('posPerseptual', -1) . "," . session('posPsikomotor', -1) . "," . session('posIntelektual', -1);
+        // $v_sentimen_netral = session('neuExtraversion', -1) . "," . session('neuConscientiousness',-1) . "," . session('neuAgreeableness', -1) . "," . session('neuOpenness', -1) . "," . session('neuNeuroticism', -1) . "," . session('neuRealistic', -1) . "," . session('neuInvestigative', -1) . "," . session('neuArtistic', -1) . "," . session('neuSocial', -1) . "," . session('neuEnterprising', -1) . "," . session('neuConventional', -1) . "," . session('neuPerseptual', -1) . "," . session('neuPsikomotor', -1) . "," . session('neuIntelektual', -1);
+        // $v_sentimen_negatif = session('negExtraversion', -1) . "," . session('negConscientiousness',-1) . "," . session('negAgreeableness', -1) . "," . session('negOpenness', -1) . "," . session('negNeuroticism', -1) . "," . session('negRealistic', -1) . "," . session('negInvestigative', -1) . "," . session('negArtistic', -1) . "," . session('negSocial', -1) . "," . session('negEnterprising', -1) . "," . session('negConventional', -1) . "," . session('negPerseptual', -1) . "," . session('negPsikomotor', -1) . "," . session('negIntelektual', -1);
+        $v_sentimen = session('voiceExtraversion', -1) . "," . session('voiceConscientiousness',-1) . "," . session('voiceAgreeableness', -1) . "," . session('voiceOpenness', -1) . "," . session('voiceNeuroticism', -1) . "," . session('voiceRealistic', -1) . "," . session('voiceInvestigative', -1) . "," . session('voiceArtistic', -1) . "," . session('voiceSocial', -1) . "," . session('voiceEnterprising', -1) . "," . session('voiceConventional', -1) . "," . session('voicePerseptual', -1) . "," . session('voicePsikomotor', -1) . "," . session('voiceIntelektual', -1);
+        // dd($v_sentimen); 
 
         // Validation Score
         $validation_score = session('resultExtraversion', -1) . "," . session('resultConscien') . "," . session('resultAgree') . "," . session('resultIntellect') . "," . session('resultEmotionalStability') . "," . session('resultR') . "," . session('resultI') . "," . session('resultA') . "," . session('resultS') . "," . session('resultE') . "," . session('resultC') . "," . session('resultPer') . ",". session('resultPsi') . ",". session('resultInt') ;
-        // $validation_score = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
 
         // %Kepercayaan
         $kepercayaan = session('trustExtraversion', -1) . "," . session('trustConscientiousness',-1) . "," . session('trustAgreeableness', -1) . "," . session('trustOpenness', -1) . "," . session('trustNeuroticism', -1) . "," . session('trustRealistic', -1) . "," . session('trustInvestigative', -1) . "," . session('trustArtistic', -1) . "," . session('trustSocial', -1) . "," . session('trustEnterprising', -1) . "," . session('trustConventional', -1) . "," . session('trustPerseptual', -1) . "," . session('trustPsikomotor', -1) . "," . session('trustIntelektual', -1);
-        // $kepercayaan = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
 
 
         // [Untuk tes cognitive video]
@@ -289,14 +290,30 @@ class VideoController extends Controller
         
         
             
-        $createMember = penilaian::create([
+        // $createMember = penilaian::create([
+        //     'id_user' => $userId,
+        //     'f_sentimen_positif' => $f_sentimen_positif,
+        //     'f_sentimen_netral' => $f_sentimen_netral,
+        //     'f_sentimen_negatif' => $f_sentimen_negatif,
+        //     'v_sentimen_positif' => $v_sentimen_positif,
+        //     'v_sentimen_netral' => $v_sentimen_netral,
+        //     'v_sentimen_negatif' => $v_sentimen_negatif,
+        //     'skor_validasi' => $skor_validasi_kepribadianbakatminat,
+        //     'kepercayaan' => $kepercayaan,
+
+        //     'cognitive_video_score' => $skor_video,
+
+        //     'skor_validasi_kepribadianbakatminat' =>  $skor_validasi_kepribadianbakatminat,
+
+        //     'skor_validasi_cognitif' => $skorValidasiCognitif,
+        // ]);
+
+        $createMember = penilaianBeo::create([
             'id_user' => $userId,
             'f_sentimen_positif' => $f_sentimen_positif,
             'f_sentimen_netral' => $f_sentimen_netral,
             'f_sentimen_negatif' => $f_sentimen_negatif,
-            'v_sentimen_positif' => $v_sentimen_positif,
-            'v_sentimen_netral' => $v_sentimen_netral,
-            'v_sentimen_negatif' => $v_sentimen_negatif,
+            'v_sentimen' => $v_sentimen,
             'skor_validasi' => $skor_validasi_kepribadianbakatminat,
             'kepercayaan' => $kepercayaan,
 

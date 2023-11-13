@@ -255,6 +255,11 @@
             transform: translateX(-50%);
             white-space: nowrap;
         }
+        .invisible-word {
+            visibility: hidden; /* or */
+            color: transparent;
+        }
+
 
     </style>
 </head>
@@ -335,7 +340,7 @@
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Mana dibawah ini yang paling berbeda</p>
+                <p>Mana dibawah ini yang paling berbeda <span class="invisible-word">Mudah1</span></p>
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label" data-correct="true">
@@ -359,7 +364,7 @@
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Mana dibawah ini yang paling berbeda </p>
+                <p>Mana dibawah ini yang paling berbeda <span class="invisible-word">Mudah2</span></p>
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label" data-correct="true">
@@ -383,7 +388,7 @@
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Mana dibawah ini yang paling berbeda  </p>                
+                <p>Mana dibawah ini yang paling berbeda <span class="invisible-word">Mudah3</span></p>                
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label" data-correct="true">
@@ -496,9 +501,11 @@
         </div>
     </div>
     <button class="calculate-score-button" style="margin-top:50px;">Calculate Score</button>
-    <button class="calculate-score-button1" id="calculate-score1">CSVSession</button>
-
-    <button id="processVideoButton" onclick="calculateAndLogSkor()">See Current Total Score</button>
+    <form method="get" action="{{ route('logout') }}">
+        @csrf <!-- Include a CSRF token for security -->
+        <button type="submit">Logout</button>
+    </form>
+    <button id="processVideoButton" onclick="calculateAndLogSkor()" style="display: none;">See Current Total Score</button>
     
 
     <!-- <div class="dropdown">
@@ -526,6 +533,19 @@
             const submitButton = document.getElementById('submit-button');
             
             submitButton.addEventListener('click', function (event) {
+
+                const sourceBQuestions = [
+                    { Question: 'Narsisisme juga dapat diartikan sebagai bentuk\ndar… memperoleh perhatian dan pemujaan atas dirinya.\n', Score: -1 },
+                    { Question: 'Body Image merupakan imajinasi subyektif yang dimi…hnya harus disesuaikan dengan persepsi - persepsi', Score: -1 },
+                    { Question: 'Sistem patriarki yang ... perempuan dan lelaki tid…nkan terjadi oleh sebagian besar warga masyarakat', Score: -1 },
+                    { Question: 'Husein Mutahar: WR Soepratman: Ismail Marzuki= .......', Score: -1 },
+                    { Question: 'Bumi: Jupiter: Saturnus = ........', Score: -1 },
+                    { Question: 'Kertas : Karet : Resin = .......', Score: -1 },
+                    { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nA, C, E, G, ...\n', Score: -1 },
+                    { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nE,H, M, P, ...\n', Score: -1 },
+                    { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nX, XII, X, XV, X, XIX, X, ...\n', Score: -1 }
+                ];
+                questionData.push(...sourceBQuestions);
                 const rawScore = parseInt(calculateRawScore(), 10);
                 const skorValidasiCognitif = (parseInt(rawScore, 10) * 1) + skor;
 
@@ -542,27 +562,29 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log(data.message);
+                    $.ajax({
+                        type: "POST",
+                        url: '/processAllvideo',
+                        data: {
+                            skorValidasiCognitif: skorValidasiCognitif
+                        },
+                        timeout: 1800000, // 30 minutes in milliseconds (30 * 60 * 1000)
+                        success: function (response) {
+                            // Handle the response from the server
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error:', error);
+                        }
+                    });
                 })
+                
                 .catch(error => {
                     console.error('Error storing data in session:', error);
                 });
 
                 var sessionValues = {};
                 
-                $.ajax({
-                    type: "POST",
-                    url: '/processAllvideo',
-                    data: {
-                        skorValidasiCognitif: skorValidasiCognitif
-                    },
-                    timeout: 1800000, // 30 minutes in milliseconds (30 * 60 * 1000)
-                    success: function (response) {
-                        // Handle the response from the server
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error:', error);
-                    }
-                });
+                
                 
                 window.location.href = "{{ route('beforeresult') }}";
                 location.reload();
@@ -578,7 +600,7 @@
             const skorValidasiCognitif = parseInt(skor, 10) + rawScore;
 
             // Log skorValidasiCognitif to the console
-            console.log("skorValidasiCognitif:", skorValidasiCognitif);
+            // console.log("skorValidasiCognitif:", skorValidasiCognitif);
         }
     </script>
     
@@ -795,7 +817,7 @@
             });
 
             var sessionData = @json(session()->all());
-            console.log(sessionData);
+            // console.log(sessionData);
             return correctAnswers;
         }
 
@@ -852,8 +874,22 @@
             const score = radioInput ? (radioInput.parentElement.getAttribute('data-correct') === 'true' ? 1 : 0) : 0;
 
             questionData.push({ Question: question, Score: score });
+            
         });
+        const sourceBQuestions = [
+                { Question: 'Narsisisme juga dapat diartikan sebagai bentuk\ndar… memperoleh perhatian dan pemujaan atas dirinya.\n', Score: -1 },
+                { Question: 'Body Image merupakan imajinasi subyektif yang dimi…hnya harus disesuaikan dengan persepsi - persepsi', Score: -1 },
+                { Question: 'Sistem patriarki yang ... perempuan dan lelaki tid…nkan terjadi oleh sebagian besar warga masyarakat', Score: -1 },
+                { Question: 'Husein Mutahar: WR Soepratman: Ismail Marzuki= .......', Score: -1 },
+                { Question: 'Bumi: Jupiter: Saturnus = ........', Score: -1 },
+                { Question: 'Kertas : Karet : Resin = .......', Score: -1 },
+                { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nA, C, E, G, ...\n', Score: -1 },
+                { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nE,H, M, P, ...\n', Score: -1 },
+                { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nX, XII, X, XV, X, XIX, X, ...\n', Score: -1 }
+            ];
 
+            // Add the questions from source B to the end of the questionData array
+        questionData.push(...sourceBQuestions);
         // Add event listeners to radio inputs
         document.querySelectorAll('.radio-input').forEach((input, index) => {
             input.addEventListener('change', (event) => {
@@ -874,36 +910,36 @@
             });
         });
 
-        document.getElementById('calculate-score1').addEventListener('click', function () {
-            const sourceBQuestions = [
-                { Question: 'Narsisisme juga dapat diartikan sebagai bentuk\ndar… memperoleh perhatian dan pemujaan atas dirinya.\n', Score: -1 },
-                { Question: 'Body Image merupakan imajinasi subyektif yang dimi…hnya harus disesuaikan dengan persepsi - persepsi', Score: -1 },
-                { Question: 'Sistem patriarki yang ... perempuan dan lelaki tid…nkan terjadi oleh sebagian besar warga masyarakat', Score: -1 },
-                { Question: 'Husein Mutahar: WR Soepratman: Ismail Marzuki= .......', Score: -1 },
-                { Question: 'Bumi: Jupiter: Saturnus = ........', Score: -1 },
-                { Question: 'Kertas : Karet : Resin = .......', Score: -1 },
-                { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nA, C, E, G, ...\n', Score: -1 },
-                { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nE,H, M, P, ...\n', Score: -1 },
-                { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nX, XII, X, XV, X, XIX, X, ...\n', Score: -1 }
-            ];
+        // document.getElementById('calculate-score1').addEventListener('click', function () {
+        //     const sourceBQuestions = [
+        //         { Question: 'Narsisisme juga dapat diartikan sebagai bentuk\ndar… memperoleh perhatian dan pemujaan atas dirinya.\n', Score: -1 },
+        //         { Question: 'Body Image merupakan imajinasi subyektif yang dimi…hnya harus disesuaikan dengan persepsi - persepsi', Score: -1 },
+        //         { Question: 'Sistem patriarki yang ... perempuan dan lelaki tid…nkan terjadi oleh sebagian besar warga masyarakat', Score: -1 },
+        //         { Question: 'Husein Mutahar: WR Soepratman: Ismail Marzuki= .......', Score: -1 },
+        //         { Question: 'Bumi: Jupiter: Saturnus = ........', Score: -1 },
+        //         { Question: 'Kertas : Karet : Resin = .......', Score: -1 },
+        //         { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nA, C, E, G, ...\n', Score: -1 },
+        //         { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nE,H, M, P, ...\n', Score: -1 },
+        //         { Question: 'Pilihlah pola yang tepat pada soal di bawah ini:\nX, XII, X, XV, X, XIX, X, ...\n', Score: -1 }
+        //     ];
 
-            // Add the questions from source B to the end of the questionData array
-            questionData.push(...sourceBQuestions);
-            fetch('/add-data-to-session', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
-                body: JSON.stringify({ questionData })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data.message);
-            })
-            .catch(error => {
-                console.error('Error storing data in session:', error);
-            });
-        });
+        //     // Add the questions from source B to the end of the questionData array
+        //     questionData.push(...sourceBQuestions);
+        //     fetch('/add-data-to-session', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        //         },
+        //         body: JSON.stringify({ questionData })
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         console.log(data.message);
+        //     })
+        //     .catch(error => {
+        //         console.error('Error storing data in session:', error);
+        //     });
+        // });
     </script>
 

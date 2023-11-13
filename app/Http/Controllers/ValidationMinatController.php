@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use App\Models\penilaian;
+// use App\Models\penilaian;
+use App\Models\penilaianBeo;
 use App\Models\Users;
 
 use Illuminate\Support\Facades\View;
@@ -152,7 +153,7 @@ class ValidationMinatController extends Controller
         // dd($value);
         $userId  = Session::get('user_id');
         //dd($value);
-        $data = penilaian::where('id_user', $userId)->get(); // Filter data based on user_id        // $length = count($data);
+        $data = penilaianBeo::where('id_user', $userId)->get(); // Filter data based on user_id        // $length = count($data);
         // dd($length);
 
         return view('beforeresult', ['data' => $data]);
@@ -166,7 +167,7 @@ class ValidationMinatController extends Controller
         // dd($value);
         //$userId  = Session::get('user_id');
         //dd($value);
-        $data = penilaian::where('id_penilaian', $itemId)->get(); // Filter data based on user_id        // $length = count($data);
+        $data = penilaianBeo::where('id_penilaian', $itemId)->get(); // Filter data based on user_id        // $length = count($data);
         $dataUser = Users::where('id', $userId)->get();
         // dd($length);
         //dd($dataUser[0]->nama_lengkap);

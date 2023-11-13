@@ -255,6 +255,10 @@
             transform: translateX(-50%);
             white-space: nowrap;
         }
+        .invisible-word {
+            visibility: hidden; /* or */
+            color: transparent;
+        }
 
     </style>
 </head>
@@ -337,7 +341,7 @@
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Mana dibawah ini yang paling berbeda</p>
+                <p>Mana dibawah ini yang paling berbeda <span class="invisible-word">Sedang1</span></p>
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label"  data-correct="true">
@@ -361,7 +365,7 @@
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Mana dibawah ini yang paling berbeda </p>
+                <p>Mana dibawah ini yang paling berbeda <span class="invisible-word">Sedang2</span></p>
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label" data-correct="true">
@@ -385,7 +389,7 @@
             </li>
             <li class="question">
                 <h1>Question:</h1>
-                <p>Mana dibawah ini yang paling berbeda  </p>
+                <p>Mana dibawah ini yang paling berbeda <span class="invisible-word">Sedang3</span></p>
                 <div class="answer-form">
                     <form class="answer-form">
                         <label class="radio-label" data-correct="true">
@@ -756,21 +760,21 @@
             // Attach a click event listener to the submit button
             submitButton.addEventListener('click', function(event) {
                 event.preventDefault(); // Prevent the default form submission
-                fetch('/add-data-to-session', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    body: JSON.stringify({ questionData })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.message);
-                })
-                .catch(error => {
-                    console.error('Error storing data in session:', error);
-                });
+                // fetch('/add-data-to-session', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                //     },
+                //     body: JSON.stringify({ questionData })
+                // })
+                // .then(response => response.json())
+                // .then(data => {
+                //     console.log(data.message);
+                // })
+                // .catch(error => {
+                //     console.error('Error storing data in session:', error);
+                // });
                 const skor = calculateRawScore(); // Replace this with the actual calculation
 
                 // Set the skor value in a session variable
@@ -781,22 +785,7 @@
                 // Define a threshold value
                 const threshold = 15; // Ganti mbe jumlag h benarnya
 
-                // Taruh detail soal individu dan jawabannya di session
-                fetch('/add-data-to-session', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    body: JSON.stringify({ questionData })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.message);
-                })
-                .catch(error => {
-                    console.error('Error storing data in session:', error);
-                });
+                
                 // Taruh Nilai keseluruhan di Session
                 fetch('/store-skor-in-session', {
                     method: 'POST',
@@ -818,6 +807,22 @@
                         // Handle error if needed
                         console.error('Failed to store skor in session.');
                     }
+                });
+                // Taruh detail soal individu dan jawabannya di session
+                fetch('/add-data-to-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    body: JSON.stringify({ questionData })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(error => {
+                    console.error('Error storing data in session:', error);
                 });
             });
         });

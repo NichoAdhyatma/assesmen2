@@ -25,9 +25,21 @@
         .card-description {
             margin-top: 10px;
         }
+        .testButton {
+            background-color: #0f33ff;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 20px;
+            width: 20%;
+            height: 60px;
+            color: #ffff;
+            border-color: #ffff;
+            margin-top: 20px
+        }
     </style>
 </head>
 <body>
+    
     @foreach ($data->reverse() as $item)
     <a href="{{ route('resultID', ['itemId' => $item->id_penilaian]) }}" style="text-decoration: none;color: black;"">
         <div class="card">
@@ -38,6 +50,12 @@
         </div>
     </a>
     @endforeach
+
+    <form method="get" action="{{ route('logout') }}">
+        @csrf <!-- Include a CSRF token for security -->
+        <button type="submit" class="testButton" style="margin-bottom: 20px;margin-left: 20px;">Logout</button>
+    </form>
+
 </body>
 </html>
 

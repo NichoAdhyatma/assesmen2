@@ -19,11 +19,14 @@ class DragImg():
             self.img = cv2.imread(self.path, cv2.IMREAD_UNCHANGED)
         else:
             self.img = cv2.imread(self.path)
-        new_width = int((200 / self.img.shape[0]) * self.img.shape[1])
 
-        # Resize the image to the target height (200) while preserving the aspect ratio
-        self.img = cv2.resize(self.img, (new_width, 200))
-
+        
+        if self.img.shape[1] > self.img.shape[0]:
+            new_height = int((200 / self.img.shape[1]) * self.img.shape[0])
+            self.img = cv2.resize(self.img, (200, new_height))
+        else:
+            new_width = int((200 / self.img.shape[0]) * self.img.shape[1])
+            self.img = cv2.resize(self.img, (new_width, 200))    
         self.size = self.img.shape[:2]
 
     def update(self, cursor):
@@ -66,7 +69,7 @@ cap.set(3, 1280)
 cap.set(4, 720)
 detector = HandDetector(detectionCon=1)
 
-path = "D:/tele-asesment python/voice-face-analysis/images"
+# path = "D:/tele-asesment python/voice-face-analysis/images"
 # mylist = os.listdir(path)
 # print(mylist)
 listImg = []
@@ -165,7 +168,7 @@ while True:
             if True:
                 questionImage = mcq.imgQuestion
                 # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/ddImages/{questionImage}")
+                bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                 # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                 new_height = 200   
@@ -189,7 +192,7 @@ while True:
                         imgType = 'png'
                     else:
                         imgType = 'jpg'
-                    listImg.append(DragImg(f'{path}/{ansImg}', [200 + distImg * 200, 175], imgType,imgid))
+                    listImg.append(DragImg(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
                     distImg += 1
                     imgid += 1
                     hasShowimg = 1
@@ -262,7 +265,7 @@ while True:
 
             questionImage = mcq.imgQuestion
             # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-            bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/ddImages/{questionImage}")
+            bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
             # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
             new_height = 200   
@@ -278,7 +281,7 @@ while True:
 
             
             for i, ans in enumerate(mcq.Ans):
-                x = 100 if i % 2 == 0 else 400
+                x = 100 if i % 2 == 0 else 650
                 y = 250 if i < 2 else 400
                 img, bboxAns = cvzone.putTextRect(img, ans, [x, y], 2, 2, offset=50, border=2)
                 if i == 0:
@@ -308,20 +311,6 @@ while True:
         for mcq in mcqList:
             if (mcq.answer == mcq.userAns):
                 score += 1
-        # score = round((score/qTotal)*100,2)
-        # img, _ = cvzone.putTextRect(img, "Quiz Completed",[250, 300],2, 2, offset=50, border=5)
-        # img, _ = cvzone.putTextRect(img, f'Your Score: {score}%',[700, 300], 2, 2, offset=50, border=5)
-        # img, bboxDone = cvzone.putTextRect(img, "Selesai",[700, 900], 2, 2, offset=50, border=5)
-        # cv2.rectangle(img, (700, 500), (900, 600), [0, 255, 0], 2)
-        # if hands:
-        #     lmlist = hands[0]['lmList']
-        #     cursor = lmlist[8]
-        #     length, info, img = detector.findDistance(lmlist[8], lmlist[4], img)
-
-        #     if length < 60:
-        #         cursor = lmlist[8]
-        #         selesai = mcq.submit(cursor,bboxDone)
-        #         if selesai == True:
 
         # Penentuan ke soal susah atau mudah
 
@@ -333,7 +322,7 @@ while True:
                     if True:
                         questionImage = mcqS.imgQuestion
                         # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                        bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/ddImages{questionImage}")
+                        bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                         # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                         new_height = 200   
@@ -357,7 +346,7 @@ while True:
                                 imgType = 'png'
                             else:
                                 imgType = 'jpg'
-                            listImg.append(DragImg(f'{path}/{ansImg}', [200 + distImg * 200, 175], imgType,imgid))
+                            listImg.append(DragImg(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
                             distImg += 1
                             imgid += 1
                             hasShowimg = 1
@@ -393,7 +382,7 @@ while True:
                             if (id_jawaban != None) and (time.time() - last_click_time) >= 1:
                                 mcqS.update(cursor,bboxSubmit,id_jawaban)
                                 if mcqS.userAns is not None:
-                                    qNo+=1
+                                    qNoSusah+=1
                                     listImg.clear()
                                     id_jawaban =None
                                     distImg = 0
@@ -430,7 +419,7 @@ while True:
 
                     questionImage = mcqS.imgQuestion
                     # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                    bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/ddImages/{questionImage}")
+                    bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                     # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                     new_height = 200   
@@ -446,7 +435,7 @@ while True:
 
                     
                     for i, ans in enumerate(mcqS.Ans):
-                        x = 100 if i % 2 == 0 else 400
+                        x = 100 if i % 2 == 0 else 650
                         y = 250 if i < 2 else 400
                         img, bboxAns = cvzone.putTextRect(img, ans, [x, y], 2, 2, offset=50, border=2)
                         if i == 0:
@@ -477,7 +466,7 @@ while True:
                     if (mcqS.answer == mcqS.userAns):
                         scoreSusah += 2
                 scoreper = round((scoreSusah/(qTotalSusah*2))*100,2)
-                img, _ = cvzone.putTextRect(img, "Quiz Completed",[250, 300],2, 2, offset=50, border=5)
+                img, _ = cvzone.putTextRect(img, "Quiz Completed",[400, 300],2, 2, offset=50, border=5)
                 # img, _ = cvzone.putTextRect(img, f'Your Score: {scoreper}%',[700, 300], 2, 2, offset=50, border=5)
                 img, bboxDone = cvzone.putTextRect(img, "Selesai",[500, 500], 2, 2, offset=50, border=5)
 
@@ -500,7 +489,7 @@ while True:
                     if True:
                         questionImage = mcqM.imgQuestion
                         # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                        bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/ddImages/{questionImage}")
+                        bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                         # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                         new_height = 200   
@@ -524,7 +513,7 @@ while True:
                                 imgType = 'png'
                             else:
                                 imgType = 'jpg'
-                            listImg.append(DragImg(f'{path}/{ansImg}', [200 + distImg * 200, 175], imgType,imgid))
+                            listImg.append(DragImg(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
                             distImg += 1
                             imgid += 1
                             hasShowimg = 1
@@ -597,7 +586,7 @@ while True:
 
                     questionImage = mcqM.imgQuestion
                     # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                    bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/ddImages/{questionImage}")
+                    bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                     # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                     new_height = 200   
@@ -613,7 +602,7 @@ while True:
 
                     
                     for i, ans in enumerate(mcqM.Ans):
-                        x = 100 if i % 2 == 0 else 400
+                        x = 100 if i % 2 == 0 else 650
                         y = 250 if i < 2 else 400
                         img, bboxAns = cvzone.putTextRect(img, ans, [x, y], 2, 2, offset=50, border=2)
                         if i == 0:
@@ -643,7 +632,7 @@ while True:
                     if (mcqM.answer == mcqM.userAns):
                         scoreMudah += 1
                 # scoreper = round((scoreMudah/qTotalMudah)*100,2)
-                img, _ = cvzone.putTextRect(img, "Quiz Completed",[250, 300],2, 2, offset=50, border=5)
+                img, _ = cvzone.putTextRect(img, "Quiz Completed",[400, 300],2, 2, offset=50, border=5)
                 # img, _ = cvzone.putTextRect(img, f'Your Score: {scoreper}%',[700, 300], 2, 2, offset=50, border=5)
                 img, bboxDone = cvzone.putTextRect(img, "Selesai",[500, 500], 2, 2, offset=50, border=5)
                 

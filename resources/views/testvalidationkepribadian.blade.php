@@ -2205,7 +2205,7 @@
     <button id="calculate-button" style="display:none">Calculate (Kepribadian)</button>
     <button id="calculate-button-bakmi" style="display: none;">Calculate (Minat)</button> 
     <button id="calculate-button-bakat" style="display: none;">Calculate (Bakat)</button> 
-    <button class="calculate-score-button" id="calculate-score">Calculate Score</button>
+    <button class="calculate-score-button" id="calculate-score" style="display: none;">Calculate Score</button>
     
     <button id="submit-button" class="submit-button" disabled title="Please finish all questions">Submit</button>
     <br>
@@ -2367,22 +2367,6 @@
                 .catch(error => {
                     console.error('Error storing data in session:', error);
                 });
-                fetch('/append-to-csv', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    },
-                    body: JSON.stringify({ questionData })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.message);
-                })
-                .catch(error => {
-                    console.error('Error appending data to CSV:', error);
-                });
-                // After calling calculateScores(), you can redirect to the 'testvalidation' route
                 window.location.href = "{{ route('testvalidation1') }}";
             });
         });

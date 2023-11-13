@@ -192,14 +192,14 @@
 
 <body>
     <div class="intro--banner">
-        <h1>Tes Interview 1</h1>
+        <h1>Live Cognition Test</h1>
     </div>
 
     <div class="contact--lockup">
         <div id="video-container-" style="height:100%; width:100%; padding-top:75px">
 
         @php
-            $videoDir = public_path('assets/video/Extraversion'); // Specify the path to your video folder.
+            $videoDir = public_path('assets/video/LiveCognition'); // Specify the path to your video folder.
             $videoFiles = glob($videoDir . '/*.mp4'); // Get all .mp4 files in the folder.
 
             if (count($videoFiles) > 0) {
@@ -210,7 +210,7 @@
         @endphp
 
         <video id="main-video" controls autoplay style="width: 100%; height: 65vh;">
-            <source src="{{ asset('assets/video/Extraversion/' . $randomVideo) }}" type="video/mp4">
+            <source src="{{ asset('assets/video/LiveCognition/' . $randomVideo) }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
@@ -219,13 +219,13 @@
             
             <form method="POST" action="{{ route('execute.python') }}">
                 @csrf
-                <button type="submit">Mulai Tes</button>
+                <button type="submit" class="testButton" style="margin-bottom: 20px;">Mulai Tes</button>
             </form>
 
 
-            <a href="{{ route('get-data') }}" class="special-link-button">
+            <!-- <a href="{{ route('get-data') }}" class="special-link-button">
                 <button id="nextButton" class="testButton" style="margin-bottom: 20px;" disabled >Lanjut ke tes berikutnya</button>
-            </a>
+            </a> -->
 
             
 

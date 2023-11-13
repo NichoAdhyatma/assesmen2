@@ -505,9 +505,11 @@ X, XII, X, XV, X, XIX, X, ...
         </div>
     </div>
     <button class="calculate-score-button" style="margin-top:50px;">Calculate Score</button>
-    <button class="calculate-score-button1" id="calculate-score1">CSVSession</button>
-
-    <button id="processVideoButton" onclick="calculateAndLogSkor()">See Current Total Score</button>
+    <form method="get" action="{{ route('logout') }}">
+        @csrf <!-- Include a CSRF token for security -->
+        <button type="submit">Logout</button>
+    </form>
+    <button id="processVideoButton" onclick="calculateAndLogSkor()" style="display: none;">See Current Total Score</button>
     
 
     <!-- <div class="dropdown">
@@ -544,6 +546,7 @@ X, XII, X, XV, X, XIX, X, ...
     <script>
         
         document.addEventListener('DOMContentLoaded', function () {
+            
             const submitButton = document.getElementById('submit-button');
             
             submitButton.addEventListener('click', function (event) {
@@ -553,146 +556,43 @@ X, XII, X, XV, X, XIX, X, ...
                 const skorValidasiCognitif = (parseInt(rawScore, 10) * 2) + skor;
                 // Prevent the default form submission behavior
                 event.preventDefault();
-                // fetch('/add-data-to-session', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                //     },
-                //     body: JSON.stringify({ questionData })
-                // })
-                // .then(response => response.json())
-                // .then(data => {
-                //     console.log(data.message);
-                // })
-                // .catch(error => {
-                //     console.error('Error storing data in session:', error);
-                // });
+                fetch('/add-data-to-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                    body: JSON.stringify({ questionData })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    $.ajax({
+                        type: "POST",
+                        url: '/processAllvideo',
+                        data: {
+                            skorValidasiCognitif: skorValidasiCognitif
+                        },
+                        timeout: 1800000, // 30 minutes in milliseconds (30 * 60 * 1000)
+                        success: function (response) {
+                            // window.location.href = "{{ route('beforeresult') }}";
+                            // location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error:', error);
+                        }
+                    });
+                    
+                })
+                .catch(error => {
+                    console.error('Error storing data in session:', error);
+                });
                 var sessionValues = {};
                 
-                $.ajax({
-                    type: "POST",
-                    url: '/processAllvideo',
-                    data: {
-                        skorValidasiCognitif: skorValidasiCognitif
-                    },
-                    timeout: 1800000, // 30 minutes in milliseconds (30 * 60 * 1000)
-                    success: function (response) {
-                        // Handle the response from the server
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error:', error);
-                    }
-                });
+                
                 var sessionData = @json(session()->all());
-                console.log(sessionData);
-                
+                // console.log(sessionData);
 
                 
-
-                // // $skor_validasi_cognitif = skorValidasiCognitif;
-                // // dd($skor_validasi_cognitif);
-                // // console.log($skor_validasi_cognitif);
-                
-
-                // //Tabel Penilaian
-                // // ID Penilaian = autoIncrement
-                // // ID User
-                // $userid = sessionData.user_id;
-                // // Tanggal Penilaian = CurrentDate
-
-                // // Struktur Tele-assesmen interview (Kepribadian,Bakat,Minat) (14data dipisah koma) per  atribut
-                
-                // // Sentimen Positif Facial
-                // $f_sentimen_positif = sessionData.positive_scoreExtraversion + "," + sessionData.positive_scoreConscientiousness + "," + sessionData.positive_scoreAgreeableness + "," + sessionData.positive_scoreOpenness + "," + sessionData.positive_scoreNeuroticism + "," + sessionData.positive_scoreRealistic + "," + sessionData.positive_scoreInvestigative + "," + sessionData.positive_scoreArtistic + "," + sessionData.positive_scoreSocial + "," + sessionData.positive_scoreEnterprising + "," + sessionData.positive_scoreConventional + "," + sessionData.positive_scorePerseptual + "," + sessionData.positive_scorePsikomotor + "," + sessionData.positive_scoreIntelektual;
-                // // $f_sentimen_positif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Sentimen Netral Facial
-                // $f_sentimen_netral = sessionData.neutral_scoreExtraversion + "," + sessionData.neutral_scoreConscientiousness + "," + sessionData.neutral_scoreAgreeableness + "," + sessionData.neutral_scoreOpenness + "," + sessionData.neutral_scoreNeuroticism + "," + sessionData.neutral_scoreRealistic + "," + sessionData.neutral_scoreInvestigative + "," + sessionData.neutral_scoreArtistic + "," + sessionData.neutral_scoreSocial + "," + sessionData.neutral_scoreEnterprising + "," + sessionData.neutral_scoreConventional + "," + sessionData.neutral_scorePerseptual + "," + sessionData.neutral_scorePsikomotor + "," + sessionData.neutral_scoreIntelektual;
-                // // $f_sentimen_netral = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Sentimen Negatif Facial
-                // $f_sentimen_negatif = sessionData.negative_scoreExtraversion + "," + sessionData.negative_scoreConscientiousness + "," + sessionData.negative_scoreAgreeableness + "," + sessionData.negative_scoreOpenness + "," + sessionData.negative_scoreNeuroticism + "," + sessionData.negative_scoreRealistic + "," + sessionData.negative_scoreInvestigative + "," + sessionData.negative_scoreArtistic + "," + sessionData.negative_scoreSocial + "," + sessionData.negative_scoreEnterprising + "," + sessionData.negative_scoreConventional + "," + sessionData.negative_scorePerseptual + "," + sessionData.negative_scorePsikomotor + "," + sessionData.negative_scoreIntelektual;
-                // // $f_sentimen_negatif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Sentimen Positif Voice
-                // $v_sentimen_positif = sessionData.posExtraversion + "," + sessionData.posConscientiousness + "," + sessionData.posAgreeableness + "," + sessionData.posOpenness + "," + sessionData.posNeuroticism + "," + sessionData.posRealistic + "," + sessionData.posInvestigative + "," + sessionData.posArtistic + "," + sessionData.posSocial + "," + sessionData.posEnterprising + "," + sessionData.posConventional + "," + sessionData.posPerseptual + "," + sessionData.posPsikomotor + "," + sessionData.posIntelektual;
-                // // $v_sentimen_positif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Sentimen Netral Voice
-                // $v_sentimen_netral = sessionData.neuExtraversion + "," + sessionData.neuConscientiousness + "," + sessionData.neuAgreeableness + "," + sessionData.neuOpenness + "," + sessionData.neuNeuroticism + "," + sessionData.neuRealistic + "," + sessionData.neuInvestigative + "," + sessionData.neuArtistic + "," + sessionData.neuSocial + "," + sessionData.neuEnterprising + "," + sessionData.neuConventional + "," + sessionData.neuPerseptual + "," + sessionData.neuPsikomotor + "," + sessionData.neuIntelektual;
-                // // $v_sentimen_netral = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Sentimen Negatif voice
-                // $v_sentimen_negatif = sessionData.negExtraversion + "," + sessionData.negConscientiousness + "," + sessionData.negAgreeableness + "," + sessionData.negOpenness + "," + sessionData.negNeuroticism + "," + sessionData.negRealistic + "," + sessionData.negInvestigative + "," + sessionData.negArtistic + "," + sessionData.negSocial + "," + sessionData.negEnterprising + "," + sessionData.negConventional + "," + sessionData.negPerseptual + "," + sessionData.negPsikomotor + "," + sessionData.negIntelektual;
-                // // $v_sentimen_negatif = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // Validation Score
-                // $validation_score = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + sessionData.resultPer + ","+ sessionData.resultPsi + ","+ sessionData.resultInt ;
-                // // $validation_score = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-                // // %Kepercayaan
-                // $kepercayaan = sessionData.trustExtraversion + "," + sessionData.trustConscientiousness + "," + sessionData.trustAgreeableness + "," + sessionData.trustOpenness + "," + sessionData.trustNeuroticism + "," + sessionData.trustRealistic + "," + sessionData.trustInvestigative + "," + sessionData.trustArtistic + "," + sessionData.trustSocial + "," + sessionData.trustEnterprising + "," + sessionData.trustConventional + "," + sessionData.trustPerseptual + "," + sessionData.trustPsikomotor + "," + sessionData.trustIntelektual;
-                // // $kepercayaan = "1,2,3,4,5,6,7,8,9,10,11,12,13,14"
-
-
-                // // [Untuk tes cognitive video]
-                // // RawScore(9Data Dipisah Koma)
-                // $skor_validasi = sessionData.skorVideo; 
-                // // Validasi bakat minat kepribadian
-                // // RawScore(14 Data dipisah koma)
-                // $skor_validasi_kepribadianbakatminat = sessionData.resultExtraversion + "," + sessionData.resultConscien + "," + sessionData.resultAgree + "," + sessionData.resultIntellect + "," + sessionData.resultEmotionalStability + "," + sessionData.resultR + "," + sessionData.resultI + "," + sessionData.resultA + "," + sessionData.resultS + "," + sessionData.resultE + "," + sessionData.resultC + "," + sessionData.resultPer + ","+ sessionData.resultPsi + ","+ sessionData.resultInt ;
-                // // Validasi Cognitive
-                // // Raw Score(9Data dipisah koma) -> 9 Penilaian jadikan 1 data hingga berikut
-                // $skor_validasi_cognitif = skorValidasiCognitif;
-                // // $skor_validasi_cognitif = calculateScore();
-                // //const csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-                // $.ajax({
-                //     type: "POST",
-                //     url: '{{route('postPenilaian') }}',
-                //     data: {
-                //         // Your request data goes here
-                //         id_user: sessionData.user_id,
-                //         f_sentimen_positif: $f_sentimen_positif,
-                //         f_sentimen_netral: $f_sentimen_netral,
-                //         f_sentimen_negatif: $f_sentimen_negatif,
-                //         v_sentimen_positif: $v_sentimen_positif,
-                //         v_sentimen_netral: $v_sentimen_netral,
-                //         v_sentimen_negatif: $v_sentimen_negatif,
-                //         skor_validasi: $validation_score,
-                //         kepercayaan: $kepercayaan,
-                //         cognitive_video_score: $skor_validasi,
-                //         skor_validasi_kepribadianbakatminat: $skor_validasi_kepribadianbakatminat,
-                //         skor_validasi_cognitif: $skor_validasi_cognitif,
-
-
-                //         // ...
-                //     },
-                //     headers: {
-                //         // Set the CSRF token in the request header
-                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                //     },
-                //     success: function(response) {
-
-                //         console.log("YEEE")
-                //     },
-                //     error: function(xhr, status, error) {
-                //         console.log("Fail")
-                //     }
-                // });
-
-               
-
-                // Set up your AJAX request
-                // console.log($skor_validasi_kepribadianbakatminat);
-                // $dataArray = $skor_validasi_kepribadianbakatminat.split(',');
-                // console.log($dataArray);
-
-                // After calling calculateScores(), you can redirect to the 'testvalidation' route
-                
-                window.location.href = "{{ route('beforeresult') }}";
-                location.reload();
             });
         });
     </script>
@@ -910,7 +810,7 @@ X, XII, X, XV, X, XIX, X, ...
             });
 
             var sessionData = @json(session()->all());
-            console.log(sessionData);
+            // console.log(sessionData);
             return correctAnswers;
         }
 
@@ -940,6 +840,7 @@ X, XII, X, XV, X, XIX, X, ...
 
         // Add an event listener to each radio button
         questionsArray.forEach((question) => {
+            
             const form = question.querySelector('form.answer-form');
             const radioInputs = form.querySelectorAll('input[type="radio"]');
 
@@ -963,9 +864,9 @@ X, XII, X, XV, X, XIX, X, ...
             { Question: 'Dalam perkembangan teknologi informasi, konektivit…data dan informasi dengan cepat di seluruh dunia.', Score: -1 },
             { Question: 'Pemahaman ........ teori psikologi membantu dalam …asi pola perilaku manusia dalam berbagai konteks.', Score: -1 },
             { Question: 'Dalam bidang ekonomi, konsep inflasi mengacu pada.…-harga barang dan jasa dalam suatu periode waktu.', Score: -1 },
-            { Question: 'Mana dibawah ini yang paling berbeda', Score: -1 },
-            { Question: 'Mana dibawah ini yang paling berbeda', Score: -1 },
-            { Question: 'Mana dibawah ini yang paling berbeda', Score: -1 },
+            { Question: 'Mana dibawah ini yang paling berbeda Mudah1', Score: -1 },
+            { Question: 'Mana dibawah ini yang paling berbeda Mudah2', Score: -1 },
+            { Question: 'Mana dibawah ini yang paling berbeda Mudah3', Score: -1 },
             { Question: 'Sejalan : .... =', Score: -1 },
             { Question: 'Statis : ..... =', Score: -1 },
             { Question: 'Keras Kepala : .... =', Score: -1 }
@@ -998,24 +899,6 @@ X, XII, X, XV, X, XIX, X, ...
                 // Log the updated data (you can send it to the server as needed)
                 console.log(questionData);
             });
-        });
-
-        // document.getElementById('calculate-score1').addEventListener('click', function () {
-        //     fetch('/add-data-to-session', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-        //         },
-        //         body: JSON.stringify({ questionData })
-        //     })
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         console.log(data.message);
-        //     })
-        //     .catch(error => {
-        //         console.error('Error storing data in session:', error);
-        //     });
-        // });
+        }); 
     </script>
 

@@ -140,5 +140,20 @@ class resultController extends Controller
         return $pdf->download('sample-with-image.pdf');
     }
 
+    public function downloadCsv()
+    {
+        $filePath = public_path('csv/csvKep/csvKep.csv'); // Path to your CSV file
+
+        if (file_exists($filePath)) {
+            $headers = [
+                'Content-Type' => 'text/csv',
+            ];
+
+            return response()->download($filePath, 'csvKep.csv', $headers);
+        } else {
+            // Handle file not found
+            return response('File not found.', 404);
+        }
+    }
 
 }

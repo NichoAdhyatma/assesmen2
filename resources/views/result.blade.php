@@ -111,7 +111,7 @@
 </head>
 <body>
     <div class="main-container">
-        <div class="logo-container">
+        <div class="logo-container" style="margin-top:20px;">
             <a class="header--logo" href="https://maxy.academy/">
                 <img src="{{ asset('assets/img/logo-maxy-header.png') }}" alt="Global">
 
@@ -133,14 +133,17 @@
         
         <div class="action-container">
             <div class="pdf-class">
-                <button id="generatePdfButton">Generate PDF</button>
-                <a href="{{ route('download-pdf') }}" class="btn btn-primary">Download PDF</a>
+                <!-- <button id="generatePdfButton">Generate PDF</button>
+                <a href="{{ route('download-pdf') }}" class="btn btn-primary">Download PDF</a> -->
+                <button id="captureAndConvert">Download as PNG</button>
+                <button id="downloadCsvButton">Download CSV</button>
+
             </div>
-            <div>
+            <!-- <div>
                 <button id="captureAndConvert">Capture as Image</button>
                 <a href="{{ route('convert.image') }}" class="btn btn-primary">Convert Image to PDF</a>
                 
-            </div>
+            </div> -->
 
         </div>
 
@@ -187,14 +190,18 @@
             $scoreArrayfneg = explode(',', $data->f_sentimen_negatif);
             $scoreArrayfneg = array_map('floatval', $scoreArrayfneg);
 
-            $scoreArrayvpos = explode(',', $data->v_sentimen_positif);
-            $scoreArrayvpos = array_map('floatval', $scoreArrayvpos);
+            // $scoreArrayvpos = explode(',', $data->v_sentimen_positif);
+            // $scoreArrayvpos = array_map('floatval', $scoreArrayvpos);
 
-            $scoreArrayvneu = explode(',', $data->v_sentimen_netral);
-            $scoreArrayvneu = array_map('floatval', $scoreArrayvneu);
+            // $scoreArrayvneu = explode(',', $data->v_sentimen_netral);
+            // $scoreArrayvneu = array_map('floatval', $scoreArrayvneu);
 
-            $scoreArrayvneg = explode(',', $data->v_sentimen_negatif);
-            $scoreArrayvneg = array_map('floatval', $scoreArrayvneg);
+            // $scoreArrayvneg = explode(',', $data->v_sentimen_negatif);
+            // $scoreArrayvneg = array_map('floatval', $scoreArrayvneg);
+
+            $scoreArrayv = explode(',', $data->v_sentimen);
+            $scoreArrayv = array_map('floatval', $scoreArrayv);
+
 
             $scoreArrayvalidasi = explode(',', $data->skor_validasi);
             $scoreArrayvalidasi = array_map('floatval', $scoreArrayvalidasi);
@@ -221,7 +228,7 @@
                     <th class="vertical-header">Netral</th>
                     <th class="vertical-header">Positif</th>
                     <th class="vertical-header">Skor Validasi</th>
-                    <th class="vertical-header">%Kepercayaan</th>
+                    <th class="vertical-header">SkorKepercayaan</th>
                 </tr>
             </thead>
             <tbody>
@@ -846,9 +853,7 @@
         var scoreArrayfpos = <?php echo json_encode($scoreArrayfpos); ?>;
         var scoreArrayfneu = <?php echo json_encode($scoreArrayfneu); ?>;
         var scoreArrayfneg = <?php echo json_encode($scoreArrayfneg); ?>;
-        var scoreArrayvpos = <?php echo json_encode($scoreArrayvpos); ?>;
-        var scoreArrayvneu = <?php echo json_encode($scoreArrayvneu); ?>;
-        var scoreArrayvneg = <?php echo json_encode($scoreArrayvneg); ?>;
+        var scoreArrayv = <?php echo json_encode($scoreArrayv); ?>;
         var scoreArrayvalidasi = <?php echo json_encode($scoreArrayvalidasi); ?>;
         var scoreArraykepercayaan = <?php echo json_encode($scoreArraykepercayaan); ?>;
         console.log(rows.length)
@@ -866,13 +871,14 @@
                 var fpos = parseFloat(scoreArrayfpos[indexData]);
                 var fneg = parseFloat(scoreArrayfneg[indexData]);
                 var fneu = parseFloat(scoreArrayfneu[indexData]);
-                var vpos = parseFloat(scoreArrayvpos[indexData]);
-                var vneg = parseFloat(scoreArrayvneg[indexData]);
-                var vneu = parseFloat(scoreArrayvneu[indexData]);
+                var voice = parseFloat(scoreArrayv[indexData]);
+                // var vpos = parseFloat(scoreArrayvpos[indexData]);
+                // var vneg = parseFloat(scoreArrayvneg[indexData]);
+                // var vneu = parseFloat(scoreArrayvneu[indexData]);
 
                 // Find the maximum value and its corresponding index
                 var maxF = Math.max(fpos, fneg, fneu);
-                var maxV = Math.max(vpos, vneg, vneu);
+                // var maxV = Math.max(vpos, vneg, vneu);
 
                 if (maxF === fneu) {
                     rows[i].cells[3].textContent = "◯"; // "Fpos" column
@@ -882,11 +888,11 @@
                     rows[i].cells[4].textContent = "◯"; // "Fneu" column
                 }
 
-                if (maxV === vneu) {
+                if (voice == 3) {
                     rows[i].cells[6].textContent = "◯"; // "Vpos" column
-                } else if (maxV === vneg) {
+                } else if (voice < 3 ) {
                     rows[i].cells[5].textContent = "◯"; // "Vneg" column
-                } else if (maxV === vpos) {
+                } else if (voice > 3) {
                     rows[i].cells[7].textContent = "◯"; // "Vneu" column
                 }
 
@@ -1089,6 +1095,7 @@
         }
     </script>
 
+    <!-- Script untuk dapat gambar -->
     <script>
         document.getElementById('captureAndConvert').addEventListener('click', function() {
             html2canvas(document.body).then(function(canvas) {
@@ -1124,6 +1131,28 @@
             });
         });
     </script>
+
+    <!-- Script Untuk download csv -->
+    <script>
+        document.getElementById('downloadCsvButton').addEventListener('click', function() {
+            // Perform an AJAX request to trigger the download
+            fetch('/download-csv')
+                .then(response => {
+                    return response.blob();
+                })
+                .then(blob => {
+                    // Create a temporary link to download the file
+                    const url = window.URL.createObjectURL(new Blob([blob]));
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'csvKep.csv'; // Name of the downloaded file
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                });
+        });
+    </script>
+
 
 
 

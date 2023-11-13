@@ -10,6 +10,10 @@ use App\Http\Controllers\banksoalvalidasikepribadianController;
 use App\Http\Controllers\bankSoalValidasiCognitiveController;
 use App\Http\Controllers\bankSoalDDController;
 use App\Http\Controllers\APIController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +26,7 @@ use App\Http\Controllers\APIController;
 |
 */
 
+// Welcome page
 Route::get('/', function () {
     return view('welcome');
 });
@@ -32,8 +37,12 @@ Route::get('/login', function () {
 })->name('login');
 Route::post('/signup', [AuthController::class, 'postSignUp'])->name('postSignUp');
 Route::post('/signin', [AuthController::class, 'postSignIn'])->name('postSignIn');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// Route::get('/logout', 'AuthController@logout')->name('logout');
 
 
+// Consent Page
 Route::get('/consent', function () {
     return view('consent');
 })->name('consent');
@@ -52,7 +61,7 @@ Route::get('/gotoValidationBakat', function () {
     return view('testvalidationBakat');
 });
 
-// Rute untuk menggabung nilai dan 
+// Rute untuk menggabung nilai dan mengirim ke database
 Route::post('/postPenilaian', [ValidationMinatController::class, 'postPenilaian'])->name('postPenilaian');
 Route::get('/postPenilaian', function () {
     return view('beforeresult');
@@ -61,7 +70,7 @@ Route::get('/postPenilaian', function () {
 
 
 Route::get('/signup', function () {
-    return view('consent');
+    return view('login');
 });
 Route::get('/signin', function () {
     return view('consent');
@@ -220,8 +229,7 @@ Route::get('/generate-pdf', [resultController::class, 'generatePDF']);
 Route::get('/download-pdf', [resultController::class, 'downloadPDF'])->name('download-pdf');
 
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+
 Route::get('/upload', function () {
     return view('insertvideo');
 });
@@ -244,7 +252,7 @@ Route::post('/upload', function (Request $request) {
 
 
 
-// Buat Skor
+// Buat Test validation 1, untuk menyimpan skor sementara buat dibawa ke halaman tes mudah atau susah
 Route::post('/store-skor-in-session', function (Request $request) {
     $skorData = $request->json()->all();
     if (isset($skorData['skor'])) {
@@ -254,52 +262,24 @@ Route::post('/store-skor-in-session', function (Request $request) {
         return response()->json(['error' => 'Skor data not provided.'], 400);
     }
 });
-
 Route::get('/store-skor-in-session', function () {
     return view('testvalidation1');
 });
 
-Route::post('/store-skor-in-session2', function (Request $request) {
-    $skorData = $request->json()->all();
-    if (isset($skorData['skor'])) {
-        Session::put('skor2', $skorData['skor']);
-        return response()->json(['message' => 'Skor stored in session.']);
-    } else {
-        return response()->json(['error' => 'Skor data not provided.'], 400);
-    }
-});
-
-Route::get('/store-skor-in-session2', function () {
-    return view('testvalidation2');
-});
-
-Route::post('/store-skor-in-sessionVideo', function (Request $request) {
-    $skorData = $request->json()->all();
-    if (isset($skorData['skor'])) {
-        Session::put('skorVideo', $skorData['skor']);
-        return response()->json(['message' => 'Skor stored in session.']);
-    } else {
-        return response()->json(['error' => 'Skor data not provided.'], 400);
-    }
-});
-
-Route::get('/store-skor-in-sessionVideo', function () {
-    return view('testvalidation2');
-});
-
-
+// Rute Untuk Execute dd.py untuk live cognitive test
 Route::get('/execute-python', function () {
     return view('dd');
 })->name('dd');
-
 Route::post('/execute-python', [VideoController::class, 'executePython'])->name('execute.python');
 
-
+// Fungsi Untuk Ubah halaman result/psikogram menjadi pdf dan png
 Route::post('/save-screenshot', [resultController::class,'save']);
 Route::get('/imgToPdf', [resultController::class,'imgToPdf']);
 Route::get('/convert-image-to-pdf', [resultController::class,'convertImageToPdf'])->name('convert.image');;
-
 Route::get('/generate-pdf',[resultController::class,'generatePDFfromBlade'])->name('/generate-pdf');
+// Untuk mendapatkan CSV dari halaman result
+Route::get('/download-csv', [resultController::class,'downloadCsv'])->name('download-csv');
+
 
 // Testing Bank Soal
 Route::resource('questions', 'banksoalvalidasikepribadianController');
@@ -342,7 +322,7 @@ Route::get('/test-get-data', [banksoalvalidasikepribadianController::class, 'get
 // Untuk Append CSV ValidationMinatController
 Route::post('/append-to-csv', [ValidationMinatController::class,'appendToCSV'])->name('/append-to-csv');
 
-// Coba gabungin data pertanyaan ke session
+// Untuk gabungin data pertanyaan ke session
 Route::post('/store-data-in-session', [ValidationMinatController::class, 'storeDataInSession']);
 Route::post('/add-data-to-session', [ValidationMinatController::class, 'addDataToSession']);
 

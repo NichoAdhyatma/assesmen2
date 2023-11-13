@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Users;
+use Illuminate\Support\Facades\Session;
+
 
 class AuthController extends Controller
 {
@@ -148,6 +150,15 @@ class AuthController extends Controller
     public function __invoke(Request $request)
     {
         //
+    }
+
+    public function logout()
+    {
+        // Clear all session data
+        Session::flush();
+
+        // Redirect to a page or route after logout (e.g., the login page)
+        return redirect()->route('login'); // Replace 'login' with your desired route
     }
 
     

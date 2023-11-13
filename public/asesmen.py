@@ -25,62 +25,35 @@ audio_name = "C:\\xamppMaxy\\htdocs\\assessment-test-lp\\public\\audiofile\\audi
 # video_name = sys.argv[1]
 # print(video_name)
 def main():
-    # actual_duration = calculate_actual_duration(video_name)
-    # print(actual_duration)
-    # Round the duration to the nearest second
-    # rounded_duration = round(actual_duration)
-    # print(rounded_duration)
     video = moviepy.editor.VideoFileClip(video_name)
-    # video = video.subclip(0, rounded_duration)
-    # return actual_duration
-    
-
-    # Perform face sentiment analysis on the video
-    # video_prediction_df = face_sentiment(video_name)
-    # Extract the Audio
-    audio = video.audio
-    # return audio
-    # Export the Audio
-    audio.write_audiofile(audio_name)
-
-# def calculate_actual_duration(video_name):
-    
-#     # Load the video using VideoFileClip
-#     video = moviepy.editor.VideoFileClip(video_name)
-
-#     # Get the duration of the video in seconds
-#     duration_in_seconds = video.duration
-
-#     # Close the video file
-#     video.close()
-
-#     return duration_in_seconds
+    # audio = video.audio
+    # audio.write_audiofile(audio_name)
 
 
 # Analyst Voice to Text
-def voice_sentiment():
-    # Initialize recognizer class
-    r = sr.Recognizer()
-    # make audio object
-    audio = sr.AudioFile(audio_name)
-    # read audio object and transcribe
-    with audio as source:
-        audio = r.record(source)
-        result = r.recognize_google(audio, language="id-ID")
+# def voice_sentiment():
+#     # Initialize recognizer class
+#     r = sr.Recognizer()
+#     # make audio object
+#     audio = sr.AudioFile(audio_name)
+#     # read audio object and transcribe
+#     with audio as source:
+#         audio = r.record(source)
+#         result = r.recognize_google(audio, language="id-ID")
 
-    # print(result)
-    # Translate to ENG
-    translator = Translator()
-    trans_res = translator.translate(result)
-    # print(trans_res)
+#     # print(result)
+#     # Translate to ENG
+#     translator = Translator()
+#     trans_res = translator.translate(result)
+#     # print(trans_res)
 
-    # Analyst
+#     # Analyst
     
-    Sentence = [str(trans_res)]
-    analyser = SentimentIntensityAnalyzer()
-    for i in Sentence:
-        v = analyser.polarity_scores(i)
-    return v
+#     Sentence = [str(trans_res)]
+#     analyser = SentimentIntensityAnalyzer()
+#     for i in Sentence:
+#         v = analyser.polarity_scores(i)
+#     return v
 
 
 def face_sentiment(video_path):
@@ -94,25 +67,6 @@ def face_sentiment(video_path):
     # Convert ke dataframe
     video_prediction_df = pd.DataFrame(video_prediction)
     return video_prediction_df
-
-    # print(video_prediction_df)
-    # Nama CSV
-    # csv_file_path = "result.csv"
-
-    # Save Dataframe ke CSV
-    # video_prediction_df.to_csv(csv_file_path, index=False)
-
-    # Modifikasi CSV
-    # df = pd.read_csv("result.csv")
-    # Menambah "contempt" pada CSV dengan rata - rata "AU12 dan AU14"
-    # Bisa diubah sesuai kebutuhan
-    # df["contempt"] = df.loc[:, ["AU12","AU14"]].mean(axis = 1)
-    # Filter kolom pada csv dan simpan pada variabel baru
-    # happiness = df["happiness"]
-    # Hasil penjumlahan
-    # sadness = df["sadness"].sum()
-    # Hasil rata - rata
-    # contempt = df["contempt"].mean()
 
 def resultcalc(video_prediction_df):
     video_prediction_df = video_prediction_df.astype({'anger': 'float64', 'disgust': 'float64', 'fear': 'float64', 'sadness': 'float64', 'happiness': 'float64', 'surprise': 'float64', 'neutral': 'float64', 'AU12': 'float64', 'AU14': 'float64'})
@@ -129,7 +83,7 @@ def resultcalc(video_prediction_df):
 
 main()
 # print(video)
-audio_res = voice_sentiment()
+# audio_res = voice_sentiment()
 # print(audio_res)
 video_prediction_df = face_sentiment(video_name)
 negative_score, positive_score, neutral_score, trust_score = resultcalc(video_prediction_df)
@@ -141,10 +95,10 @@ trust_score = round(trust_score, 3)
 # # print(negative_score)
 import json
 output_data = {
-    "neg": round(audio_res.get('neg', 0.0), 3),
-    "neu": round(audio_res.get('neu', 0.0), 3),
-    "pos": round(audio_res.get('pos', 0.0), 3),
-    "compound": round(audio_res.get('compound', 0.0), 3),
+    # "neg": round(audio_res.get('neg', 0.0), 3),
+    # "neu": round(audio_res.get('neu', 0.0), 3),
+    # "pos": round(audio_res.get('pos', 0.0), 3),
+    # "compound": round(audio_res.get('compound', 0.0), 3),
     "negative_score": negative_score,
     "positive_score": positive_score,
     "neutral_score": neutral_score,
