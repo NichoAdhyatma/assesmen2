@@ -101,7 +101,7 @@ scoreMudah = 0
 
 # Keperluan soal sedang
 
-pathCSV = "C:/xamppMaxy/htdocs/assessment-test-lp/public/csv/csvDD/dd.csv"
+pathCSV = "/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/csv/csvDD/dd.csv"
 
 with open(pathCSV,newline='\n') as f:
     reader = csv.reader(f)
@@ -119,7 +119,7 @@ last_click_time = time.time() - 60
 hasShowimg = 0
 
 # Keperluan soal susah
-pathCSVSusah = "C:/xamppMaxy/htdocs/assessment-test-lp/public/csv/csvDD/ddSusah.csv"
+pathCSVSusah = "/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/csv/csvDD/ddSusah.csv"
 
 with open(pathCSVSusah,newline='\n') as f:
     reader = csv.reader(f)
@@ -135,7 +135,7 @@ qTotalSusah = len(dataAllSusah)
 # print("Qtotal susah = ",qTotalSusah)
 
 # Keperluan soal Mudah
-pathCSVMudah = "C:/xamppMaxy/htdocs/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
+pathCSVMudah = "/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
 
 with open(pathCSVMudah,newline='\n') as f:
     reader = csv.reader(f)
@@ -168,7 +168,7 @@ while True:
             if True:
                 questionImage = mcq.imgQuestion
                 # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                bbox_image = cv2.imread(f"/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                 # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                 new_height = 200   
@@ -192,7 +192,7 @@ while True:
                         imgType = 'png'
                     else:
                         imgType = 'jpg'
-                    listImg.append(DragImg(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
+                    listImg.append(DragImg(f"/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
                     distImg += 1
                     imgid += 1
                     hasShowimg = 1
@@ -265,7 +265,7 @@ while True:
 
             questionImage = mcq.imgQuestion
             # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-            bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+            bbox_image = cv2.imread(f"/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
             # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
             new_height = 200   
@@ -322,7 +322,7 @@ while True:
                     if True:
                         questionImage = mcqS.imgQuestion
                         # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                        bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                        bbox_image = cv2.imread(f"/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                         # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                         new_height = 200   
@@ -346,7 +346,7 @@ while True:
                                 imgType = 'png'
                             else:
                                 imgType = 'jpg'
-                            listImg.append(DragImg(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
+                            listImg.append(DragImg(f"C/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
                             distImg += 1
                             imgid += 1
                             hasShowimg = 1
@@ -419,7 +419,7 @@ while True:
 
                     questionImage = mcqS.imgQuestion
                     # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                    bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                    bbox_image = cv2.imread(f"/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                     # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                     new_height = 200   
@@ -489,7 +489,7 @@ while True:
                     if True:
                         questionImage = mcqM.imgQuestion
                         # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                        bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                        bbox_image = cv2.imread(f"/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                         # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                         new_height = 200   
@@ -513,7 +513,7 @@ while True:
                                 imgType = 'png'
                             else:
                                 imgType = 'jpg'
-                            listImg.append(DragImg(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
+                            listImg.append(DragImg(f"/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
                             distImg += 1
                             imgid += 1
                             hasShowimg = 1
@@ -586,7 +586,7 @@ while True:
 
                     questionImage = mcqM.imgQuestion
                     # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                    bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                    bbox_image = cv2.imread(f"/var/www/moon.torodeveloper.co/public_html/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                     # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                     new_height = 200   

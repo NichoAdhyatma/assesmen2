@@ -16,44 +16,13 @@ from pydub import AudioSegment
 
 testvar = sys.argv[1]
 testvar = testvar.replace("'", '')
-# print(testvar)
-# video_name = "C:\\xamppMaxy\\htdocs\\assessment-test-lp\\public\\videos\\11\\video1.mp4"
+
 video_name = ""
 video_name += testvar
-# print(video_name)
-audio_name = "C:\\xamppMaxy\\htdocs\\assessment-test-lp\\public\\audiofile\\audio_test.wav"
-# video_name = sys.argv[1]
-# print(video_name)
+
+
 def main():
     video = moviepy.editor.VideoFileClip(video_name)
-    # audio = video.audio
-    # audio.write_audiofile(audio_name)
-
-
-# Analyst Voice to Text
-# def voice_sentiment():
-#     # Initialize recognizer class
-#     r = sr.Recognizer()
-#     # make audio object
-#     audio = sr.AudioFile(audio_name)
-#     # read audio object and transcribe
-#     with audio as source:
-#         audio = r.record(source)
-#         result = r.recognize_google(audio, language="id-ID")
-
-#     # print(result)
-#     # Translate to ENG
-#     translator = Translator()
-#     trans_res = translator.translate(result)
-#     # print(trans_res)
-
-#     # Analyst
-    
-#     Sentence = [str(trans_res)]
-#     analyser = SentimentIntensityAnalyzer()
-#     for i in Sentence:
-#         v = analyser.polarity_scores(i)
-#     return v
 
 
 def face_sentiment(video_path):
@@ -82,9 +51,6 @@ def resultcalc(video_prediction_df):
 
 
 main()
-# print(video)
-# audio_res = voice_sentiment()
-# print(audio_res)
 video_prediction_df = face_sentiment(video_name)
 negative_score, positive_score, neutral_score, trust_score = resultcalc(video_prediction_df)
 negative_score = round(negative_score, 3)
@@ -95,10 +61,6 @@ trust_score = round(trust_score, 3)
 # # print(negative_score)
 import json
 output_data = {
-    # "neg": round(audio_res.get('neg', 0.0), 3),
-    # "neu": round(audio_res.get('neu', 0.0), 3),
-    # "pos": round(audio_res.get('pos', 0.0), 3),
-    # "compound": round(audio_res.get('compound', 0.0), 3),
     "negative_score": negative_score,
     "positive_score": positive_score,
     "neutral_score": neutral_score,

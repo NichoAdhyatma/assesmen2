@@ -35,7 +35,7 @@ return [
     
     'pdf' => [
         'enabled' => true,
-        'binary' => '"C:\xamppMaxy\htdocs\assessment-test-lp\public\wkhtmltopdf\bin\wkhtmltopdf"',
+        'binary' => '"\var\www\moon.torodeveloper.co\public_html\assessment-test-lp\public\wkhtmltopdf\bin\wkhtmltopdf"',
         'timeout' => 3600, // Increase the timeout to 120 seconds or more
         'options' => [],
         'env' => [],
@@ -43,7 +43,7 @@ return [
     
     'image' => [
         'enabled' => true,
-        'binary' => '"C:\xamppMaxy\htdocs\assessment-test-lp\public\wkhtmltopdf\bin\wkhtmltoimage"',
+        'binary' => '"\var\www\moon.torodeveloper.co\public_html\assessment-test-lp\public\wkhtmltopdf\bin\wkhtmltoimage"',
         'timeout' => 3600, // Increase the timeout to 120 seconds or more
         'options' => [],
         'env' => [],
