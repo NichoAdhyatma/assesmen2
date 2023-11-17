@@ -366,11 +366,11 @@ class VideoController extends Controller
         set_time_limit(5040);
         $pythonScriptPath = base_path('public\dd.py');
         $output = shell_exec("python $pythonScriptPath");
-
+        // dd($output);
         // Extract and clean the score from the output
         $output = trim($output); // Remove leading/trailing whitespace
         $score = intval($output); // Convert to an integer
-
+        // dd($score);
         // Save the score in a session variable
         Session::put('skorVideo', $score);
 

@@ -2,9 +2,9 @@ Question,QuestionImg,ansimg1,ansimg2,ansimg3,answer4,Answer,type
 Pola Berikutnya Adalah?,Sulit1.png,Sulit1A.png,Sulit1B.png,Sulit1C.png,Sulit1D.png,4,drag
 Pola Berikutnya Adalah?,Sulit2.png,Sulit2A.png,Sulit2B.png,Sulit2C.png,Sulit2D.png,1,drag
 Pernyataan Yang Benar Adalah?,Sulit3.png,"Edy lebih pandai dari Viki","Viki lebih pandai dari Amir","Ani lebih pandai dari Amir","Viki kurang pandai dibanding Ani",2,clickQuestion,Sulit4.png,ansimg1,ansimg2,ansimg3,answer4,2,click
-Pernyataan Yang Benar Adalah?,Sulit4.png,Semua OB ikut rapat rutin,Semua OB itu karyawan,Beberapa bukan karyawan ikut rapat rutin,Tidak semua OB ikut rapat rutin,4,click
-Gambar yang tidak sama atau tidak sekelompok dengan gambar lainnya?,Sulit5.png,1,2,3,4,3,click
-Pilih gambar yang tidak sama atau tidak sekelompok dengan gambar lainnya?,Sulit6.png,Sulit6A.png,Sulit6B.png,Sulit6C.png,Sulit6D.png,2,drag
-Pilih gambar yang tidak sama atau tidak sekelompok dengan gambar lainnya?,Sulit7.png,1,2,3,4,2,click
-Pilih gambar yang tidak sama atau tidak sekelompok dengan gambar lainnya?,Sulit8.png,1,2,3,4,3,click
-Pilih gambar yang tidak sama atau tidak sekelompok dengan gambar lainnya?,Sulit9.png,1,2,3,4,4,click
+Pernyataan Yang Benar Adalah?,Sulit4.png,Semua OB ikut rapat rutin,,Beberapa bukan karyawan ikut rapat rutin,Semua OB itu karyawanTidak semua OB ikut rapat rutin,4,click
+Gambar yang tidak sekelompok dengan gambar lainnya?,Sulit5.png,1,2,3,4,3,click
+Pilih gambar yang tidak sekelompok dengan gambar lainnya?,Sulit6.png,Sulit6A.png,Sulit6B.png,Sulit6C.png,Sulit6D.png,2,drag
+Pilih gambar yang tidak sekelompok dengan gambar lainnya?,Sulit7.png,1,2,3,4,2,click
+Pilih gambar yang tidak sekelompok dengan gambar lainnya?,Sulit8.png,1,2,3,4,3,click
+Pilih gambar yang tidak sekelompok dengan gambar lainnya?,Sulit9.png,1,2,3,4,4,click

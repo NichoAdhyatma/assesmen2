@@ -4,35 +4,68 @@ import cvzone
 import os
 from cvzone.HandTrackingModule import HandDetector
 import time
+import requests
+import numpy as np
+from io import BytesIO
+from io import StringIO
+import time
+
+# class DragImg():
+#     # next_id = 1  # Class variable to automatically assign IDs
+
+#     def __init__(self, path, posOrigin, imgType, imgid):
+#         self.img_id = imgid  # Assign the next available ID
+#         # DragImg.next_id += 1  # Increment the ID counter
+#         self.posOrigin = posOrigin
+#         self.imgType = imgType
+#         self.path = path
+
+#         if self.imgType == 'png':
+#             self.img = cv2.imread(self.path, cv2.IMREAD_UNCHANGED)
+#         else:
+#             self.img = cv2.imread(self.path)
+#         # print("UKURANNYA BEB = ",self.img.shape[1]," , ",self.img.shape[0])
+#         print("Imagenya beb = ",self.img)
+        
+#         if self.img.shape[1] > self.img.shape[0]:
+#             new_height = int((200 / self.img.shape[1]) * self.img.shape[0])
+#             self.img = cv2.resize(self.img, (200, new_height))
+#         else:
+#             new_width = int((200 / self.img.shape[0]) * self.img.shape[1])
+#             self.img = cv2.resize(self.img, (new_width, 200))    
+#         self.size = self.img.shape[:2]
+
+#     def update(self, cursor):
+#         ox, oy = self.posOrigin
+#         h, w = self.size
+#         if (ox < cursor[0] < ox+w) and (oy < cursor[1] < oy+h):
+#             self.posOrigin = cursor[0] - w // 2, cursor[1] - h // 2
 
 class DragImg():
-    # next_id = 1  # Class variable to automatically assign IDs
-
-    def __init__(self, path, posOrigin, imgType, imgid):
-        self.img_id = imgid  # Assign the next available ID
-        # DragImg.next_id += 1  # Increment the ID counter
+    def __init__(self, image_data, posOrigin, imgType, imgid):
+        self.img_id = imgid
         self.posOrigin = posOrigin
         self.imgType = imgType
-        self.path = path
+        self.image_data = image_data  # Use the image data directly
 
-        if self.imgType == 'png':
-            self.img = cv2.imread(self.path, cv2.IMREAD_UNCHANGED)
-        else:
-            self.img = cv2.imread(self.path)
-
-        
+        # if self.imgType == 'png':
+        #     self.img = cv2.imdecode(self.image_data, cv2.IMREAD_COLOR)
+        # else:
+        #     self.img = cv2.imdecode(self.image_data, cv2.IMREAD_COLOR)
+        self.img = self.image_data
         if self.img.shape[1] > self.img.shape[0]:
             new_height = int((200 / self.img.shape[1]) * self.img.shape[0])
             self.img = cv2.resize(self.img, (200, new_height))
         else:
             new_width = int((200 / self.img.shape[0]) * self.img.shape[1])
-            self.img = cv2.resize(self.img, (new_width, 200))    
+            self.img = cv2.resize(self.img, (new_width, 200))
+
         self.size = self.img.shape[:2]
 
     def update(self, cursor):
         ox, oy = self.posOrigin
         h, w = self.size
-        if (ox < cursor[0] < ox+w) and (oy < cursor[1] < oy+h):
+        if (ox < cursor[0] < ox + w) and (oy < cursor[1] < oy + h):
             self.posOrigin = cursor[0] - w // 2, cursor[1] - h // 2
 
 class MCQ():
@@ -101,54 +134,83 @@ scoreMudah = 0
 
 # Keperluan soal sedang
 
-pathCSV = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/dd.csv"
-
-with open(pathCSV,newline='\n') as f:
-    reader = csv.reader(f)
-    dataAll = list(reader)[1:]
-# print(dataAll)
-
+# Local
+# C:\xamppMaxy\htdocs\assessment-test-lp\public
+# pathCSV = "C:/xamppMaxy/htdocs/assessment-test-lp/public/csv/csvDD/dd.csv"
+# Server
+url_csv = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/dd.csv"
+response = requests.get(url_csv)
+csv_content = response.text
+# pathCSV = response.text
+reader = csv.reader(StringIO(csv_content))
+next(reader)
 mcqList = []
-for q in dataAll:
-    mcqList.append(MCQ(q))
+qTotal = 0
+for row in reader:
+    mcqList.append(MCQ(row))
+    qTotal += 1
+
+
+# Depreciated, Fungsi lama untuk dapat dari file CSV
+# with open(pathCSV,newline='\n') as f:
+#     reader = csv.reader(f)
+#     dataAll = list(reader)[1:]
+# print(dataAll)
+# mcqList = []
+# for q in dataAll:
+#     mcqList.append(MCQ(q))
 
 
 qNo = 0 
-qTotal = len(dataAll)
+
+
 last_click_time = time.time() - 60 
+hasShowques = 0
 hasShowimg = 0
 
+
 # Keperluan soal susah
-pathCSVSusah = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddSusah.csv"
-
-with open(pathCSVSusah,newline='\n') as f:
-    reader = csv.reader(f)
-    dataAllSusah = list(reader)[1:]
-# print(dataAllSusah)
-
+# Local
+# C:\xamppMaxy\htdocs\assessment-test-lp\public
+# pathCSVSusah = "C:/xamppMaxy/htdocs/assessment-test-lp/public/csv/csvDD/ddSusah.csv"
+url_csv = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddSusah.csv"
+response = requests.get(url_csv)
+csv_content = response.text
+reader = csv.reader(StringIO(csv_content))
+next(reader)
 mcqListSusah = []
-for q in dataAllSusah:
-    mcqListSusah.append(MCQ(q))
+qTotalSusah = 0
+for row in reader:
+    mcqListSusah.append(MCQ(row))
+    qTotalSusah += 1
+
+
 
 qNoSusah = 0 
-qTotalSusah = len(dataAllSusah)
+
 # print("Qtotal susah = ",qTotalSusah)
 
 # Keperluan soal Mudah
-pathCSVMudah = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
-
-with open(pathCSVMudah,newline='\n') as f:
-    reader = csv.reader(f)
-    dataAllMudah = list(reader)[1:]
-# print(dataAllMudah)
-
+# Local
+# C:\xamppMaxy\htdocs\assessment-test-lp\public
+# pathCSVMudah = "C:/xamppMaxy/htdocs/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
+url_csv = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
+response = requests.get(url_csv)
+csv_content = response.text
+reader = csv.reader(StringIO(csv_content))
+next(reader)
 mcqListMudah = []
-for q in dataAllMudah:
-    mcqListMudah.append(MCQ(q))
+qTotalMudah = 0
+for row in reader:
+    mcqListMudah.append(MCQ(row))
+    qTotalMudah += 1
+
+# Server
+# pathCSVMudah = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
 
 
 qNoMudah = 0 
-qTotalMudah = len(dataAllMudah)
+# qTotalMudah = len(dataAllMudah)
 # print("Qtotal mudah = ",qTotalMudah)
 
 
@@ -168,7 +230,17 @@ while True:
             if True:
                 questionImage = mcq.imgQuestion
                 # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                # Local
+                # C:\xamppMaxy\htdocs\assessment-test-lp\public
+                # bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                # Server
+                # bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                if hasShowques == 0:
+                    url = f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}"
+                    response = requests.get(url)
+                    img_array_ques = np.asarray(bytearray(response.content), dtype=np.uint8)
+                    hasShowques = 1
+                bbox_image = cv2.imdecode(img_array_ques, cv2.IMREAD_COLOR)
                 # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                 new_height = 200   
@@ -192,7 +264,24 @@ while True:
                         imgType = 'png'
                     else:
                         imgType = 'jpg'
-                    listImg.append(DragImg(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
+                    # Local
+                    # C:\xamppMaxy\htdocs\assessment-test-lp\public
+                    # listImg.append(DragImg(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
+                    url = f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}"
+
+                    # Download the image from the URL
+                    response = requests.get(url)
+                    img_array = np.asarray(bytearray(response.content), dtype=np.uint8)
+
+                    # Decode the image using OpenCV
+                    answer_image = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                    
+                    # Assuming imgType, imgid, and distImg are already defined
+                    listImg.append(DragImg(answer_image, [100 + distImg * 250, 175], imgType, imgid))
+                    # print(ansImg)
+
+                    # Server
+                    # listImg.append(DragImg(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
                     distImg += 1
                     imgid += 1
                     hasShowimg = 1
@@ -210,10 +299,10 @@ while True:
                 for imgS in listImg:
                     h, w = imgS.size
                     ox, oy = imgS.posOrigin
-                    if imgS.imgType == 'png':
-                        img = cvzone.overlayPNG(img, imgS.img, [ox, oy])
-                    else:
-                        img[oy:oy+h, ox:ox+w] = imgS.img
+                    # if imgS.imgType == 'png':
+                    #     img = cvzone.overlayPNG(img, imgS.img, [ox, oy])
+                    # else:
+                    img[oy:oy+h, ox:ox+w] = imgS.img
             except:
                 pass
             # print("Id Jawaban = ",id_jawaban)
@@ -225,7 +314,7 @@ while True:
 
                 if length < 60:
                     cursor = lmlist[8]
-                    if (id_jawaban != None) and (time.time() - last_click_time) >= 1:
+                    if (id_jawaban != None) and (time.time() - last_click_time) >= 1.5:
                         mcq.update(cursor,bboxSubmit,id_jawaban)
                         if mcq.userAns is not None:
                             qNo+=1
@@ -234,7 +323,9 @@ while True:
                             distImg = 0
                             imgid = 1
                             hasShowimg = 0
+                            hasShowques = 0
                             cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + new_width, bbox_y + new_height), (0, 0, 0), cv2.FILLED)
+
                             # Test ubah gambar
                             
                             
@@ -265,7 +356,21 @@ while True:
 
             questionImage = mcq.imgQuestion
             # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-            bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+
+            # Local
+            # C:\xamppMaxy\htdocs\assessment-test-lp\public
+            # print(questionImage)
+            # bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+            # print(bbox_image)
+            # Server
+            # bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+            if hasShowques == 0:
+                url = f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}"
+                response = requests.get(url)
+                img_array_ques = np.asarray(bytearray(response.content), dtype=np.uint8)
+                hasShowques = 1
+            bbox_image = cv2.imdecode(img_array_ques, cv2.IMREAD_COLOR)
+
             # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
             new_height = 200   
@@ -299,12 +404,19 @@ while True:
                 cursor = lmList[8]
                 length, info, img = detector.findDistance(lmList[8], lmList[4], img)
                 # print(length)
-                if (length < 60) and (time.time() - last_click_time) >= 1:  # Check if the delay has passed
+                if (length < 60) and (time.time() - last_click_time) >= 1.5:  # Check if the delay has passed
                     mcq.updateClick(cursor,[bbox1 , bbox2, bbox3, bbox4])
                     # print(mcq.userAns)
                     last_click_time = time.time()  # Update the last click time
                     if mcq.userAns is not None:
                         qNo+=1
+                        listImg.clear()
+                        id_jawaban =None
+                        distImg = 0
+                        imgid = 1
+                        hasShowimg = 0
+                        hasShowques = 0
+                        
     # After Tidak ada lagi pertanyaan 
     else:
         score = 0
@@ -314,7 +426,7 @@ while True:
 
         # Penentuan ke soal susah atau mudah
 
-        if(score >= 1):
+        if(score >=12):
             if qNoSusah<qTotalSusah:
                 mcqS = mcqListSusah[qNoSusah]
                 if mcqS.type == 'drag':
@@ -322,7 +434,17 @@ while True:
                     if True:
                         questionImage = mcqS.imgQuestion
                         # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                        bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                        # Local
+                        # C:\xamppMaxy\htdocs\assessment-test-lp\public 
+                        # bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                        if hasShowques == 0:
+                            url = f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}"
+                            response = requests.get(url)
+                            img_array = np.asarray(bytearray(response.content), dtype=np.uint8)
+                            hasShowques = 1
+                        bbox_image = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                        # Server
+                        # bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                         # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                         new_height = 200   
@@ -346,7 +468,22 @@ while True:
                                 imgType = 'png'
                             else:
                                 imgType = 'jpg'
-                            listImg.append(DragImg(f"Chttps://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
+                            # Local
+                            # C:\xamppMaxy\htdocs\assessment-test-lp\public
+                            # listImg.append(DragImg(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
+                            url = f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}"
+
+                            # Download the image from the URL
+                            response = requests.get(url)
+                            img_array = np.asarray(bytearray(response.content), dtype=np.uint8)
+
+                            # Decode the image using OpenCV
+                            answer_image = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            
+                            # Assuming imgType, imgid, and distImg are already defined
+                            listImg.append(DragImg(answer_image, [100 + distImg * 250, 175], imgType, imgid))
+                            # Server
+                            # listImg.append(DragImg(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
                             distImg += 1
                             imgid += 1
                             hasShowimg = 1
@@ -364,10 +501,10 @@ while True:
                         for imgS in listImg:
                             h, w = imgS.size
                             ox, oy = imgS.posOrigin
-                            if imgS.imgType == 'png':
-                                img = cvzone.overlayPNG(img, imgS.img, [ox, oy])
-                            else:
-                                img[oy:oy+h, ox:ox+w] = imgS.img
+                            # if imgS.imgType == 'png':
+                            #     img = cvzone.overlayPNG(img, imgS.img, [ox, oy])
+                            # else:
+                            img[oy:oy+h, ox:ox+w] = imgS.img
                     except:
                         pass
                     # print("Id Jawaban = ",id_jawaban)
@@ -379,7 +516,7 @@ while True:
 
                         if length < 60:
                             cursor = lmlist[8]
-                            if (id_jawaban != None) and (time.time() - last_click_time) >= 1:
+                            if (id_jawaban != None) and (time.time() - last_click_time) >= 1.5:
                                 mcqS.update(cursor,bboxSubmit,id_jawaban)
                                 if mcqS.userAns is not None:
                                     qNoSusah+=1
@@ -388,6 +525,8 @@ while True:
                                     distImg = 0
                                     imgid = 1
                                     hasShowimg = 0
+                                    hasShowques = 0
+
                                     cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + new_width, bbox_y + new_height), (0, 0, 0), cv2.FILLED)
                                     # Test ubah gambar
                                     
@@ -419,7 +558,17 @@ while True:
 
                     questionImage = mcqS.imgQuestion
                     # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                    bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                    # Local
+                    # C:\xamppMaxy\htdocs\assessment-test-lp\public
+                    # bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                    if hasShowques == 0:
+                        url = f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}"
+                        response = requests.get(url)
+                        img_array_ques = np.asarray(bytearray(response.content), dtype=np.uint8)
+                        hasShowques = 1
+                    bbox_image = cv2.imdecode(img_array_ques, cv2.IMREAD_COLOR)
+                    # Server
+                    # bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                     # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                     new_height = 200   
@@ -453,12 +602,18 @@ while True:
                         cursor = lmList[8]
                         length, info, img = detector.findDistance(lmList[8], lmList[4], img)
                         # print(length)
-                        if (length < 60) and (time.time() - last_click_time) >= 1:  # Check if the delay has passed
+                        if (length < 60) and (time.time() - last_click_time) >= 1.5:  # Check if the delay has passed
                             mcqS.updateClick(cursor,[bbox1 , bbox2, bbox3, bbox4])
                             # print(mcqS.userAns)
                             last_click_time = time.time()  # Update the last click time
                             if mcqS.userAns is not None:
                                 qNoSusah+=1
+                                listImg.clear()
+                                id_jawaban =None
+                                distImg = 0
+                                imgid = 1
+                                hasShowimg = 0
+                                hasShowques = 0
             else:
                 scoreSusah = 0
 
@@ -489,7 +644,18 @@ while True:
                     if True:
                         questionImage = mcqM.imgQuestion
                         # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                        bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+
+                        # Local
+                        # C:\xamppMaxy\htdocs\assessment-test-lp\public
+                        # bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                        if hasShowques == 0:
+                            url = f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}"
+                            response = requests.get(url)
+                            img_array_ques = np.asarray(bytearray(response.content), dtype=np.uint8)
+                            hasShowques = 1
+                        bbox_image = cv2.imdecode(img_array_ques, cv2.IMREAD_COLOR)
+                        # Server
+                        # bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                         # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                         new_height = 200   
@@ -513,7 +679,23 @@ while True:
                                 imgType = 'png'
                             else:
                                 imgType = 'jpg'
-                            listImg.append(DragImg(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
+                            # Local
+                            # C:\xamppMaxy\htdocs\assessment-test-lp\public
+                            # print(ansImg)
+                            # listImg.append(DragImg(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
+                            url = f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}"
+
+                            # Download the image from the URL
+                            response = requests.get(url)
+                            img_array = np.asarray(bytearray(response.content), dtype=np.uint8)
+
+                            # Decode the image using OpenCV
+                            answer_image = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
+                            
+                            # Assuming imgType, imgid, and distImg are already defined
+                            listImg.append(DragImg(answer_image, [100 + distImg * 250, 175], imgType, imgid))
+                            # Server
+                            # listImg.append(DragImg(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/answerImg/{ansImg}", [100 + distImg * 250, 175], imgType,imgid))
                             distImg += 1
                             imgid += 1
                             hasShowimg = 1
@@ -531,10 +713,10 @@ while True:
                         for imgS in listImg:
                             h, w = imgS.size
                             ox, oy = imgS.posOrigin
-                            if imgS.imgType == 'png':
-                                img = cvzone.overlayPNG(img, imgS.img, [ox, oy])
-                            else:
-                                img[oy:oy+h, ox:ox+w] = imgS.img
+                            # if imgS.imgType == 'png':
+                            #     img = cvzone.overlayPNG(img, imgS.img, [ox, oy])
+                            # else:
+                            img[oy:oy+h, ox:ox+w] = imgS.img
                     except:
                         pass
                     # print("Id Jawaban = ",id_jawaban)
@@ -546,7 +728,7 @@ while True:
 
                         if length < 60:
                             cursor = lmlist[8]
-                            if (id_jawaban != None) and (time.time() - last_click_time) >= 1:
+                            if (id_jawaban != None) and (time.time() - last_click_time) >= 1.5:
                                 mcqM.update(cursor,bboxSubmit,id_jawaban)
                                 if mcqM.userAns is not None:
                                     qNoMudah+=1
@@ -555,6 +737,8 @@ while True:
                                     distImg = 0
                                     imgid = 1
                                     hasShowimg = 0
+                                    hasShowques = 0
+
                                     cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + new_width, bbox_y + new_height), (0, 0, 0), cv2.FILLED)
                                     # Test ubah gambar
                                     
@@ -586,7 +770,17 @@ while True:
 
                     questionImage = mcqM.imgQuestion
                     # cv2.rectangle(img, (bbox_x, bbox_y), (bbox_x + bbox_width, bbox_y + bbox_height), (0, 0, 0), cv2.FILLED)
-                    bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                    # Local
+                    # C:\xamppMaxy\htdocs\assessment-test-lp\public
+                    # bbox_image = cv2.imread(f"C:/xamppMaxy/htdocs/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
+                    if hasShowques == 0:
+                        url = f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}"
+                        response = requests.get(url)
+                        img_array_ques = np.asarray(bytearray(response.content), dtype=np.uint8)
+                        hasShowques = 1
+                    bbox_image = cv2.imdecode(img_array_ques, cv2.IMREAD_COLOR)
+                    # Server 
+                    # bbox_image = cv2.imread(f"https://moon.torodeveloper.co/assessment-test-lp/public/assets/InteligenceSet/Set1/questionImg/{questionImage}")
                     # bbox_height, bbox_width, _ = bbox_image.shape  # Get the width and height of the image
 
                     new_height = 200   
@@ -620,12 +814,18 @@ while True:
                         cursor = lmList[8]
                         length, info, img = detector.findDistance(lmList[8], lmList[4], img)
                         # print(length)
-                        if (length < 60) and (time.time() - last_click_time) >= 1:  # Check if the delay has passed
+                        if (length < 60) and (time.time() - last_click_time) >= 1.5:  # Check if the delay has passed
                             mcqM.updateClick(cursor,[bbox1 , bbox2, bbox3, bbox4])
                             # print(mcqM.userAns)
                             last_click_time = time.time()  # Update the last click time
                             if mcqM.userAns is not None:
                                 qNoMudah+=1
+                                listImg.clear()
+                                id_jawaban =None
+                                distImg = 0
+                                imgid = 1
+                                hasShowimg = 0
+                                hasShowques = 0
             else:
                 scoreMudah = 0
                 for mcqM in mcqListMudah:
