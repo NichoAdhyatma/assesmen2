@@ -6,8 +6,8 @@ import sys
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from pprint import pprint
 from IPython.core.display import Video
-from feat import Detector
-# from feat.detector import Detector
+# from feat import Detector
+from feat.detector import Detector
 
 
 
