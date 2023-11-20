@@ -196,7 +196,7 @@ class VideoController extends Controller
             // Disini kita perlu add ngambil voice recording dengan filter string
             // REMINDER UNTUK ENABLE SAAT BEO GA DOWN
             $filterString = $personality . '_' . $userId;
-            $filterString = "Extraversion_11"; 
+            // $filterString = "Extraversion_11"; 
             $resultAudio = $this->getRecordingData($filterString);
             $sessionNameAudio = 'voice' . $personality;
             session([$sessionNameAudio => $resultAudio]);
