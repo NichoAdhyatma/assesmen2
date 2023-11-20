@@ -5,12 +5,9 @@ import os
 import sys
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from pprint import pprint
-from googletrans import Translator, constants
 from IPython.core.display import Video
-from feat.utils.io import get_test_data_path
 from feat import Detector
-from feat.detector import Detector
-from pydub import AudioSegment
+# from feat.detector import Detector
 
 
 
