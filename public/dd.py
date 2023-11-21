@@ -97,29 +97,17 @@ class MCQ():
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), cv2.FILLED)
             return True
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(-1)
 cap.set(3, 1280)
 cap.set(4, 720)
 detector = HandDetector(detectionCon=1)
 
-# path = "D:/tele-asesment python/voice-face-analysis/images"
-# mylist = os.listdir(path)
-# print(mylist)
 listImg = []
 
 
 distImg = 0
 imgid = 1
 selesai = False
-# for pathImg in mylist:
-#     if 'png' in pathImg:
-#         imgType = 'png'
-#     else:
-#         imgType = 'jpg'
-
-#     listImg.append(DragImg(f'{path}/{pathImg}', [50 + distImg * 300, 50], imgType,imgid))
-#     distImg += 1
-#     imgid += 1
 
 active_img = None
 id_jawaban = None
@@ -132,12 +120,6 @@ score = 0
 scoreSusah = 0
 scoreMudah = 0
 
-# Keperluan soal sedang
-
-# Local
-# C:\xamppMaxy\htdocs\assessment-test-lp\public
-# pathCSV = "C:/xamppMaxy/htdocs/assessment-test-lp/public/csv/csvDD/dd.csv"
-# Server
 url_csv = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/dd.csv"
 response = requests.get(url_csv)
 csv_content = response.text
@@ -151,14 +133,6 @@ for row in reader:
     qTotal += 1
 
 
-# Depreciated, Fungsi lama untuk dapat dari file CSV
-# with open(pathCSV,newline='\n') as f:
-#     reader = csv.reader(f)
-#     dataAll = list(reader)[1:]
-# print(dataAll)
-# mcqList = []
-# for q in dataAll:
-#     mcqList.append(MCQ(q))
 
 
 qNo = 0 
@@ -169,10 +143,6 @@ hasShowques = 0
 hasShowimg = 0
 
 
-# Keperluan soal susah
-# Local
-# C:\xamppMaxy\htdocs\assessment-test-lp\public
-# pathCSVSusah = "C:/xamppMaxy/htdocs/assessment-test-lp/public/csv/csvDD/ddSusah.csv"
 url_csv_susah = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddSusah.csv"
 response_susah = requests.get(url_csv_susah)
 csv_content_susah = response_susah.text
@@ -183,17 +153,8 @@ qTotalSusah = 0
 for row in reader_susah:
     mcqListSusah.append(MCQ(row))
     qTotalSusah += 1
-
-
-
 qNoSusah = 0 
 
-# print("Qtotal susah = ",qTotalSusah)
-
-# Keperluan soal Mudah
-# Local
-# C:\xamppMaxy\htdocs\assessment-test-lp\public
-# pathCSVMudah = "C:/xamppMaxy/htdocs/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
 url_csv_mudah = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
 response_mudah = requests.get(url_csv_mudah)
 csv_content_mudah = response_mudah.text
@@ -204,14 +165,7 @@ qTotalMudah = 0
 for row in reader_mudah:
     mcqListMudah.append(MCQ(row))
     qTotalMudah += 1
-
-# Server
-# pathCSVMudah = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
-
-
 qNoMudah = 0 
-# qTotalMudah = len(dataAllMudah)
-# print("Qtotal mudah = ",qTotalMudah)
 
 
 while True:
