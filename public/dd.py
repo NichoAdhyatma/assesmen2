@@ -173,14 +173,14 @@ hasShowimg = 0
 # Local
 # C:\xamppMaxy\htdocs\assessment-test-lp\public
 # pathCSVSusah = "C:/xamppMaxy/htdocs/assessment-test-lp/public/csv/csvDD/ddSusah.csv"
-url_csv = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddSusah.csv"
-response = requests.get(url_csv)
-csv_content = response.text
-reader = csv.reader(StringIO(csv_content))
-next(reader)
+url_csv_susah = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddSusah.csv"
+response_susah = requests.get(url_csv_susah)
+csv_content_susah = response_susah.text
+reader_susah = csv.reader(StringIO(csv_content_susah))
+next(reader_susah)
 mcqListSusah = []
 qTotalSusah = 0
-for row in reader:
+for row in reader_susah:
     mcqListSusah.append(MCQ(row))
     qTotalSusah += 1
 
@@ -194,14 +194,14 @@ qNoSusah = 0
 # Local
 # C:\xamppMaxy\htdocs\assessment-test-lp\public
 # pathCSVMudah = "C:/xamppMaxy/htdocs/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
-url_csv = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
-response = requests.get(url_csv)
-csv_content = response.text
-reader = csv.reader(StringIO(csv_content))
-next(reader)
+url_csv_mudah = "https://moon.torodeveloper.co/assessment-test-lp/public/csv/csvDD/ddMudah.csv"
+response_mudah = requests.get(url_csv_mudah)
+csv_content_mudah = response_mudah.text
+reader_mudah = csv.reader(StringIO(csv_content_mudah))
+next(reader_mudah)
 mcqListMudah = []
 qTotalMudah = 0
-for row in reader:
+for row in reader_mudah:
     mcqListMudah.append(MCQ(row))
     qTotalMudah += 1
 
@@ -217,6 +217,9 @@ qNoMudah = 0
 while True:
     # Webcam dan hand detection
     success, img = cap.read()
+    if not success:
+        print("Error reading frame. Exiting the loop or handling accordingly.")
+        continue  # or continue to try the next frame
     img = cv2.flip(img, 1)
     hands, img = detector.findHands(img, flipType=False)
    
