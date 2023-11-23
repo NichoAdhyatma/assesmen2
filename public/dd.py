@@ -178,7 +178,9 @@ while True:
         print("Error reading frame. Exiting the loop or handling accordingly.")
         countBreak += 1
         if countBreak > 5:
-            break
+            cap.release()
+            cv2.destroyAllWindows()
+            break    
         else:
             continue  # or continue to try the next frame
 
@@ -812,14 +814,11 @@ while True:
                         if selesai == True:
                             score += scoreMudah
                             break
-
-
-
-    
-
     cv2.imshow("Img", img)
     cv2.waitKey(1)
 
 if score is None:
     score = -1
 print(score)
+cap.release()
+cv2.destroyAllWindows()
