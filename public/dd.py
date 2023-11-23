@@ -168,12 +168,12 @@ for row in reader_mudah:
     mcqListMudah.append(MCQ(row))
     qTotalMudah += 1
 qNoMudah = 0 
-
+countBreak = 0
 
 while True:
     # Webcam dan hand detection
     success, img = cap.read()
-    countBreak = 0
+
     if not success:
         print("Error reading frame. Exiting the loop or handling accordingly.")
         countBreak += 1
