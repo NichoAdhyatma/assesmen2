@@ -97,12 +97,31 @@ class MCQ():
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), cv2.FILLED)
             return True
 
-cap = cv2.VideoCapture(cv2.CAP_V4L2)
-if not cap.isOpened():
-    print("Error: Could not open camera.")
-cap.set(3, 1280)
-cap.set(4, 720)
-detector = HandDetector(detectionCon=1)
+
+def initialize_camera():
+    cap = cv2.VideoCapture(cv2.CAP_V4L2)
+    if not cap.isOpened():
+        print("Error: Could not open camera.")
+        return None
+    cap.set(3, 1280)
+    cap.set(4, 720)
+    return cap
+
+def release_camera(cap):
+    if cap is not None:
+        cap.release()
+
+camera = initialize_camera()
+if camera is None:
+    print("Camera not initialized. Exiting.")
+    exit()
+cv2.namedWindow('Hand Detection')    
+# cap = cv2.VideoCapture(cv2.CAP_V4L2)
+# if not cap.isOpened():
+#     print("Error: Could not open camera.")
+# cap.set(3, 1280)
+# cap.set(4, 720)
+# detector = HandDetector(detectionCon=1)
 
 listImg = []
 
@@ -178,8 +197,6 @@ while True:
         print("Error reading frame. Exiting the loop or handling accordingly.")
         countBreak += 1
         if countBreak > 5:
-            cap.release()
-            cv2.destroyAllWindows()
             break    
         else:
             continue  # or continue to try the next frame
@@ -820,5 +837,5 @@ while True:
 if score is None:
     score = -1
 print(score)
-cap.release()
+release_camera(camera)
 cv2.destroyAllWindows()
