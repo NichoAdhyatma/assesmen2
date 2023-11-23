@@ -173,9 +173,15 @@ qNoMudah = 0
 while True:
     # Webcam dan hand detection
     success, img = cap.read()
+    countBreak = 0
     if not success:
         print("Error reading frame. Exiting the loop or handling accordingly.")
-        continue  # or continue to try the next frame
+        countBreak += 1
+        if countBreak > 5:
+            break
+        else:
+            continue  # or continue to try the next frame
+
     img = cv2.flip(img, 1)
     hands, img = detector.findHands(img, flipType=False)
    

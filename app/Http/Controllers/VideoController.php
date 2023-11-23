@@ -366,7 +366,7 @@ class VideoController extends Controller
         set_time_limit(5040);
         $pythonScriptPath = base_path('public\dd.py');
         $output = shell_exec("python $pythonScriptPath");
-        // dd($output);
+        dd($output);
         // Extract and clean the score from the output
         $output = trim($output); // Remove leading/trailing whitespace
         $score = intval($output); // Convert to an integer
