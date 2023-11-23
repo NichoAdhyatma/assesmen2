@@ -820,5 +820,6 @@ while True:
     cv2.imshow("Img", img)
     cv2.waitKey(1)
 
-
+if score is None:
+    score = -1
 print(score)
