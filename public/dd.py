@@ -110,13 +110,9 @@ class MCQ():
 # def release_camera(cap):
 #     if cap is not None:
 #         cap.release()
-cap = cv2.VideoCapture(0)
-if cap is not None:
-    cap.release()
-cv2.destroyAllWindows()
 
 time.sleep(5)
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(-1)
 time.sleep(5)
 if not cap.isOpened():
     print("Error: Could not open camera.")
