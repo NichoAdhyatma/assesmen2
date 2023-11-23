@@ -336,7 +336,7 @@ class VideoController extends Controller
         //$pythonScript = public_path('asesmen.py'); //public/python ya bisa
         $pythonScript = base_path('public\asesmen.py');
         // dd($videoFilePath);
-        $command = "python {$pythonScript} '{$videoFilePath}' 2>&1";
+        $command = "python3.10 {$pythonScript} '{$videoFilePath}' 2>&1";
         // dd($command);
         // Inside your Laravel controller
         $output = exec($command, $outputArray, $exitCode);
@@ -364,8 +364,8 @@ class VideoController extends Controller
     public function executePython()
     {
         set_time_limit(5040);
-        $pythonScriptPath = base_path('public\dd.py');
-        $output = shell_exec("python $pythonScriptPath 2>&1");  // Capture both stdout and stderr
+        $pythonScriptPath = public_path('dd.py');
+        $output = shell_exec("python3.10 $pythonScriptPath 2>&1");  // Capture both stdout and stderr
         dd($output);
         // Extract and clean the score from the output
         $output = trim($output); // Remove leading/trailing whitespace
