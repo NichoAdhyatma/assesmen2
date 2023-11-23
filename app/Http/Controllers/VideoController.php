@@ -365,7 +365,7 @@ class VideoController extends Controller
     {
         set_time_limit(5040);
         $pythonScriptPath = public_path('dd.py');
-        $pythonPath = 'python3.10'; // replace with the correct path to your Python interpreter
+        $pythonPath = 'python'; // replace with the correct path to your Python interpreter
         $packageName = 'opencv-python';
 
         $command = "$pythonPath -m pip show $packageName";
