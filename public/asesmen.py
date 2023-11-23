@@ -1,14 +1,10 @@
-import speech_recognition as sr
 import moviepy.editor
 import pandas as pd
 import os
 import sys
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from pprint import pprint
 from IPython.core.display import Video
-from feat import Detector
-# from feat import Detector
-# from feat.detector import Detector
+from feat.detector import Detector
 
 testvar = sys.argv[1]
 testvar = testvar.replace("'", '')
