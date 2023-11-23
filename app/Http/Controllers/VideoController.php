@@ -365,7 +365,13 @@ class VideoController extends Controller
     {
         set_time_limit(5040);
         $pythonScriptPath = public_path('dd.py');
-        $output = exec("python3.10 $pythonScriptPath 2>&1");  // Capture both stdout and stderr
+        $pythonPath = 'python3.10'; // replace with the correct path to your Python interpreter
+        $packageName = 'opencv-python';
+
+        $command = "$pythonPath -m pip show $packageName";
+        $output = shell_exec($command);
+        dd($output);
+        $output = shell_exec("python3.10 $pythonScriptPath 2>&1");  // Capture both stdout and stderr
         dd($output);
         // Extract and clean the score from the output
         $output = trim($output); // Remove leading/trailing whitespace
