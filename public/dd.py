@@ -98,30 +98,31 @@ class MCQ():
             return True
 
 
-def initialize_camera():
-    cap = cv2.VideoCapture(cv2.CAP_V4L2)
-    if not cap.isOpened():
-        print("Error: Could not open camera.")
-        return None
-    cap.set(3, 1280)
-    cap.set(4, 720)
-    return cap
+# def initialize_camera():
+#     cap = cv2.VideoCapture(cv2.CAP_V4L2)
+#     if not cap.isOpened():
+#         print("Error: Could not open camera.")
+#         return None
+#     cap.set(3, 1280)
+#     cap.set(4, 720)
+#     return cap
 
-def release_camera(cap):
-    if cap is not None:
-        cap.release()
+# def release_camera(cap):
+#     if cap is not None:
+#         cap.release()
+cap = cv2.VideoCapture(0)
+if cap is not None:
+    cap.release()
+cv2.destroyAllWindows()
 
-camera = initialize_camera()
-if camera is None:
-    print("Camera not initialized. Exiting.")
-    exit()
-cv2.namedWindow('Hand Detection')    
-# cap = cv2.VideoCapture(cv2.CAP_V4L2)
-# if not cap.isOpened():
-#     print("Error: Could not open camera.")
-# cap.set(3, 1280)
-# cap.set(4, 720)
-# detector = HandDetector(detectionCon=1)
+time.sleep(5)
+cap = cv2.VideoCapture(0)
+time.sleep(5)
+if not cap.isOpened():
+    print("Error: Could not open camera.")
+cap.set(3, 1280)
+cap.set(4, 720)
+detector = HandDetector(detectionCon=1)
 
 listImg = []
 
@@ -837,5 +838,5 @@ while True:
 if score is None:
     score = -1
 print(score)
-release_camera(camera)
+cap.release()
 cv2.destroyAllWindows()
