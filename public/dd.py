@@ -97,7 +97,7 @@ class MCQ():
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), cv2.FILLED)
             return True
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(cv2.CAP_V4L2)
 if not cap.isOpened():
     print("Error: Could not open camera.")
 cap.set(3, 1280)
