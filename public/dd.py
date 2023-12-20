@@ -111,11 +111,9 @@ class MCQ():
 #     if cap is not None:
 #         cap.release()
 
-time.sleep(5)
-cap = cv2.VideoCapture(-1)
-time.sleep(5)
-if not cap.isOpened():
-    print("Error: Could not open camera.")
+
+cap=cv2.VideoCapture(0,cv2.CAP_DSHOW)
+
 cap.set(3, 1280)
 cap.set(4, 720)
 detector = HandDetector(detectionCon=1)

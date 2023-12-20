@@ -233,5 +233,24 @@
 
         </div>
     </div>
+    <script>
+        // JavaScript code in your HTML or a separate script file
+        document.getElementById('executeButton').addEventListener('click', function () {
+            fetch('/execute-python', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}', // Include CSRF token if your application uses CSRF protection
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Process the response data as needed
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+    </script>
 </html>
 

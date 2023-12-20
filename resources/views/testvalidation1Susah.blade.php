@@ -574,7 +574,8 @@ X, XII, X, XV, X, XIX, X, ...
                         },
                         timeout: 1800000, // 30 minutes in milliseconds (30 * 60 * 1000)
                         success: function (response) {
-                            // window.location.href = "{{ route('beforeresult') }}";
+                            console.log("Success");
+                            window.location.href = "{{ route('beforeresult') }}";
                             // location.reload();
                         },
                         error: function (xhr, status, error) {
@@ -583,6 +584,7 @@ X, XII, X, XV, X, XIX, X, ...
                     });
                     
                 })
+                
                 .catch(error => {
                     console.error('Error storing data in session:', error);
                 });
@@ -592,7 +594,8 @@ X, XII, X, XV, X, XIX, X, ...
                 var sessionData = @json(session()->all());
                 // console.log(sessionData);
 
-                
+                window.location.href = "{{ route('beforeresult') }}";
+                location.reload();
             });
         });
     </script>

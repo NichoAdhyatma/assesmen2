@@ -570,24 +570,28 @@
                         },
                         timeout: 1800000, // 30 minutes in milliseconds (30 * 60 * 1000)
                         success: function (response) {
-                            // Handle the response from the server
+                            console.log("Success");
+                            window.location.href = "{{ route('beforeresult') }}";
+                            //     location.reload();
                         },
                         error: function (xhr, status, error) {
                             console.error('Error:', error);
                         }
                     });
                 })
+                // .then(data => {
+                //     window.location.href = "{{ route('beforeresult') }}";
+                //     location.reload();
+                // })
                 
                 .catch(error => {
                     console.error('Error storing data in session:', error);
                 });
 
                 var sessionValues = {};
+                var sessionData = @json(session()->all());
                 
                 
-                
-                window.location.href = "{{ route('beforeresult') }}";
-                location.reload();
             });
         });
     </script>

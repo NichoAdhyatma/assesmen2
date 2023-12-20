@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "name": "Python",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:\\xamppMaxy\\htdocs\\assessment-test-lp\\zlib13\\zlib-1.3"
+            ],
+            "defines": [],
+            "intelliSenseMode": "msvc-x64"
+        }
+    ],
+    "version": 4
+}

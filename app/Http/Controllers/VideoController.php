@@ -336,7 +336,7 @@ class VideoController extends Controller
         //$pythonScript = public_path('asesmen.py'); //public/python ya bisa
         $pythonScript = base_path('public\asesmen.py');
         // dd($videoFilePath);
-        $command = "python3.10 {$pythonScript} '{$videoFilePath}' 2>&1";
+        $command = "python {$pythonScript} '{$videoFilePath}' 2>&1";
         // dd($command);
         // Inside your Laravel controller
         $output = exec($command, $outputArray, $exitCode);
@@ -365,19 +365,12 @@ class VideoController extends Controller
     {
         set_time_limit(5040);
         $pythonScriptPath = public_path('dd.py');
-        // $pythonPath = 'python3.10'; // replace with the correct path to your Python interpreter
-        // $packageName = 'opencv-python';
-
-        // $command = "$pythonPath -m pip show $packageName";
-        // $output = shell_exec($command);
+        $output = shell_exec("python $pythonScriptPath 2>&1");  // Capture both stdout and stderr
         // dd($output);
-        $output = shell_exec("python3.10 $pythonScriptPath 2>&1");  // Capture both stdout and stderr
-        dd($output);
-        // Extract and clean the score from the output
+
         $output = trim($output); // Remove leading/trailing whitespace
         $score = intval($output); // Convert to an integer
-        // dd($score);
-        // Save the score in a session variable
+
         Session::put('skorVideo', $score);
 
         $data = banksoalvalidasikepribadian::all();
@@ -466,10 +459,16 @@ class VideoController extends Controller
         $audioList = $this->getListOfAudio($accessToken);
 
         // Get the filter string from the request
-        $search = $filterString;
-        $filteredAudio = collect($audioList['arr_record'])->filter(function ($audio) use ($search) {
-            return str_contains($audio['name'], $search);
-        });
+        $search = $filterString;    
+        if ($audioList && isset($audioList['arr_record'])) {
+            $filteredAudio = collect($audioList['arr_record'])->filter(function ($audio) use ($search) {
+                return str_contains($audio['name'], $search);
+            });
+        
+            
+        } else {
+               $filteredAudio=[];
+        }
 
         // You can now work with the filtered audio data.
         return $filteredAudio;
@@ -479,7 +478,7 @@ class VideoController extends Controller
         $accessToken = $this->signInAPI();
         // $filterString = $filterString;
         $audioList = $this->signInAndFilterAudioForRecording($filterString);
-        if ($audioList->isEmpty()) {
+        if (empty($audioList)) {
             // Handle the case where the filtered list is empty (no matching audio files).
         } else {
             // Get the last audio entry from the filtered list
