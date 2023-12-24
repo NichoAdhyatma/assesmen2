@@ -48,12 +48,12 @@ class VideoController extends Controller
             $outputVideoPath = $userVideoDirectory . '/video' . $videoNumber . '.mp4';
         }
         // $outputVideoPath = $userVideoDirectory . '/video' . $videoNumber . '.mp4';
-        
+
         // Execute FFmpeg command to create output files with a specific duration
         $ffmpegCommand = "ffmpeg -i $video -c:v copy -c:a aac -strict experimental -b:a 192k $outputVideoPath";
         exec($ffmpegCommand);
 
-        
+
         // SaveAudioFile
         // Define the path where you want to save the audio
         $userAudioDirectory = public_path('audios/' . $userId . '/' . $firstPersonality);
@@ -83,7 +83,7 @@ class VideoController extends Controller
                 'multipart' => [
                     [
                         'name' => 'type',
-                        'contents' => 'upload', 
+                        'contents' => 'upload',
                     ],
                     [
                         'name' => 'name',
@@ -107,7 +107,6 @@ class VideoController extends Controller
                     ],
                 ]
             ]);
-
         } catch (\Exception $e) {
 
             return $e;
@@ -129,15 +128,15 @@ class VideoController extends Controller
             'Extraversion', 'Conscientiousness', 'Agreeableness', 'Openness', 'Neuroticism', 'Realistic', 'Investigative', 'Artistic', 'Social', 'Enterprising', 'Conventional', 'Perseptual', 'Psikomotor', 'Intelektual',
         ];
         $firstPersonality = $personalityList[$numberData];
-        
+
         // Get the user's ID (assuming you have it stored in the session)
         $userId = session('user_id');
         //dd($userId);
         // Define the path to the user's video directory
-        $userVideoDirectory = base_path('public'. DIRECTORY_SEPARATOR .'videos' . DIRECTORY_SEPARATOR .$userId.  DIRECTORY_SEPARATOR .$firstPersonality);
+        $userVideoDirectory = base_path('public' . DIRECTORY_SEPARATOR . 'videos' . DIRECTORY_SEPARATOR . $userId .  DIRECTORY_SEPARATOR . $firstPersonality);
         // dd($userVideoDirectory);
         // Get a list of video files in the user's directory
-        $videoFiles = Storage::disk('public')->files('videos'  . DIRECTORY_SEPARATOR . $userId. DIRECTORY_SEPARATOR .$firstPersonality);
+        $videoFiles = Storage::disk('public')->files('videos'  . DIRECTORY_SEPARATOR . $userId . DIRECTORY_SEPARATOR . $firstPersonality);
         // dd( $videoFiles);
 
         // Ambil Video Terakhir
@@ -160,13 +159,13 @@ class VideoController extends Controller
         $personalityList = [
             'Extraversion', 'Conscientiousness', 'Agreeableness', 'Openness', 'Neuroticism', 'Realistic', 'Investigative', 'Artistic', 'Social', 'Enterprising', 'Conventional', 'Perseptual', 'Psikomotor', 'Intelektual',
         ];
-        
+
         // Get the user's ID (assuming you have it stored in the session)
         $userId = session('user_id');
-        
+
         // Define the path to the user's video directory
-        $userVideoDirectory = base_path('public'. DIRECTORY_SEPARATOR .'videos' . DIRECTORY_SEPARATOR .$userId);
-        
+        $userVideoDirectory = base_path('public' . DIRECTORY_SEPARATOR . 'videos' . DIRECTORY_SEPARATOR . $userId);
+
         // Initialize an array to store the results for each personality
         $results = [];
         $varCheck = [];
@@ -178,7 +177,7 @@ class VideoController extends Controller
             $videoFilePath = $userVideoDirectory . DIRECTORY_SEPARATOR . $personality . DIRECTORY_SEPARATOR . basename($videoFile);
             $pythonData = $this->processVideoWithPython($videoFilePath);
             $decodedData = json_decode($pythonData, true); // Decode the JSON string into an array
-           
+
             if (is_array($decodedData)) {
                 foreach ($decodedData as $key => $value) {
 
@@ -187,8 +186,8 @@ class VideoController extends Controller
 
                     session([$sessionName => $value]);
                 }
-            } 
-            
+            }
+
             // Store the result in the results array
             $results[$personality] = $pythonData;
 
@@ -200,7 +199,6 @@ class VideoController extends Controller
             $resultAudio = $this->getRecordingData($filterString);
             $sessionNameAudio = 'voice' . $personality;
             session([$sessionNameAudio => $resultAudio]);
-
         }
         array_push($varCheck, ["Question" => 'SkorLiveCognitive', "Score" => session('skorVideo', -1)]);
         $existingCSVSession = session('CSVSession', []);
@@ -208,7 +206,7 @@ class VideoController extends Controller
         // Tambah hasil disini 
         // dd($combinedData);
         session(['CSVSession' => $combinedData]);
-        
+
 
         $questionData = session('CSVSession');
         // dd($questionData);
@@ -242,30 +240,30 @@ class VideoController extends Controller
 
         // Gabungkan data dan taruh ke database
         // Sentimen Face
-        $f_sentimen_positif = session('positive_scoreExtraversion', -1) . "," . session('positive_scoreConscientiousness',-1) . "," . session('positive_scoreAgreeableness', -1) . "," . session('positive_scoreOpenness', -1) . "," . session('positive_scoreNeuroticism', -1) . "," . session('positive_scoreRealistic', -1) . "," . session('positive_scoreInvestigative', -1) . "," . session('positive_scoreArtistic', -1) . "," . session('positive_scoreSocial', -1) . "," . session('positive_scoreEnterprising', -1) . "," . session('positive_scoreConventional', -1) . "," . session('positive_scorePerseptual', -1) . "," . session('positive_scorePsikomotor', -1) . "," . session('positive_scoreIntelektual', -1);
-        $f_sentimen_negatif = session('positive_scoreExtraversion', -1) . "," . session('positive_scoreConscientiousness',-1) . "," . session('positive_scoreAgreeableness', -1) . "," . session('positive_scoreOpenness', -1) . "," . session('positive_scoreNeuroticism', -1) . "," . session('positive_scoreRealistic', -1) . "," . session('positive_scoreInvestigative', -1) . "," . session('positive_scoreArtistic', -1) . "," . session('positive_scoreSocial', -1) . "," . session('positive_scoreEnterprising', -1) . "," . session('positive_scoreConventional', -1) . "," . session('positive_scorePerseptual', -1) . "," . session('positive_scorePsikomotor', -1) . "," . session('positive_scoreIntelektual', -1);
-        $f_sentimen_netral = session('neutral_scoreExtraversion', -1) . "," . session('neutral_scoreConscientiousness',-1) . "," . session('neutral_scoreAgreeableness', -1) . "," . session('neutral_scoreOpenness', -1) . "," . session('neutral_scoreNeuroticism', -1) . "," . session('neutral_scoreRealistic', -1) . "," . session('neutral_scoreInvestigative', -1) . "," . session('neutral_scoreArtistic', -1) . "," . session('neutral_scoreSocial', -1) . "," . session('neutral_scoreEnterprising', -1) . "," . session('neutral_scoreConventional', -1) . "," . session('neutral_scorePerseptual', -1) . "," . session('neutral_scorePsikomotor', -1) . "," . session('neutral_scoreIntelektual', -1);
-        
+        $f_sentimen_positif = session('positive_scoreExtraversion', -1) . "," . session('positive_scoreConscientiousness', -1) . "," . session('positive_scoreAgreeableness', -1) . "," . session('positive_scoreOpenness', -1) . "," . session('positive_scoreNeuroticism', -1) . "," . session('positive_scoreRealistic', -1) . "," . session('positive_scoreInvestigative', -1) . "," . session('positive_scoreArtistic', -1) . "," . session('positive_scoreSocial', -1) . "," . session('positive_scoreEnterprising', -1) . "," . session('positive_scoreConventional', -1) . "," . session('positive_scorePerseptual', -1) . "," . session('positive_scorePsikomotor', -1) . "," . session('positive_scoreIntelektual', -1);
+        $f_sentimen_negatif = session('positive_scoreExtraversion', -1) . "," . session('positive_scoreConscientiousness', -1) . "," . session('positive_scoreAgreeableness', -1) . "," . session('positive_scoreOpenness', -1) . "," . session('positive_scoreNeuroticism', -1) . "," . session('positive_scoreRealistic', -1) . "," . session('positive_scoreInvestigative', -1) . "," . session('positive_scoreArtistic', -1) . "," . session('positive_scoreSocial', -1) . "," . session('positive_scoreEnterprising', -1) . "," . session('positive_scoreConventional', -1) . "," . session('positive_scorePerseptual', -1) . "," . session('positive_scorePsikomotor', -1) . "," . session('positive_scoreIntelektual', -1);
+        $f_sentimen_netral = session('neutral_scoreExtraversion', -1) . "," . session('neutral_scoreConscientiousness', -1) . "," . session('neutral_scoreAgreeableness', -1) . "," . session('neutral_scoreOpenness', -1) . "," . session('neutral_scoreNeuroticism', -1) . "," . session('neutral_scoreRealistic', -1) . "," . session('neutral_scoreInvestigative', -1) . "," . session('neutral_scoreArtistic', -1) . "," . session('neutral_scoreSocial', -1) . "," . session('neutral_scoreEnterprising', -1) . "," . session('neutral_scoreConventional', -1) . "," . session('neutral_scorePerseptual', -1) . "," . session('neutral_scorePsikomotor', -1) . "," . session('neutral_scoreIntelektual', -1);
+
         // Sentimen Voice
         // $v_sentimen_positif = session('posExtraversion', -1) . "," . session('posConscientiousness',-1) . "," . session('posAgreeableness', -1) . "," . session('posOpenness', -1) . "," . session('posNeuroticism', -1) . "," . session('posRealistic', -1) . "," . session('posInvestigative', -1) . "," . session('posArtistic', -1) . "," . session('posSocial', -1) . "," . session('posEnterprising', -1) . "," . session('posConventional', -1) . "," . session('posPerseptual', -1) . "," . session('posPsikomotor', -1) . "," . session('posIntelektual', -1);
         // $v_sentimen_netral = session('neuExtraversion', -1) . "," . session('neuConscientiousness',-1) . "," . session('neuAgreeableness', -1) . "," . session('neuOpenness', -1) . "," . session('neuNeuroticism', -1) . "," . session('neuRealistic', -1) . "," . session('neuInvestigative', -1) . "," . session('neuArtistic', -1) . "," . session('neuSocial', -1) . "," . session('neuEnterprising', -1) . "," . session('neuConventional', -1) . "," . session('neuPerseptual', -1) . "," . session('neuPsikomotor', -1) . "," . session('neuIntelektual', -1);
         // $v_sentimen_negatif = session('negExtraversion', -1) . "," . session('negConscientiousness',-1) . "," . session('negAgreeableness', -1) . "," . session('negOpenness', -1) . "," . session('negNeuroticism', -1) . "," . session('negRealistic', -1) . "," . session('negInvestigative', -1) . "," . session('negArtistic', -1) . "," . session('negSocial', -1) . "," . session('negEnterprising', -1) . "," . session('negConventional', -1) . "," . session('negPerseptual', -1) . "," . session('negPsikomotor', -1) . "," . session('negIntelektual', -1);
-        $v_sentimen = session('voiceExtraversion', -1) . "," . session('voiceConscientiousness',-1) . "," . session('voiceAgreeableness', -1) . "," . session('voiceOpenness', -1) . "," . session('voiceNeuroticism', -1) . "," . session('voiceRealistic', -1) . "," . session('voiceInvestigative', -1) . "," . session('voiceArtistic', -1) . "," . session('voiceSocial', -1) . "," . session('voiceEnterprising', -1) . "," . session('voiceConventional', -1) . "," . session('voicePerseptual', -1) . "," . session('voicePsikomotor', -1) . "," . session('voiceIntelektual', -1);
+        $v_sentimen = session('voiceExtraversion', -1) . "," . session('voiceConscientiousness', -1) . "," . session('voiceAgreeableness', -1) . "," . session('voiceOpenness', -1) . "," . session('voiceNeuroticism', -1) . "," . session('voiceRealistic', -1) . "," . session('voiceInvestigative', -1) . "," . session('voiceArtistic', -1) . "," . session('voiceSocial', -1) . "," . session('voiceEnterprising', -1) . "," . session('voiceConventional', -1) . "," . session('voicePerseptual', -1) . "," . session('voicePsikomotor', -1) . "," . session('voiceIntelektual', -1);
         // dd($v_sentimen); 
 
         // Validation Score
-        $validation_score = session('resultExtraversion', -1) . "," . session('resultConscien') . "," . session('resultAgree') . "," . session('resultIntellect') . "," . session('resultEmotionalStability') . "," . session('resultR') . "," . session('resultI') . "," . session('resultA') . "," . session('resultS') . "," . session('resultE') . "," . session('resultC') . "," . session('resultPer') . ",". session('resultPsi') . ",". session('resultInt') ;
+        $validation_score = session('resultExtraversion', -1) . "," . session('resultConscien') . "," . session('resultAgree') . "," . session('resultIntellect') . "," . session('resultEmotionalStability') . "," . session('resultR') . "," . session('resultI') . "," . session('resultA') . "," . session('resultS') . "," . session('resultE') . "," . session('resultC') . "," . session('resultPer') . "," . session('resultPsi') . "," . session('resultInt');
 
         // %Kepercayaan
-        $kepercayaan = session('trustExtraversion', -1) . "," . session('trustConscientiousness',-1) . "," . session('trustAgreeableness', -1) . "," . session('trustOpenness', -1) . "," . session('trustNeuroticism', -1) . "," . session('trustRealistic', -1) . "," . session('trustInvestigative', -1) . "," . session('trustArtistic', -1) . "," . session('trustSocial', -1) . "," . session('trustEnterprising', -1) . "," . session('trustConventional', -1) . "," . session('trustPerseptual', -1) . "," . session('trustPsikomotor', -1) . "," . session('trustIntelektual', -1);
+        $kepercayaan = session('trustExtraversion', -1) . "," . session('trustConscientiousness', -1) . "," . session('trustAgreeableness', -1) . "," . session('trustOpenness', -1) . "," . session('trustNeuroticism', -1) . "," . session('trustRealistic', -1) . "," . session('trustInvestigative', -1) . "," . session('trustArtistic', -1) . "," . session('trustSocial', -1) . "," . session('trustEnterprising', -1) . "," . session('trustConventional', -1) . "," . session('trustPerseptual', -1) . "," . session('trustPsikomotor', -1) . "," . session('trustIntelektual', -1);
 
 
         // [Untuk tes cognitive video]
         // RawScore(9Data Dipisah Koma)
-        $skor_video = session('skorVideo', -1); 
+        $skor_video = session('skorVideo', -1);
         // Validasi bakat minat kepribadian
         // RawScore(14 Data dipisah koma)
-        $skor_validasi_kepribadianbakatminat = session('resultExtraversion', -1) . "," . session('resultConscien', -1) . "," . session('resultAgree', -1) . "," . session('resultIntellect', -1) . "," . session('resultEmotionalStability', -1) . "," . session('resultR', -1) . "," . session('resultI', -1) . "," . session('resultA', -1) . "," . session('resultS', -1) . "," . session('resultE', -1) . "," . session('resultC', -1) . "," . session('resultPer', -1) . ",". session('resultPsi', -1) . ",". session('resultInt', -1) ;
+        $skor_validasi_kepribadianbakatminat = session('resultExtraversion', -1) . "," . session('resultConscien', -1) . "," . session('resultAgree', -1) . "," . session('resultIntellect', -1) . "," . session('resultEmotionalStability', -1) . "," . session('resultR', -1) . "," . session('resultI', -1) . "," . session('resultA', -1) . "," . session('resultS', -1) . "," . session('resultE', -1) . "," . session('resultC', -1) . "," . session('resultPer', -1) . "," . session('resultPsi', -1) . "," . session('resultInt', -1);
         // Validasi Cognitive
         // Raw Score(9Data dipisah koma) -> 9 Penilaian jadikan 1 data hingga berikut
         $skorValidasiCognitif = (int) $request->input('skorValidasiCognitif', -1);
@@ -285,11 +283,11 @@ class VideoController extends Controller
         //     'skor_validasi_kepribadianbakatminat' => 'required',
         //     'skor_validasi_cognitif' => 'required',
         // ]);
-        
-        
-        
-        
-            
+
+
+
+
+
         // $createMember = penilaian::create([
         //     'id_user' => $userId,
         //     'f_sentimen_positif' => $f_sentimen_positif,
@@ -325,7 +323,6 @@ class VideoController extends Controller
         ]);
         // Return the results as a response
         return response()->json(['data' => $results]);
-        
     }
 
     // Function to process the selected video with Python
@@ -342,12 +339,11 @@ class VideoController extends Controller
         $output = exec($command, $outputArray, $exitCode);
         // Log or print $output, $outputArray, and $exitCode for debugging
         // dd($output);
-        
+
         $pythonData = json_decode($output, true);
         // dd($pythonData);
         $pythonData = $output;
         return $pythonData;
-        
     }
     public function setSessionValues(Request $request)
     {
@@ -412,7 +408,6 @@ class VideoController extends Controller
                 // Handle the case where the access token is not present in the response.
                 dd('fail');
             }
-
         } catch (\Exception $e) {
             // Handle exceptions (e.g., network errors or API failures).
         }
@@ -440,7 +435,7 @@ class VideoController extends Controller
             return json_decode($responseBody, true);
             // dd($data);
             // Handle the response data as needed.
-            
+
             return $data;
         } catch (\Exception $e) {
             // Handle exceptions (e.g., network errors or API failures).
@@ -459,15 +454,13 @@ class VideoController extends Controller
         $audioList = $this->getListOfAudio($accessToken);
 
         // Get the filter string from the request
-        $search = $filterString;    
+        $search = $filterString;
         if ($audioList && isset($audioList['arr_record'])) {
             $filteredAudio = collect($audioList['arr_record'])->filter(function ($audio) use ($search) {
                 return str_contains($audio['name'], $search);
             });
-        
-            
         } else {
-               $filteredAudio=[];
+            $filteredAudio = [];
         }
 
         // You can now work with the filtered audio data.
@@ -478,15 +471,15 @@ class VideoController extends Controller
         $accessToken = $this->signInAPI();
         // $filterString = $filterString;
         $audioList = $this->signInAndFilterAudioForRecording($filterString);
-        if (empty($audioList)) {
+        if (empty($audioList) || $audioList == null) {
             // Handle the case where the filtered list is empty (no matching audio files).
         } else {
             // Get the last audio entry from the filtered list
             $lastAudio = $audioList->last();
-    
+
             // Retrieve the 'id' of the last audio entry
-            $lastAudioId = $lastAudio['id'];
-    
+            $lastAudioId = $lastAudio['id'] ?? null;
+
             // dd($lastAudioId);
             $client = new Client();
 
@@ -511,6 +504,5 @@ class VideoController extends Controller
                 // Handle exceptions (e.g., network errors or API failures).
             }
         }
-        
     }
 }
