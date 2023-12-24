@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\pyController;
@@ -196,8 +197,6 @@ Route::get('/insert', function () {
     return view('insertvideo');
 })->name('insert');
 
-Route::get('/my-route', [pyController::class, 'index'])->name('my-route');
-
 Route::get('/outputdb', [ValidationMinatController::class, 'getPenilaian']);
 Route::get('/beforeresult', [ValidationMinatController::class, 'getPenilaianBefore'])->name('beforeresult');
 Route::get('/resultID/{itemId}', [ValidationMinatController::class, 'getPenilaianAfter'])->name('resultID');
@@ -246,7 +245,7 @@ Route::post('/upload', function (Request $request) {
 
     // Store the uploaded video in the selected folder
     $videoPath = $request->file('video')->store("assets/video/{$selectedFolder}", 'public');
- 
+
     return "The video has been successfully uploaded to {$selectedFolder}.";
 })->name('upload.video');
 
@@ -273,35 +272,35 @@ Route::get('/execute-python', function () {
 Route::post('/execute-python', [VideoController::class, 'executePython'])->name('execute.python');
 
 // Fungsi Untuk Ubah halaman result/psikogram menjadi pdf dan png
-Route::post('/save-screenshot', [resultController::class,'save']);
-Route::get('/imgToPdf', [resultController::class,'imgToPdf']);
-Route::get('/convert-image-to-pdf', [resultController::class,'convertImageToPdf'])->name('convert.image');;
-Route::get('/generate-pdf',[resultController::class,'generatePDFfromBlade'])->name('/generate-pdf');
+Route::post('/save-screenshot', [resultController::class, 'save']);
+Route::get('/imgToPdf', [resultController::class, 'imgToPdf']);
+Route::get('/convert-image-to-pdf', [resultController::class, 'convertImageToPdf'])->name('convert.image');;
+Route::get('/generate-pdf', [resultController::class, 'generatePDFfromBlade'])->name('/generate-pdf');
 // Untuk mendapatkan CSV dari halaman result
-Route::get('/download-csv', [resultController::class,'downloadCsv'])->name('download-csv');
+Route::get('/download-csv', [resultController::class, 'downloadCsv'])->name('download-csv');
 
 
 // Testing Bank Soal
 Route::resource('questions', 'banksoalvalidasikepribadianController');
-Route::get('/insert-question', [banksoalvalidasikepribadianController::class,'index'])->name('insert-question');
-Route::post('/store-question', [banksoalvalidasikepribadianController::class,'store'])->name('store-question');
+Route::get('/insert-question', [banksoalvalidasikepribadianController::class, 'index'])->name('insert-question');
+Route::post('/store-question', [banksoalvalidasikepribadianController::class, 'store'])->name('store-question');
 Route::delete('/lol', [banksoalvalidasikepribadianController::class, 'destroy'])->name('delete-question');
-Route::post('/upload-csv', [banksoalvalidasikepribadianController::class,'importCSV'])->name('/upload-csv');
+Route::post('/upload-csv', [banksoalvalidasikepribadianController::class, 'importCSV'])->name('/upload-csv');
 // (Sementara Didalam Bank Soal) buat test upload ke csv
-Route::get('/generate-csv', [banksoalvalidasikepribadianController::class,'writeCSV'])->name('/generate-csv');
+Route::get('/generate-csv', [banksoalvalidasikepribadianController::class, 'writeCSV'])->name('/generate-csv');
 // Buat test export list ke csv 
 Route::get('/export-csv', [banksoalvalidasikepribadianController::class, 'exportToCSV'])->name('export-csv');
 
 
 // Testing Bank Soal Cognitive
-Route::get('/insert-question-cognitive', [bankSoalValidasiCognitiveController::class,'index'])->name('insert-question-cognitive');
-Route::post('/store-question-cognitive', [bankSoalValidasiCognitiveController::class,'store'])->name('store-question-cognitive');
+Route::get('/insert-question-cognitive', [bankSoalValidasiCognitiveController::class, 'index'])->name('insert-question-cognitive');
+Route::post('/store-question-cognitive', [bankSoalValidasiCognitiveController::class, 'store'])->name('store-question-cognitive');
 Route::delete('/lol-cognitive', [bankSoalValidasiCognitiveController::class, 'destroy'])->name('delete-question-cognitive');
-Route::post('/upload-csv-cognitive', [bankSoalValidasiCognitiveController::class,'importCSV'])->name('/upload-csv-cognitive');
+Route::post('/upload-csv-cognitive', [bankSoalValidasiCognitiveController::class, 'importCSV'])->name('/upload-csv-cognitive');
 
 
 // Testing Bank Soal DD
-Route::get('/insert-question-DD', [bankSoalDDController::class,'index'])->name('insert-question-DD');
+Route::get('/insert-question-DD', [bankSoalDDController::class, 'index'])->name('insert-question-DD');
 // Route::post('/store-question-DD', [bankSoalDDController::class,'store'])->name('store-question-DD');
 // Route::delete('/lol-DD', [bankSoalDDController::class, 'destroy'])->name('delete-question-DD');
 // Route::post('/upload-csv-DD', [bankSoalDDController::class,'importCSV'])->name('/upload-csv-DD');
@@ -309,7 +308,7 @@ Route::get('/insert-question-DD', [bankSoalDDController::class,'index'])->name('
 
 
 // API Routes
-Route::get('/api/signin', [APIController::class,'signInAPI'])->name('apiName/signin');
+Route::get('/api/signin', [APIController::class, 'signInAPI'])->name('apiName/signin');
 Route::post('/filter-audio', [APIController::class, 'signInAndFilterAudio'])->name('filter-audio');
 Route::post('/upload-audio', [APIController::class, 'addAudio'])->name('upload-audio');
 Route::post('/get-audio', [APIController::class, 'getRecordingData'])->name('get-audio');
@@ -320,11 +319,19 @@ Route::get('/test-get-data', [banksoalvalidasikepribadianController::class, 'get
 
 
 // Untuk Append CSV ValidationMinatController
-Route::post('/append-to-csv', [ValidationMinatController::class,'appendToCSV'])->name('/append-to-csv');
+Route::post('/append-to-csv', [ValidationMinatController::class, 'appendToCSV'])->name('/append-to-csv');
 
 // Untuk gabungin data pertanyaan ke session
 Route::post('/store-data-in-session', [ValidationMinatController::class, 'storeDataInSession']);
 Route::post('/add-data-to-session', [ValidationMinatController::class, 'addDataToSession']);
 
 
+//admin
+Route::middleware('guest')->group(function () {
+    Route::get('/admin/login', [AdminController::class, 'index'])->name('admin.login');
+    Route::post('/admin/login', [AdminController::class, 'authenticate'])->name('auth.admin');
+});
 
+//auth-admin
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
