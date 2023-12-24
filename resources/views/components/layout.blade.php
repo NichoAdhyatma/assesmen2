@@ -13,7 +13,8 @@
 </head>
 
 <body>
-    <div class="max-w-7xl w-full mx-auto">
+    @include('components.navbar')
+    <div class="max-w-7xl w-full mx-auto p-4">
         {{ $slot }}
     </div>
 

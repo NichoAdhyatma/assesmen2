@@ -335,3 +335,7 @@ Route::middleware('guest')->group(function () {
 //auth-admin
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+Route::get('/admin/detail/{id}', [AdminController::class, 'detailResult'])->name('admin.detail');
+
+Route::get('/admin/result/{item}/{user}', [AdminController::class, 'result'])->name('admin.result');

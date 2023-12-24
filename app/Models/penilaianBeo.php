@@ -24,4 +24,9 @@ class penilaianBeo extends Model
         'skor_validasi_kepribadianbakatminat',
         'skor_validasi_cognitif',
     ];
+
+    public function user() {
+        return $this->belongsTo(Users::class, 'id_user');
+    }
 }
+
